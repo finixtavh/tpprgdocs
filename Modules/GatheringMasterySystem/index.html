@@ -1,0 +1,1784 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica del RPG modular">
+      
+      
+        <meta name="author" content="FN">
+      
+      
+      
+        <link rel="prev" href="../FarmingSystem/">
+      
+      
+        <link rel="next" href="../ShopManager/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Gathering Mastery - TPPRPG Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gatheringmasterysystempy" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="TPPRPG Docs" class="md-header__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TPPRPG Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Gathering Mastery
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TPPRPG Docs" class="md-nav__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TPPRPG Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Módulos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Módulos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BuffManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buff Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EnchantmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enchantment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EquipmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equipment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FarmingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Farming System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gathering Mastery
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gathering Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cskill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cSkill
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cSkill">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cfarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cFarm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cFarm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de clase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gathermaterial-tool-vinventory-buffsnone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        gather(Material, Tool, vInventory, buffs=None)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cmaterial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cMaterial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cMaterial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-ctool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cTool
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cTool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recolectar-un-material-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recolectar un material básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recolectar-con-buffs-activos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recolectar con buffs activos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificar-nivel-de-una-skill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificar nivel de una skill
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ShopManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Núcleo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Núcleo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/MainGame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/Loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/ModLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cskill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cSkill
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cSkill">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cfarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cFarm
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cFarm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-clase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de clase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gathermaterial-tool-vinventory-buffsnone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        gather(Material, Tool, vInventory, buffs=None)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cmaterial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cMaterial
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cMaterial">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-ctool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cTool
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cTool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recolectar-un-material-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recolectar un material básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recolectar-con-buffs-activos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recolectar con buffs activos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificar-nivel-de-una-skill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificar nivel de una skill
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="gatheringmasterysystempy"><code>GatheringMasterySystem.py</code></h1>
+<h2 id="indice">Índice</h2>
+<ol>
+<li><a href="#descripción-general">Descripción General</a></li>
+<li><a href="#variables-globales">Variables Globales</a></li>
+<li><a href="#clase-cskill">Clase <code>cSkill</code></a></li>
+<li><a href="#clase-cfarm">Clase <code>cFarm</code></a></li>
+<li><a href="#clase-cmaterial">Clase <code>cMaterial</code></a></li>
+<li><a href="#clase-ctool">Clase <code>cTool</code></a></li>
+<li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
+<li><a href="#notas-y-referencias">Notas y Referencias</a></li>
+</ol>
+<hr />
+<h2 id="descripcion-general">Descripción General</h2>
+<p><code>GatheringMasterySystem.py</code> implementa el sistema completo de <strong>recolección de recursos</strong> del juego. Incluye la lógica de recolección con barra de progreso visual (usando la librería <code>rich</code>), sistema de skills con niveles, materiales y herramientas.</p>
+<p>Cuando el jugador recolecta un material, el tiempo necesario depende de:</p>
+<ul>
+<li>La dureza del material (<code>Hardness</code>).</li>
+<li>La eficiencia de la herramienta (<code>Efficiency</code>).</li>
+<li>El nivel del jugador en la skill correspondiente.</li>
+<li>Buffs activos del jugador.</li>
+</ul>
+<hr />
+<h2 id="variables-globales">Variables Globales</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Gathering_init</code></td>
+<td><code>cFarm</code></td>
+<td>Instancia global del sistema de recolección. Se crea al importar el módulo.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-python">Gathering_init = cFarm()
+</code></pre>
+<hr />
+<h2 id="clase-cskill">Clase <code>cSkill</code></h2>
+<p>Representa una habilidad individual de recolección o arma con su sistema de progresión.</p>
+<blockquote>
+<p><strong>Nota:</strong> A diferencia de <code>FarmingSystem.py</code>, esta clase <strong>no usa <code>@dataclass</code></strong>; los atributos de clase actúan como valores por defecto compartidos entre instancias. Esto es una particularidad del código que puede causar comportamientos inesperados si se modifican directamente los atributos de clase.</p>
+</blockquote>
+<h3 id="atributos">Atributos</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Valor por Defecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exp_total</code></td>
+<td><code>float</code></td>
+<td><code>0.0</code></td>
+<td>Experiencia total acumulada.</td>
+</tr>
+<tr>
+<td><code>exp_to_next_lvl</code></td>
+<td><code>float</code></td>
+<td><code>100.0</code></td>
+<td>Experiencia necesaria para el próximo nivel.</td>
+</tr>
+<tr>
+<td><code>current_level</code></td>
+<td><code>int</code></td>
+<td><code>1</code></td>
+<td>Nivel actual de la habilidad.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clase-cfarm">Clase <code>cFarm</code></h2>
+<p>Gestor de todas las skills del jugador y punto de entrada para iniciar recolecciones.</p>
+<h3 id="atributos-de-clase">Atributos de clase</h3>
+<pre><code class="language-python">GATHERING_SKILLS = [&quot;mining&quot;, &quot;lumberjack&quot;, &quot;fishing&quot;, &quot;herbs&quot;, &quot;hunting&quot;, &quot;astrology&quot;]
+
+WEAPON_SKILLS = [&quot;swords&quot;, &quot;electric_wands&quot;, &quot;thermal_wands&quot;, &quot;earth_wands&quot;,
+                 &quot;void_staffs&quot;, &quot;shields&quot;, &quot;blessed_ornament&quot;, &quot;ornament&quot;, &quot;cursed_ornament&quot;]
+</code></pre>
+<h3 id="atributos-de-instancia">Atributos de instancia</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gathering</code></td>
+<td><code>Dict[str, cSkill]</code></td>
+<td>Skills de recolección, inicializadas a nivel 1.</td>
+</tr>
+<tr>
+<td><code>weapons</code></td>
+<td><code>Dict[str, cSkill]</code></td>
+<td>Skills de armas, inicializadas a nivel 1.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metodos">Métodos</h3>
+<h4 id="gathermaterial-tool-vinventory-buffsnone"><code>gather(Material, Tool, vInventory, buffs=None)</code></h4>
+<p>Ejecuta la acción de recolección. Muestra una barra de progreso animada y al finalizar otorga EXP a la skill correspondiente.</p>
+<p><strong>Parámetros:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Material</code></td>
+<td><code>cMaterial</code></td>
+<td>El material a recolectar.</td>
+</tr>
+<tr>
+<td><code>Tool</code></td>
+<td><code>cTool</code> o <code>None</code></td>
+<td>La herramienta usada. Si es <code>None</code>, eficiencia = 1.0.</td>
+</tr>
+<tr>
+<td><code>vInventory</code></td>
+<td><code>cInventory</code></td>
+<td>El inventario del jugador (para añadir el material).</td>
+</tr>
+<tr>
+<td><code>buffs</code></td>
+<td><code>list[float]</code></td>
+<td>Lista de multiplicadores de buff (ej: <code>[1.1, 1.2]</code>).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cálculo de poder de recolección:</strong></p>
+<pre><code class="language-python">Gathering_Skill_Bonus = 1 + (nivel_actual * 0.05)
+total_modifier = producto_de_todos_los_buffs
+tool_eff = Tool.Efficiency  # 1.0 si no hay herramienta
+
+power = tool_eff * Gathering_Skill_Bonus * total_modifier
+</code></pre>
+<p><strong>Cálculo de EXP ganada:</strong></p>
+<pre><code class="language-python">exp_ganada = Material.Hardness / 13
+</code></pre>
+<p><strong>Barra de progreso:</strong></p>
+<p>Usa <code>rich.progress.Progress</code> con <code>BarColumn</code> y <code>TimeRemainingColumn</code>. El progreso avanza en <code>power</code> unidades cada 0.1 segundos hasta alcanzar <code>Material.Hardness</code>.</p>
+<hr />
+<h2 id="clase-cmaterial">Clase <code>cMaterial</code></h2>
+<p>Representa un material recolectable del mundo del juego.</p>
+<h3 id="constructor">Constructor</h3>
+<pre><code class="language-python">cMaterial(MATERIAL_ID, TypeStr, Name, Hardness, SkillName)
+</code></pre>
+<h3 id="atributos_1">Atributos</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MATERIAL_ID</code></td>
+<td><code>int</code></td>
+<td>ID único del material.</td>
+</tr>
+<tr>
+<td><code>Material_Type</code></td>
+<td><code>str</code></td>
+<td>Tipo del material con prefijo: <code>"TYPE_M:" + TypeStr</code>.</td>
+</tr>
+<tr>
+<td><code>Name</code></td>
+<td><code>str</code></td>
+<td>Nombre del material (ej: <code>"Hierro"</code>, <code>"Roble"</code>).</td>
+</tr>
+<tr>
+<td><code>Hardness</code></td>
+<td><code>float</code></td>
+<td>Dureza: determina cuánto tarda en recolectarse.</td>
+</tr>
+<tr>
+<td><code>SkillName</code></td>
+<td><code>str</code></td>
+<td>Nombre de la skill que se usa para recolectarlo (debe coincidir con una key en <code>cFarm.gathering</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clase-ctool">Clase <code>cTool</code></h2>
+<p>Representa una herramienta de recolección.</p>
+<h3 id="constructor_1">Constructor</h3>
+<pre><code class="language-python">cTool(STATIC_ID, TypeStr, Name, Desc, Efficiency, Enchantments)
+</code></pre>
+<h3 id="atributos_2">Atributos</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>STATIC_ID</code></td>
+<td><code>int</code></td>
+<td>ID único de la herramienta.</td>
+</tr>
+<tr>
+<td><code>ToolTypeStr</code></td>
+<td><code>str</code></td>
+<td>Tipo de herramienta con prefijo: <code>"TYPE_M:" + TypeStr</code>.</td>
+</tr>
+<tr>
+<td><code>Name</code></td>
+<td><code>str</code></td>
+<td>Nombre de la herramienta.</td>
+</tr>
+<tr>
+<td><code>Desc</code></td>
+<td><code>str</code></td>
+<td>Descripción.</td>
+</tr>
+<tr>
+<td><code>Efficiency</code></td>
+<td><code>float</code></td>
+<td>Multiplicador de eficiencia (ej: <code>2.0</code> = doble de rápido).</td>
+</tr>
+<tr>
+<td><code>Enchantments</code></td>
+<td><code>List</code></td>
+<td>Lista de encantamientos aplicados (ver <code>EnchantmentSystem.py</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
+<h3 id="recolectar-un-material-basico">Recolectar un material básico</h3>
+<pre><code class="language-python">from Modules.GatheringMasterySystem import cFarm, cMaterial, cTool, Gathering_init
+
+# Crear material
+hierro = cMaterial(
+    MATERIAL_ID=1,
+    TypeStr=&quot;OreBlock&quot;,
+    Name=&quot;Mineral de Hierro&quot;,
+    Hardness=50.0,
+    SkillName=&quot;mining&quot;
+)
+
+# Crear herramienta
+pico = cTool(
+    STATIC_ID=101,
+    TypeStr=&quot;Pickaxe&quot;,
+    Name=&quot;Pico de Hierro&quot;,
+    Desc=&quot;Un pico resistente&quot;,
+    Efficiency=2.5,
+    Enchantments=[]
+)
+
+# Recolectar (bloquea hasta terminar, muestra barra)
+Gathering_init.gather(hierro, pico, vInventory)
+</code></pre>
+<h3 id="recolectar-con-buffs-activos">Recolectar con buffs activos</h3>
+<pre><code class="language-python"># Los buffs son multiplicadores de eficiencia
+buffs = [1.2, 1.1]  # +20% y +10% extra
+Gathering_init.gather(hierro, pico, vInventory, buffs=buffs)
+</code></pre>
+<h3 id="verificar-nivel-de-una-skill">Verificar nivel de una skill</h3>
+<pre><code class="language-python">nivel_mineria = Gathering_init.gathering[&quot;mining&quot;].current_level
+exp_actual = Gathering_init.gathering[&quot;mining&quot;].exp_total
+print(f&quot;Minería: Nivel {nivel_mineria}, EXP: {exp_actual}&quot;)
+</code></pre>
+<hr />
+<h2 id="notas-y-referencias">Notas y Referencias</h2>
+<ul>
+<li><strong>Barra de progreso con <code>rich</code>:</strong> La librería <code>rich</code> provee componentes visuales avanzados para la terminal. Documentación: <a href="https://rich.readthedocs.io/en/stable/progress.html">https://rich.readthedocs.io/en/stable/progress.html</a></li>
+<li><strong>Atributos de clase vs. atributos de instancia en Python:</strong> Los atributos definidos en el cuerpo de la clase (sin <code>self</code>) son compartidos entre instancias. Esto puede causar bugs si se modifican. Para evitarlo, deben definirse en <code>__init__</code>. Referencia: <a href="https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables">https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables</a></li>
+<li><strong><code>time.sleep(0.1)</code>:</strong> Cada ciclo de la barra espera 0.1 segundos. Materiales muy duros pueden tardar varios segundos en recolectarse.</li>
+<li>El nombre de la skill en <code>cMaterial.SkillName</code> <strong>debe coincidir exactamente</strong> (en minúsculas) con una clave del diccionario <code>gathering</code> de <code>cFarm</code>. Si no coincide, se producirá un <code>KeyError</code>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

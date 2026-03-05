@@ -1,0 +1,1946 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica del RPG modular">
+      
+      
+        <meta name="author" content="FN">
+      
+      
+      
+        <link rel="prev" href="../MainGame/">
+      
+      
+        <link rel="next" href="../ModLoader/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Loader - TPPRPG Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#loaderpy" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="TPPRPG Docs" class="md-header__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TPPRPG Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Loader
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TPPRPG Docs" class="md-nav__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TPPRPG Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Módulos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Módulos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/BuffManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buff Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/EnchantmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enchantment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/EquipmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equipment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/FarmingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Farming System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/GatheringMasterySystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gathering Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/ShopManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Núcleo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Núcleo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MainGame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loader
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función Read
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Función Read">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deteccion-de-tipo-de-archivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detección de tipo de archivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manejo-de-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manejo de errores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función Write
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Función Write">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametros_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comportamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comportamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handlers-internos-de-lectura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handlers internos de lectura
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Handlers internos de lectura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_handle_datastatsdata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_datastats(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_weaponsdata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_weapons(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_shopsdata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_shops(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_savesdata-saveslot-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_saves(data, SaveSlot, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_buffsdata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_buffs(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_generic_jsondata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_generic_json(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handlers-internos-de-escritura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handlers internos de escritura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leer-todos-los-enemigos-de-una-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leer todos los enemigos de una zona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leer-las-strings-nombre-descripcion-de-una-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leer las strings (nombre, descripción) de una zona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leer-datos-completos-del-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leer datos completos del save
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guardar-datos-del-jugador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guardar datos del jugador
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escribir-un-log-en-texto-plano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escribir un log en texto plano
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ModLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de Logging
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-read" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función Read
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Función Read">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deteccion-de-tipo-de-archivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detección de tipo de archivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manejo-de-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manejo de errores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-write" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función Write
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Función Write">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametros_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comportamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comportamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handlers-internos-de-lectura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handlers internos de lectura
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Handlers internos de lectura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_handle_datastatsdata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_datastats(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_weaponsdata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_weapons(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_shopsdata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_shops(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_savesdata-saveslot-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_saves(data, SaveSlot, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_buffsdata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_buffs(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_handle_generic_jsondata-object-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _handle_generic_json(data, Object, Content)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handlers-internos-de-escritura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Handlers internos de escritura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leer-todos-los-enemigos-de-una-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leer todos los enemigos de una zona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leer-las-strings-nombre-descripcion-de-una-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leer las strings (nombre, descripción) de una zona
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leer-datos-completos-del-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Leer datos completos del save
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guardar-datos-del-jugador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guardar datos del jugador
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escribir-un-log-en-texto-plano" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escribir un log en texto plano
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="loaderpy"><code>Loader.py</code></h1>
+<h2 id="indice">Índice</h2>
+<ol>
+<li><a href="#descripción-general">Descripción General</a></li>
+<li><a href="#configuración-de-logging">Configuración de Logging</a></li>
+<li><a href="#función-read">Función <code>Read</code></a></li>
+<li><a href="#función-write">Función <code>Write</code></a></li>
+<li><a href="#handlers-internos-de-lectura">Handlers internos de lectura</a></li>
+<li><a href="#handlers-internos-de-escritura">Handlers internos de escritura</a></li>
+<li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
+<li><a href="#notas-y-referencias">Notas y Referencias</a></li>
+</ol>
+<hr />
+<h2 id="descripcion-general">Descripción General</h2>
+<p><code>Loader.py</code> es el módulo de <strong>entrada/salida de datos</strong> del juego. Proporciona dos funciones principales (<code>Read</code> y <code>Write</code>) que abstraen la lectura y escritura de archivos JSON con manejo de errores robusto, logging automático y soporte para múltiples estructuras de archivo.</p>
+<p>Detecta automáticamente el tipo de archivo por nombre y aplica la lógica de parseo correspondiente.</p>
+<hr />
+<h2 id="configuracion-de-logging">Configuración de Logging</h2>
+<p>Al importarse, el módulo configura un logger que guarda eventos en <code>tpprpg.log</code>:</p>
+<pre><code class="language-python">logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='tpprpg.log',
+    filemode='a'
+)
+logger = logging.getLogger('TPPRPG.Loader')
+</code></pre>
+<p>Todos los errores de lectura/escritura quedan registrados automáticamente con timestamp, nivel y mensaje de excepción.</p>
+<hr />
+<h2 id="funcion-read">Función <code>Read</code></h2>
+<pre><code class="language-python">Read(FilePath, Object, Content=None, Values=None)
+</code></pre>
+<p>Lee y procesa datos JSON desde archivos del juego. Detecta el tipo de archivo por su nombre y aplica el handler correspondiente.</p>
+<h3 id="parametros">Parámetros</h3>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FilePath</code></td>
+<td><code>str</code></td>
+<td>Ruta al archivo JSON. Se normaliza con <code>os.path.normpath</code>.</td>
+</tr>
+<tr>
+<td><code>Object</code></td>
+<td><code>str</code> o <code>None</code></td>
+<td>Clave primaria a acceder en el JSON. Si es <code>None</code>, retorna el JSON completo.</td>
+</tr>
+<tr>
+<td><code>Content</code></td>
+<td><code>str</code> o <code>None</code></td>
+<td>Clave secundaria o comando especial (<code>"Strings"</code>, <code>"IDs"</code>, etc.).</td>
+</tr>
+<tr>
+<td><code>Values</code></td>
+<td><code>any</code></td>
+<td>Parámetro adicional reservado para consultas más complejas (no usado actualmente).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="retorno">Retorno</h3>
+<p>Retorna la estructura de datos solicitada. Si ocurre un error (archivo no encontrado, JSON inválido, clave inexistente), retorna una lista vacía <code>[]</code> o diccionario vacío <code>{}</code> para consistencia.</p>
+<h3 id="deteccion-de-tipo-de-archivo">Detección de tipo de archivo</h3>
+<table>
+<thead>
+<tr>
+<th>Nombre del archivo</th>
+<th>Handler aplicado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datastats.json</code></td>
+<td><code>_handle_datastats</code></td>
+</tr>
+<tr>
+<td><code>weapons.json</code></td>
+<td><code>_handle_weapons</code></td>
+</tr>
+<tr>
+<td><code>datashops.json</code></td>
+<td><code>_handle_shops</code></td>
+</tr>
+<tr>
+<td><code>saveslots.json</code> / <code>savegame.json</code></td>
+<td><code>_handle_saves</code></td>
+</tr>
+<tr>
+<td><code>databuffs.json</code></td>
+<td><code>_handle_buffs</code></td>
+</tr>
+<tr>
+<td>Cualquier otro</td>
+<td><code>_handle_generic_json</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="manejo-de-errores">Manejo de errores</h3>
+<table>
+<thead>
+<tr>
+<th>Excepción</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FileNotFoundError</code></td>
+<td>Imprime error, registra en log, retorna <code>[]</code>.</td>
+</tr>
+<tr>
+<td><code>json.JSONDecodeError</code></td>
+<td>Imprime error de JSON malformado, retorna <code>[]</code>.</td>
+</tr>
+<tr>
+<td><code>Exception</code> genérica</td>
+<td>Captura cualquier otro error, retorna <code>[]</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="funcion-write">Función <code>Write</code></h2>
+<pre><code class="language-python">Write(FilePath, Object=None, Content=None, ToWrite=None, isplaintext=False)
+</code></pre>
+<p>Escribe datos en archivos JSON o texto plano.</p>
+<h3 id="parametros_1">Parámetros</h3>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FilePath</code></td>
+<td><code>str</code></td>
+<td>Ruta del archivo a escribir.</td>
+</tr>
+<tr>
+<td><code>Object</code></td>
+<td><code>str</code> o <code>None</code></td>
+<td>Clave primaria en el JSON donde escribir.</td>
+</tr>
+<tr>
+<td><code>Content</code></td>
+<td><code>str</code> o <code>None</code></td>
+<td>Clave secundaria o contenido (texto plano).</td>
+</tr>
+<tr>
+<td><code>ToWrite</code></td>
+<td><code>any</code></td>
+<td>Datos a escribir en el JSON.</td>
+</tr>
+<tr>
+<td><code>isplaintext</code></td>
+<td><code>bool</code></td>
+<td>Si <code>True</code>, escribe como texto plano en modo <em>append</em>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comportamiento">Comportamiento</h3>
+<p><strong>Texto plano</strong> (<code>isplaintext=True</code>): Crea el directorio si no existe y añade <code>Content + "\n"</code> al final del archivo.</p>
+<p><strong>JSON</strong> (<code>isplaintext=False</code>):</p>
+<ol>
+<li>Lee el archivo existente (o crea un dict vacío si no existe).</li>
+<li>Aplica el handler del tipo de archivo para actualizar la estructura.</li>
+<li>Escribe el JSON resultante con <code>indent=4</code>.</li>
+</ol>
+<hr />
+<h2 id="handlers-internos-de-lectura">Handlers internos de lectura</h2>
+<h3 id="_handle_datastatsdata-object-content"><code>_handle_datastats(data, Object, Content)</code></h3>
+<p>Para <code>DataStats.json</code>. Maneja zonas con enemigos y strings de descripción.</p>
+<table>
+<thead>
+<tr>
+<th><code>Content</code></th>
+<th>Retorna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>None</code></td>
+<td>Todos los datos de la zona.</td>
+</tr>
+<tr>
+<td><code>"Strings"</code></td>
+<td>El objeto <code>Strings</code> de la zona (nombre, descripción, color).</td>
+</tr>
+<tr>
+<td>Nombre de enemigo</td>
+<td>Los datos del enemigo específico.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_handle_weaponsdata-object-content"><code>_handle_weapons(data, Object, Content)</code></h3>
+<p>Para <code>weapons.json</code>. Maneja tipos de armas con prefijo <code>"TYPE:"</code>.</p>
+<table>
+<thead>
+<tr>
+<th><code>Content</code></th>
+<th>Retorna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>None</code></td>
+<td>Todas las armas del tipo.</td>
+</tr>
+<tr>
+<td>Nombre de arma</td>
+<td>Los datos del arma específica.</td>
+</tr>
+</tbody>
+</table>
+<p>Añade automáticamente el prefijo <code>"TYPE:"</code> si el <code>Object</code> no lo tiene.</p>
+<hr />
+<h3 id="_handle_shopsdata-object-content"><code>_handle_shops(data, Object, Content)</code></h3>
+<p>Para <code>DataShops.json</code>. Maneja tiendas con arrays de IDs.</p>
+<table>
+<thead>
+<tr>
+<th><code>Content</code></th>
+<th>Retorna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>None</code></td>
+<td>Todos los datos de la tienda.</td>
+</tr>
+<tr>
+<td><code>"IDs"</code></td>
+<td>Solo el array de IDs de items.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_handle_savesdata-saveslot-content"><code>_handle_saves(data, SaveSlot, Content)</code></h3>
+<p>Para <code>SaveSlots.json</code> / <code>SaveGame.json</code>. Preserva valores <code>null</code> intencionales.</p>
+<table>
+<thead>
+<tr>
+<th><code>Content</code></th>
+<th>Retorna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>None</code></td>
+<td>Todos los datos del slot de guardado.</td>
+</tr>
+<tr>
+<td>Clave específica</td>
+<td>Valor del campo (puede ser <code>None</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_handle_buffsdata-object-content"><code>_handle_buffs(data, Object, Content)</code></h3>
+<p>Para <code>DataBuffs.json</code>. Maneja buffs y debuffs.</p>
+<table>
+<thead>
+<tr>
+<th><code>Object</code></th>
+<th><code>Content</code></th>
+<th>Retorna</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"BUFFS"</code> o <code>"DEBUFFS"</code></td>
+<td><code>None</code></td>
+<td>Todos los buffs/debuffs de esa categoría.</td>
+</tr>
+<tr>
+<td><code>"BUFFS"</code> o <code>"DEBUFFS"</code></td>
+<td>ID específico</td>
+<td>El buff/debuff con ese ID.</td>
+</tr>
+<tr>
+<td>ID con <code>"_buff"</code> o <code>"_debuff"</code></td>
+<td>—</td>
+<td>El buff/debuff directamente.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_handle_generic_jsondata-object-content"><code>_handle_generic_json(data, Object, Content)</code></h3>
+<p>Handler genérico para archivos sin estructura especial. Busca <code>Content</code> en el objeto, incluyendo dentro de listas.</p>
+<hr />
+<h2 id="handlers-internos-de-escritura">Handlers internos de escritura</h2>
+<p>Cada handler de escritura espeja la estructura de su handler de lectura para mantener la integridad del JSON:</p>
+<table>
+<thead>
+<tr>
+<th>Handler</th>
+<th>Archivo objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_write_datastats</code></td>
+<td><code>DataStats.json</code></td>
+</tr>
+<tr>
+<td><code>_write_weapons</code></td>
+<td><code>weapons.json</code></td>
+</tr>
+<tr>
+<td><code>_write_shops</code></td>
+<td><code>DataShops.json</code></td>
+</tr>
+<tr>
+<td><code>_write_saves</code></td>
+<td><code>SaveSlots.json</code> / <code>SaveGame.json</code></td>
+</tr>
+<tr>
+<td><code>_write_buffs</code></td>
+<td><code>DataBuffs.json</code></td>
+</tr>
+<tr>
+<td><code>_write_generic_json</code></td>
+<td>Cualquier otro JSON</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
+<h3 id="leer-todos-los-enemigos-de-una-zona">Leer todos los enemigos de una zona</h3>
+<pre><code class="language-python">from Modules.Loader import Read
+
+enemies_data = Read(&quot;Data/DataStats.json&quot;, &quot;Forest&quot;, None)
+# Retorna la lista completa de datos del Bosque
+</code></pre>
+<h3 id="leer-las-strings-nombre-descripcion-de-una-zona">Leer las strings (nombre, descripción) de una zona</h3>
+<pre><code class="language-python">strings = Read(&quot;Data/DataStats.json&quot;, &quot;Forest&quot;, &quot;Strings&quot;)
+name = strings.get(&quot;name&quot;, &quot;Bosque&quot;)
+desc = strings.get(&quot;desc&quot;, &quot;Sin descripción&quot;)
+color = strings.get(&quot;color&quot;, &quot;white&quot;)
+</code></pre>
+<h3 id="leer-datos-completos-del-save">Leer datos completos del save</h3>
+<pre><code class="language-python">save_data = Read(&quot;Data/SaveGame.json&quot;, None, None)
+# Retorna todo el JSON
+</code></pre>
+<h3 id="guardar-datos-del-jugador">Guardar datos del jugador</h3>
+<pre><code class="language-python">from Modules.Loader import Write
+
+Write(&quot;Data/SaveGame.json&quot;, &quot;player&quot;, &quot;gold&quot;, 9999)
+</code></pre>
+<h3 id="escribir-un-log-en-texto-plano">Escribir un log en texto plano</h3>
+<pre><code class="language-python">Write(&quot;logs/logs.txt&quot;, None, &quot;[INFO] El jugador subió de nivel.&quot;, None, isplaintext=True)
+</code></pre>
+<hr />
+<h2 id="notas-y-referencias">Notas y Referencias</h2>
+<ul>
+<li>La función <code>Read</code> siempre retorna un valor seguro (lista o dict vacío) en caso de error, lo que previene que el juego crashee por problemas de archivo.</li>
+<li><strong><code>os.path.normpath</code>:</strong> Convierte separadores de ruta al formato del SO actual (<code>/</code> en Linux, <code>\</code> en Windows). <a href="https://docs.python.org/3/library/os.path.html#os.path.normpath">https://docs.python.org/3/library/os.path.html#os.path.normpath</a></li>
+<li><strong><code>logging</code> en Python:</strong> <a href="https://docs.python.org/3/library/logging.html">https://docs.python.org/3/library/logging.html</a></li>
+<li><strong><code>json.load</code> vs <code>json.loads</code>:</strong> <code>json.load</code> lee desde un archivo, <code>json.loads</code> desde un string. <a href="https://docs.python.org/3/library/json.html">https://docs.python.org/3/library/json.html</a></li>
+<li><strong><code>pathlib.Path.mkdir(parents=True, exist_ok=True)</code>:</strong> Crea directorios anidados sin errores si ya existen. <a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path.mkdir">https://docs.python.org/3/library/pathlib.html#pathlib.Path.mkdir</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

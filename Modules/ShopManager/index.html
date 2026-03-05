@@ -1,0 +1,1693 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica del RPG modular">
+      
+      
+        <meta name="author" content="FN">
+      
+      
+      
+        <link rel="prev" href="../GatheringMasterySystem/">
+      
+      
+        <link rel="next" href="../../ModulesUtils/MainGame/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Shop Manager - TPPRPG Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#shopmanagerpy" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="TPPRPG Docs" class="md-header__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TPPRPG Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Shop Manager
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TPPRPG Docs" class="md-nav__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TPPRPG Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Módulos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Módulos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BuffManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buff Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EnchantmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enchantment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EquipmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equipment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FarmingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Farming System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GatheringMasterySystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gathering Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop Manager
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-shopmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase ShopManager
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase ShopManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load_shops-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_shops() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_shop_itemsshop_name-str-listint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_shop_items(shop_name: str) -&gt; List[int]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_item_to_shopshop_name-str-item_id-int-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_item_to_shop(shop_name: str, item_id: int) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove_item_from_shopshop_name-str-item_id-int-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        remove_item_from_shop(shop_name: str, item_id: int) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_shops-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_shops() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_default_shops_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_default_shops_file()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-helper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones Helper
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones Helper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_shop_managershops_path-shopmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_shop_manager(shops_path) -&gt; ShopManager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_shopshop_name-player-item_manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_shop(shop_name, player, item_manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inicializar-y-consultar-tienda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicializar y consultar tienda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agregar-un-item-a-una-tienda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregar un item a una tienda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mostrar-la-tienda-interactiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mostrar la tienda interactiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-esperada-en-datashopsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura esperada en DataShops.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Núcleo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Núcleo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/MainGame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/Loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/ModLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-shopmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase ShopManager
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase ShopManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load_shops-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_shops() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_shop_itemsshop_name-str-listint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_shop_items(shop_name: str) -&gt; List[int]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_item_to_shopshop_name-str-item_id-int-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_item_to_shop(shop_name: str, item_id: int) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove_item_from_shopshop_name-str-item_id-int-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        remove_item_from_shop(shop_name: str, item_id: int) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_shops-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_shops() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_default_shops_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_default_shops_file()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-helper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones Helper
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones Helper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_shop_managershops_path-shopmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_shop_manager(shops_path) -&gt; ShopManager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_shopshop_name-player-item_manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_shop(shop_name, player, item_manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inicializar-y-consultar-tienda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicializar y consultar tienda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agregar-un-item-a-una-tienda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregar un item a una tienda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mostrar-la-tienda-interactiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mostrar la tienda interactiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-esperada-en-datashopsjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura esperada en DataShops.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="shopmanagerpy"><code>ShopManager.py</code></h1>
+<h2 id="indice">Índice</h2>
+<ol>
+<li><a href="#descripción-general">Descripción General</a></li>
+<li><a href="#clase-shopmanager">Clase <code>ShopManager</code></a></li>
+<li><a href="#variables-globales">Variables Globales</a></li>
+<li><a href="#funciones-helper">Funciones Helper</a></li>
+<li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
+<li><a href="#notas-y-referencias">Notas y Referencias</a></li>
+</ol>
+<hr />
+<h2 id="descripcion-general">Descripción General</h2>
+<p><code>ShopManager.py</code> gestiona las <strong>tiendas del juego</strong> cargando su inventario desde el archivo <code>DataShops.json</code>. Permite consultar, agregar y remover items de tiendas de forma persistente, además de mostrar una interfaz interactiva de compra en la consola.</p>
+<hr />
+<h2 id="clase-shopmanager">Clase <code>ShopManager</code></h2>
+<p>Gestor de tiendas. Lee y escribe la configuración de tiendas desde/hacia JSON.</p>
+<h3 id="constructor">Constructor</h3>
+<pre><code class="language-python">ShopManager(shops_json_path=&quot;./Data/DataShops.json&quot;)
+</code></pre>
+<h3 id="atributos-de-instancia">Atributos de instancia</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shops_json_path</code></td>
+<td><code>str</code></td>
+<td>Ruta al archivo JSON de configuración de tiendas.</td>
+</tr>
+<tr>
+<td><code>shops_data</code></td>
+<td><code>dict</code></td>
+<td>Datos de todas las tiendas en memoria.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="metodos">Métodos</h3>
+<h4 id="load_shops-bool"><code>load_shops() -&gt; bool</code></h4>
+<p>Carga las tiendas desde el JSON. Si el archivo no existe, llama a <code>_create_default_shops_file()</code> para generar uno con tiendas de ejemplo. Retorna <code>True</code> si se cargó correctamente.</p>
+<hr />
+<h4 id="get_shop_itemsshop_name-str-listint"><code>get_shop_items(shop_name: str) -&gt; List[int]</code></h4>
+<p>Retorna la lista de IDs de items disponibles en la tienda especificada.</p>
+<pre><code class="language-python">ids = manager.get_shop_items(&quot;WeaponShop&quot;)
+# [1, 2, 3, 4]
+</code></pre>
+<hr />
+<h4 id="add_item_to_shopshop_name-str-item_id-int-bool"><code>add_item_to_shop(shop_name: str, item_id: int) -&gt; bool</code></h4>
+<p>Agrega un item (por ID) al inventario de la tienda. Guarda automáticamente los cambios en JSON. No agrega duplicados.</p>
+<hr />
+<h4 id="remove_item_from_shopshop_name-str-item_id-int-bool"><code>remove_item_from_shop(shop_name: str, item_id: int) -&gt; bool</code></h4>
+<p>Remueve un item del inventario de la tienda y guarda los cambios.</p>
+<hr />
+<h4 id="save_shops-bool"><code>save_shops() -&gt; bool</code></h4>
+<p>Persiste el estado actual de <code>shops_data</code> en el archivo JSON con formato indentado.</p>
+<hr />
+<h4 id="_create_default_shops_file"><code>_create_default_shops_file()</code></h4>
+<p><em>(Método interno)</em> Crea el archivo JSON con las tiendas por defecto:</p>
+<table>
+<thead>
+<tr>
+<th>Tienda</th>
+<th>IDs de items</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GeneralStore</code></td>
+<td>1, 10, 20, 30, 40, 50, 51, 53</td>
+</tr>
+<tr>
+<td><code>WeaponShop</code></td>
+<td>1, 2, 3, 4</td>
+</tr>
+<tr>
+<td><code>ArmorShop</code></td>
+<td>10, 11, 12, 20, 21, 30, 31</td>
+</tr>
+<tr>
+<td><code>MagicShop</code></td>
+<td>4, 5, 41, 42, 43, 44, 54, 55</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="variables-globales">Variables Globales</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_shop_manager_instance</code></td>
+<td><code>Optional[ShopManager]</code></td>
+<td>Instancia global Singleton del <code>ShopManager</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="funciones-helper">Funciones Helper</h2>
+<h3 id="get_shop_managershops_path-shopmanager"><code>get_shop_manager(shops_path) -&gt; ShopManager</code></h3>
+<p>Patrón <strong>Singleton</strong>. Retorna la instancia global del <code>ShopManager</code>. La primera vez la crea y llama a <code>load_shops()</code> automáticamente.</p>
+<pre><code class="language-python">manager = get_shop_manager()
+</code></pre>
+<hr />
+<h3 id="display_shopshop_name-player-item_manager"><code>display_shop(shop_name, player, item_manager)</code></h3>
+<p>Muestra la interfaz de tienda interactiva en la consola. Permite al jugador ver items disponibles, sus stats y precios, y comprarlos.</p>
+<p><strong>Parámetros:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shop_name</code></td>
+<td><code>str</code></td>
+<td>Nombre de la tienda a mostrar (ej: <code>"GeneralStore"</code>).</td>
+</tr>
+<tr>
+<td><code>player</code></td>
+<td><code>cPlayer</code></td>
+<td>El objeto del jugador (para verificar/descontar oro).</td>
+</tr>
+<tr>
+<td><code>item_manager</code></td>
+<td><code>ItemManager</code></td>
+<td>Instancia del gestor de items para cargar datos del item.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flujo de la función:</strong></p>
+<ol>
+<li>Obtiene los IDs de items de la tienda.</li>
+<li>Muestra una tabla con nombre, costo, tipo y disponibilidad (✓/✗ según el oro del jugador).</li>
+<li>El jugador selecciona un número para ver detalles del item.</li>
+<li>Confirma la compra (<code>s/n</code>).</li>
+<li>Si confirma y tiene oro suficiente: descuenta el oro, crea el objeto del item y lo añade al inventario.</li>
+</ol>
+<p><strong>Stats mostrados:</strong></p>
+<ul>
+<li>Daño Físico (de <code>DMG</code>)</li>
+<li>Daño Mágico (de <code>Magical_DMG</code>)</li>
+<li>Defensa (<code>Defense</code>)</li>
+<li>HP Máximo (<code>HealthBoost</code>)</li>
+<li>Daño bonus (<code>DmgBoost</code>)</li>
+<li>Robo de Vida (<code>HealthSteal</code>)</li>
+<li>Restauración de HP/MP (<code>HealthRestore</code>, <code>ManaRestore</code>)</li>
+</ul>
+<hr />
+<h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
+<h3 id="inicializar-y-consultar-tienda">Inicializar y consultar tienda</h3>
+<pre><code class="language-python">from Modules.ShopManager import get_shop_manager
+
+manager = get_shop_manager()
+item_ids = manager.get_shop_items(&quot;WeaponShop&quot;)
+print(item_ids)  # [1, 2, 3, 4]
+</code></pre>
+<h3 id="agregar-un-item-a-una-tienda">Agregar un item a una tienda</h3>
+<pre><code class="language-python">manager = get_shop_manager()
+manager.add_item_to_shop(&quot;WeaponShop&quot;, 99)
+# Guarda automáticamente en DataShops.json
+</code></pre>
+<h3 id="mostrar-la-tienda-interactiva">Mostrar la tienda interactiva</h3>
+<pre><code class="language-python">from Modules.ShopManager import display_shop
+from Modules.ItemManager import get_item_manager
+
+item_manager = get_item_manager()
+display_shop(&quot;GeneralStore&quot;, player, item_manager)
+</code></pre>
+<h3 id="estructura-esperada-en-datashopsjson">Estructura esperada en <code>DataShops.json</code></h3>
+<pre><code class="language-json">{
+    &quot;GeneralStore&quot;: [
+        {
+            &quot;IDs&quot;: [1, 10, 20, 30, 40, 50]
+        }
+    ],
+    &quot;WeaponShop&quot;: [
+        {
+            &quot;IDs&quot;: [1, 2, 3, 4]
+        }
+    ]
+}
+</code></pre>
+<hr />
+<h2 id="notas-y-referencias">Notas y Referencias</h2>
+<ul>
+<li>La función <code>display_shop</code> importa <code>keyboard</code> para manejar la espera de confirmación. Esta librería requiere instalación: <code>pip install keyboard</code>.</li>
+<li>Los IDs en el JSON deben coincidir con los <code>STATIC_ID</code> definidos en <code>DataItems.json</code>, que maneja el <code>ItemManager</code>.</li>
+<li><strong><code>keyboard</code> library:</strong> Permite detectar pulsaciones de teclas. Documentación: <a href="https://github.com/boppreh/keyboard">https://github.com/boppreh/keyboard</a></li>
+<li>En Linux, la librería <code>keyboard</code> puede requerir permisos de root para funcionar (de ahí la integración con <code>check_admin.py</code>).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
