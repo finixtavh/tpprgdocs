@@ -1,0 +1,2109 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica del RPG modular">
+      
+      
+        <meta name="author" content="FN">
+      
+      
+      
+        <link rel="prev" href="../../Modules/ShopManager/">
+      
+      
+        <link rel="next" href="../Loader/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Main Game - TPPRPG Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#maingamepy" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="TPPRPG Docs" class="md-header__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TPPRPG Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Main Game
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TPPRPG Docs" class="md-nav__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TPPRPG Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Módulos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Módulos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/BuffManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buff Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/EnchantmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enchantment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/EquipmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equipment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/FarmingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Farming System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/GatheringMasterySystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gathering Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/ShopManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Núcleo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Núcleo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Game
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración (CONFIG)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estado-del-juego-gamestate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado del Juego (GameState)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales-del-juego" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales del Juego
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tema-visual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tema Visual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-inicializacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Inicialización
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Inicialización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#init_game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init_game()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_test_items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_test_items()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zone_loaderplayer_zone-str-cenemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zone_loader(player_zone: str) -&gt; cEnemy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de UI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de UI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#display_player_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_player_status()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_status_barcurrent-maximum-color-return_valuestrue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_status_bar(current, maximum, color, return_values=True)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_main_menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_main_menu()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render_combat_menuplayer-enemy-combat_round" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render_combat_menu(player, enemy, combat_round)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_zone_enemieszone_name-enemies_data-strings_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_zone_enemies(zone_name, enemies_data, strings_data)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_validated_inputprompt-valid_options-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_validated_input(prompt, valid_options) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-combate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Combate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Combate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apply_debuffsplayer-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apply_debuffs(player) -&gt; Dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-guardadocarga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Guardado/Carga
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Guardado/Carga">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save_game-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_game() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_game-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_game() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bucle-principal-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bucle Principal (main)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opciones-del-menu-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opciones del Menú Principal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opciones del Menú Principal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flujo-de-combate-opcion-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de Combate (opción 7)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejecutar-el-juego" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejecutar el juego
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-delay-de-combate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificar el delay de combate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acceder-al-item_manager-desde-el-juego" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceder al item_manager desde el juego
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ModLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración (CONFIG)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estado-del-juego-gamestate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado del Juego (GameState)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales-del-juego" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales del Juego
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tema-visual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tema Visual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-inicializacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Inicialización
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Inicialización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#init_game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        init_game()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_test_items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_test_items()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zone_loaderplayer_zone-str-cenemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zone_loader(player_zone: str) -&gt; cEnemy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de UI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de UI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#display_player_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_player_status()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_status_barcurrent-maximum-color-return_valuestrue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_status_bar(current, maximum, color, return_values=True)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_main_menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_main_menu()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#render_combat_menuplayer-enemy-combat_round" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render_combat_menu(player, enemy, combat_round)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_zone_enemieszone_name-enemies_data-strings_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_zone_enemies(zone_name, enemies_data, strings_data)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_validated_inputprompt-valid_options-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_validated_input(prompt, valid_options) -&gt; int
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-combate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Combate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Combate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apply_debuffsplayer-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        apply_debuffs(player) -&gt; Dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-guardadocarga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Guardado/Carga
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Guardado/Carga">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save_game-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_game() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_game-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_game() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bucle-principal-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bucle Principal (main)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opciones-del-menu-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opciones del Menú Principal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opciones del Menú Principal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flujo-de-combate-opcion-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de Combate (opción 7)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejecutar-el-juego" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejecutar el juego
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-delay-de-combate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificar el delay de combate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acceder-al-item_manager-desde-el-juego" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceder al item_manager desde el juego
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="maingamepy"><code>MainGame.py</code></h1>
+<h2 id="indice">Índice</h2>
+<ol>
+<li><a href="#descripción-general">Descripción General</a></li>
+<li><a href="#configuración-config">Configuración (<code>CONFIG</code>)</a></li>
+<li><a href="#estado-del-juego-gamestate">Estado del Juego (<code>GameState</code>)</a></li>
+<li><a href="#variables-globales-del-juego">Variables Globales del Juego</a></li>
+<li><a href="#tema-visual">Tema Visual</a></li>
+<li><a href="#funciones-de-inicialización">Funciones de Inicialización</a></li>
+<li><a href="#funciones-de-ui">Funciones de UI</a></li>
+<li><a href="#funciones-de-combate">Funciones de Combate</a></li>
+<li><a href="#funciones-de-guardadocarga">Funciones de Guardado/Carga</a></li>
+<li><a href="#bucle-principal-main">Bucle Principal (<code>main</code>)</a></li>
+<li><a href="#opciones-del-menú-principal">Opciones del Menú Principal</a></li>
+<li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
+<li><a href="#notas-y-referencias">Notas y Referencias</a></li>
+</ol>
+<hr />
+<h2 id="descripcion-general">Descripción General</h2>
+<p><code>MainGame.py</code> es el <strong>punto de entrada y bucle principal</strong> del juego. Orquesta todos los demás módulos (Loader, setup, EquipmentSystem, ItemManager, ShopManager, ModLoader, GatheringMasterySystem) para presentar al jugador un RPG completo por consola con menús, combate, inventario y tiendas.</p>
+<p>Al ejecutar <code>python MainGame.py</code> (o <code>python -m Modules.MainGame</code>), se inicia el juego.</p>
+<hr />
+<h2 id="configuracion-config">Configuración (<code>CONFIG</code>)</h2>
+<p>Diccionario global con todas las opciones configurables del juego:</p>
+<pre><code class="language-python">CONFIG = {
+    &quot;ASK_FOR_ADMIN&quot;: False if platform.platform == &quot;Windows&quot; else True,
+
+    &quot;COMBAT&quot;: {
+        &quot;DELAY_BETWEEN_ROUNDS&quot;: 3.5,   # Segundos entre rondas
+        &quot;CHANCE_TO_FLEE&quot;: 0.3,          # Probabilidad base de huir (30%)
+    },
+    &quot;DISPLAY&quot;: {
+        &quot;BAR_LENGTH&quot;: 25,               # Largo de las barras HP/MP
+        &quot;MENU_REFRESH_RATE&quot;: 0.5,       # Segundos de espera al refrescar menús
+        &quot;SHOW_FULL_STATS&quot;: True,        # Mostrar stats completos en pantalla
+    },
+    &quot;DEBUG&quot;: {
+        &quot;ENABLED&quot;: False,               # Modo debug (actualmente no hace nada)
+    }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Clave</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ASK_FOR_ADMIN</code></td>
+<td><code>bool</code></td>
+<td>Si solicitar privilegios de admin al iniciar.</td>
+</tr>
+<tr>
+<td><code>COMBAT.DELAY_BETWEEN_ROUNDS</code></td>
+<td><code>float</code></td>
+<td>Segundos de pausa entre rondas de combate.</td>
+</tr>
+<tr>
+<td><code>COMBAT.CHANCE_TO_FLEE</code></td>
+<td><code>float</code></td>
+<td>Probabilidad base de huir (0.0–1.0).</td>
+</tr>
+<tr>
+<td><code>DISPLAY.BAR_LENGTH</code></td>
+<td><code>int</code></td>
+<td>Longitud visual de las barras de estado.</td>
+</tr>
+<tr>
+<td><code>DISPLAY.SHOW_FULL_STATS</code></td>
+<td><code>bool</code></td>
+<td>Si mostrar todos los stats en la pantalla de estadísticas.</td>
+</tr>
+<tr>
+<td><code>DEBUG.ENABLED</code></td>
+<td><code>bool</code></td>
+<td>Modo debug (reservado).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="estado-del-juego-gamestate">Estado del Juego (<code>GameState</code>)</h2>
+<p>Enum que registra en qué pantalla se encuentra el juego actualmente:</p>
+<pre><code class="language-python">class GameState(Enum):
+    MAIN_MENU  = auto()
+    EXPLORING  = auto()
+    COMBAT     = auto()
+    SHOP       = auto()
+    INVENTORY  = auto()
+    STATS      = auto()
+    EQUIPMENT  = auto()
+</code></pre>
+<hr />
+<h2 id="variables-globales-del-juego">Variables Globales del Juego</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>player</code></td>
+<td><code>cPlayer</code></td>
+<td>Objeto del jugador. Se inicializa con <code>setup_player()</code>.</td>
+</tr>
+<tr>
+<td><code>enemies</code></td>
+<td><code>List</code></td>
+<td>Lista de enemigos disponibles.</td>
+</tr>
+<tr>
+<td><code>enemy</code></td>
+<td><code>Optional[cEnemy]</code></td>
+<td>Enemigo actual del combate.</td>
+</tr>
+<tr>
+<td><code>chosen_area</code></td>
+<td><code>Optional[str]</code></td>
+<td>Zona seleccionada por el jugador (<code>"Forest"</code>, <code>"Cave"</code>, <code>None</code>).</td>
+</tr>
+<tr>
+<td><code>shop_objects</code></td>
+<td><code>List</code></td>
+<td>Items de la tienda (legado).</td>
+</tr>
+<tr>
+<td><code>zone_name</code></td>
+<td><code>str</code></td>
+<td>Nombre de la zona actual.</td>
+</tr>
+<tr>
+<td><code>tick</code></td>
+<td><code>int</code></td>
+<td>Contador de turnos global.</td>
+</tr>
+<tr>
+<td><code>chars</code></td>
+<td><code>List</code></td>
+<td>Lista de personajes (reservado).</td>
+</tr>
+<tr>
+<td><code>current_state</code></td>
+<td><code>GameState</code></td>
+<td>Estado actual del juego.</td>
+</tr>
+<tr>
+<td><code>item_manager</code></td>
+<td><code>ItemManager</code></td>
+<td>Instancia del gestor de items.</td>
+</tr>
+<tr>
+<td><code>shop_manager</code></td>
+<td><code>ShopManager</code></td>
+<td>Instancia del gestor de tiendas.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tema-visual">Tema Visual</h2>
+<p>Se configura un tema de colores personalizado para <code>rich.Console</code>:</p>
+<pre><code class="language-python">custom_theme = Theme({
+    &quot;info&quot;:        &quot;dim cyan&quot;,
+    &quot;warning&quot;:     &quot;magenta&quot;,
+    &quot;danger&quot;:      &quot;bold red&quot;,
+    &quot;success&quot;:     &quot;bold green&quot;,
+    &quot;menu_title&quot;:  &quot;bold yellow&quot;,
+    &quot;menu_option&quot;: &quot;bright_white&quot;,
+})
+console = Console(theme=custom_theme)
+</code></pre>
+<p>Uso en el código:</p>
+<pre><code class="language-python">console.print(&quot;[success]¡Éxito![/success]&quot;)
+console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
+</code></pre>
+<hr />
+<h2 id="funciones-de-inicializacion">Funciones de Inicialización</h2>
+<h3 id="init_game"><code>init_game()</code></h3>
+<p>Inicializa todos los sistemas del juego al arrancar:</p>
+<ol>
+<li>Carga el <code>ItemManager</code> con <code>get_item_manager()</code>.</li>
+<li>Carga el <code>ShopManager</code> con <code>get_shop_manager()</code>.</li>
+<li>Inicializa y carga todos los mods con <code>get_mod_loader().load_all_mods()</code>.</li>
+<li>Si existe <code>Data/SaveGame.json</code>, pregunta si cargar la partida guardada.</li>
+</ol>
+<hr />
+<h3 id="load_test_items"><code>load_test_items()</code></h3>
+<p>Carga algunos items de prueba (IDs 3, 4, 40, 41, 52) y los añade al inventario. Útil durante desarrollo.</p>
+<hr />
+<h3 id="zone_loaderplayer_zone-str-cenemy"><code>zone_loader(player_zone: str) -&gt; cEnemy</code></h3>
+<p>Carga los enemigos de la zona indicada desde <code>DataStats.json</code> y retorna uno aleatorio.</p>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>player_zone</code></td>
+<td><code>"Forest"</code> o <code>"Cave"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Retorna una instancia de <code>cEnemy</code> o <code>None</code> si hay error.</p>
+<hr />
+<h2 id="funciones-de-ui">Funciones de UI</h2>
+<h3 id="display_player_status"><code>display_player_status()</code></h3>
+<p>Muestra un panel con:
+- Nombre, nivel y zona actual del jugador.
+- Barra de HP con porcentaje.
+- Barra de Mana con porcentaje.</p>
+<hr />
+<h3 id="create_status_barcurrent-maximum-color-return_valuestrue"><code>create_status_bar(current, maximum, color, return_values=True)</code></h3>
+<p>Crea una barra de estado visual con caracteres <code>#</code> y <code>-</code>.</p>
+<p><strong>Parámetros:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>current</code></td>
+<td><code>float</code></td>
+<td>Valor actual.</td>
+</tr>
+<tr>
+<td><code>maximum</code></td>
+<td><code>float</code></td>
+<td>Valor máximo.</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td><code>str</code></td>
+<td>Color para la parte llena (ej: <code>"red"</code>, <code>"blue"</code>, <code>"green"</code>).</td>
+</tr>
+<tr>
+<td><code>return_values</code></td>
+<td><code>bool</code></td>
+<td>Si <code>True</code>, retorna <code>(bar_str, percentage)</code>. Si <code>False</code>, imprime y retorna <code>None</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de salida:</strong></p>
+<pre><code>[#########################-] 96%
+</code></pre>
+<hr />
+<h3 id="display_main_menu"><code>display_main_menu()</code></h3>
+<p>Muestra el menú principal agrupado en 4 secciones: Explorar, Tienda, Personaje, Sistema.</p>
+<hr />
+<h3 id="render_combat_menuplayer-enemy-combat_round"><code>render_combat_menu(player, enemy, combat_round)</code></h3>
+<p>Muestra la UI de combate con:
+- Número de ronda.
+- Paneles de HP/MP del jugador y enemigo.
+- Tabla de acciones disponibles (Atacar, Usar objeto, Huir).</p>
+<hr />
+<h3 id="display_zone_enemieszone_name-enemies_data-strings_data"><code>display_zone_enemies(zone_name, enemies_data, strings_data)</code></h3>
+<p>Muestra una tabla con los enemigos de una zona, incluyendo HP, daño físico, daño mágico y defensa.</p>
+<hr />
+<h3 id="get_validated_inputprompt-valid_options-int"><code>get_validated_input(prompt, valid_options) -&gt; int</code></h3>
+<p>Solicita input al usuario hasta recibir un número válido dentro de <code>valid_options</code>. Ignora Enters residuales.</p>
+<hr />
+<h2 id="funciones-de-combate">Funciones de Combate</h2>
+<h3 id="apply_debuffsplayer-dict"><code>apply_debuffs(player) -&gt; Dict</code></h3>
+<p>Aplica todos los debuffs activos en <code>player.applieddebuffs</code>. Para cada debuff, llama a <code>debuff.Apply(attr, player)</code> por cada atributo no-callable. Retorna un diccionario de efectos aplicados.</p>
+<hr />
+<h2 id="funciones-de-guardadocarga">Funciones de Guardado/Carga</h2>
+<h3 id="save_game-bool"><code>save_game() -&gt; bool</code></h3>
+<p>Guarda el estado del juego en <code>Data/SaveGame.json</code>.</p>
+<p><strong>Datos guardados:</strong></p>
+<pre><code class="language-json">{
+    &quot;player&quot;: {
+        &quot;name&quot;: &quot;...&quot;, &quot;level&quot;: 1, &quot;health&quot;: 100, &quot;health_max&quot;: 100,
+        &quot;mana&quot;: 100, &quot;mana_max&quot;: 100, &quot;exp&quot;: 15, &quot;exp_max&quot;: 100, &quot;gold&quot;: 50
+    },
+    &quot;game_state&quot;: { &quot;area&quot;: &quot;Forest&quot;, &quot;tick&quot;: 0 },
+    &quot;timestamp&quot;: &quot;...&quot;
+}
+</code></pre>
+<blockquote>
+<p><strong>Nota:</strong> El inventario y el equipamiento <strong>no se guardan</strong> en la implementación actual.</p>
+</blockquote>
+<hr />
+<h3 id="load_game-bool"><code>load_game() -&gt; bool</code></h3>
+<p>Carga el archivo <code>Data/SaveGame.json</code> y restaura los atributos básicos del jugador y el estado del juego. Retorna <code>False</code> si el archivo no existe o está corrupto.</p>
+<hr />
+<h2 id="bucle-principal-main">Bucle Principal (<code>main</code>)</h2>
+<p>La función <code>main()</code> se llama en un loop infinito desde el bloque <code>if __name__ == "__main__"</code>. En cada iteración:</p>
+<ol>
+<li>Llama a <code>player.Check(vInventory)</code> y regenera el maná.</li>
+<li>Limpia la pantalla.</li>
+<li>Muestra el estado del jugador y el menú principal.</li>
+<li>Solicita y valida el input del usuario.</li>
+<li>Ejecuta la acción correspondiente.</li>
+</ol>
+<hr />
+<h2 id="opciones-del-menu-principal">Opciones del Menú Principal</h2>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Salir del juego (con confirmación).</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Ver información de zonas (enemigos de Bosque y Cueva en tablas).</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Ir a una zona (Bosque, Cueva o salir de la zona actual). Opcionalmente visitar la tienda de zona.</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>Tienda general con selección entre GeneralStore, WeaponShop, ArmorShop, MagicShop.</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>Ver inventario (<code>vInventory.PrintObjects()</code>).</td>
+</tr>
+<tr>
+<td><code>5</code></td>
+<td>Usar objetos consumibles del inventario.</td>
+</tr>
+<tr>
+<td><code>6</code></td>
+<td>Menú de equipamiento (<code>equip_menu(player, vInventory)</code>).</td>
+</tr>
+<tr>
+<td><code>7</code></td>
+<td>Combate contra el enemigo de la zona actual.</td>
+</tr>
+<tr>
+<td><code>8</code></td>
+<td>Ver estadísticas completas del jugador con barras de HP/MP/EXP y equipamiento actual.</td>
+</tr>
+<tr>
+<td><code>9</code></td>
+<td>Gestión de mods (listar, recargar, ver estado).</td>
+</tr>
+<tr>
+<td><code>10</code></td>
+<td>Ver todos los items disponibles en el juego (<code>item_manager.list_all_items(detailed=True)</code>).</td>
+</tr>
+<tr>
+<td><code>11</code></td>
+<td>Guardar la partida.</td>
+</tr>
+<tr>
+<td><code>12</code></td>
+<td>Menú DEBUG (añadir armas, oro/EXP, ver variables).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="flujo-de-combate-opcion-7">Flujo de Combate (opción 7)</h3>
+<pre><code>¿Hay enemigo en zona?
+    NO → Mensaje de error
+    SÍ → Bucle de combate:
+        ┌─────────────────────────────────────────┐
+        │  Mostrar UI combate (render_combat_menu) │
+        │  Aplicar debuffs activos                │
+        │  Input del jugador (1/2/3)              │
+        │                                         │
+        │  [1] Atacar:                            │
+        │      player.attack(enemy)               │
+        │      Si enemy.HP ≤ 0:                   │
+        │        → EXP, Gold, loot drop (30%)     │
+        │        → Level up si corresponde        │
+        │        → Cargar nuevo enemigo            │
+        │        → Salir del bucle                │
+        │      enemy.attack(player)               │
+        │      Si player.HP ≤ 0: Game Over parcial│
+        │                                         │
+        │  [2] Usar objeto:                       │
+        │      Mostrar consumibles                 │
+        │      Usar seleccionado                  │
+        │      enemy.attack(player) (turno enemigo)│
+        │                                         │
+        │  [3] Huir:                              │
+        │      chance = 0.3 + (AGI_j - AGI_e)/100│
+        │      Si éxito: salir del bucle          │
+        │      Si falla: enemy ataca con x1.2 dmg │
+        └─────────────────────────────────────────┘
+</code></pre>
+<hr />
+<h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
+<h3 id="ejecutar-el-juego">Ejecutar el juego</h3>
+<pre><code class="language-bash">python MainGame.py
+</code></pre>
+<h3 id="modificar-el-delay-de-combate">Modificar el delay de combate</h3>
+<pre><code class="language-python"># En MainGame.py, antes de iniciar:
+CONFIG[&quot;COMBAT&quot;][&quot;DELAY_BETWEEN_ROUNDS&quot;] = 1.0  # Más rápido
+</code></pre>
+<h3 id="acceder-al-item_manager-desde-el-juego">Acceder al item_manager desde el juego</h3>
+<pre><code class="language-python"># Ya inicializado en init_game()
+item_manager.list_all_items(detailed=True)
+</code></pre>
+<hr />
+<h2 id="notas-y-referencias">Notas y Referencias</h2>
+<ul>
+<li><strong><code>rich</code> library:</strong> Usada extensivamente para UI. <a href="https://rich.readthedocs.io/">https://rich.readthedocs.io/</a></li>
+<li><strong><code>keyboard</code> library:</strong> Para capturar Enter en confirmaciones. <a href="https://github.com/boppreh/keyboard">https://github.com/boppreh/keyboard</a></li>
+<li><strong><code>Enum</code> en Python:</strong> Para estados del juego. <a href="https://docs.python.org/3/library/enum.html">https://docs.python.org/3/library/enum.html</a></li>
+<li>El sistema de loot usa una tabla hardcodeada por niveles (1-3). Una mejora futura podría cargar la tabla desde el JSON.</li>
+<li>El <strong>guardado no persiste inventario ni equipamiento</strong>. Es una funcionalidad pendiente de implementar.</li>
+<li>La probabilidad de huir está limitada entre 5% y 95%: <code>flee_chance = max(0.05, min(0.95, flee_chance))</code>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

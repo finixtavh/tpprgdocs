@@ -1,0 +1,1554 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica del RPG modular">
+      
+      
+        <meta name="author" content="FN">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>ItemManager.py - TPPRPG Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#itemmanagerpy" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="TPPRPG Docs" class="md-header__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TPPRPG Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ItemManager.py
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TPPRPG Docs" class="md-nav__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TPPRPG Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Módulos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Módulos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BuffManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buff Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EnchantmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enchantment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EquipmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equipment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FarmingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Farming System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GatheringMasterySystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gathering Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ShopManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Núcleo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Núcleo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/MainGame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/Loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/ModLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-itemmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase ItemManager
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase ItemManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load_items-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_items() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_build_indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _build_indexes()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_item_by_iditem_id-int-optionaldict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_item_by_id(item_id: int) -&gt; Optional[Dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_item_by_namename-str-optionaldict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_item_by_name(name: str) -&gt; Optional[Dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_items_by_typeitem_type-str-listdict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_items_by_type(item_type: str) -&gt; List[Dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_item_objectitem_id-cweapon-cequippableitems-cobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_item_object(item_id, cWeapon, cEquippableItems, cObject)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_weaponitem_data-cweapon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_weapon(item_data, cWeapon)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_equippableitem_data-cequippableitems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_equippable(item_data, cEquippableItems)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_consumableitem_data-cobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_consumable(item_data, cObject)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_itemitem_type-item_key-item_data-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_item(item_type, item_key, item_data) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify_itemitem_id-updates-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        modify_item(item_id, updates) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete_itemitem_id-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        delete_item(item_id) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_items-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_items() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_all_itemsdetailedfalse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        list_all_items(detailed=False)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-conveniencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Conveniencia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Conveniencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_item_manageritems_path-itemmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_item_manager(items_path) -&gt; ItemManager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_item_by_iditem_id-cweapon-cequippableitems-cobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_item_by_id(item_id, cWeapon, cEquippableItems, cObject)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_items_by_typeitem_type-cweapon-cequippableitems-cobject-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_items_by_type(item_type, cWeapon, cEquippableItems, cObject) -&gt; List
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search_item_by_namename-optionaldict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        search_item_by_name(name) -&gt; Optional[Dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cargar-un-item-y-anadirlo-al-inventario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cargar un item y añadirlo al inventario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agregar-un-item-nuevo-al-json-en-tiempo-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregar un item nuevo al JSON en tiempo de ejecución
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-costo-de-un-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificar el costo de un item
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="itemmanagerpy"><code>ItemManager.py</code></h1>
+<h2 id="indice">Índice</h2>
+<ol>
+<li><a href="#descripción-general">Descripción General</a></li>
+<li><a href="#clase-itemmanager">Clase <code>ItemManager</code></a></li>
+<li><a href="#variables-globales">Variables Globales</a></li>
+<li><a href="#funciones-de-conveniencia">Funciones de Conveniencia</a></li>
+<li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
+<li><a href="#notas-y-referencias">Notas y Referencias</a></li>
+</ol>
+<hr />
+<h2 id="descripcion-general">Descripción General</h2>
+<p><code>ItemManager.py</code> es el sistema centralizado de <strong>gestión de items</strong> del juego. Carga todos los items desde <code>DataItems.json</code>, los indexa por ID y nombre para búsqueda rápida, y crea instancias de los objetos del juego (<code>cWeapon</code>, <code>cEquippableItems</code>, <code>cObject</code>) según el tipo de item.</p>
+<p>También permite agregar, modificar y eliminar items del JSON en tiempo de ejecución.</p>
+<hr />
+<h2 id="clase-itemmanager">Clase <code>ItemManager</code></h2>
+<h3 id="constructor">Constructor</h3>
+<pre><code class="language-python">ItemManager(items_json_path=&quot;./Data/DataItems.json&quot;)
+</code></pre>
+<h3 id="atributos-de-instancia">Atributos de instancia</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>items_json_path</code></td>
+<td><code>str</code></td>
+<td>Ruta al archivo JSON de items.</td>
+</tr>
+<tr>
+<td><code>items_data</code></td>
+<td><code>Dict</code></td>
+<td>Datos completos del JSON en memoria.</td>
+</tr>
+<tr>
+<td><code>items_by_id</code></td>
+<td><code>Dict[int, Dict]</code></td>
+<td>Índice de búsqueda por <code>STATIC_ID</code>.</td>
+</tr>
+<tr>
+<td><code>items_by_name</code></td>
+<td><code>Dict[str, Dict]</code></td>
+<td>Índice de búsqueda por nombre (en minúsculas).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="metodos">Métodos</h3>
+<h4 id="load_items-bool"><code>load_items() -&gt; bool</code></h4>
+<p>Carga el JSON de items. Si el archivo no existe, crea uno con items por defecto. Llama internamente a <code>_build_indexes()</code> para construir los índices de búsqueda. Retorna <code>True</code> en caso de éxito.</p>
+<hr />
+<h4 id="_build_indexes"><code>_build_indexes()</code></h4>
+<p><em>(Interno)</em> Recorre <code>items_data</code> y llena <code>items_by_id</code> e <code>items_by_name</code> para permitir búsquedas O(1). Los datos del JSON deben tener categorías con el prefijo <code>"TYPE:"</code>.</p>
+<p><strong>Estructura esperada en el JSON:</strong></p>
+<pre><code class="language-json">{
+    &quot;TYPE:Weapons&quot;: {
+        &quot;wooden_sword&quot;: {
+            &quot;STATIC_ID&quot;: 1,
+            &quot;Name&quot;: &quot;Espada de Madera&quot;,
+            &quot;Type&quot;: &quot;Weapon&quot;,
+            &quot;DMG&quot;: [10, 0, 0, 0, 0],
+            &quot;DMG_min&quot;: [5, 0, 0, 0],
+            &quot;Gold_Cost&quot;: 10,
+            &quot;Description&quot;: &quot;Una espada básica&quot;
+        }
+    },
+    &quot;TYPE:Armor&quot;: {
+        &quot;leather_armor&quot;: {
+            &quot;STATIC_ID&quot;: 10,
+            &quot;Name&quot;: &quot;Armadura de Cuero&quot;,
+            &quot;Type&quot;: &quot;Armor&quot;,
+            &quot;Defense&quot;: [5, 2, 2, 2, 1],
+            &quot;HealthBoost&quot;: 10,
+            &quot;Gold_Cost&quot;: 30
+        }
+    }
+}
+</code></pre>
+<hr />
+<h4 id="get_item_by_iditem_id-int-optionaldict"><code>get_item_by_id(item_id: int) -&gt; Optional[Dict]</code></h4>
+<p>Retorna los datos del item con el <code>STATIC_ID</code> dado, o <code>None</code> si no existe.</p>
+<pre><code class="language-python">data = manager.get_item_by_id(3)
+</code></pre>
+<hr />
+<h4 id="get_item_by_namename-str-optionaldict"><code>get_item_by_name(name: str) -&gt; Optional[Dict]</code></h4>
+<p>Retorna los datos del item por nombre (case-insensitive). Busca con <code>name.lower()</code>.</p>
+<pre><code class="language-python">data = manager.get_item_by_name(&quot;Espada de Madera&quot;)
+</code></pre>
+<hr />
+<h4 id="get_items_by_typeitem_type-str-listdict"><code>get_items_by_type(item_type: str) -&gt; List[Dict]</code></h4>
+<p>Retorna todos los items de una categoría. Busca la clave <code>"TYPE:{item_type}"</code> en el JSON.</p>
+<pre><code class="language-python">weapons = manager.get_items_by_type(&quot;Weapons&quot;)
+</code></pre>
+<hr />
+<h4 id="create_item_objectitem_id-cweapon-cequippableitems-cobject"><code>create_item_object(item_id, cWeapon, cEquippableItems, cObject)</code></h4>
+<p><strong>Método central del sistema.</strong> Crea y retorna una instancia del objeto de item correcto según su <code>Type</code>:</p>
+<table>
+<thead>
+<tr>
+<th><code>Type</code> en JSON</th>
+<th>Clase instanciada</th>
+<th>Método interno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"Weapon"</code></td>
+<td><code>cWeapon</code></td>
+<td><code>_create_weapon()</code></td>
+</tr>
+<tr>
+<td><code>"Armor"</code>, <code>"Helmet"</code>, <code>"Boots"</code>, <code>"Ring"</code></td>
+<td><code>cEquippableItems</code></td>
+<td><code>_create_equippable()</code></td>
+</tr>
+<tr>
+<td><code>"Consumable"</code></td>
+<td><code>cObject</code></td>
+<td><code>_create_consumable()</code></td>
+</tr>
+</tbody>
+</table>
+<p>Retorna <code>None</code> si el item no existe o el tipo es desconocido.</p>
+<hr />
+<h4 id="_create_weaponitem_data-cweapon"><code>_create_weapon(item_data, cWeapon)</code></h4>
+<p><em>(Interno)</em> Normaliza el array de daño al nuevo formato de 5 valores y crea una instancia de <code>cWeapon</code>. Maneja compatibilidad con formatos antiguos:</p>
+<table>
+<thead>
+<tr>
+<th>Formato de entrada <code>DMG</code></th>
+<th>Conversión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lista de 5+ valores</td>
+<td>Sin cambio</td>
+</tr>
+<tr>
+<td>Lista de 2 valores <code>[Físico, Mágico]</code></td>
+<td><code>[F, M, 0, 0, 0]</code></td>
+</tr>
+<tr>
+<td>Número único</td>
+<td><code>[N, 0, 0, 0, 0]</code></td>
+</tr>
+<tr>
+<td>Inválido</td>
+<td><code>[0, 0, 0, 0, 0]</code></td>
+</tr>
+</tbody>
+</table>
+<p>El mismo proceso aplica para <code>DMG_min</code> (4 valores).</p>
+<hr />
+<h4 id="_create_equippableitem_data-cequippableitems"><code>_create_equippable(item_data, cEquippableItems)</code></h4>
+<p><em>(Interno)</em> Normaliza el array de defensa y crea una instancia de <code>cEquippableItems</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Formato de entrada <code>Defense</code></th>
+<th>Conversión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lista de 5+ valores</td>
+<td>Sin cambio</td>
+</tr>
+<tr>
+<td>Lista de 2 valores <code>[F, M]</code></td>
+<td><code>[F, M, M, M, M]</code></td>
+</tr>
+<tr>
+<td>Número único</td>
+<td><code>[N, 0, 0, 0, 0]</code></td>
+</tr>
+<tr>
+<td>Inválido</td>
+<td><code>[0, 0, 0, 0, 0]</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h4 id="_create_consumableitem_data-cobject"><code>_create_consumable(item_data, cObject)</code></h4>
+<p><em>(Interno)</em> Crea una instancia de <code>cObject</code> (poción u objeto consumible) con <code>HealthRestore</code> y <code>ManaRestore</code>.</p>
+<hr />
+<h4 id="add_itemitem_type-item_key-item_data-bool"><code>add_item(item_type, item_key, item_data) -&gt; bool</code></h4>
+<p>Agrega un nuevo item al JSON y reconstruye los índices. Si la categoría no existe, la crea.</p>
+<hr />
+<h4 id="modify_itemitem_id-updates-bool"><code>modify_item(item_id, updates) -&gt; bool</code></h4>
+<p>Actualiza campos específicos de un item existente (identificado por <code>STATIC_ID</code>) y guarda los cambios.</p>
+<pre><code class="language-python">manager.modify_item(3, {&quot;Gold_Cost&quot;: 250, &quot;Description&quot;: &quot;Nueva descripción&quot;})
+</code></pre>
+<hr />
+<h4 id="delete_itemitem_id-bool"><code>delete_item(item_id) -&gt; bool</code></h4>
+<p>Elimina un item del JSON por su <code>STATIC_ID</code> y guarda los cambios.</p>
+<hr />
+<h4 id="save_items-bool"><code>save_items() -&gt; bool</code></h4>
+<p>Persiste el estado de <code>items_data</code> en el archivo JSON con indentación de 4 espacios.</p>
+<hr />
+<h4 id="list_all_itemsdetailedfalse"><code>list_all_items(detailed=False)</code></h4>
+<p>Imprime en consola todos los items disponibles. Si <code>detailed=True</code>, muestra descripción, stats de daño, defensa, bonificaciones, etc.</p>
+<hr />
+<h2 id="variables-globales">Variables Globales</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_item_manager_instance</code></td>
+<td><code>Optional[ItemManager]</code></td>
+<td>Instancia global Singleton del <code>ItemManager</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="funciones-de-conveniencia">Funciones de Conveniencia</h2>
+<h3 id="get_item_manageritems_path-itemmanager"><code>get_item_manager(items_path) -&gt; ItemManager</code></h3>
+<p>Patrón <strong>Singleton</strong>. Crea la instancia global la primera vez (llamando a <code>load_items()</code>) y la retorna en llamadas sucesivas.</p>
+<pre><code class="language-python">from Modules.ItemManager import get_item_manager
+manager = get_item_manager()
+</code></pre>
+<hr />
+<h3 id="load_item_by_iditem_id-cweapon-cequippableitems-cobject"><code>load_item_by_id(item_id, cWeapon, cEquippableItems, cObject)</code></h3>
+<p>Atajo para cargar un item por ID y obtener el objeto del juego directamente.</p>
+<pre><code class="language-python">from Modules.ItemManager import load_item_by_id
+espada = load_item_by_id(3, cWeapon, cEquippableItems, cObject)
+</code></pre>
+<hr />
+<h3 id="load_items_by_typeitem_type-cweapon-cequippableitems-cobject-list"><code>load_items_by_type(item_type, cWeapon, cEquippableItems, cObject) -&gt; List</code></h3>
+<p>Carga todos los items de un tipo y retorna una lista de objetos del juego instanciados.</p>
+<pre><code class="language-python">from Modules.ItemManager import load_items_by_type
+todas_las_armas = load_items_by_type(&quot;Weapons&quot;, cWeapon, cEquippableItems, cObject)
+</code></pre>
+<hr />
+<h3 id="search_item_by_namename-optionaldict"><code>search_item_by_name(name) -&gt; Optional[Dict]</code></h3>
+<p>Busca un item por nombre (delega a <code>get_item_manager().get_item_by_name(name)</code>).</p>
+<hr />
+<h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
+<h3 id="cargar-un-item-y-anadirlo-al-inventario">Cargar un item y añadirlo al inventario</h3>
+<pre><code class="language-python">from Modules.ItemManager import load_item_by_id
+from Modules.setup import cWeapon, cEquippableItems, cObject, vInventory
+
+pocion = load_item_by_id(52, cWeapon, cEquippableItems, cObject)
+if pocion:
+    vInventory.addObject(pocion)
+    print(f&quot;Añadido: {pocion.name}&quot;)
+</code></pre>
+<h3 id="agregar-un-item-nuevo-al-json-en-tiempo-de-ejecucion">Agregar un item nuevo al JSON en tiempo de ejecución</h3>
+<pre><code class="language-python">from Modules.ItemManager import get_item_manager
+
+manager = get_item_manager()
+manager.add_item(&quot;Weapons&quot;, &quot;dragon_blade&quot;, {
+    &quot;STATIC_ID&quot;: 999,
+    &quot;Name&quot;: &quot;Hoja del Dragón&quot;,
+    &quot;Type&quot;: &quot;Weapon&quot;,
+    &quot;DMG&quot;: [80, 30, 0, 0, 20],
+    &quot;DMG_min&quot;: [50, 15, 0, 0],
+    &quot;Gold_Cost&quot;: 5000,
+    &quot;Description&quot;: &quot;Un arma legendaria forjada con escamas de dragón&quot;
+})
+</code></pre>
+<h3 id="modificar-el-costo-de-un-item">Modificar el costo de un item</h3>
+<pre><code class="language-python">manager = get_item_manager()
+manager.modify_item(1, {&quot;Gold_Cost&quot;: 15})  # Bajar el precio de la Espada de Madera
+</code></pre>
+<hr />
+<h2 id="notas-y-referencias">Notas y Referencias</h2>
+<ul>
+<li>Los <code>STATIC_ID</code> deben ser <strong>únicos</strong> en todo el JSON. Si dos items tienen el mismo ID, el índice guardará solo uno de ellos.</li>
+<li>El sistema de tipos usa el campo <code>"Type"</code> del JSON (no la categoría). Asegúrate de que coincida exactamente con: <code>"Weapon"</code>, <code>"Armor"</code>, <code>"Helmet"</code>, <code>"Boots"</code>, <code>"Ring"</code>, <code>"Consumable"</code>.</li>
+<li><strong><code>json</code> módulo de Python:</strong> Para leer y escribir JSON. <a href="https://docs.python.org/3/library/json.html">https://docs.python.org/3/library/json.html</a></li>
+<li><strong>Patrón Singleton:</strong> <a href="https://refactoring.guru/design-patterns/singleton/python/example">https://refactoring.guru/design-patterns/singleton/python/example</a></li>
+<li><strong><code>os.makedirs(..., exist_ok=True)</code>:</strong> Crea directorios de forma segura sin error si ya existen. <a href="https://docs.python.org/3/library/os.html#os.makedirs">https://docs.python.org/3/library/os.html#os.makedirs</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

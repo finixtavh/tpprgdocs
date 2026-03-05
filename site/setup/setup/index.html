@@ -1,0 +1,3283 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica del RPG modular">
+      
+      
+        <meta name="author" content="FN">
+      
+      
+      
+        <link rel="prev" href="../../ModulesUtils/check_admin/">
+      
+      
+        <link rel="next" href="../../__init__/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
+    
+    
+      
+        <title>Configuración - TPPRPG Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#setuppy" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="TPPRPG Docs" class="md-header__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TPPRPG Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuración
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TPPRPG Docs" class="md-nav__button md-logo" aria-label="TPPRPG Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    TPPRPG Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Módulos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Módulos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/BuffManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Buff Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/EnchantmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enchantment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/EquipmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Equipment System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/FarmingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Farming System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/GatheringMasterySystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gathering Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/ShopManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shop Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Núcleo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Núcleo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/MainGame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Main Game
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/Loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/ModLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cplayer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cPlayer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cPlayer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Atributos de instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stats-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stats principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stats-secundarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stats secundarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#economia-y-progresion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Economía y progresión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slots-de-equipamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slots de equipamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listas-de-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas de estado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attackenemy-float-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        attack(enemy) -&gt; float | int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takedamagedamage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TakeDamage(damage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#winquantity-quantity2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        win(quantity, quantity2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#playerobjects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PlayerObjects()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checklinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check(lInventory)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equipvinventory-inventorysortervar-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equip(vInventory, InventorySortervar, player)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cenemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cEnemy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cEnemy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attackplayer-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        attack(player) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takedamagedamage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TakeDamage(damage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cweapon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cWeapon
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cWeapon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-use_weaponplayernone-list5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método use_weapon(player=None) -&gt; list[5]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cequippableitems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cEquippableItems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cEquippableItems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cObject
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cObject">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cinventory-e-inventoryslot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cInventory e InventorySlot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cInventory e InventorySlot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inventoryslot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InventorySlot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cInventory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="cInventory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodos-importantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos importantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propiedades-de-compatibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propiedades de compatibilidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cdebuff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cDebuff
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cDebuff">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#efectos-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Efectos disponibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-applyvalue-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método Apply(Value, player)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cbuffs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cBuffs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cidsorter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cIDSorter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cIDSorter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-searchobjectid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método SearchObject(ID)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cshop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cShop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cShop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-buy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método buy()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clases-de-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clases de Skills
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clases de Skills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cskill-dataclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cSkill (dataclass)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cfarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cFarm
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instancias-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instancias Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones Globales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones Globales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup_player-cplayer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        setup_player() -&gt; cPlayer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#companion_updaterplayer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Companion_Updater(player)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enemy_loaderdata_npc-return_singlefalse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        enemy_loader(data_npc, return_single=False)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-de-dano-multi-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema de Daño Multi-tipo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-un-jugador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear un jugador
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crear-un-arma-manualmente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear un arma manualmente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cargar-enemigos-desde-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cargar enemigos desde JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interno
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Interno
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../__init__/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cplayer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cPlayer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cPlayer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Atributos de instancia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stats-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stats principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stats-secundarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stats secundarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#economia-y-progresion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Economía y progresión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slots-de-equipamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Slots de equipamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listas-de-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Listas de estado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attackenemy-float-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        attack(enemy) -&gt; float | int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takedamagedamage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TakeDamage(damage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#winquantity-quantity2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        win(quantity, quantity2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#playerobjects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PlayerObjects()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checklinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check(lInventory)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equipvinventory-inventorysortervar-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equip(vInventory, InventorySortervar, player)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cenemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cEnemy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cEnemy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attackplayer-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        attack(player) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#takedamagedamage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TakeDamage(damage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cweapon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cWeapon
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cWeapon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-use_weaponplayernone-list5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método use_weapon(player=None) -&gt; list[5]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cequippableitems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cEquippableItems
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cEquippableItems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cObject
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cObject">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cinventory-e-inventoryslot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cInventory e InventorySlot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cInventory e InventorySlot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inventoryslot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InventorySlot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cInventory
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="cInventory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodos-importantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos importantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propiedades-de-compatibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propiedades de compatibilidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cdebuff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cDebuff
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cDebuff">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#efectos-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Efectos disponibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-applyvalue-player" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método Apply(Value, player)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cbuffs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cBuffs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cidsorter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cIDSorter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cIDSorter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-searchobjectid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método SearchObject(ID)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-cshop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase cShop
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase cShop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-buy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método buy()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clases-de-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clases de Skills
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clases de Skills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cskill-dataclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cSkill (dataclass)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cfarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        cFarm
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instancias-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instancias Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones Globales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones Globales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup_player-cplayer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        setup_player() -&gt; cPlayer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#companion_updaterplayer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Companion_Updater(player)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enemy_loaderdata_npc-return_singlefalse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        enemy_loader(data_npc, return_single=False)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sistema-de-dano-multi-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistema de Daño Multi-tipo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-un-jugador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear un jugador
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crear-un-arma-manualmente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crear un arma manualmente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cargar-enemigos-desde-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cargar enemigos desde JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="setuppy"><code>setup.py</code></h1>
+<h2 id="indice">Índice</h2>
+<ol>
+<li><a href="#descripción-general">Descripción General</a></li>
+<li><a href="#variables-globales">Variables Globales</a></li>
+<li><a href="#clase-cplayer">Clase <code>cPlayer</code></a></li>
+<li><a href="#clase-cenemy">Clase <code>cEnemy</code></a></li>
+<li><a href="#clase-cweapon">Clase <code>cWeapon</code></a></li>
+<li><a href="#clase-cequippableitems">Clase <code>cEquippableItems</code></a></li>
+<li><a href="#clase-cobject">Clase <code>cObject</code></a></li>
+<li><a href="#clase-cinventory-e-inventoryslot">Clase <code>cInventory</code> e <code>InventorySlot</code></a></li>
+<li><a href="#clase-cdebuff">Clase <code>cDebuff</code></a></li>
+<li><a href="#clase-cbuffs">Clase <code>cBuffs</code></a></li>
+<li><a href="#clase-cidsorter">Clase <code>cIDSorter</code></a></li>
+<li><a href="#clase-cshop">Clase <code>cShop</code></a></li>
+<li><a href="#clases-de-skills">Clases de Skills</a></li>
+<li><a href="#instancias-globales">Instancias Globales</a></li>
+<li><a href="#funciones-globales">Funciones Globales</a></li>
+<li><a href="#sistema-de-daño-multi-tipo">Sistema de Daño Multi-tipo</a></li>
+<li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
+<li><a href="#notas-y-referencias">Notas y Referencias</a></li>
+</ol>
+<hr />
+<h2 id="descripcion-general">Descripción General</h2>
+<p><code>setup.py</code> es el <strong>núcleo del juego</strong>. Define todas las clases principales del RPG: jugador, enemigos, armas, equipamiento, inventario, buffs, debuffs y tiendas. También inicializa las instancias globales que son compartidas por todos los módulos.</p>
+<hr />
+<h2 id="variables-globales">Variables Globales</h2>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>player</code></td>
+<td><code>None</code> → <code>cPlayer</code></td>
+<td>Referencia al jugador. Inicialmente <code>None</code>, se asigna con <code>setup_player()</code>.</td>
+</tr>
+<tr>
+<td><code>LObject</code></td>
+<td><code>list</code></td>
+<td>Lista global que acumula todos los items instanciados (<code>cWeapon</code>, <code>cEquippableItems</code>, <code>cObject</code>).</td>
+</tr>
+<tr>
+<td><code>console</code></td>
+<td><code>Console</code></td>
+<td>Instancia de <code>rich.Console</code> para salida formateada.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clase-cplayer">Clase <code>cPlayer</code></h2>
+<p>Representa al personaje del jugador. Es la clase más compleja del juego.</p>
+<h3 id="constructor">Constructor</h3>
+<pre><code class="language-python">cPlayer(name: str, weapon: cWeapon | None)
+</code></pre>
+<h3 id="atributos-de-instancia">Atributos de instancia</h3>
+<h4 id="stats-principales">Stats principales</h4>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Valor inicial</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>—</td>
+<td>Nombre del personaje.</td>
+</tr>
+<tr>
+<td><code>Health_max</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
+<td>HP máximo.</td>
+</tr>
+<tr>
+<td><code>Health</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
+<td>HP actual.</td>
+</tr>
+<tr>
+<td><code>Mana_max</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
+<td>Maná máximo.</td>
+</tr>
+<tr>
+<td><code>Mana</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
+<td>Maná actual.</td>
+</tr>
+<tr>
+<td><code>Level</code></td>
+<td><code>int</code></td>
+<td><code>1</code></td>
+<td>Nivel del personaje.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="stats-secundarios">Stats secundarios</h4>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Valor inicial</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEF</code></td>
+<td><code>list[5]</code></td>
+<td><code>[0,0,0,0,0]</code></td>
+<td>Defensa por tipo: [Físico, Térmico, Tierra, Eléctrico, Profundo].</td>
+</tr>
+<tr>
+<td><code>MDEF</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>Defensa mágica (pendiente de eliminación).</td>
+</tr>
+<tr>
+<td><code>AGI</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>Agilidad: % de probabilidad de acertar ataques.</td>
+</tr>
+<tr>
+<td><code>DefensePercentage</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>% de daño bloqueado (ignora daño de debuffs).</td>
+</tr>
+<tr>
+<td><code>CounterAttack</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>% de contraatacar sin consumir turno.</td>
+</tr>
+<tr>
+<td><code>Evasion</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>% de esquivar daño entrante.</td>
+</tr>
+<tr>
+<td><code>ManaRegen</code></td>
+<td><code>float</code></td>
+<td><code>2.5</code></td>
+<td>Maná regenerado por turno.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="economia-y-progresion">Economía y progresión</h4>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Valor inicial</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Gold</code></td>
+<td><code>int</code></td>
+<td><code>50</code></td>
+<td>Oro actual.</td>
+</tr>
+<tr>
+<td><code>EXP</code></td>
+<td><code>int</code></td>
+<td><code>15</code></td>
+<td>Experiencia actual.</td>
+</tr>
+<tr>
+<td><code>EXP_M</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
+<td>EXP necesaria para subir de nivel.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="slots-de-equipamiento">Slots de equipamiento</h4>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>weapon</code></td>
+<td><code>cWeapon \| None</code></td>
+<td>Arma equipada.</td>
+</tr>
+<tr>
+<td><code>helmet</code></td>
+<td><code>cEquippableItems \| None</code></td>
+<td>Casco equipado.</td>
+</tr>
+<tr>
+<td><code>armor</code></td>
+<td><code>cEquippableItems \| None</code></td>
+<td>Armadura equipada (inicia con una armadura básica).</td>
+</tr>
+<tr>
+<td><code>boots</code></td>
+<td><code>cEquippableItems \| None</code></td>
+<td>Botas equipadas.</td>
+</tr>
+<tr>
+<td><code>ring</code>, <code>ring2</code>, <code>ring3</code></td>
+<td><code>cEquippableItems \| None</code></td>
+<td>Hasta 3 anillos.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="listas-de-estado">Listas de estado</h4>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>applieddebuffs</code></td>
+<td><code>list</code></td>
+<td>Debuffs activos aplicados al jugador.</td>
+</tr>
+<tr>
+<td><code>appliedbuffs</code></td>
+<td><code>list</code></td>
+<td>Buffs activos del jugador.</td>
+</tr>
+<tr>
+<td><code>companion</code></td>
+<td><code>list</code></td>
+<td>Lista de compañeros del jugador.</td>
+</tr>
+<tr>
+<td><code>items_in_PlayerClass</code></td>
+<td><code>list</code></td>
+<td>Lista de todos los slots de equipamiento [weapon, helmet, armor, boots, ring, ring2, ring3].</td>
+</tr>
+<tr>
+<td><code>lobjectscheck</code></td>
+<td><code>list[tuple]</code></td>
+<td>Lista de tuplas <code>(item, tipo_esperado)</code> para validación de slots.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metodos">Métodos</h3>
+<h4 id="attackenemy-float-int"><code>attack(enemy) -&gt; float | int</code></h4>
+<p>Ataca al enemigo. Si no tiene arma, hace 1-3 de daño físico. Con arma:</p>
+<ol>
+<li>Llama a <code>self.weapon.use_weapon(self)</code> para obtener el array de daño <code>[5]</code>.</li>
+<li>Resta la defensa del enemigo a cada tipo de daño.</li>
+<li>Llama a <code>enemy.TakeDamage(final_damage)</code>.</li>
+<li>Imprime el desglose de daño.</li>
+</ol>
+<p>Retorna el daño total infligido.</p>
+<hr />
+<h4 id="takedamagedamage"><code>TakeDamage(damage)</code></h4>
+<p>Reduce el HP del jugador. Acepta un número único (compatibilidad) o una lista de 5 valores. El HP no baja de 0.</p>
+<hr />
+<h4 id="winquantity-quantity2"><code>win(quantity, quantity2)</code></h4>
+<p>Llamar cuando el jugador derrota un enemigo. Añade <code>quantity</code> EXP y <code>quantity2</code> oro. Maneja la subida de nivel automáticamente.</p>
+<hr />
+<h4 id="playerobjects"><code>PlayerObjects()</code></h4>
+<p>Imprime en consola los atributos de todos los items equipados.</p>
+<hr />
+<h4 id="checklinventory"><code>Check(lInventory)</code></h4>
+<p><strong>Método de validación principal.</strong> Se llama al inicio de cada turno. Realiza:</p>
+<ol>
+<li>Actualiza <code>items_in_PlayerClass</code> y <code>lobjectscheck</code> con el estado actual.</li>
+<li>Llama a <code>Companion_Updater(self)</code>.</li>
+<li>Clampea HP y Maná a sus máximos.</li>
+<li>Si algún slot tiene un <code>cObject</code> (consumible), lo mueve al inventario.</li>
+<li>Si el jugador murió (HP ≤ 0), restaura HP y aplica penalización de oro.</li>
+<li>Aplica stats de items equipados que aún no han sido aplicados (<code>AppliedStats == False</code>).</li>
+<li>Verifica que los items estén en el slot correcto según su <code>objectcheck</code>.</li>
+<li>Gestiona la subida de nivel y muestra el mensaje formateado.</li>
+</ol>
+<hr />
+<h4 id="equipvinventory-inventorysortervar-player"><code>Equip(vInventory, InventorySortervar, player)</code></h4>
+<p>Menú antiguo de equipamiento (consola). Se recomienda usar <code>equip_menu</code> de <code>EquipmentSystem.py</code> en su lugar.</p>
+<hr />
+<h2 id="clase-cenemy">Clase <code>cEnemy</code></h2>
+<p>Representa un enemigo del juego.</p>
+<h3 id="constructor_1">Constructor</h3>
+<pre><code class="language-python">cEnemy(NAME, HP_M, DMG, DMG_min, MP_M, EXP_TO_PLAYER, DEF, LS, AGI,
+       DBUFF_TO_PLAYER, BUFF_RECEIVED, GOLD)
+</code></pre>
+<h3 id="atributos">Atributos</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NAME</code></td>
+<td><code>str</code></td>
+<td>Nombre del enemigo.</td>
+</tr>
+<tr>
+<td><code>HP_M</code></td>
+<td><code>int</code></td>
+<td>HP máximo.</td>
+</tr>
+<tr>
+<td><code>HP</code></td>
+<td><code>int</code></td>
+<td>HP actual (= HP_M al inicio).</td>
+</tr>
+<tr>
+<td><code>DMG</code></td>
+<td><code>list[5]</code></td>
+<td>Daño máximo por tipo: [Físico, Térmico, Tierra, Eléctrico, Profundo].</td>
+</tr>
+<tr>
+<td><code>DMG_min</code></td>
+<td><code>list[5]</code></td>
+<td>Daño mínimo por tipo (Deep siempre es máximo).</td>
+</tr>
+<tr>
+<td><code>DEF</code></td>
+<td><code>list[5]</code></td>
+<td>Defensa por tipo.</td>
+</tr>
+<tr>
+<td><code>MP_M</code></td>
+<td><code>int</code></td>
+<td>Maná máximo.</td>
+</tr>
+<tr>
+<td><code>MP</code></td>
+<td><code>int</code></td>
+<td>Maná actual.</td>
+</tr>
+<tr>
+<td><code>EXP_TO_PLAYER</code></td>
+<td><code>int</code></td>
+<td>EXP otorgada al morir.</td>
+</tr>
+<tr>
+<td><code>LS</code></td>
+<td><code>int</code></td>
+<td>Robo de vida.</td>
+</tr>
+<tr>
+<td><code>AGI</code></td>
+<td><code>int</code></td>
+<td>Agilidad.</td>
+</tr>
+<tr>
+<td><code>DBUFF_TO_PLAYER</code></td>
+<td><code>list</code></td>
+<td>Debuffs que aplica al atacar.</td>
+</tr>
+<tr>
+<td><code>BUFF_RECEIVED</code></td>
+<td><code>list</code></td>
+<td>Buffs que recibe al inicio del combate.</td>
+</tr>
+<tr>
+<td><code>GOLD</code></td>
+<td><code>int</code></td>
+<td>Oro soltado al morir.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metodos_1">Métodos</h3>
+<h4 id="attackplayer-float"><code>attack(player) -&gt; float</code></h4>
+<p>Ataca al jugador. Calcula daño aleatorio entre <code>DMG_min[i]</code> y <code>DMG[i]</code> para cada tipo. Deep siempre hace daño máximo. Llama a <code>player.TakeDamage()</code>. Retorna el daño total.</p>
+<h4 id="takedamagedamage_1"><code>TakeDamage(damage)</code></h4>
+<p>Reduce el HP del enemigo. Acepta número o lista de 5 valores.</p>
+<hr />
+<h2 id="clase-cweapon">Clase <code>cWeapon</code></h2>
+<p>Representa un arma equipable.</p>
+<h3 id="constructor_2">Constructor</h3>
+<pre><code class="language-python">cWeapon(ID, name, DMG, DMG_min, Gold_Cost, Description)
+</code></pre>
+<h3 id="atributos_1">Atributos</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ID</code></td>
+<td><code>int</code></td>
+<td>ID único.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>Nombre del arma.</td>
+</tr>
+<tr>
+<td><code>DMG</code></td>
+<td><code>list[5]</code></td>
+<td>Daño máximo: [Físico, Térmico, Tierra, Eléctrico, Profundo].</td>
+</tr>
+<tr>
+<td><code>DMG_min</code></td>
+<td><code>list[4]</code></td>
+<td>Daño mínimo: [Físico, Térmico, Tierra, Eléctrico] (Deep siempre máximo).</td>
+</tr>
+<tr>
+<td><code>Gold_Cost</code></td>
+<td><code>int</code></td>
+<td>Costo en oro.</td>
+</tr>
+<tr>
+<td><code>Description</code></td>
+<td><code>str</code></td>
+<td>Descripción.</td>
+</tr>
+<tr>
+<td><code>AppliedStats</code></td>
+<td><code>bool</code></td>
+<td>Siempre <code>False</code> para armas (los stats se calculan en cada ataque).</td>
+</tr>
+<tr>
+<td><code>PHYSICAL_DMG</code></td>
+<td><code>int</code></td>
+<td>Alias de <code>DMG[0]</code> para compatibilidad.</td>
+</tr>
+<tr>
+<td><code>damage_min</code></td>
+<td><code>int</code></td>
+<td>Alias de <code>DMG_min[0]</code> para compatibilidad.</td>
+</tr>
+<tr>
+<td><code>damage_max</code></td>
+<td><code>int</code></td>
+<td>Alias de <code>DMG[0]</code> para compatibilidad.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metodo-use_weaponplayernone-list5">Método <code>use_weapon(player=None) -&gt; list[5]</code></h3>
+<p>Calcula el array de daño para un ataque:</p>
+<ol>
+<li>Para cada tipo con <code>DMG[i] &gt; 0</code>: genera aleatorio entre <code>DMG_min[i]</code> y <code>DMG[i]</code> (excepto Deep, que siempre es máximo).</li>
+<li>Suma <code>DmgBoost</code> de anillos y armadura al daño físico.</li>
+</ol>
+<p>Retorna una lista de 5 valores de daño.</p>
+<hr />
+<h2 id="clase-cequippableitems">Clase <code>cEquippableItems</code></h2>
+<p>Representa un item equipable (armadura, casco, botas, anillo).</p>
+<h3 id="constructor_3">Constructor</h3>
+<pre><code class="language-python">cEquippableItems(ID, name, Defense, HealthBoost, HealthSteal, DmgBoost, Gold_Cost, Description, objectcheck)
+</code></pre>
+<h3 id="atributos_2">Atributos</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ID</code></td>
+<td><code>int</code></td>
+<td>ID único.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>str</code></td>
+<td>Nombre del item.</td>
+</tr>
+<tr>
+<td><code>Defense</code></td>
+<td><code>list[5]</code></td>
+<td>Defensa por tipo de daño. Normalizado siempre a 5 valores.</td>
+</tr>
+<tr>
+<td><code>HealthBoost</code></td>
+<td><code>int</code></td>
+<td>Bonus de HP máximo al equipar.</td>
+</tr>
+<tr>
+<td><code>HealthSteal</code></td>
+<td><code>int</code></td>
+<td>Robo de vida por ataque.</td>
+</tr>
+<tr>
+<td><code>DmgBoost</code></td>
+<td><code>int</code></td>
+<td>Bonus de daño físico.</td>
+</tr>
+<tr>
+<td><code>Gold_Cost</code></td>
+<td><code>int</code></td>
+<td>Costo en oro.</td>
+</tr>
+<tr>
+<td><code>Description</code></td>
+<td><code>str</code></td>
+<td>Descripción.</td>
+</tr>
+<tr>
+<td><code>objectcheck</code></td>
+<td><code>str</code></td>
+<td>Tipo del item: <code>"Weapon"</code>, <code>"Helmet"</code>, <code>"Armor"</code>, <code>"Boots"</code>, <code>"Ring"</code>.</td>
+</tr>
+<tr>
+<td><code>AppliedStats</code></td>
+<td><code>bool</code></td>
+<td><code>False</code> si los stats aún no se han aplicado al jugador.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clase-cobject">Clase <code>cObject</code></h2>
+<p>Objeto consumible (pociones, etc.).</p>
+<h3 id="constructor_4">Constructor</h3>
+<pre><code class="language-python">cObject(ID, name, HealthRestore, ManaRestore, Gold_Cost, Description)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HealthRestore</code></td>
+<td>HP restaurado al usar.</td>
+</tr>
+<tr>
+<td><code>ManaRestore</code></td>
+<td>Maná restaurado al usar.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clase-cinventory-e-inventoryslot">Clase <code>cInventory</code> e <code>InventorySlot</code></h2>
+<h3 id="inventoryslot"><code>InventorySlot</code></h3>
+<p>Representa un slot del inventario con soporte para stacking.</p>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>item</code></td>
+<td>El item en el slot.</td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td>Cantidad actual.</td>
+</tr>
+<tr>
+<td><code>max_stack</code></td>
+<td>Máximo de items apilables (de <code>item.MaxStack</code>, default <code>1</code>).</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Métodos:</strong> <code>can_add(amount)</code>, <code>add(amount) -&gt; overflow</code>, <code>remove(amount) -&gt; removido</code>, <code>is_empty()</code>, <code>get_display_name()</code>.</p>
+<h3 id="cinventory"><code>cInventory</code></h3>
+<p>Inventario con sistema de stacking automático.</p>
+<h4 id="metodos-importantes">Métodos importantes</h4>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addObject(item, quantity=1, appenditem=True)</code></td>
+<td>Añade item. Si <code>appenditem=False</code>, lo remueve.</td>
+</tr>
+<tr>
+<td><code>remove_item(item, quantity=1) -&gt; int</code></td>
+<td>Remueve items por objeto o por ID entero.</td>
+</tr>
+<tr>
+<td><code>get_item_count(item_id) -&gt; int</code></td>
+<td>Cantidad total de un item.</td>
+</tr>
+<tr>
+<td><code>has_item(item_id, quantity=1) -&gt; bool</code></td>
+<td>Verifica si hay suficiente cantidad.</td>
+</tr>
+<tr>
+<td><code>PrintObjects()</code></td>
+<td>Muestra el inventario en consola.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="propiedades-de-compatibilidad">Propiedades de compatibilidad</h4>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lObjectsInventory</code></td>
+<td>Lista plana de todos los items (sin stacks).</td>
+</tr>
+<tr>
+<td><code>Objects</code></td>
+<td>Alias de <code>lObjectsInventory</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clase-cdebuff">Clase <code>cDebuff</code></h2>
+<p>Representa un debuff aplicable al jugador.</p>
+<h3 id="efectos-disponibles">Efectos disponibles</h3>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Efecto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PersistentDamageDebuff</code></td>
+<td>Daño por turno (no implementado).</td>
+</tr>
+<tr>
+<td><code>HealDebuff</code></td>
+<td>Reduce el HP del jugador.</td>
+</tr>
+<tr>
+<td><code>ArmorPierce</code></td>
+<td>Reduce la defensa del jugador.</td>
+</tr>
+<tr>
+<td><code>AgilityDebuff</code>, <code>MPDisruption</code>, <code>EvadeDebuff</code>, <code>CounterAttackDebuff</code></td>
+<td>No implementados.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metodo-applyvalue-player">Método <code>Apply(Value, player)</code></h3>
+<p>Aplica el efecto del debuff al jugador. <code>Value</code> es el nombre del atributo del debuff a aplicar.</p>
+<hr />
+<h2 id="clase-cbuffs">Clase <code>cBuffs</code></h2>
+<p>Representa un buff para el jugador.</p>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EvadeBuff</code></td>
+<td>Bonus de evasión.</td>
+</tr>
+<tr>
+<td><code>Heal</code></td>
+<td>Curación.</td>
+</tr>
+<tr>
+<td><code>MagicArmor</code></td>
+<td>Armadura mágica.</td>
+</tr>
+<tr>
+<td><code>MPregen</code></td>
+<td>Regeneración de maná.</td>
+</tr>
+<tr>
+<td><code>Strength</code></td>
+<td>Bonus de fuerza.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clase-cidsorter">Clase <code>cIDSorter</code></h2>
+<p>Utilidad para buscar items por ID en una lista.</p>
+<h3 id="metodo-searchobjectid">Método <code>SearchObject(ID)</code></h3>
+<p>Retorna el primer objeto de la lista cuyo atributo <code>ID</code> coincida. Retorna <code>None</code> si no se encuentra.</p>
+<hr />
+<h2 id="clase-cshop">Clase <code>cShop</code></h2>
+<p>Tienda simple (sistema antiguo, reemplazado por <code>ShopManager</code>).</p>
+<h3 id="metodo-buy">Método <code>buy()</code></h3>
+<p>Compra el item si el jugador tiene suficiente oro. Descuenta el oro y añade el item al inventario.</p>
+<hr />
+<h2 id="clases-de-skills">Clases de Skills</h2>
+<h3 id="cskill-dataclass"><code>cSkill</code> (dataclass)</h3>
+<pre><code class="language-python">@dataclass
+class cSkill:
+    exp_total: float = 0.0
+    exp_to_next_lvl: float = 100.0
+    current_level: int = 1
+</code></pre>
+<h3 id="cfarm"><code>cFarm</code></h3>
+<p>Versión base de la clase de skills en <code>setup.py</code>. El método <code>gather()</code> aquí no está implementado (usa <code>NotImplemented</code>). La versión funcional está en <code>GatheringMasterySystem.py</code>.</p>
+<hr />
+<h2 id="instancias-globales">Instancias Globales</h2>
+<table>
+<thead>
+<tr>
+<th>Instancia</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vInventory</code></td>
+<td><code>cInventory</code></td>
+<td>Inventario global del jugador.</td>
+</tr>
+<tr>
+<td><code>InventorySorter</code></td>
+<td><code>cIDSorter</code></td>
+<td>Buscador de items en el inventario.</td>
+</tr>
+<tr>
+<td><code>LObjectSorter</code></td>
+<td><code>cIDSorter</code></td>
+<td>Buscador de items en la lista global <code>LObject</code>.</td>
+</tr>
+<tr>
+<td><code>SLObject</code></td>
+<td><code>list</code></td>
+<td><code>LObject</code> ordenado por ID.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="funciones-globales">Funciones Globales</h2>
+<h3 id="setup_player-cplayer"><code>setup_player() -&gt; cPlayer</code></h3>
+<p>Solicita el nombre al usuario por consola y retorna una nueva instancia de <code>cPlayer</code> sin arma equipada.</p>
+<h3 id="companion_updaterplayer"><code>Companion_Updater(player)</code></h3>
+<p>Actualiza la lista de compañeros del jugador (actualmente retorna una lista pero no la usa).</p>
+<h3 id="enemy_loaderdata_npc-return_singlefalse"><code>enemy_loader(data_npc, return_single=False)</code></h3>
+<p>Carga enemigos desde datos JSON y crea instancias de <code>cEnemy</code>. Normaliza los arrays de daño y defensa al formato de 5 valores. Retorna una lista o un enemigo aleatorio si <code>return_single=True</code>.</p>
+<hr />
+<h2 id="sistema-de-dano-multi-tipo">Sistema de Daño Multi-tipo</h2>
+<p>Todos los daños y defensas usan arrays de 5 posiciones:</p>
+<pre><code>Índice:  0          1         2        3           4
+Tipo:    Físico     Térmico   Tierra   Eléctrico   Profundo
+</code></pre>
+<p><strong>Regla especial del tipo Profundo (Deep):</strong> El daño siempre es el valor máximo (sin aleatoriedad).</p>
+<hr />
+<h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
+<h3 id="crear-un-jugador">Crear un jugador</h3>
+<pre><code class="language-python">from Modules.setup import setup_player, vInventory
+
+player = setup_player()
+# → Solicita nombre por consola
+# → Retorna cPlayer(name, weapon=None)
+</code></pre>
+<h3 id="crear-un-arma-manualmente">Crear un arma manualmente</h3>
+<pre><code class="language-python">from Modules.setup import cWeapon
+
+espada = cWeapon(
+    ID=1,
+    name=&quot;Espada de Hierro&quot;,
+    DMG=[15, 0, 0, 0, 0],
+    DMG_min=[8, 0, 0, 0],
+    Gold_Cost=50,
+    Description=&quot;Una espada básica&quot;
+)
+</code></pre>
+<h3 id="cargar-enemigos-desde-json">Cargar enemigos desde JSON</h3>
+<pre><code class="language-python">from Modules.setup import enemy_loader
+from Modules.Loader import Read
+
+data = Read(&quot;Data/DataStats.json&quot;, &quot;Forest&quot;, None)
+enemies = enemy_loader(data)
+enemy = enemies[0]
+</code></pre>
+<hr />
+<h2 id="notas-y-referencias">Notas y Referencias</h2>
+<ul>
+<li><strong><code>@dataclass</code>:</strong> <a href="https://docs.python.org/3/library/dataclasses.html">https://docs.python.org/3/library/dataclasses.html</a></li>
+<li><strong><code>random.randint(a, b)</code>:</strong> Genera un entero aleatorio entre a y b (incluidos). <a href="https://docs.python.org/3/library/random.html#random.randint">https://docs.python.org/3/library/random.html#random.randint</a></li>
+<li><strong><code>setattr(obj, name, value)</code>:</strong> Asigna dinámicamente un atributo a un objeto. <a href="https://docs.python.org/3/library/functions.html#setattr">https://docs.python.org/3/library/functions.html#setattr</a></li>
+<li>El atributo <code>MDEF</code> está marcado como "pendiente de eliminación" en los comentarios del código.</li>
+<li>La clase <code>cFarm</code> en <code>setup.py</code> es una versión placeholder. Para la lógica de recolección real, referirse a <code>GatheringMasterySystem.py</code>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
