@@ -1,0 +1,102 @@
+/* ===============================
+   TPPRPG - Dark RPG Theme
+   =============================== */
+
+/* Colores base */
+:root {
+  --md-primary-fg-color: #14001f;
+  --md-accent-fg-color: #ffcc33;
+  --rpg-gold: #ffcc33;
+  --rpg-purple: #2a0033;
+  --rpg-dark: #0d0014;
+}
+
+/* Fondo general */
+.md-main {
+  background: linear-gradient(
+    180deg,
+    #1a0026 0%,
+    #12001c 50%,
+    #0d0014 100%
+  );
+}
+
+/* Sidebar */
+.md-sidebar {
+  background-color: #100018;
+  border-right: 1px solid rgba(255, 204, 51, 0.1);
+}
+
+/* Títulos principales */
+.md-typeset h1 {
+  color: var(--rpg-gold);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 204, 51, 0.4);
+  border-bottom: 2px solid rgba(255, 204, 51, 0.3);
+  padding-bottom: 0.3em;
+}
+
+.md-typeset h2 {
+  color: #e6b800;
+  margin-top: 1.5em;
+}
+
+.md-typeset h3 {
+  color: #d4af37;
+}
+
+/* Enlaces */
+.md-typeset a {
+  color: var(--rpg-gold);
+}
+
+.md-typeset a:hover {
+  color: #fff2b3;
+  text-shadow: 0 0 6px rgba(255, 204, 51, 0.5);
+}
+
+/* Bloques de código */
+.md-typeset code {
+  background-color: rgba(255, 204, 51, 0.08);
+  color: #ffd966;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.md-typeset pre {
+  background-color: #0f0018;
+  border: 1px solid rgba(255, 204, 51, 0.15);
+  border-radius: 8px;
+}
+
+/* Tablas */
+.md-typeset table {
+  border: 1px solid rgba(255, 204, 51, 0.2);
+}
+
+.md-typeset th {
+  background-color: #1a0026;
+  color: var(--rpg-gold);
+}
+
+.md-typeset td {
+  background-color: #14001f;
+}
+
+/* Scrollbar (webkit browsers) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0014;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b0066;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8000aa;
+}

@@ -1,0 +1,42 @@
+site_name: TPPRPG Docs
+site_description: Documentación técnica del RPG modular
+site_author: FN
+
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+
+plugins:
+  - search
+
+extra_css:
+  - css/style.css
+
+nav:
+  - Inicio: index.md
+
+  - Módulos:
+      - Buff Manager: Modules/BuffManager.md
+      - Enchantment System: Modules/EnchantmentSystem.md
+      - Equipment System: Modules/EquipmentSystem.md
+      - Farming System: Modules/FarmingSystem.md
+      - Gathering Mastery: Modules/GatheringMasterySystem.md
+      - Shop Manager: Modules/ShopManager.md
+
+  - Núcleo:
+      - Main Game: ModulesUtils/MainGame.md
+      - Loader: ModulesUtils/Loader.md
+      - Mod Loader: ModulesUtils/ModLoader.md
+      - Check Admin: ModulesUtils/check_admin.md
+
+  - Setup:
+      - Configuración: setup/setup.md
+
+  - Interno:
+      - Init: __init__.md
