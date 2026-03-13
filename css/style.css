@@ -1,3 +1,4 @@
+ /* Default Background */
 :root {
     --md-default-bg-color: #1e1e1e
 }
@@ -11,26 +12,16 @@
     color: #ffffff;
 }
 
-
-
 .md-header {
     background-color: #1a1a1a;
 }
-
-
 
 .md-sidebar--primary {
     background-color: #1e1e1e;
 }
 
-
 .md-nav__title {
     background: #1e1e1e !important;
-    color: #ffffff !important;
-}
-
-.md-nav__link {
-    background-color: #1e1e1e;  
     color: #ffffff !important;
 }
 
@@ -73,4 +64,47 @@
     background-color: #2a2a2a;
 }
 
+/*  */
+.md-nav__item {
+    padding: 0;
+    margin: 0;
+}
 
+.md-nav__link {
+    background-color: #1e1e1e;
+    color: #ffffff !important;
+    margin: 0 !important;
+    padding: 0.4rem 0.6rem !important;
+}
+
+/* Sidebar sin gaps */
+.md-sidebar__scrollwrap {
+    background-color: #1e1e1e;
+}
+
+/* Tabla de contenidos (TOC derecha) */
+.md-sidebar--secondary {
+    background-color: #1e1e1e;
+}
+
+.md-nav--secondary .md-nav__link {
+    background-color: #1e1e1e;
+    padding: 0.3rem 0.6rem !important;
+    margin: 0 !important;
+}
+
+/* Títulos de sección */
+.md-nav__title {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    font-size: 1.4rem !important;  /* Ajusta a tu gusto */
+    font-weight: 700 !important;
+    padding: 0.5rem 0.5rem 0.3rem 0.5rem
+}
+
+.md-nav__item--section > .md-nav__link {
+    font-size: 1.0rem !important;    /* Tamaño del texto, ajusta a tu gusto */
+    font-weight: 700 !important;   /* Grosor: 400=normal, 700=bold */
+    padding: 0.2rem 0.6rem !important;
+}
