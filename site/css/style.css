@@ -1,113 +1,76 @@
-/* ===============================
-   TPPRPG - Dark Readable Theme
-   =============================== */
-
-/* Colores base */
 :root {
-  --md-primary-fg-color: #1a0026;
-  --md-accent-fg-color: #ffcc33;
-
-  --rpg-gold: #ffcc33;
-  --rpg-bg: #0f0016;
-  --rpg-bg2: #160022;
-
-  --text-main: #e6e6e6;
-  --text-soft: #cfcfcf;
+    --md-default-bg-color: #1e1e1e
 }
 
-/* Fondo general */
+
 .md-main {
-  background: linear-gradient(
-    180deg,
-    #160022 0%,
-    #12001c 50%,
-    #0d0014 100%
-  );
+    background-color: #121212;
 }
 
-/* TEXTO PRINCIPAL (FIX IMPORTANTE) */
 .md-typeset {
-  color: var(--text-main);
-  font-size: 16px;
-  line-height: 1.6;
+    color: #ffffff;
 }
 
-/* Sidebar */
-.md-sidebar {
-  background-color: #12001c;
-  border-right: 1px solid rgba(255, 204, 51, 0.1);
+
+
+.md-header {
+    background-color: #1a1a1a;
 }
 
-/* Títulos */
-.md-typeset h1 {
-  color: var(--rpg-gold);
-  font-weight: 700;
-  border-bottom: 2px solid rgba(255, 204, 51, 0.3);
-  padding-bottom: 0.3em;
+
+
+.md-sidebar--primary {
+    background-color: #1e1e1e;
 }
 
-.md-typeset h2 {
-  color: #ffd966;
+
+.md-nav__title {
+    background: #1e1e1e !important;
+    color: #ffffff !important;
 }
 
-.md-typeset h3 {
-  color: #e6c65c;
+.md-nav__link {
+    background-color: #1e1e1e;  
+    color: #ffffff !important;
 }
 
-/* Párrafos */
-.md-typeset p {
-  color: var(--text-soft);
+.md-nav__link:hover {
+    color: #4dabf7 !important;
 }
 
-/* Enlaces */
 .md-typeset a {
-  color: var(--rpg-gold);
-  text-decoration: none;
+    color: #4dabf7;
 }
 
 .md-typeset a:hover {
-  color: #fff2b3;
-}
-
-/* Código */
-.md-typeset code {
-  background-color: #1b0028;
-  color: #ffd966;
-  border-radius: 4px;
-  padding: 2px 6px;
-}
+    color: #74c0fc;
+}          
 
 .md-typeset pre {
-  background-color: #0c0012;
-  border: 1px solid rgba(255, 204, 51, 0.15);
-  border-radius: 6px;
+    background-color: #1e1e1e;
 }
 
-/* Tablas */
+.md-typeset code {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
 .md-typeset table {
-  border: 1px solid rgba(255, 204, 51, 0.2);
+    background-color: #1e1e1e;
+    color: #ffffff;
 }
 
 .md-typeset th {
-  background-color: #1a0026;
-  color: #ffd966;
+    background-color: #2a2a2a;
+}
+
+
+.md-typeset hr {
+    border-color: #333;
 }
 
 .md-typeset td {
-  background-color: #12001c;
-  color: var(--text-main);
+    background-color: #2a2a2a;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
 
-::-webkit-scrollbar-track {
-  background: #0d0014;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4b0066;
-  border-radius: 4px;
-}
