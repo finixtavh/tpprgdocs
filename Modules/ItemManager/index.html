@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../ShopManager/">
+      
+      
+        <link rel="next" href="../../ModulesUtils/MainGame/">
       
       
         
@@ -23,7 +27,7 @@
     
     
       
-        <title>ItemManager.py - TPPRPG Docs</title>
+        <title>Item Manager - TPPRPG Docs</title>
       
     
     
@@ -102,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ItemManager.py
+              Item Manager
             
           </span>
         </div>
@@ -222,8 +226,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -234,13 +240,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -261,7 +265,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -435,6 +439,446 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Item Manager
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Item Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-itemmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase ItemManager
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase ItemManager">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load_items-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_items() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_build_indexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _build_indexes()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_item_by_iditem_id-int-optionaldict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_item_by_id(item_id: int) -&gt; Optional[Dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_item_by_namename-str-optionaldict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_item_by_name(name: str) -&gt; Optional[Dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_items_by_typeitem_type-str-listdict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_items_by_type(item_type: str) -&gt; List[Dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_item_objectitem_id-cweapon-cequippableitems-cobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        create_item_object(item_id, cWeapon, cEquippableItems, cObject)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_weaponitem_data-cweapon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_weapon(item_data, cWeapon)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_equippableitem_data-cequippableitems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_equippable(item_data, cEquippableItems)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_consumableitem_data-cobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_consumable(item_data, cObject)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add_itemitem_type-item_key-item_data-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add_item(item_type, item_key, item_data) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify_itemitem_id-updates-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        modify_item(item_id, updates) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete_itemitem_id-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        delete_item(item_id) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_items-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_items() -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#list_all_itemsdetailedfalse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        list_all_items(detailed=False)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-conveniencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Conveniencia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Conveniencia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_item_manageritems_path-itemmanager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_item_manager(items_path) -&gt; ItemManager
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_item_by_iditem_id-cweapon-cequippableitems-cobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_item_by_id(item_id, cWeapon, cEquippableItems, cObject)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_items_by_typeitem_type-cweapon-cequippableitems-cobject-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_items_by_type(item_type, cWeapon, cEquippableItems, cObject) -&gt; List
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#search_item_by_namename-optionaldict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        search_item_by_name(name) -&gt; Optional[Dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cargar-un-item-y-anadirlo-al-inventario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cargar un item y añadirlo al inventario
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agregar-un-item-nuevo-al-json-en-tiempo-de-ejecucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregar un item nuevo al JSON en tiempo de ejecución
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificar-el-costo-de-un-item" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificar el costo de un item
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
