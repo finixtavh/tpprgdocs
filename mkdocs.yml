@@ -28,6 +28,7 @@ nav:
       - Farming System: Modules/FarmingSystem.md
       - Gathering Mastery: Modules/GatheringMasterySystem.md
       - Shop Manager: Modules/ShopManager.md
+      - Item Manager: Modules/ItemManager.md
 
   - Núcleo:
       - Main Game: ModulesUtils/MainGame.md
