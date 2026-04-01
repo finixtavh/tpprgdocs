@@ -119,6 +119,16 @@ equip_menu(player, inventory)
 
 Menú interactivo para gestionar el equipamiento desde la consola.
 
+**Actualización de UI (menú interactivo global):**
+
+- Navegación con `↑/↓` + `Enter`.
+- Alternativa: escribir número + `Enter`.
+- Selección resaltada con **colores invertidos** (estilo menú).
+
+Aplica tanto al menú principal de equipamiento como a:
+- selección de item a equipar
+- selección de slot a desequipar
+
 ### Opciones del menú
 
 | Opción | Acción |

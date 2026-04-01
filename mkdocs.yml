@@ -27,17 +27,24 @@ nav:
       - Equipment System: Modules/EquipmentSystem.md
       - Farming System: Modules/FarmingSystem.md
       - Gathering Mastery: Modules/GatheringMasterySystem.md
+      - Inventory Menu: Modules/InventoryMenu.md
       - Shop Manager: Modules/ShopManager.md
       - Item Manager: Modules/ItemManager.md
+      - Zone Manager: Modules/ZoneManager.md
 
-  - Núcleo:
+  - Utils:
       - Main Game: ModulesUtils/MainGame.md
       - Loader: ModulesUtils/Loader.md
       - Mod Loader: ModulesUtils/ModLoader.md
-      - Check Admin: ModulesUtils/check_admin.md
+
+      - Debug: ModulesUtils/debug.md
+      - Input Utils: ModulesUtils/input_utils.md
+      - Modloader: ModulesUtils/ModLoader.md
 
   - Setup:
       - Configuración: setup/setup.md
 
   - Interno:
       - Init: __init__.md
+  - Obsoleto:
+    - Check Admin: ModulesUtils/check_admin.md

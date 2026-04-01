@@ -185,7 +185,13 @@ Crea una barra de estado visual con caracteres `#` y `-`.
 
 ### `display_main_menu()`
 
-Muestra el menú principal agrupado en 4 secciones: Explorar, Tienda, Personaje, Sistema.
+Ahora el menú principal es **interactivo**:
+
+- Navegación con `↑/↓` y selección con `Enter`.
+- Opción alternativa: escribir el número y presionar `Enter`.
+- La opción seleccionada se muestra con **colores invertidos** (estilo “menú”).
+
+**Nota técnica:** el menú interactivo usa un `Theme` compartido para resolver estilos como `menu_title`. Además, el listener de teclado se limpia siempre al salir del menú (para evitar el error de sshkeyboard “Only one listener allowed at a time”).
 
 ---
 
@@ -206,7 +212,13 @@ Muestra una tabla con los enemigos de una zona, incluyendo HP, daño físico, da
 
 ### `get_validated_input(prompt, valid_options) -> int`
 
-Solicita input al usuario hasta recibir un número válido dentro de `valid_options`. Ignora Enters residuales.
+Se mantiene como fallback para entradas puramente numéricas cuando no hay un menú Rich asociado.
+
+> El flujo principal del juego usa menús interactivos con selección invertida.
+
+### `keyboard_listener_scope()` (`Modules/input_utils.py`)
+
+Context manager que **serializa** todo uso de `sshkeyboard.listen_keyboard`: solo puede existir un listener a la vez. Antes y después de cada sesión se llama a `stop_listening()` y se espera un instante; en menús con hilo de teclado se hace `join()` del hilo antes de abrir el siguiente menú. Así se evita `AssertionError: Only one listener allowed at a time` al encadenar menús (por ejemplo menú principal → selección de zona).
 
 ---
 
@@ -270,7 +282,7 @@ La función `main()` se llama en un loop infinito desde el bloque `if __name__ =
 | `4` | Ver inventario (`vInventory.PrintObjects()`). |
 | `5` | Usar objetos consumibles del inventario. |
 | `6` | Menú de equipamiento (`equip_menu(player, vInventory)`). |
-| `7` | Combate contra el enemigo de la zona actual. |
+| `7` | Acciones de zona: luchar, tienda de zona, recolectar o volver al menú principal. |
 | `8` | Ver estadísticas completas del jugador con barras de HP/MP/EXP y equipamiento actual. |
 | `9` | Gestión de mods (listar, recargar, ver estado). |
 | `10` | Ver todos los items disponibles en el juego (`item_manager.list_all_items(detailed=True)`). |
@@ -279,37 +291,23 @@ La función `main()` se llama en un loop infinito desde el bloque `if __name__ =
 
 ---
 
-### Flujo de Combate (opción 7)
+### Flujo de Zona (opción 7)
 
 ```
-¿Hay enemigo en zona?
+¿Hay zona seleccionada?
     NO → Mensaje de error
-    SÍ → Bucle de combate:
-        ┌─────────────────────────────────────────┐
-        │  Mostrar UI combate (render_combat_menu) │
-        │  Aplicar debuffs activos                │
-        │  Input del jugador (1/2/3)              │
-        │                                         │
-        │  [1] Atacar:                            │
-        │      player.attack(enemy)               │
-        │      Si enemy.HP ≤ 0:                   │
-        │        → EXP, Gold, loot drop (30%)     │
-        │        → Level up si corresponde        │
-        │        → Cargar nuevo enemigo            │
-        │        → Salir del bucle                │
-        │      enemy.attack(player)               │
-        │      Si player.HP ≤ 0: Game Over parcial│
-        │                                         │
-        │  [2] Usar objeto:                       │
-        │      Mostrar consumibles                 │
-        │      Usar seleccionado                  │
-        │      enemy.attack(player) (turno enemigo)│
-        │                                         │
-        │  [3] Huir:                              │
-        │      chance = 0.3 + (AGI_j - AGI_e)/100│
-        │      Si éxito: salir del bucle          │
-        │      Si falla: enemy ataca con x1.2 dmg │
-        └─────────────────────────────────────────┘
+    SÍ → Submenú:
+        [1] Luchar
+            - Ejecuta el flujo de combate existente
+            - Si no hay enemigo cargado, intenta cargar uno con zone_loader()
+        [2] Tienda actual
+            - Busca tienda por nombre: {ZoneKey}Shop
+            - Si existe inventario, abre display_shop()
+        [3] Recolectar
+            - Lee "Gathering.Materials" de DataStats.json (ej: "1_G")
+            - Resuelve IDs de materiales y ejecuta GatheringMasterySystem
+        [4] Volver
+            - Regresa al menú principal sin acciones adicionales
 ```
 
 ---

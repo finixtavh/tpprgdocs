@@ -13,7 +13,7 @@
 
 ## Descripción General
 
-`ShopManager.py` gestiona las **tiendas del juego** cargando su inventario desde el archivo `DataShops.json`. Permite consultar, agregar y remover items de tiendas de forma persistente, además de mostrar una interfaz interactiva de compra en la consola.
+`ShopManager.py` gestiona las **tiendas del juego** cargando su inventario desde el archivo `DataShops.json`. Permite consultar, agregar y remover items de tiendas de forma persistente, además de mostrar una interfaz interactiva de compra en la consola usando los menús de `input_utils.py`.
 
 ---
 
@@ -110,6 +110,14 @@ manager = get_shop_manager()
 
 Muestra la interfaz de tienda interactiva en la consola. Permite al jugador ver items disponibles, sus stats y precios, y comprarlos.
 
+**UI interactiva:**
+
+- Selección del item con `↑/↓` + `Enter` (usando `interactive_menu_select` de `input_utils.py`).
+- Alternativa: escribir el número del item + `Enter`.
+- La fila seleccionada se resalta con **colores invertidos** (texto negro sobre fondo blanco).
+- La confirmación de compra es también un menú interactivo Sí/No con el mismo sistema.
+- Tras cada acción, se usa `wait_for_enter()` para pausar y leer el resultado.
+
 **Parámetros:**
 
 | Parámetro | Tipo | Descripción |
@@ -120,13 +128,14 @@ Muestra la interfaz de tienda interactiva en la consola. Permite al jugador ver 
 
 **Flujo de la función:**
 
-1. Obtiene los IDs de items de la tienda.
-2. Muestra una tabla con nombre, costo, tipo y disponibilidad (✓/✗ según el oro del jugador).
-3. El jugador selecciona un número para ver detalles del item.
-4. Confirma la compra (`s/n`).
-5. Si confirma y tiene oro suficiente: descuenta el oro, crea el objeto del item y lo añade al inventario.
+1. Obtiene los IDs de items de la tienda mediante `get_shop_manager().get_shop_items()`.
+2. Muestra una tabla con nombre, costo, tipo y disponibilidad (`✓`/`✗` según el oro del jugador).
+3. El jugador navega con `↑/↓` y selecciona con `Enter`.
+4. Se muestran los detalles del item seleccionado.
+5. Se presenta un menú de confirmación de compra (Sí/No).
+6. Si confirma y tiene oro suficiente: descuenta el oro, crea el objeto con `item_manager.create_item_object()` y lo añade a `vInventory`.
 
-**Stats mostrados:**
+**Stats mostrados al detallar un item:**
 
 - Daño Físico (de `DMG`)
 - Daño Mágico (de `Magical_DMG`)
@@ -189,7 +198,8 @@ display_shop("GeneralStore", player, item_manager)
 
 ## Notas y Referencias
 
-- La función `display_shop` importa `keyboard` para manejar la espera de confirmación. Esta librería requiere instalación: `pip install keyboard`.
+- La navegación interactiva de la tienda usa `interactive_menu_select` y `wait_for_enter` de `Modules/input_utils.py`. No requiere la librería `keyboard` ni permisos de administrador.
 - Los IDs en el JSON deben coincidir con los `STATIC_ID` definidos en `DataItems.json`, que maneja el `ItemManager`.
-- **`keyboard` library:** Permite detectar pulsaciones de teclas. Documentación: [https://github.com/boppreh/keyboard](https://github.com/boppreh/keyboard)
-- En Linux, la librería `keyboard` puede requerir permisos de root para funcionar (de ahí la integración con `check_admin.py`).
+- La función `display_shop` importa `cWeapon`, `cEquippableItems`, `cObject` y `vInventory` desde `Modules.setup` en tiempo de ejecución (import diferido dentro del bloque de compra) para evitar imports circulares.
+- **`input_utils.py`:** Ver `input_utils.md` para documentación completa del sistema de menús interactivos.
+- **Patrón Singleton:** [https://refactoring.guru/design-patterns/singleton/python/example](https://refactoring.guru/design-patterns/singleton/python/example)

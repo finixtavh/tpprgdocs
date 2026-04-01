@@ -119,7 +119,7 @@ Retorna el daño total infligido.
 
 #### `TakeDamage(damage)`
 
-Reduce el HP del jugador. Acepta un número único (compatibilidad) o una lista de 5 valores. El HP no baja de 0.
+Reduce el HP del jugador. El flujo principal usa listas multi-tipo de daño. El HP no baja de 0.
 
 ---
 
@@ -219,9 +219,7 @@ cWeapon(ID, name, DMG, DMG_min, Gold_Cost, Description)
 | `Gold_Cost` | `int` | Costo en oro. |
 | `Description` | `str` | Descripción. |
 | `AppliedStats` | `bool` | Siempre `False` para armas (los stats se calculan en cada ataque). |
-| `PHYSICAL_DMG` | `int` | Alias de `DMG[0]` para compatibilidad. |
-| `damage_min` | `int` | Alias de `DMG_min[0]` para compatibilidad. |
-| `damage_max` | `int` | Alias de `DMG[0]` para compatibilidad. |
+| `DMG` / `DMG_min` | `list` | El daño siempre se maneja en arrays multi-tipo normalizados. |
 
 ### Método `use_weapon(player=None) -> list[5]`
 
@@ -250,7 +248,7 @@ cEquippableItems(ID, name, Defense, HealthBoost, HealthSteal, DmgBoost, Gold_Cos
 |---|---|---|
 | `ID` | `int` | ID único. |
 | `name` | `str` | Nombre del item. |
-| `Defense` | `list[5]` | Defensa por tipo de daño. Normalizado siempre a 5 valores. |
+| `Defense` | `list[5]` | Defensa por tipo de daño. |
 | `HealthBoost` | `int` | Bonus de HP máximo al equipar. |
 | `HealthSteal` | `int` | Robo de vida por ataque. |
 | `DmgBoost` | `int` | Bonus de daño físico. |
@@ -409,7 +407,7 @@ Actualiza la lista de compañeros del jugador (actualmente retorna una lista per
 
 ### `enemy_loader(data_npc, return_single=False)`
 
-Carga enemigos desde datos JSON y crea instancias de `cEnemy`. Normaliza los arrays de daño y defensa al formato de 5 valores. Retorna una lista o un enemigo aleatorio si `return_single=True`.
+Carga enemigos desde datos JSON y crea instancias de `cEnemy`. Los arrays de daño/defensa se normalizan a formato multi-tipo al construir las entidades. Retorna una lista o un enemigo aleatorio si `return_single=True`.
 
 ---
 
@@ -418,11 +416,15 @@ Carga enemigos desde datos JSON y crea instancias de `cEnemy`. Normaliza los arr
 Todos los daños y defensas usan arrays de 5 posiciones:
 
 ```
-Índice:  0          1         2        3           4
-Tipo:    Físico     Térmico   Tierra   Eléctrico   Profundo
+Índice:  0          1         2           3        4
+Tipo:    Físico     Térmico   Eléctrico   Tierra   Profundo
 ```
 
 **Regla especial del tipo Profundo (Deep):** El daño siempre es el valor máximo (sin aleatoriedad).
+
+**Normalización soportada al cargar datos:**  
+- `DMG` y `DEF`: listas de 1, 2 o 5 valores (se expanden a 5).  
+- `DMG_min`: listas de 1, 2 o 4 valores (se expanden a 4).  
 
 ---
 

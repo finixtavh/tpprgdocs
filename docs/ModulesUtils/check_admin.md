@@ -1,3 +1,7 @@
+> DEPRECATED
+>> Since V0.1.1
+>> Changed due sshkeyboard not requiring sudo privileges on linux
+
 # `check_admin.py`
 
 ## Índice
