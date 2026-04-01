@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../GatheringMasterySystem/">
+        <link rel="prev" href="../InventoryMenu/">
       
       
         <link rel="next" href="../ItemManager/">
@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -420,6 +420,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../InventoryMenu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventory Menu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -785,6 +813,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ZoneManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zone Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -824,7 +880,7 @@
   <span class="md-ellipsis">
     
   
-    Núcleo
+    Utils
   
 
     
@@ -840,7 +896,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Núcleo
+    Utils
   
 
           </label>
@@ -937,14 +993,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ModulesUtils/check_admin/" class="md-nav__link">
+      <a href="../../ModulesUtils/debug/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Check Admin
+    Debug
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/input_utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Utils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/ModLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
   
 
     
@@ -1123,6 +1235,95 @@
     
   
     Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Obsoleto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Obsoleto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
   
 
     
@@ -1464,7 +1665,7 @@
 </ol>
 <hr />
 <h2 id="descripcion-general">Descripción General</h2>
-<p><code>ShopManager.py</code> gestiona las <strong>tiendas del juego</strong> cargando su inventario desde el archivo <code>DataShops.json</code>. Permite consultar, agregar y remover items de tiendas de forma persistente, además de mostrar una interfaz interactiva de compra en la consola.</p>
+<p><code>ShopManager.py</code> gestiona las <strong>tiendas del juego</strong> cargando su inventario desde el archivo <code>DataShops.json</code>. Permite consultar, agregar y remover items de tiendas de forma persistente, además de mostrar una interfaz interactiva de compra en la consola usando los menús de <code>input_utils.py</code>.</p>
 <hr />
 <h2 id="clase-shopmanager">Clase <code>ShopManager</code></h2>
 <p>Gestor de tiendas. Lee y escribe la configuración de tiendas desde/hacia JSON.</p>
@@ -1568,6 +1769,14 @@
 <hr />
 <h3 id="display_shopshop_name-player-item_manager"><code>display_shop(shop_name, player, item_manager)</code></h3>
 <p>Muestra la interfaz de tienda interactiva en la consola. Permite al jugador ver items disponibles, sus stats y precios, y comprarlos.</p>
+<p><strong>UI interactiva:</strong></p>
+<ul>
+<li>Selección del item con <code>↑/↓</code> + <code>Enter</code> (usando <code>interactive_menu_select</code> de <code>input_utils.py</code>).</li>
+<li>Alternativa: escribir el número del item + <code>Enter</code>.</li>
+<li>La fila seleccionada se resalta con <strong>colores invertidos</strong> (texto negro sobre fondo blanco).</li>
+<li>La confirmación de compra es también un menú interactivo Sí/No con el mismo sistema.</li>
+<li>Tras cada acción, se usa <code>wait_for_enter()</code> para pausar y leer el resultado.</li>
+</ul>
 <p><strong>Parámetros:</strong></p>
 <table>
 <thead>
@@ -1597,13 +1806,14 @@
 </table>
 <p><strong>Flujo de la función:</strong></p>
 <ol>
-<li>Obtiene los IDs de items de la tienda.</li>
-<li>Muestra una tabla con nombre, costo, tipo y disponibilidad (✓/✗ según el oro del jugador).</li>
-<li>El jugador selecciona un número para ver detalles del item.</li>
-<li>Confirma la compra (<code>s/n</code>).</li>
-<li>Si confirma y tiene oro suficiente: descuenta el oro, crea el objeto del item y lo añade al inventario.</li>
+<li>Obtiene los IDs de items de la tienda mediante <code>get_shop_manager().get_shop_items()</code>.</li>
+<li>Muestra una tabla con nombre, costo, tipo y disponibilidad (<code>✓</code>/<code>✗</code> según el oro del jugador).</li>
+<li>El jugador navega con <code>↑/↓</code> y selecciona con <code>Enter</code>.</li>
+<li>Se muestran los detalles del item seleccionado.</li>
+<li>Se presenta un menú de confirmación de compra (Sí/No).</li>
+<li>Si confirma y tiene oro suficiente: descuenta el oro, crea el objeto con <code>item_manager.create_item_object()</code> y lo añade a <code>vInventory</code>.</li>
 </ol>
-<p><strong>Stats mostrados:</strong></p>
+<p><strong>Stats mostrados al detallar un item:</strong></p>
 <ul>
 <li>Daño Físico (de <code>DMG</code>)</li>
 <li>Daño Mágico (de <code>Magical_DMG</code>)</li>
@@ -1651,10 +1861,11 @@ display_shop(&quot;GeneralStore&quot;, player, item_manager)
 <hr />
 <h2 id="notas-y-referencias">Notas y Referencias</h2>
 <ul>
-<li>La función <code>display_shop</code> importa <code>keyboard</code> para manejar la espera de confirmación. Esta librería requiere instalación: <code>pip install keyboard</code>.</li>
+<li>La navegación interactiva de la tienda usa <code>interactive_menu_select</code> y <code>wait_for_enter</code> de <code>Modules/input_utils.py</code>. No requiere la librería <code>keyboard</code> ni permisos de administrador.</li>
 <li>Los IDs en el JSON deben coincidir con los <code>STATIC_ID</code> definidos en <code>DataItems.json</code>, que maneja el <code>ItemManager</code>.</li>
-<li><strong><code>keyboard</code> library:</strong> Permite detectar pulsaciones de teclas. Documentación: <a href="https://github.com/boppreh/keyboard">https://github.com/boppreh/keyboard</a></li>
-<li>En Linux, la librería <code>keyboard</code> puede requerir permisos de root para funcionar (de ahí la integración con <code>check_admin.py</code>).</li>
+<li>La función <code>display_shop</code> importa <code>cWeapon</code>, <code>cEquippableItems</code>, <code>cObject</code> y <code>vInventory</code> desde <code>Modules.setup</code> en tiempo de ejecución (import diferido dentro del bloque de compra) para evitar imports circulares.</li>
+<li><strong><code>input_utils.py</code>:</strong> Ver <code>input_utils.md</code> para documentación completa del sistema de menús interactivos.</li>
+<li><strong>Patrón Singleton:</strong> <a href="https://refactoring.guru/design-patterns/singleton/python/example">https://refactoring.guru/design-patterns/singleton/python/example</a></li>
 </ul>
 
 

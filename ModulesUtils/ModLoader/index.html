@@ -13,17 +13,17 @@
       
       
       
-        <link rel="prev" href="../Loader/">
+        <link rel="prev" href="../input_utils/">
       
       
-        <link rel="next" href="../check_admin/">
+        <link rel="next" href="../../setup/setup/">
       
       
         
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -423,6 +423,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../Modules/InventoryMenu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventory Menu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../Modules/ShopManager/" class="md-nav__link">
         
   
@@ -459,6 +487,34 @@
     
   
     Item Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/ZoneManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zone Manager
   
 
     
@@ -511,7 +567,7 @@
   <span class="md-ellipsis">
     
   
-    Núcleo
+    Utils
   
 
     
@@ -527,7 +583,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Núcleo
+    Utils
   
 
           </label>
@@ -1115,14 +1171,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../check_admin/" class="md-nav__link">
+      <a href="../debug/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Check Admin
+    Debug
   
 
     
@@ -1131,6 +1187,553 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input_utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Utils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-modapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase ModAPI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase ModAPI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register_itemitem_or_class-item_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        register_item(item_or_class, item_data)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_enemyenemy_or_class-enemy_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        register_enemy(enemy_or_class, enemy_data)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_zonezone_name-zone_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        register_zone(zone_name, zone_data)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_event_handlerevent_name-handler_func" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        register_event_handler(event_name, handler_func)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_commandcommand_name-handler_func-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        register_command(command_name, handler_func, description="")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#register_shopshop_name-shop_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        register_shop(shop_name, shop_data)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fire_eventevent_name-args-kwargs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        fire_event(event_name, *args, **kwargs)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-modinfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase ModInfo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase ModInfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-modloader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase ModLoader
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase ModLoader">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos de instancia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#discover_mods-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        discover_mods() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_modmod_info-modinfo-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_mod(mod_info: ModInfo) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_all_mods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_all_mods()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unload_modmod_id-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        unload_mod(mod_id) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_loaded_mods_info-listmodinfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_loaded_mods_info() -&gt; List[ModInfo]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_mods_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_mods_info()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_create_example_mod_structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _create_example_mod_structure()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variables-globales-y-funciones-de-acceso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variables Globales y Funciones de Acceso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables Globales y Funciones de Acceso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_mod_loader-modloader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_mod_loader() -&gt; ModLoader
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_mod_api-modapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_mod_api() -&gt; ModAPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-de-un-mod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura de un Mod
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura de un Mod">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mod.json
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mainpy-plantilla-minima" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        main.py (plantilla mínima)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cargar-todos-los-mods-al-iniciar-el-juego" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cargar todos los mods al iniciar el juego
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disparar-un-evento-desde-el-juego" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disparar un evento desde el juego
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ver-mods-cargados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ver mods cargados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1301,6 +1904,95 @@
     
   
     Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Obsoleto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Obsoleto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
   
 
     

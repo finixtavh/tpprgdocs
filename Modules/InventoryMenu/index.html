@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../FarmingSystem/">
+        <link rel="prev" href="../GatheringMasterySystem/">
       
       
-        <link rel="next" href="../InventoryMenu/">
+        <link rel="next" href="../ShopManager/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Gathering Mastery - TPPRPG Docs</title>
+        <title>Inventory Menu - TPPRPG Docs</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#gatheringmasterysystempy" class="md-skip">
+        <a href="#inventorymenupy" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Gathering Mastery
+              Inventory Menu
             
           </span>
         </div>
@@ -392,6 +392,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../GatheringMasterySystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gathering Mastery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -411,7 +439,7 @@
   <span class="md-ellipsis">
     
   
-    Gathering Mastery
+    Inventory Menu
   
 
     
@@ -429,7 +457,7 @@
   <span class="md-ellipsis">
     
   
-    Gathering Mastery
+    Inventory Menu
   
 
     
@@ -477,33 +505,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#variables-globales" class="md-nav__link">
+  <a href="#constantes-visuales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Variables Globales
+        Constantes Visuales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constantes Visuales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_rarity_color" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _RARITY_COLOR
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#clase-cskill" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_type_icon-_type_label-_type_color" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase cSkill
+        _TYPE_ICON, _TYPE_LABEL, _TYPE_COLOR
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Clase cSkill">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#atributos" class="md-nav__link">
+  <a href="#_dmg_names-_def_names" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos
+        _DMG_NAMES / _DEF_NAMES
       
     </span>
   </a>
@@ -516,22 +555,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#clase-cfarm" class="md-nav__link">
+  <a href="#funciones-helper-internas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase cFarm
+        Funciones Helper Internas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Clase cFarm">
+    <nav class="md-nav" aria-label="Funciones Helper Internas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#atributos-de-clase" class="md-nav__link">
+  <a href="#_item_typeitem-str" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos de clase
+        _item_type(item) -&gt; str
       
     </span>
   </a>
@@ -539,10 +578,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#atributos-de-instancia" class="md-nav__link">
+  <a href="#_item_nameitem-str" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos de instancia
+        _item_name(item) -&gt; str
       
     </span>
   </a>
@@ -550,55 +589,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#metodos" class="md-nav__link">
+  <a href="#_item_descitem-str" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Métodos
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Métodos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gathermaterial-tool-vinventory-buffsnone" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        gather(Material, Tool, vInventory, buffs=None)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#clase-cmaterial" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Clase cMaterial
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Clase cMaterial">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constructor
+        _item_desc(item) -&gt; str
       
     </span>
   </a>
@@ -606,10 +600,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#atributos_1" class="md-nav__link">
+  <a href="#_item_costitem-int" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos
+        _item_cost(item) -&gt; int
       
     </span>
   </a>
@@ -622,22 +616,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#clase-ctool" class="md-nav__link">
+  <a href="#paneles-de-renderizado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase cTool
+        Paneles de Renderizado
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Clase cTool">
+    <nav class="md-nav" aria-label="Paneles de Renderizado">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#constructor_1" class="md-nav__link">
+  <a href="#_render_item_listslots-selected_idx-scroll_offset-max_visible-panel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constructor
+        _render_item_list(slots, selected_idx, scroll_offset, max_visible) -&gt; Panel
       
     </span>
   </a>
@@ -645,10 +639,121 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#atributos_2" class="md-nav__link">
+  <a href="#_render_item_detailslot-playernone-panel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos
+        _render_item_detail(slot, player=None) -&gt; Panel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_render_actionsslot-message-message_style-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _render_actions(slot, message, message_style) -&gt; Panel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pantalla-de-informacion-detallada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pantalla de Información Detallada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pantalla de Información Detallada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_show_item_info_screenitem-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _show_item_info_screen(item, console)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-principal-open_inventory_menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función Principal open_inventory_menu
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Función Principal open_inventory_menu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controles-del-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controles del menú
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comportamiento-al-equipar-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comportamiento al equipar (E)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comportamiento-al-usar-u" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comportamiento al usar (U)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scroll automático
       
     </span>
   </a>
@@ -673,10 +778,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#recolectar-un-material-basico" class="md-nav__link">
+  <a href="#abrir-el-inventario-con-comportamiento-por-defecto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recolectar un material básico
+        Abrir el inventario con comportamiento por defecto
       
     </span>
   </a>
@@ -684,10 +789,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#recolectar-con-buffs-activos" class="md-nav__link">
+  <a href="#con-callbacks-personalizados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recolectar con buffs activos
+        Con callbacks personalizados
       
     </span>
   </a>
@@ -695,10 +800,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#verificar-nivel-de-una-skill" class="md-nav__link">
+  <a href="#integracion-en-el-bucle-de-maingame" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificar nivel de una skill
+        Integración en el bucle de MainGame
       
     </span>
   </a>
@@ -725,34 +830,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../InventoryMenu/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Inventory Menu
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1394,33 +1471,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#variables-globales" class="md-nav__link">
+  <a href="#constantes-visuales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Variables Globales
+        Constantes Visuales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constantes Visuales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_rarity_color" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _RARITY_COLOR
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#clase-cskill" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_type_icon-_type_label-_type_color" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase cSkill
+        _TYPE_ICON, _TYPE_LABEL, _TYPE_COLOR
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Clase cSkill">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#atributos" class="md-nav__link">
+  <a href="#_dmg_names-_def_names" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos
+        _DMG_NAMES / _DEF_NAMES
       
     </span>
   </a>
@@ -1433,22 +1521,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#clase-cfarm" class="md-nav__link">
+  <a href="#funciones-helper-internas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase cFarm
+        Funciones Helper Internas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Clase cFarm">
+    <nav class="md-nav" aria-label="Funciones Helper Internas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#atributos-de-clase" class="md-nav__link">
+  <a href="#_item_typeitem-str" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos de clase
+        _item_type(item) -&gt; str
       
     </span>
   </a>
@@ -1456,10 +1544,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#atributos-de-instancia" class="md-nav__link">
+  <a href="#_item_nameitem-str" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos de instancia
+        _item_name(item) -&gt; str
       
     </span>
   </a>
@@ -1467,55 +1555,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#metodos" class="md-nav__link">
+  <a href="#_item_descitem-str" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Métodos
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Métodos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gathermaterial-tool-vinventory-buffsnone" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        gather(Material, Tool, vInventory, buffs=None)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#clase-cmaterial" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Clase cMaterial
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Clase cMaterial">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constructor
+        _item_desc(item) -&gt; str
       
     </span>
   </a>
@@ -1523,10 +1566,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#atributos_1" class="md-nav__link">
+  <a href="#_item_costitem-int" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos
+        _item_cost(item) -&gt; int
       
     </span>
   </a>
@@ -1539,22 +1582,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#clase-ctool" class="md-nav__link">
+  <a href="#paneles-de-renderizado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase cTool
+        Paneles de Renderizado
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Clase cTool">
+    <nav class="md-nav" aria-label="Paneles de Renderizado">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#constructor_1" class="md-nav__link">
+  <a href="#_render_item_listslots-selected_idx-scroll_offset-max_visible-panel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Constructor
+        _render_item_list(slots, selected_idx, scroll_offset, max_visible) -&gt; Panel
       
     </span>
   </a>
@@ -1562,10 +1605,121 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#atributos_2" class="md-nav__link">
+  <a href="#_render_item_detailslot-playernone-panel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Atributos
+        _render_item_detail(slot, player=None) -&gt; Panel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_render_actionsslot-message-message_style-panel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _render_actions(slot, message, message_style) -&gt; Panel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pantalla-de-informacion-detallada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pantalla de Información Detallada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pantalla de Información Detallada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_show_item_info_screenitem-console" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _show_item_info_screen(item, console)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-principal-open_inventory_menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función Principal open_inventory_menu
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Función Principal open_inventory_menu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controles-del-menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controles del menú
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comportamiento-al-equipar-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comportamiento al equipar (E)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comportamiento-al-usar-u" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comportamiento al usar (U)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scroll automático
       
     </span>
   </a>
@@ -1590,10 +1744,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#recolectar-un-material-basico" class="md-nav__link">
+  <a href="#abrir-el-inventario-con-comportamiento-por-defecto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recolectar un material básico
+        Abrir el inventario con comportamiento por defecto
       
     </span>
   </a>
@@ -1601,10 +1755,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#recolectar-con-buffs-activos" class="md-nav__link">
+  <a href="#con-callbacks-personalizados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recolectar con buffs activos
+        Con callbacks personalizados
       
     </span>
   </a>
@@ -1612,10 +1766,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#verificar-nivel-de-una-skill" class="md-nav__link">
+  <a href="#integracion-en-el-bucle-de-maingame" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificar nivel de una skill
+        Integración en el bucle de MainGame
       
     </span>
   </a>
@@ -1655,119 +1809,135 @@
 
 
 
-<h1 id="gatheringmasterysystempy"><code>GatheringMasterySystem.py</code></h1>
+<h1 id="inventorymenupy"><code>InventoryMenu.py</code></h1>
 <h2 id="indice">Índice</h2>
 <ol>
 <li><a href="#descripción-general">Descripción General</a></li>
-<li><a href="#variables-globales">Variables Globales</a></li>
-<li><a href="#clase-cskill">Clase <code>cSkill</code></a></li>
-<li><a href="#clase-cfarm">Clase <code>cFarm</code></a></li>
-<li><a href="#clase-cmaterial">Clase <code>cMaterial</code></a></li>
-<li><a href="#clase-ctool">Clase <code>cTool</code></a></li>
+<li><a href="#constantes-visuales">Constantes Visuales</a></li>
+<li><a href="#funciones-helper-internas">Funciones Helper Internas</a></li>
+<li><a href="#paneles-de-renderizado">Paneles de Renderizado</a></li>
+<li><a href="#pantalla-de-información-detallada">Pantalla de Información Detallada</a></li>
+<li><a href="#función-principal-open_inventory_menu">Función Principal <code>open_inventory_menu</code></a></li>
 <li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
 <li><a href="#notas-y-referencias">Notas y Referencias</a></li>
 </ol>
 <hr />
 <h2 id="descripcion-general">Descripción General</h2>
-<p><code>GatheringMasterySystem.py</code> implementa el sistema completo de <strong>recolección de recursos</strong> del juego. Incluye la lógica de recolección con barra de progreso visual (usando la librería <code>rich</code>), sistema de skills con niveles, materiales y herramientas.</p>
-<p>Cuando el jugador recolecta un material, el tiempo necesario depende de:</p>
-<ul>
-<li>La dureza del material (<code>Hardness</code>).</li>
-<li>La eficiencia de la herramienta (<code>Efficiency</code>).</li>
-<li>El nivel del jugador en la skill correspondiente.</li>
-<li>Buffs activos del jugador.</li>
-</ul>
-<hr />
-<h2 id="variables-globales">Variables Globales</h2>
+<p><code>InventoryMenu.py</code> implementa el <strong>menú de inventario interactivo</strong> del juego. Muestra un layout de dos columnas —lista de items a la izquierda, panel de detalle a la derecha— con navegación por flechas en tiempo real usando <code>rich.Live</code>.</p>
+<p>Es compatible con todos los tipos de item del juego:</p>
 <table>
 <thead>
 <tr>
-<th>Variable</th>
-<th>Tipo</th>
-<th>Descripción</th>
+<th>Tipo de item</th>
+<th>Acciones disponibles</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Gathering_init</code></td>
-<td><code>cFarm</code></td>
-<td>Instancia global del sistema de recolección. Se crea al importar el módulo.</td>
+<td><code>cWeapon</code></td>
+<td><code>[E] Equipar</code>, <code>[I] Información</code></td>
+</tr>
+<tr>
+<td><code>cEquippableItems</code></td>
+<td><code>[E] Equipar</code>, <code>[I] Información</code></td>
+</tr>
+<tr>
+<td><code>cTool</code></td>
+<td><code>[E] Equipar</code>, <code>[I] Información</code></td>
+</tr>
+<tr>
+<td><code>cObject</code></td>
+<td><code>[U] Usar</code>, <code>[I] Información</code></td>
+</tr>
+<tr>
+<td><code>cMaterial</code></td>
+<td><code>[I] Información</code></td>
 </tr>
 </tbody>
 </table>
-<pre><code class="language-python">Gathering_init = cFarm()
+<hr />
+<h2 id="constantes-visuales">Constantes Visuales</h2>
+<h3 id="_rarity_color"><code>_RARITY_COLOR</code></h3>
+<pre><code class="language-python">_RARITY_COLOR = {
+    &quot;Common&quot;:    &quot;white&quot;,
+    &quot;Uncommon&quot;:  &quot;bright_green&quot;,
+    &quot;Rare&quot;:      &quot;bright_blue&quot;,
+    &quot;Epic&quot;:      &quot;medium_purple1&quot;,
+    &quot;Legendary&quot;: &quot;gold1&quot;,
+}
 </code></pre>
+<p>Mapea la rareza de un material a su color Rich para el panel de detalle.</p>
 <hr />
-<h2 id="clase-cskill">Clase <code>cSkill</code></h2>
-<p>Representa una habilidad individual de recolección o arma con su sistema de progresión.</p>
-<blockquote>
-<p><strong>Nota:</strong> A diferencia de <code>FarmingSystem.py</code>, esta clase <strong>no usa <code>@dataclass</code></strong>; los atributos de clase actúan como valores por defecto compartidos entre instancias. Esto es una particularidad del código que puede causar comportamientos inesperados si se modifican directamente los atributos de clase.</p>
-</blockquote>
-<h3 id="atributos">Atributos</h3>
+<h3 id="_type_icon-_type_label-_type_color"><code>_TYPE_ICON</code>, <code>_TYPE_LABEL</code>, <code>_TYPE_COLOR</code></h3>
+<p>Tres diccionarios que mapean el nombre de clase del item (<code>cWeapon</code>, <code>cEquippableItems</code>, etc.) a su icono emoji, etiqueta de texto y color de estilo Rich respectivamente:</p>
 <table>
 <thead>
 <tr>
-<th>Atributo</th>
 <th>Tipo</th>
-<th>Valor por Defecto</th>
-<th>Descripción</th>
+<th>Icono</th>
+<th>Etiqueta</th>
+<th>Color</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>exp_total</code></td>
-<td><code>float</code></td>
-<td><code>0.0</code></td>
-<td>Experiencia total acumulada.</td>
+<td><code>cWeapon</code></td>
+<td><code>⚔</code></td>
+<td><code>Arma</code></td>
+<td><code>bold red</code></td>
 </tr>
 <tr>
-<td><code>exp_to_next_lvl</code></td>
-<td><code>float</code></td>
-<td><code>100.0</code></td>
-<td>Experiencia necesaria para el próximo nivel.</td>
+<td><code>cEquippableItems</code></td>
+<td><code>🛡</code></td>
+<td><code>Equipamiento</code></td>
+<td><code>bold cyan</code></td>
 </tr>
 <tr>
-<td><code>current_level</code></td>
-<td><code>int</code></td>
-<td><code>1</code></td>
-<td>Nivel actual de la habilidad.</td>
+<td><code>cObject</code></td>
+<td><code>🧪</code></td>
+<td><code>Objeto</code></td>
+<td><code>bold yellow</code></td>
+</tr>
+<tr>
+<td><code>cTool</code></td>
+<td><code>⛏</code></td>
+<td><code>Herramienta</code></td>
+<td><code>bold dark_orange3</code></td>
+</tr>
+<tr>
+<td><code>cMaterial</code></td>
+<td><code>🪨</code></td>
+<td><code>Material</code></td>
+<td><code>bold blue</code></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="clase-cfarm">Clase <code>cFarm</code></h2>
-<p>Gestor de todas las skills del jugador y punto de entrada para iniciar recolecciones.</p>
-<h3 id="atributos-de-clase">Atributos de clase</h3>
-<pre><code class="language-python">GATHERING_SKILLS = [&quot;mining&quot;, &quot;lumberjack&quot;, &quot;fishing&quot;, &quot;herbs&quot;, &quot;hunting&quot;, &quot;astrology&quot;]
-
-WEAPON_SKILLS = [&quot;swords&quot;, &quot;electric_wands&quot;, &quot;thermal_wands&quot;, &quot;earth_wands&quot;,
-                 &quot;void_staffs&quot;, &quot;shields&quot;, &quot;blessed_ornament&quot;, &quot;ornament&quot;, &quot;cursed_ornament&quot;]
+<h3 id="_dmg_names-_def_names"><code>_DMG_NAMES</code> / <code>_DEF_NAMES</code></h3>
+<pre><code class="language-python">_DMG_NAMES = [&quot;Fís&quot;, &quot;Tér&quot;, &quot;Tier&quot;, &quot;Eléc&quot;, &quot;Prof&quot;]
+_DEF_NAMES = [&quot;Fís&quot;, &quot;Tér&quot;, &quot;Tier&quot;, &quot;Eléc&quot;, &quot;Prof&quot;]
 </code></pre>
-<h3 id="atributos-de-instancia">Atributos de instancia</h3>
-<table>
-<thead>
-<tr>
-<th>Atributo</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>gathering</code></td>
-<td><code>Dict[str, cSkill]</code></td>
-<td>Skills de recolección, inicializadas a nivel 1.</td>
-</tr>
-<tr>
-<td><code>weapons</code></td>
-<td><code>Dict[str, cSkill]</code></td>
-<td>Skills de armas, inicializadas a nivel 1.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="metodos">Métodos</h3>
-<h4 id="gathermaterial-tool-vinventory-buffsnone"><code>gather(Material, Tool, vInventory, buffs=None)</code></h4>
-<p>Ejecuta la acción de recolección. Muestra una barra de progreso animada y al finalizar otorga EXP a la skill correspondiente.</p>
+<p>Etiquetas abreviadas para los 5 tipos de daño/defensa, usadas en los paneles de detalle.</p>
+<hr />
+<h2 id="funciones-helper-internas">Funciones Helper Internas</h2>
+<h3 id="_item_typeitem-str"><code>_item_type(item) -&gt; str</code></h3>
+<p>Retorna <code>type(item).__name__</code> (ej: <code>"cWeapon"</code>, <code>"cObject"</code>).</p>
+<h3 id="_item_nameitem-str"><code>_item_name(item) -&gt; str</code></h3>
+<p>Busca el nombre del item probando los atributos <code>Name</code>, <code>name</code> en ese orden. Retorna <code>"???"</code> si ninguno existe.</p>
+<h3 id="_item_descitem-str"><code>_item_desc(item) -&gt; str</code></h3>
+<p>Busca la descripción probando <code>Description</code>, <code>description</code>, <code>Desc</code>, <code>desc</code>. Retorna <code>"Sin descripción."</code> si ninguno existe.</p>
+<h3 id="_item_costitem-int"><code>_item_cost(item) -&gt; int</code></h3>
+<p>Retorna <code>Gold_Cost</code> del item o <code>0</code> si no tiene.</p>
+<hr />
+<h2 id="paneles-de-renderizado">Paneles de Renderizado</h2>
+<h3 id="_render_item_listslots-selected_idx-scroll_offset-max_visible-panel"><code>_render_item_list(slots, selected_idx, scroll_offset, max_visible) -&gt; Panel</code></h3>
+<p>Genera el panel izquierdo con la lista paginada del inventario.</p>
+<p><strong>Características:</strong>
+- Muestra hasta <code>max_visible</code> slots a la vez (por defecto <code>14</code> en <code>open_inventory_menu</code>).
+- La fila seleccionada se resalta con <strong>fondo blanco brillante y texto negro</strong> (<code>black on bright_white</code>).
+- El cursor de selección muestra <code>►</code> en la fila activa.
+- Un footer indica el rango visible: <code>"1–14 de 32  [↑/↓ para mover]"</code>.
+- Cada fila muestra: índice, icono de tipo, nombre, etiqueta de tipo y cantidad (si &gt; 1).</p>
 <p><strong>Parámetros:</strong></p>
 <table>
 <thead>
@@ -1779,174 +1949,219 @@ WEAPON_SKILLS = [&quot;swords&quot;, &quot;electric_wands&quot;, &quot;thermal_w
 </thead>
 <tbody>
 <tr>
-<td><code>Material</code></td>
+<td><code>slots</code></td>
+<td><code>List[InventorySlot]</code></td>
+<td>Lista de slots del inventario.</td>
+</tr>
+<tr>
+<td><code>selected_idx</code></td>
+<td><code>int</code></td>
+<td>Índice absoluto del slot seleccionado.</td>
+</tr>
+<tr>
+<td><code>scroll_offset</code></td>
+<td><code>int</code></td>
+<td>Primer slot visible (para paginación).</td>
+</tr>
+<tr>
+<td><code>max_visible</code></td>
+<td><code>int</code></td>
+<td>Número máximo de slots visibles simultáneamente.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="_render_item_detailslot-playernone-panel"><code>_render_item_detail(slot, player=None) -&gt; Panel</code></h3>
+<p>Genera el panel derecho con los detalles del item seleccionado.</p>
+<p><strong>Contenido según tipo:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Información mostrada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cWeapon</code></td>
+<td>Barras visuales de daño por tipo (mínimo–máximo), con barra de <code>█░</code>. El tipo Profundo siempre muestra <code>(fijo)</code>.</td>
+</tr>
+<tr>
+<td><code>cEquippableItems</code></td>
+<td>Barras de defensa por tipo, HP máximo (<code>❤</code>), robo de vida (<code>🩸</code>), daño extra (<code>⚔</code>), slot de equipamiento.</td>
+</tr>
+<tr>
+<td><code>cObject</code></td>
+<td>HP restaurado (<code>❤</code>), MP restaurado (<code>💧</code>).</td>
+</tr>
+<tr>
+<td><code>cTool</code></td>
+<td>Barra de eficiencia, tipo de material compatible, encantamientos.</td>
+</tr>
+<tr>
 <td><code>cMaterial</code></td>
-<td>El material a recolectar.</td>
+<td>Rareza (con color), barra de dureza, skill requerida, tipos de material.</td>
 </tr>
+</tbody>
+</table>
+<p><strong>Indicador de equipado:</strong> Si <code>player</code> es proporcionado y el item está actualmente equipado, muestra <code>"✓ ACTUALMENTE EQUIPADO"</code> en verde brillante.</p>
+<p>Si <code>slot</code> es <code>None</code>, muestra un panel vacío con mensaje de ayuda.</p>
+<hr />
+<h3 id="_render_actionsslot-message-message_style-panel"><code>_render_actions(slot, message, message_style) -&gt; Panel</code></h3>
+<p>Genera el panel inferior con las acciones disponibles para el item seleccionado.</p>
+<ul>
+<li>Para <code>cWeapon</code>, <code>cEquippableItems</code>, <code>cTool</code>: muestra <code>[E] Equipar  [I] Información  [Q] Cerrar</code>.</li>
+<li>Para <code>cObject</code> y otros: muestra <code>[U] Usar  [I] Información  [Q] Cerrar</code>.</li>
+<li>Si hay un <code>message</code> activo (ej: confirmación de éxito o error), lo muestra debajo de las acciones con el estilo <code>message_style</code>.</li>
+</ul>
+<hr />
+<h2 id="pantalla-de-informacion-detallada">Pantalla de Información Detallada</h2>
+<h3 id="_show_item_info_screenitem-console"><code>_show_item_info_screen(item, console)</code></h3>
+<p>Muestra una pantalla completa (a pantalla completa, <code>console.clear()</code>) con toda la información del item seleccionado. Espera cualquier pulsación de tecla para volver al menú principal de inventario.</p>
+<p><strong>Información mostrada según tipo:</strong></p>
+<ul>
+<li><strong><code>cWeapon</code>:</strong> Tabla de daño mínimo–máximo por tipo.</li>
+<li><strong><code>cEquippableItems</code>:</strong> Slot, tabla de defensa, HP, robo de vida, daño extra.</li>
+<li><strong><code>cObject</code>:</strong> Efectos al usar (HP y MP restaurados).</li>
+<li><strong><code>cTool</code>:</strong> Eficiencia, tipo de material, encantamientos.</li>
+</ul>
+<hr />
+<h2 id="funcion-principal-open_inventory_menu">Función Principal <code>open_inventory_menu</code></h2>
+<pre><code class="language-python">open_inventory_menu(inventory, player=None, *, on_equip=None, on_use=None) -&gt; None
+</code></pre>
+<p>Abre el menú de inventario interactivo y entra en el bucle de eventos. Bloquea hasta que el usuario cierra el menú con <code>[Q]</code> o <code>Escape</code>.</p>
+<p><strong>Parámetros:</strong></p>
+<table>
+<thead>
 <tr>
-<td><code>Tool</code></td>
-<td><code>cTool</code> o <code>None</code></td>
-<td>La herramienta usada. Si es <code>None</code>, eficiencia = 1.0.</td>
+<th>Parámetro</th>
+<th>Tipo</th>
+<th>Descripción</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td><code>vInventory</code></td>
+<td><code>inventory</code></td>
 <td><code>cInventory</code></td>
-<td>El inventario del jugador (para añadir el material).</td>
+<td>Inventario del jugador. Debe tener atributo <code>slots</code> (lista de <code>InventorySlot</code>).</td>
 </tr>
 <tr>
-<td><code>buffs</code></td>
-<td><code>list[float]</code></td>
-<td>Lista de multiplicadores de buff (ej: <code>[1.1, 1.2]</code>).</td>
+<td><code>player</code></td>
+<td><code>cPlayer \| None</code></td>
+<td>Objeto del jugador. Si se proporciona, se muestra el indicador de "equipado" y se pueden aplicar efectos de items.</td>
+</tr>
+<tr>
+<td><code>on_equip</code></td>
+<td><code>Callable(player, item, inventory) → bool \| None</code></td>
+<td>Callback para equipar un item. Si es <code>None</code>, usa <code>EquipmentManager.equip_item</code> por defecto.</td>
+</tr>
+<tr>
+<td><code>on_use</code></td>
+<td><code>Callable(player, item, inventory) → bool \| None</code></td>
+<td>Callback para usar un <code>cObject</code>. Si es <code>None</code>, aplica <code>HealthRestore</code> y <code>ManaRestore</code> directamente.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Cálculo de poder de recolección:</strong></p>
-<pre><code class="language-python">Gathering_Skill_Bonus = 1 + (nivel_actual * 0.05)
-total_modifier = producto_de_todos_los_buffs
-tool_eff = Tool.Efficiency  # 1.0 si no hay herramienta
-
-power = tool_eff * Gathering_Skill_Bonus * total_modifier
-</code></pre>
-<p><strong>Cálculo de EXP ganada:</strong></p>
-<pre><code class="language-python">exp_ganada = Material.Hardness / 13
-</code></pre>
-<p><strong>Barra de progreso:</strong></p>
-<p>Usa <code>rich.progress.Progress</code> con <code>BarColumn</code> y <code>TimeRemainingColumn</code>. El progreso avanza en <code>power</code> unidades cada 0.1 segundos hasta alcanzar <code>Material.Hardness</code>.</p>
-<hr />
-<h2 id="clase-cmaterial">Clase <code>cMaterial</code></h2>
-<p>Representa un material recolectable del mundo del juego.</p>
-<h3 id="constructor">Constructor</h3>
-<pre><code class="language-python">cMaterial(MATERIAL_ID, TypeStr, Name, Hardness, SkillName)
-</code></pre>
-<h3 id="atributos_1">Atributos</h3>
+<h3 id="controles-del-menu">Controles del menú</h3>
 <table>
 <thead>
 <tr>
-<th>Atributo</th>
-<th>Tipo</th>
-<th>Descripción</th>
+<th>Tecla</th>
+<th>Acción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>MATERIAL_ID</code></td>
-<td><code>int</code></td>
-<td>ID único del material.</td>
+<td><code>↑</code></td>
+<td>Seleccionar item anterior.</td>
 </tr>
 <tr>
-<td><code>Material_Type</code></td>
-<td><code>str</code></td>
-<td>Tipo del material con prefijo: <code>"TYPE_M:" + TypeStr</code>.</td>
+<td><code>↓</code></td>
+<td>Seleccionar item siguiente.</td>
 </tr>
 <tr>
-<td><code>Name</code></td>
-<td><code>str</code></td>
-<td>Nombre del material (ej: <code>"Hierro"</code>, <code>"Roble"</code>).</td>
+<td><code>E</code></td>
+<td>Equipar item seleccionado (<code>cWeapon</code>, <code>cEquippableItems</code>, <code>cTool</code>).</td>
 </tr>
 <tr>
-<td><code>Hardness</code></td>
-<td><code>float</code></td>
-<td>Dureza: determina cuánto tarda en recolectarse.</td>
+<td><code>U</code></td>
+<td>Usar item seleccionado (<code>cObject</code>).</td>
 </tr>
 <tr>
-<td><code>SkillName</code></td>
-<td><code>str</code></td>
-<td>Nombre de la skill que se usa para recolectarlo (debe coincidir con una key en <code>cFarm.gathering</code>).</td>
+<td><code>I</code></td>
+<td>Abrir pantalla de información detallada.</td>
+</tr>
+<tr>
+<td><code>Q</code> / <code>Escape</code></td>
+<td>Cerrar el menú de inventario.</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="clase-ctool">Clase <code>cTool</code></h2>
-<p>Representa una herramienta de recolección.</p>
-<h3 id="constructor_1">Constructor</h3>
-<pre><code class="language-python">cTool(STATIC_ID, TypeStr, Name, Desc, Efficiency, Enchantments)
-</code></pre>
-<h3 id="atributos_2">Atributos</h3>
-<table>
-<thead>
-<tr>
-<th>Atributo</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>STATIC_ID</code></td>
-<td><code>int</code></td>
-<td>ID único de la herramienta.</td>
-</tr>
-<tr>
-<td><code>ToolTypeStr</code></td>
-<td><code>str</code></td>
-<td>Tipo de herramienta con prefijo: <code>"TYPE_M:" + TypeStr</code>.</td>
-</tr>
-<tr>
-<td><code>Name</code></td>
-<td><code>str</code></td>
-<td>Nombre de la herramienta.</td>
-</tr>
-<tr>
-<td><code>Desc</code></td>
-<td><code>str</code></td>
-<td>Descripción.</td>
-</tr>
-<tr>
-<td><code>Efficiency</code></td>
-<td><code>float</code></td>
-<td>Multiplicador de eficiencia (ej: <code>2.0</code> = doble de rápido).</td>
-</tr>
-<tr>
-<td><code>Enchantments</code></td>
-<td><code>List</code></td>
-<td>Lista de encantamientos aplicados (ver <code>EnchantmentSystem.py</code>).</td>
-</tr>
-</tbody>
-</table>
+<h3 id="comportamiento-al-equipar-e">Comportamiento al equipar (<code>E</code>)</h3>
+<ol>
+<li>Llama a <code>on_equip(player, item, inventory)</code>.</li>
+<li>Si retorna <code>True</code>: elimina el item del inventario con <code>inventory.remove_item(item, 1)</code> y muestra mensaje de éxito.</li>
+<li>Si retorna <code>False</code>: muestra mensaje de error.</li>
+</ol>
+<h3 id="comportamiento-al-usar-u">Comportamiento al usar (<code>U</code>)</h3>
+<p><strong>Con <code>on_use</code> definido:</strong>
+- Llama a <code>on_use(player, item, inventory)</code>.
+- Si retorna <code>True</code>, elimina el item del inventario.</p>
+<p><strong>Sin <code>on_use</code> (comportamiento por defecto):</strong>
+- Lee <code>HealthRestore</code> y <code>ManaRestore</code> del item.
+- Aplica la curación respetando <code>Health_max</code> y <code>Mana_max</code>.
+- Elimina el item del inventario.
+- Muestra el HP y MP curados en el mensaje de resultado.</p>
+<h3 id="implementacion-tecnica">Implementación técnica</h3>
+<ul>
+<li>Usa <code>rich.Live</code> con 30 fps (<code>refresh_per_second=30</code>) y <code>transient=True</code>.</li>
+<li>El listener de teclado corre en un hilo daemon separado.</li>
+<li>El bucle exterior (<code>while True</code>) permite volver al menú tras acciones como Info o Equipar sin tener que reinicializar todo el estado.</li>
+<li>Usa <code>keyboard_listener_scope()</code> de <code>input_utils.py</code> para serializar el listener.</li>
+</ul>
+<h3 id="scroll-automatico">Scroll automático</h3>
+<p>El índice seleccionado siempre permanece visible. Si sube del límite superior o baja del inferior de la ventana visible, <code>_clamp()</code> ajusta <code>scroll_offset</code> para seguir al cursor.</p>
 <hr />
 <h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
-<h3 id="recolectar-un-material-basico">Recolectar un material básico</h3>
-<pre><code class="language-python">from Modules.GatheringMasterySystem import cFarm, cMaterial, cTool, Gathering_init
+<h3 id="abrir-el-inventario-con-comportamiento-por-defecto">Abrir el inventario con comportamiento por defecto</h3>
+<pre><code class="language-python">from Modules.InventoryMenu import open_inventory_menu
+from Modules.setup import vInventory
 
-# Crear material
-hierro = cMaterial(
-    MATERIAL_ID=1,
-    TypeStr=&quot;OreBlock&quot;,
-    Name=&quot;Mineral de Hierro&quot;,
-    Hardness=50.0,
-    SkillName=&quot;mining&quot;
-)
+# Sin jugador (solo lectura/información)
+open_inventory_menu(vInventory)
 
-# Crear herramienta
-pico = cTool(
-    STATIC_ID=101,
-    TypeStr=&quot;Pickaxe&quot;,
-    Name=&quot;Pico de Hierro&quot;,
-    Desc=&quot;Un pico resistente&quot;,
-    Efficiency=2.5,
-    Enchantments=[]
-)
-
-# Recolectar (bloquea hasta terminar, muestra barra)
-Gathering_init.gather(hierro, pico, vInventory)
+# Con jugador (permite equipar y usar)
+open_inventory_menu(vInventory, player=player)
 </code></pre>
-<h3 id="recolectar-con-buffs-activos">Recolectar con buffs activos</h3>
-<pre><code class="language-python"># Los buffs son multiplicadores de eficiencia
-buffs = [1.2, 1.1]  # +20% y +10% extra
-Gathering_init.gather(hierro, pico, vInventory, buffs=buffs)
+<h3 id="con-callbacks-personalizados">Con callbacks personalizados</h3>
+<pre><code class="language-python">from Modules.InventoryMenu import open_inventory_menu
+
+def mi_equip(player, item, inventory):
+    &quot;&quot;&quot;Lógica personalizada de equipamiento.&quot;&quot;&quot;
+    # ...
+    return True  # True = éxito
+
+def mi_use(player, item, inventory):
+    &quot;&quot;&quot;Lógica personalizada al usar consumible.&quot;&quot;&quot;
+    # ...
+    return True
+
+open_inventory_menu(vInventory, player=player, on_equip=mi_equip, on_use=mi_use)
 </code></pre>
-<h3 id="verificar-nivel-de-una-skill">Verificar nivel de una skill</h3>
-<pre><code class="language-python">nivel_mineria = Gathering_init.gathering[&quot;mining&quot;].current_level
-exp_actual = Gathering_init.gathering[&quot;mining&quot;].exp_total
-print(f&quot;Minería: Nivel {nivel_mineria}, EXP: {exp_actual}&quot;)
+<h3 id="integracion-en-el-bucle-de-maingame">Integración en el bucle de MainGame</h3>
+<pre><code class="language-python"># En MainGame.py, opción de menú para inventario:
+from Modules.InventoryMenu import open_inventory_menu
+
+open_inventory_menu(vInventory, player=player)
 </code></pre>
 <hr />
 <h2 id="notas-y-referencias">Notas y Referencias</h2>
 <ul>
-<li><strong>Barra de progreso con <code>rich</code>:</strong> La librería <code>rich</code> provee componentes visuales avanzados para la terminal. Documentación: <a href="https://rich.readthedocs.io/en/stable/progress.html">https://rich.readthedocs.io/en/stable/progress.html</a></li>
-<li><strong>Atributos de clase vs. atributos de instancia en Python:</strong> Los atributos definidos en el cuerpo de la clase (sin <code>self</code>) son compartidos entre instancias. Esto puede causar bugs si se modifican. Para evitarlo, deben definirse en <code>__init__</code>. Referencia: <a href="https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables">https://docs.python.org/3/tutorial/classes.html#class-and-instance-variables</a></li>
-<li><strong><code>time.sleep(0.1)</code>:</strong> Cada ciclo de la barra espera 0.1 segundos. Materiales muy duros pueden tardar varios segundos en recolectarse.</li>
-<li>El nombre de la skill en <code>cMaterial.SkillName</code> <strong>debe coincidir exactamente</strong> (en minúsculas) con una clave del diccionario <code>gathering</code> de <code>cFarm</code>. Si no coincide, se producirá un <code>KeyError</code>.</li>
+<li>El menú requiere que <code>cInventory</code> exponga un atributo <code>slots</code> (lista de <code>InventorySlot</code>). La clase <code>cInventory</code> de <code>setup.py</code> lo cumple.</li>
+<li>Si el inventario está vacío, todos los paneles se muestran en estado "vacío" sin errores.</li>
+<li><strong><code>rich.Live</code>:</strong> <a href="https://rich.readthedocs.io/en/stable/live.html">https://rich.readthedocs.io/en/stable/live.html</a></li>
+<li><strong><code>rich.Columns</code>:</strong> Permite mostrar varios renderizables en columnas. <a href="https://rich.readthedocs.io/en/stable/columns.html">https://rich.readthedocs.io/en/stable/columns.html</a></li>
+<li><strong><code>sshkeyboard</code>:</strong> Librería de captura de teclado usada para la navegación. <a href="https://github.com/sagi-z/sshkeyboard">https://github.com/sagi-z/sshkeyboard</a></li>
 </ul>
 
 

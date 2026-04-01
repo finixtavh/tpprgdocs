@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../../ModulesUtils/check_admin/">
+        <link rel="prev" href="../../ModulesUtils/ModLoader/">
       
       
         <link rel="next" href="../../__init__/">
@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -423,6 +423,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../Modules/InventoryMenu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventory Menu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../Modules/ShopManager/" class="md-nav__link">
         
   
@@ -459,6 +487,34 @@
     
   
     Item Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/ZoneManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zone Manager
   
 
     
@@ -511,7 +567,7 @@
   <span class="md-ellipsis">
     
   
-    Núcleo
+    Utils
   
 
     
@@ -527,7 +583,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Núcleo
+    Utils
   
 
           </label>
@@ -624,14 +680,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ModulesUtils/check_admin/" class="md-nav__link">
+      <a href="../../ModulesUtils/debug/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Check Admin
+    Debug
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/input_utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Utils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/ModLoader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mod Loader
   
 
     
@@ -1613,6 +1725,95 @@
     
   
     Init
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Obsoleto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Obsoleto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ModulesUtils/check_admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check Admin
   
 
     
@@ -2713,7 +2914,7 @@
 <p>Retorna el daño total infligido.</p>
 <hr />
 <h4 id="takedamagedamage"><code>TakeDamage(damage)</code></h4>
-<p>Reduce el HP del jugador. Acepta un número único (compatibilidad) o una lista de 5 valores. El HP no baja de 0.</p>
+<p>Reduce el HP del jugador. El flujo principal usa listas multi-tipo de daño. El HP no baja de 0.</p>
 <hr />
 <h4 id="winquantity-quantity2"><code>win(quantity, quantity2)</code></h4>
 <p>Llamar cuando el jugador derrota un enemigo. Añade <code>quantity</code> EXP y <code>quantity2</code> oro. Maneja la subida de nivel automáticamente.</p>
@@ -2882,19 +3083,9 @@
 <td>Siempre <code>False</code> para armas (los stats se calculan en cada ataque).</td>
 </tr>
 <tr>
-<td><code>PHYSICAL_DMG</code></td>
-<td><code>int</code></td>
-<td>Alias de <code>DMG[0]</code> para compatibilidad.</td>
-</tr>
-<tr>
-<td><code>damage_min</code></td>
-<td><code>int</code></td>
-<td>Alias de <code>DMG_min[0]</code> para compatibilidad.</td>
-</tr>
-<tr>
-<td><code>damage_max</code></td>
-<td><code>int</code></td>
-<td>Alias de <code>DMG[0]</code> para compatibilidad.</td>
+<td><code>DMG</code> / <code>DMG_min</code></td>
+<td><code>list</code></td>
+<td>El daño siempre se maneja en arrays multi-tipo normalizados.</td>
 </tr>
 </tbody>
 </table>
@@ -2934,7 +3125,7 @@
 <tr>
 <td><code>Defense</code></td>
 <td><code>list[5]</code></td>
-<td>Defensa por tipo de daño. Normalizado siempre a 5 valores.</td>
+<td>Defensa por tipo de daño.</td>
 </tr>
 <tr>
 <td><code>HealthBoost</code></td>
@@ -3202,14 +3393,17 @@ class cSkill:
 <h3 id="companion_updaterplayer"><code>Companion_Updater(player)</code></h3>
 <p>Actualiza la lista de compañeros del jugador (actualmente retorna una lista pero no la usa).</p>
 <h3 id="enemy_loaderdata_npc-return_singlefalse"><code>enemy_loader(data_npc, return_single=False)</code></h3>
-<p>Carga enemigos desde datos JSON y crea instancias de <code>cEnemy</code>. Normaliza los arrays de daño y defensa al formato de 5 valores. Retorna una lista o un enemigo aleatorio si <code>return_single=True</code>.</p>
+<p>Carga enemigos desde datos JSON y crea instancias de <code>cEnemy</code>. Los arrays de daño/defensa se normalizan a formato multi-tipo al construir las entidades. Retorna una lista o un enemigo aleatorio si <code>return_single=True</code>.</p>
 <hr />
 <h2 id="sistema-de-dano-multi-tipo">Sistema de Daño Multi-tipo</h2>
 <p>Todos los daños y defensas usan arrays de 5 posiciones:</p>
-<pre><code>Índice:  0          1         2        3           4
-Tipo:    Físico     Térmico   Tierra   Eléctrico   Profundo
+<pre><code>Índice:  0          1         2           3        4
+Tipo:    Físico     Térmico   Eléctrico   Tierra   Profundo
 </code></pre>
 <p><strong>Regla especial del tipo Profundo (Deep):</strong> El daño siempre es el valor máximo (sin aleatoriedad).</p>
+<p><strong>Normalización soportada al cargar datos:</strong><br />
+- <code>DMG</code> y <code>DEF</code>: listas de 1, 2 o 5 valores (se expanden a 5).<br />
+- <code>DMG_min</code>: listas de 1, 2 o 4 valores (se expanden a 4).  </p>
 <hr />
 <h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
 <h3 id="crear-un-jugador">Crear un jugador</h3>
