@@ -1,6 +1,6 @@
 > DEPRECATED
 >> Since V0.1.1
->> Changed due sshkeyboard not requiring sudo privileges on linux
+>> Changed due security reasons
 
 # `check_admin.py`
 

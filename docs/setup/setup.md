@@ -128,6 +128,7 @@ Reduce el HP del jugador. El flujo principal usa listas multi-tipo de daño. El 
 Llamar cuando el jugador derrota un enemigo. Añade `quantity` EXP y `quantity2` oro. Maneja la subida de nivel automáticamente.
 
 ---
+> Deprecated since V0.2.2, Now use IntentoryMenu.py.
 
 #### `PlayerObjects()`
 
