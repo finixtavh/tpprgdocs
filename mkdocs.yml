@@ -31,7 +31,10 @@ nav:
       - Shop Manager: Modules/ShopManager.md
       - Item Manager: Modules/ItemManager.md
       - Zone Manager: Modules/ZoneManager.md
-
+      - Crafting System: Modules/CraftingSystem.md
+      - Mastery System: Modules/MasterySystem.md
+      - Save System: Modules/SaveSystem.md
+      - Skill Tree System: Modules/SkillTreeSystem.md
   - Utils:
       - Main Game: ModulesUtils/MainGame.md
       - Loader: ModulesUtils/Loader.md

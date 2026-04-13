@@ -133,7 +133,9 @@ Muestra la interfaz de tienda interactiva en la consola. Permite al jugador ver 
 3. El jugador navega con `↑/↓` y selecciona con `Enter`.
 4. Se muestran los detalles del item seleccionado.
 5. Se presenta un menú de confirmación de compra (Sí/No).
-6. Si confirma y tiene oro suficiente: descuenta el oro, crea el objeto con `item_manager.create_item_object()` y lo añade a `vInventory`.
+6. Si confirma y tiene oro suficiente: descuenta el oro, crea el objeto con `item_manager.create_item_object(item_id, cWeapon, cEquippableItems, cObject, cTool)` y lo añade a `vInventory`.
+
+> **Nota:** La llamada a `create_item_object` ahora incluye `cTool` como parámetro adicional, soportando la compra de herramientas desde la tienda.
 
 **Stats mostrados al detallar un item:**
 
@@ -200,6 +202,7 @@ display_shop("GeneralStore", player, item_manager)
 
 - La navegación interactiva de la tienda usa `interactive_menu_select` y `wait_for_enter` de `Modules/input_utils.py`. No requiere la librería `keyboard` ni permisos de administrador.
 - Los IDs en el JSON deben coincidir con los `STATIC_ID` definidos en `DataItems.json`, que maneja el `ItemManager`.
-- La función `display_shop` importa `cWeapon`, `cEquippableItems`, `cObject` y `vInventory` desde `Modules.setup` en tiempo de ejecución (import diferido dentro del bloque de compra) para evitar imports circulares.
+- La función `display_shop` importa `cWeapon`, `cEquippableItems`, `cObject` y `vInventory` desde `Modules.setup`, y `cTool` desde `Modules.GatheringMasterySystem`, todos en tiempo de ejecución (import diferido dentro del bloque de compra) para evitar imports circulares.
+- Las tiendas de zona se nombran automáticamente como `"{ZoneKey}Shop"` (ej: `"ForestShop"`). Ver `MainGame.py` → `get_zone_shop_name()`.
 - **`input_utils.py`:** Ver `input_utils.md` para documentación completa del sistema de menús interactivos.
 - **Patrón Singleton:** [https://refactoring.guru/design-patterns/singleton/python/example](https://refactoring.guru/design-patterns/singleton/python/example)

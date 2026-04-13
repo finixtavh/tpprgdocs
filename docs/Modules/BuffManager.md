@@ -44,7 +44,7 @@ Representa **un buff o debuff individual** aplicado a una entidad (jugador o ene
 | `type` | `str` | Tipo de cálculo: `"flat"` (valor plano) u otros. |
 | `effects` | `dict` | Diccionario de efectos: `{nombre_stat: valor}`. |
 | `icon` | `str` | Emoji/icono visual del buff (ej: `"✨"`). |
-| `source` | `str` | Origen del buff: `"skill"`, `"item"`, `"potion"`. |
+| `source` | `str` | Origen del buff: `"skill"`, `"item"`, `"potion"`, `"companion_skill"`. |
 | `permanent` | `bool` | Si es `True`, el buff dura mientras el item esté equipado. |
 | `buff_after_unequip` | `int` | Turnos extra de duración tras desequipar el item fuente. |
 | `is_debuff` | `bool` | `True` si el ID contiene `"_debuff"`. |
@@ -158,7 +158,7 @@ manager = get_buff_manager()
 
 ### `apply_buff_to_player(player, buff_id, source, permanent, buff_after_unequip)`
 
-Función de conveniencia para aplicar un buff directamente a un jugador. Inicializa `player.active_buffs` si no existe.
+Función de conveniencia para aplicar un buff directamente a un jugador. Inicializa `player.active_buffs` si no existe. El parámetro `source` acepta el valor `"companion_skill"` además de los anteriores.
 
 ### `remove_buff_from_player(player, buff_id) -> bool`
 
@@ -191,6 +191,17 @@ from Modules.BuffManager import apply_buff_to_player
 
 # El buff dura mientras el item esté equipado
 apply_buff_to_player(player, "2_buff", source="item", permanent=True)
+```
+
+### Aplicar debuff de compañero a un enemigo (desde MainGame)
+
+```python
+bm = get_buff_manager()
+debuff = bm.create_buff("5_debuff", "companion_skill")
+if debuff:
+    if not hasattr(enemy, 'active_buffs'):
+        enemy.active_buffs = []
+    enemy.active_buffs.append(debuff)
 ```
 
 ### Crear y usar el BuffManager directamente
@@ -240,6 +251,7 @@ manager.list_all_buffs(detailed=True)
 ## Notas y Referencias
 
 - El sistema de *diminishing returns* es un patrón común en RPGs para evitar que acumular muchos buffs del mismo tipo sea demasiado poderoso.
+- Los buffs aplicados a enemigos (ej: debuffs de compañeros) siguen el mismo sistema; el objeto enemigo necesita un atributo `active_buffs` (lista) para recibirlos.
 - **Patrón Singleton en Python:** [https://refactoring.guru/design-patterns/singleton/python/example](https://refactoring.guru/design-patterns/singleton/python/example)
 - **`deepcopy` de la librería `copy`:** Crea copias independientes de objetos complejos. [https://docs.python.org/3/library/copy.html](https://docs.python.org/3/library/copy.html)
 - **`typing` module:** Tipos como `Optional`, `List`, `Dict` son de este módulo. [https://docs.python.org/3/library/typing.html](https://docs.python.org/3/library/typing.html)

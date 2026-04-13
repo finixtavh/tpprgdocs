@@ -4,49 +4,41 @@
 
 1. [Descripción General](#descripción-general)
 2. [Configuración (`CONFIG`)](#configuración-config)
-3. [Estado del Juego (`GameState`)](#estado-del-juego-gamestate)
-4. [Variables Globales del Juego](#variables-globales-del-juego)
-5. [Tema Visual](#tema-visual)
-6. [Funciones de Inicialización](#funciones-de-inicialización)
-7. [Funciones de UI](#funciones-de-ui)
-8. [Funciones de Combate](#funciones-de-combate)
-9. [Funciones de Guardado/Carga](#funciones-de-guardadocarga)
-10. [Bucle Principal (`main`)](#bucle-principal-main)
-11. [Opciones del Menú Principal](#opciones-del-menú-principal)
-12. [Ejemplos de Uso](#ejemplos-de-uso)
-13. [Notas y Referencias](#notas-y-referencias)
+3. [Variables Globales del Juego](#variables-globales-del-juego)
+4. [Tema Visual](#tema-visual)
+5. [Funciones de Inicialización](#funciones-de-inicialización)
+6. [Funciones de UI](#funciones-de-ui)
+7. [Funciones de Combate](#funciones-de-combate)
+8. [Funciones de Guardado/Carga](#funciones-de-guardadocarga)
+9. [Bucle Principal (`main`)](#bucle-principal-main)
+10. [Opciones del Menú Principal](#opciones-del-menú-principal)
+11. [Ejemplos de Uso](#ejemplos-de-uso)
+12. [Notas y Referencias](#notas-y-referencias)
 
 ---
 
 ## Descripción General
 
-`MainGame.py` es el **punto de entrada y bucle principal** del juego. Orquesta todos los demás módulos (Loader, setup, EquipmentSystem, ItemManager, ShopManager, ModLoader, GatheringMasterySystem) para presentar al jugador un RPG completo por consola con menús, combate, inventario y tiendas.
+`MainGame.py` es el **punto de entrada y bucle principal** del juego. Orquesta todos los demás módulos para presentar al jugador un RPG completo por consola con menús, combate, inventario, tiendas, compañeros, crafteo, encantamientos y base.
 
-Al ejecutar `python MainGame.py` (o `python -m Modules.MainGame`), se inicia el juego.
+Al ejecutar `python MainGame.py`, se inicia el juego.
+
+**Módulos importados principales:**
+
+- `InventoryMenu`, `ShopManager`, `ItemManager`, `ModLoader`
+- `GatheringMasterySystem`, `EnchantmentSystem`, `MasterySystem`
+- `SaveSystem`, `ZoneManager`, `BuffManager`, `CraftingSystem`
+- `BaseSystem`, `CompanionSystem`, `SkillTreeSystem` (vía `player.Points()`)
+- `debug`, `input_utils`, `setup`
 
 ---
 
 ## Configuración (`CONFIG`)
 
-Diccionario global con todas las opciones configurables del juego:
+El archivo de configuración se carga dinámicamente desde `config.json`:
 
 ```python
-CONFIG = {
-    "ASK_FOR_ADMIN": False if platform.platform == "Windows" else True,
-
-    "COMBAT": {
-        "DELAY_BETWEEN_ROUNDS": 3.5,   # Segundos entre rondas
-        "CHANCE_TO_FLEE": 0.3,          # Probabilidad base de huir (30%)
-    },
-    "DISPLAY": {
-        "BAR_LENGTH": 25,               # Largo de las barras HP/MP
-        "MENU_REFRESH_RATE": 0.5,       # Segundos de espera al refrescar menús
-        "SHOW_FULL_STATS": True,        # Mostrar stats completos en pantalla
-    },
-    "DEBUG": {
-        "ENABLED": False,               # Modo debug (actualmente no hace nada)
-    }
-}
+CONFIG = Read("config.json", None)
 ```
 
 | Clave | Tipo | Descripción |
@@ -56,24 +48,9 @@ CONFIG = {
 | `COMBAT.CHANCE_TO_FLEE` | `float` | Probabilidad base de huir (0.0–1.0). |
 | `DISPLAY.BAR_LENGTH` | `int` | Longitud visual de las barras de estado. |
 | `DISPLAY.SHOW_FULL_STATS` | `bool` | Si mostrar todos los stats en la pantalla de estadísticas. |
-| `DEBUG.ENABLED` | `bool` | Modo debug (reservado). |
+| `DEBUG.ENABLED` | `bool` | Activa el modo debug y el logging detallado. |
 
----
-
-## Estado del Juego (`GameState`)
-
-Enum que registra en qué pantalla se encuentra el juego actualmente:
-
-```python
-class GameState(Enum):
-    MAIN_MENU  = auto()
-    EXPLORING  = auto()
-    COMBAT     = auto()
-    SHOP       = auto()
-    INVENTORY  = auto()
-    STATS      = auto()
-    EQUIPMENT  = auto()
-```
+> **Nota:** `CONFIG` ya no es un diccionario hardcodeado en el código; se lee desde `config.json` en tiempo de ejecución. Si el archivo no existe, `Read` retornará un valor vacío y el juego fallará al acceder a las claves.
 
 ---
 
@@ -81,7 +58,7 @@ class GameState(Enum):
 
 | Variable | Tipo | Descripción |
 |---|---|---|
-| `player` | `cPlayer` | Objeto del jugador. Se inicializa con `setup_player()`. |
+| `player` | `cPlayer` | Objeto del jugador. Se inicializa con `setup_player()` al importar el módulo. |
 | `enemies` | `List` | Lista de enemigos disponibles. |
 | `enemy` | `Optional[cEnemy]` | Enemigo actual del combate. |
 | `chosen_area` | `Optional[str]` | Zona seleccionada por el jugador (`"Forest"`, `"Cave"`, `None`). |
@@ -89,9 +66,9 @@ class GameState(Enum):
 | `zone_name` | `str` | Nombre de la zona actual. |
 | `tick` | `int` | Contador de turnos global. |
 | `chars` | `List` | Lista de personajes (reservado). |
-| `current_state` | `GameState` | Estado actual del juego. |
 | `item_manager` | `ItemManager` | Instancia del gestor de items. |
 | `shop_manager` | `ShopManager` | Instancia del gestor de tiendas. |
+| `app_logger` | `Logger` | Logger principal del juego configurado por `debug.py`. |
 
 ---
 
@@ -111,11 +88,12 @@ custom_theme = Theme({
 console = Console(theme=custom_theme)
 ```
 
-Uso en el código:
+Inmediatamente después se conecta el sistema de logging:
 
 ```python
-console.print("[success]¡Éxito![/success]")
-console.print("[danger]¡Error crítico![/danger]")
+app_logger = setup_logging(CONFIG["DEBUG"]["ENABLED"])
+attach_console_logging(console, app_logger)
+install_exception_hooks(app_logger)
 ```
 
 ---
@@ -129,96 +107,142 @@ Inicializa todos los sistemas del juego al arrancar:
 1. Carga el `ItemManager` con `get_item_manager()`.
 2. Carga el `ShopManager` con `get_shop_manager()`.
 3. Inicializa y carga todos los mods con `get_mod_loader().load_all_mods()`.
-4. Si existe `Data/SaveGame.json`, pregunta si cargar la partida guardada.
+4. Si existe `Data/SaveGame.json`, pregunta si cargar la partida guardada (legado, llama a `load_game()`).
 
 ---
 
 ### `load_test_items()`
 
-Carga algunos items de prueba (IDs 3, 4, 40, 41, 52) y los añade al inventario. Útil durante desarrollo.
+Carga items de prueba (IDs 3, 4, 40, 41, 52) y los añade al inventario. Útil durante desarrollo. Acepta también `cTool` como parámetro al llamar a `load_item_by_id`.
 
 ---
 
 ### `zone_loader(player_zone: str) -> cEnemy`
 
-Carga los enemigos de la zona indicada desde `DataStats.json` y retorna uno aleatorio.
+Carga los enemigos de la zona indicada desde `DataStats.json` o desde los datos de mods (`mod_api.stats_injections`). Retorna un enemigo aleatorio.
 
-| Parámetro | Descripción |
-|---|---|
-| `player_zone` | `"Forest"` o `"Cave"` |
+**Prioridad de carga:**
+1. Primero busca en `mod_api.stats_injections[player_zone]`.
+2. Si no encuentra, lee de `Data/DataStats.json`.
 
-Retorna una instancia de `cEnemy` o `None` si hay error.
-
----
-
-## Funciones de UI
-
-### `display_player_status()`
-
-Muestra un panel con:
-- Nombre, nivel y zona actual del jugador.
-- Barra de HP con porcentaje.
-- Barra de Mana con porcentaje.
+Retorna `None` si hay error o no hay enemigos.
 
 ---
 
-### `create_status_bar(current, maximum, color, return_values=True)`
+### `zone_loader_group(player_zone: str, max_enemies: int = 5) -> List[cEnemy]`
 
-Crea una barra de estado visual con caracteres `#` y `-`.
+**Función nueva.** Carga un grupo de entre 1 y `max_enemies` enemigos aleatorios de la zona indicada. Sigue la misma lógica de prioridad (mods primero, luego JSON base).
 
 **Parámetros:**
 
 | Parámetro | Tipo | Descripción |
 |---|---|---|
-| `current` | `float` | Valor actual. |
-| `maximum` | `float` | Valor máximo. |
-| `color` | `str` | Color para la parte llena (ej: `"red"`, `"blue"`, `"green"`). |
-| `return_values` | `bool` | Si `True`, retorna `(bar_str, percentage)`. Si `False`, imprime y retorna `None`. |
+| `player_zone` | `str` | Clave de la zona. |
+| `max_enemies` | `int` | Máximo de enemigos en el grupo (default `5`). |
 
-**Ejemplo de salida:**
+**Retorno:** Lista de instancias `cEnemy`. Lista vacía si falla la carga.
 
-```
-[#########################-] 96%
+---
+
+### `run_zone_gathering(zone_key: str) -> bool`
+
+Ejecuta el minijuego de recolección para la zona actual. Lee los IDs de materiales del JSON, selecciona uno aleatorio, instancia el material con `item_manager.create_item_object()` y llama a `Gathering_init.gather()`. Si tiene éxito, añade el material al inventario.
+
+Retorna `True` si se recolectó con éxito.
+
+---
+
+## Funciones de UI
+
+### `display_player_status() -> None`
+
+Muestra un panel con:
+- Nombre, nivel, zona actual y oro del jugador.
+- Barra de HP (con soporte de barrera `Barrier` en cian brillante si `player.Barrier > 0`).
+- Barra de Maná.
+
+---
+
+### `create_status_bar(current, maximum, color, return_values=True)`
+
+Crea una barra de estado visual con caracteres `#` y `-`. La longitud se toma de `CONFIG["DISPLAY"]["BAR_LENGTH"]`.
+
+**Retorno:** Tupla `(bar_str, percentage)` si `return_values=True`. Si es `False`, imprime directamente.
+
+---
+
+### `create_hp_barrier_bar(health, health_max, barrier, _unused=None) -> Tuple[str, int]`
+
+**Función nueva.** Crea una barra de HP con superposición visual de barrera (similar a los escudos de League of Legends).
+
+**Visual:** `[CYAN_barrera | GREEN_hp | EMPTY]`
+
+La barrera se muestra en cian brillante desde la izquierda, cubriendo las celdas de HP. La barrera es proporcional a `health_max`.
+
+**Retorno:** Tupla `(bar_string, health_percentage)`.
+
+```python
+bar, pct = create_hp_barrier_bar(75, 100, 30)
+# Barrera de 30 se renderiza sobre los primeros ~7 caracteres en cian
 ```
 
 ---
 
-### `display_main_menu()`
+### `display_main_menu() -> int`
 
-Ahora el menú principal es **interactivo**:
+Menú principal interactivo que usa `interactive_menu_select`. Retorna el número de opción elegida.
 
-- Navegación con `↑/↓` y selección con `Enter`.
-- Opción alternativa: escribir el número y presionar `Enter`.
-- La opción seleccionada se muestra con **colores invertidos** (estilo “menú”).
+**Opciones actuales:**
 
-**Nota técnica:** el menú interactivo usa un `Theme` compartido para resolver estilos como `menu_title`. Además, el listener de teclado se limpia siempre al salir del menú (para evitar el error de sshkeyboard “Only one listener allowed at a time”).
+| Valor | Etiqueta |
+|---|---|
+| `1` | Inspeccionar las zonas |
+| `2` | Ir a una zona |
+| `3` | Tienda |
+| `4` | Inventario Universal |
+| `7` | Acciones de Zona |
+| `8` | Mirar Stats |
+| `9` | Gestión de Mods |
+| `10` | Ver Items Disponibles |
+| `11` | Guardar |
+| `12` | DEBUG |
+| `13` | Compañeros |
+| `14` | Árbol de Habilidades |
+| `15` | Mesa de Encantamientos |
+| `16` | Yunque de Crafteo |
+| `17` | Base |
+| `0` | Salir del juego |
+
+> **Nota:** Las opciones `5` y `6` del menú anterior (Usar objetos y Equipamiento) han sido eliminadas. El inventario unificado (opción `4`) las reemplaza.
 
 ---
 
 ### `render_combat_menu(player, enemy, combat_round)`
 
-Muestra la UI de combate con:
-- Número de ronda.
-- Paneles de HP/MP del jugador y enemigo.
-- Tabla de acciones disponibles (Atacar, Usar objeto, Huir).
+Muestra la UI de combate. Ahora incluye soporte para **compañeros**:
+
+- Muestra hasta 4 paneles de compañeros activos a la izquierda del jugador.
+- Compañeros caídos muestran `💀 KO` con indicación de costo de resurrección.
+- El panel del jugador incluye barra de barrera si `player.Barrier > 0`.
+- Las acciones disponibles son: `[1] Atacar`, `[2] Inventario`, `[3] Huir`.
 
 ---
 
 ### `display_zone_enemies(zone_name, enemies_data, strings_data)`
 
-Muestra una tabla con los enemigos de una zona, incluyendo HP, daño físico, daño mágico y defensa.
+Muestra una tabla con los enemigos de una zona, incluyendo HP, daño físico, daño mágico total y defensa física.
 
 ---
 
 ### `get_validated_input(prompt, valid_options) -> int`
 
-Se mantiene como fallback para entradas puramente numéricas cuando no hay un menú Rich asociado.
+Fallback numérico simple para entradas sin menú Rich. Ignora entradas vacías (Enter residual). Atrapa `KeyboardInterrupt` y `EOFError` terminando el juego con `sys.exit(0)`.
 
-> El flujo principal del juego usa menús interactivos con selección invertida.
+---
 
-### `keyboard_listener_scope()` (`Modules/input_utils.py`)
+### `get_zone_shop_name(zone_key: str) -> str`
 
-Context manager que **serializa** todo uso de `sshkeyboard.listen_keyboard`: solo puede existir un listener a la vez. Antes y después de cada sesión se llama a `stop_listening()` y se espera un instante; en menús con hilo de teclado se hace `join()` del hilo antes de abrir el siguiente menú. Así se evita `AssertionError: Only one listener allowed at a time` al encadenar menús (por ejemplo menú principal → selección de zona).
+Retorna el nombre de la tienda de una zona: `f"{zone_key}Shop"`.
 
 ---
 
@@ -234,28 +258,25 @@ Aplica todos los debuffs activos en `player.applieddebuffs`. Para cada debuff, l
 
 ### `save_game() -> bool`
 
-Guarda el estado del juego en `Data/SaveGame.json`.
+Guarda el estado básico del juego en `Data/SaveGame.json` (función legado, preservada para compatibilidad).
 
 **Datos guardados:**
 
 ```json
 {
-    "player": {
-        "name": "...", "level": 1, "health": 100, "health_max": 100,
-        "mana": 100, "mana_max": 100, "exp": 15, "exp_max": 100, "gold": 50
-    },
+    "player": { "name": "...", "level": 1, "health": 100, ... },
     "game_state": { "area": "Forest", "tick": 0 },
     "timestamp": "..."
 }
 ```
 
-> **Nota:** El inventario y el equipamiento **no se guardan** en la implementación actual.
+> **Nota:** El guardado completo (inventario, equipamiento, compañeros, masteries, base) lo gestiona `SaveSystem.py` a través de la opción `11` del menú.
 
 ---
 
 ### `load_game() -> bool`
 
-Carga el archivo `Data/SaveGame.json` y restaura los atributos básicos del jugador y el estado del juego. Retorna `False` si el archivo no existe o está corrupto.
+Carga el archivo `Data/SaveGame.json` (legado) y restaura los atributos básicos del jugador. Retorna `False` si el archivo no existe o está corrupto.
 
 ---
 
@@ -266,8 +287,9 @@ La función `main()` se llama en un loop infinito desde el bloque `if __name__ =
 1. Llama a `player.Check(vInventory)` y regenera el maná.
 2. Limpia la pantalla.
 3. Muestra el estado del jugador y el menú principal.
-4. Solicita y valida el input del usuario.
-5. Ejecuta la acción correspondiente.
+4. Ejecuta la acción correspondiente.
+
+El loop externo captura excepciones y las muestra en consola sin terminar el juego.
 
 ---
 
@@ -275,19 +297,22 @@ La función `main()` se llama en un loop infinito desde el bloque `if __name__ =
 
 | Opción | Acción |
 |---|---|
-| `0` | Salir del juego (con confirmación). |
-| `1` | Ver información de zonas (enemigos de Bosque y Cueva en tablas). |
-| `2` | Ir a una zona (Bosque, Cueva o salir de la zona actual). Opcionalmente visitar la tienda de zona. |
-| `3` | Tienda general con selección entre GeneralStore, WeaponShop, ArmorShop, MagicShop. |
-| `4` | Ver inventario (`vInventory.PrintObjects()`). |
-| `5` | Usar objetos consumibles del inventario. |
-| `6` | Menú de equipamiento (`equip_menu(player, vInventory)`). |
-| `7` | Acciones de zona: luchar, tienda de zona, recolectar o volver al menú principal. |
-| `8` | Ver estadísticas completas del jugador con barras de HP/MP/EXP y equipamiento actual. |
+| `0` | Salir del juego (con confirmación `s/n`). |
+| `1` | Ver información de todas las zonas dinámicamente (usa `get_all_zones()`). Muestra fuente si es de un mod. |
+| `2` | Ir a una zona (selector dinámico con `get_zones_for_selector()`). Dispara evento `zone_entered` para mods. |
+| `3` | Tienda general con submenú: GeneralStore, WeaponShop, ArmorShop, MagicShop. |
+| `4` | Inventario universal (`open_inventory_menu`). |
+| `7` | Acciones de zona: Luchar, Tienda de zona, Recolectar, Volver. |
+| `8` | Ver estadísticas completas del jugador con barras, defensas multi-tipo, compañeros, buffs activos y equipamiento. |
 | `9` | Gestión de mods (listar, recargar, ver estado). |
-| `10` | Ver todos los items disponibles en el juego (`item_manager.list_all_items(detailed=True)`). |
-| `11` | Guardar la partida. |
-| `12` | Menú DEBUG (añadir armas, oro/EXP, ver variables). |
+| `10` | Ver todos los items disponibles en el juego. |
+| `11` | Guardar/Cargar partida mediante `save_load_menu` de `SaveSystem.py` (3 slots). |
+| `12` | Menú DEBUG (añadir armas, oro/EXP, mastery, variables, compañero de prueba). |
+| `13` | Gestión de compañeros (`companion_management_menu`). |
+| `14` | Árbol de Habilidades (`player.Points()`). |
+| `15` | Mesa de Encantamientos (`open_enchantment_menu`). |
+| `16` | Yunque de Crafteo (`open_crafting_menu`). |
+| `17` | Base del jugador (`open_base_menu`), con inyección de edificios de mods. |
 
 ---
 
@@ -298,17 +323,43 @@ La función `main()` se llama en un loop infinito desde el bloque `if __name__ =
     NO → Mensaje de error
     SÍ → Submenú:
         [1] Luchar
-            - Ejecuta el flujo de combate existente
-            - Si no hay enemigo cargado, intenta cargar uno con zone_loader()
-        [2] Tienda actual
-            - Busca tienda por nombre: {ZoneKey}Shop
-            - Si existe inventario, abre display_shop()
+            - Carga enemigo si no hay uno con zone_loader()
+            - Bucle de combate por rondas:
+                · Turno del jugador: Atacar / Inventario / Huir
+                · Turno de compañeros (con acciones según clase)
+                · Turno del enemigo (ataca a objetivo aleatorio: jugador o compañero)
+            - Al vencer: EXP, oro, loot aleatorio, posible level-up
+        [2] Tienda actual de la zona
+            - Busca tienda "{ZoneKey}Shop"
+            - Si existe, abre display_shop()
         [3] Recolectar
-            - Lee "Gathering.Materials" de DataStats.json (ej: "1_G")
-            - Resuelve IDs de materiales y ejecuta GatheringMasterySystem
-        [4] Volver
-            - Regresa al menú principal sin acciones adicionales
+            - Llama a run_zone_gathering(chosen_area)
+        [4] Devolverse al menú principal
 ```
+
+### Flujo de combate con compañeros (detalle)
+
+Durante el turno de cada compañero vivo, el jugador elige su acción según la clase del compañero:
+
+| Clase | Acciones disponibles |
+|---|---|
+| Cualquiera | `[1] Atacar` |
+| `Curandero` | `[2] Curar al jugador (+20% HP máx)`, `[3] Curar al equipo (+15% HP máx)` |
+| `Soporte` | `[2] Debilitar al enemigo (debuff vía BuffManager o reducción DEF -10%)` |
+
+El enemigo elige un objetivo aleatorio entre el jugador y los compañeros vivos.
+
+---
+
+### Menú DEBUG (opción 12)
+
+| Sub-opción | Acción |
+|---|---|
+| `1` | Añadir arma de prueba (IDs 3 y 100) al inventario. |
+| `2` | Añadir 9.999.999 de oro y EXP. |
+| `3` | Subir 10 niveles a todas las skills de Gathering y Armas. |
+| `4` | Mostrar `dump_debug_snapshot` en pantalla y loggear. |
+| `5` | Añadir compañero de prueba `Lyra` con arma equipada si hay una en el inventario. |
 
 ---
 
@@ -320,18 +371,19 @@ La función `main()` se llama en un loop infinito desde el bloque `if __name__ =
 python MainGame.py
 ```
 
-### Modificar el delay de combate
+### Cargar un grupo de enemigos para un encuentro
 
 ```python
-# En MainGame.py, antes de iniciar:
-CONFIG["COMBAT"]["DELAY_BETWEEN_ROUNDS"] = 1.0  # Más rápido
+group = zone_loader_group("Forest", max_enemies=3)
+# Retorna lista de 1 a 3 instancias de cEnemy del Bosque
 ```
 
-### Acceder al item_manager desde el juego
+### Crear barra con barrera
 
 ```python
-# Ya inicializado en init_game()
-item_manager.list_all_items(detailed=True)
+bar, pct = create_hp_barrier_bar(60, 100, 25)
+# Bar: [CYAN×6 | GREEN×9 | EMPTY×10]
+# pct: 60
 ```
 
 ---
@@ -339,8 +391,9 @@ item_manager.list_all_items(detailed=True)
 ## Notas y Referencias
 
 - **`rich` library:** Usada extensivamente para UI. [https://rich.readthedocs.io/](https://rich.readthedocs.io/)
-- **`keyboard` library:** Para capturar Enter en confirmaciones. [https://github.com/boppreh/keyboard](https://github.com/boppreh/keyboard)
 - **`Enum` en Python:** Para estados del juego. [https://docs.python.org/3/library/enum.html](https://docs.python.org/3/library/enum.html)
-- El sistema de loot usa una tabla hardcodeada por niveles (1-3). Una mejora futura podría cargar la tabla desde el JSON.
-- El **guardado no persiste inventario ni equipamiento**. Es una funcionalidad pendiente de implementar.
+- El `CONFIG` ahora se lee desde `config.json` en lugar de estar hardcodeado. Si el archivo no existe el juego no arrancará correctamente.
+- El **guardado completo** (con inventario, masteries, compañeros y base) está en `SaveSystem.py`. La función `save_game()` en este archivo es un guardado básico de legado.
 - La probabilidad de huir está limitada entre 5% y 95%: `flee_chance = max(0.05, min(0.95, flee_chance))`.
+- El evento `zone_entered` se dispara automáticamente al seleccionar una zona, permitiendo a los mods reaccionar a la entrada.
+- La opción `14` del menú llama a `player.Points()`, que abre el árbol de habilidades definido en `SkillTreeSystem.py`.
