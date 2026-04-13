@@ -13,7 +13,7 @@
       
       
       
-        <link rel="prev" href="../../Modules/ZoneManager/">
+        <link rel="prev" href="../../Modules/SkillTreeSystem/">
       
       
         <link rel="next" href="../Loader/">
@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
     
     
       
@@ -528,6 +528,118 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/CraftingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crafting System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/MasterySystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mastery System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/SaveSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Save System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Modules/SkillTreeSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill Tree System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -689,17 +801,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#estado-del-juego-gamestate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Estado del Juego (GameState)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#variables-globales-del-juego" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -766,6 +867,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#zone_loader_groupplayer_zone-str-max_enemies-int-5-listcenemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zone_loader_group(player_zone: str, max_enemies: int = 5) -&gt; List[cEnemy]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_zone_gatheringzone_key-str-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_zone_gathering(zone_key: str) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -784,10 +907,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#display_player_status" class="md-nav__link">
+  <a href="#display_player_status-none" class="md-nav__link">
     <span class="md-ellipsis">
       
-        display_player_status()
+        display_player_status() -&gt; None
       
     </span>
   </a>
@@ -806,10 +929,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#display_main_menu" class="md-nav__link">
+  <a href="#create_hp_barrier_barhealth-health_max-barrier-_unusednone-tuplestr-int" class="md-nav__link">
     <span class="md-ellipsis">
       
-        display_main_menu()
+        create_hp_barrier_bar(health, health_max, barrier, _unused=None) -&gt; Tuple[str, int]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_main_menu-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_main_menu() -&gt; int
       
     </span>
   </a>
@@ -850,10 +984,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#keyboard_listener_scope-modulesinput_utilspy" class="md-nav__link">
+  <a href="#get_zone_shop_namezone_key-str-str" class="md-nav__link">
     <span class="md-ellipsis">
       
-        keyboard_listener_scope() (Modules/input_utils.py)
+        get_zone_shop_name(zone_key: str) -&gt; str
       
     </span>
   </a>
@@ -966,6 +1100,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#flujo-de-combate-con-companeros-detalle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de combate con compañeros (detalle)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menu-debug-opcion-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menú DEBUG (opción 12)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -995,10 +1151,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modificar-el-delay-de-combate" class="md-nav__link">
+  <a href="#cargar-un-grupo-de-enemigos-para-un-encuentro" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modificar el delay de combate
+        Cargar un grupo de enemigos para un encuentro
       
     </span>
   </a>
@@ -1006,10 +1162,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#acceder-al-item_manager-desde-el-juego" class="md-nav__link">
+  <a href="#crear-barra-con-barrera" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Acceder al item_manager desde el juego
+        Crear barra con barrera
       
     </span>
   </a>
@@ -1515,17 +1671,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#estado-del-juego-gamestate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Estado del Juego (GameState)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#variables-globales-del-juego" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1592,6 +1737,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#zone_loader_groupplayer_zone-str-max_enemies-int-5-listcenemy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        zone_loader_group(player_zone: str, max_enemies: int = 5) -&gt; List[cEnemy]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run_zone_gatheringzone_key-str-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        run_zone_gathering(zone_key: str) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1610,10 +1777,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#display_player_status" class="md-nav__link">
+  <a href="#display_player_status-none" class="md-nav__link">
     <span class="md-ellipsis">
       
-        display_player_status()
+        display_player_status() -&gt; None
       
     </span>
   </a>
@@ -1632,10 +1799,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#display_main_menu" class="md-nav__link">
+  <a href="#create_hp_barrier_barhealth-health_max-barrier-_unusednone-tuplestr-int" class="md-nav__link">
     <span class="md-ellipsis">
       
-        display_main_menu()
+        create_hp_barrier_bar(health, health_max, barrier, _unused=None) -&gt; Tuple[str, int]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_main_menu-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_main_menu() -&gt; int
       
     </span>
   </a>
@@ -1676,10 +1854,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#keyboard_listener_scope-modulesinput_utilspy" class="md-nav__link">
+  <a href="#get_zone_shop_namezone_key-str-str" class="md-nav__link">
     <span class="md-ellipsis">
       
-        keyboard_listener_scope() (Modules/input_utils.py)
+        get_zone_shop_name(zone_key: str) -&gt; str
       
     </span>
   </a>
@@ -1792,6 +1970,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#flujo-de-combate-con-companeros-detalle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de combate con compañeros (detalle)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#menu-debug-opcion-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menú DEBUG (opción 12)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1821,10 +2021,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modificar-el-delay-de-combate" class="md-nav__link">
+  <a href="#cargar-un-grupo-de-enemigos-para-un-encuentro" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modificar el delay de combate
+        Cargar un grupo de enemigos para un encuentro
       
     </span>
   </a>
@@ -1832,10 +2032,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#acceder-al-item_manager-desde-el-juego" class="md-nav__link">
+  <a href="#crear-barra-con-barrera" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Acceder al item_manager desde el juego
+        Crear barra con barrera
       
     </span>
   </a>
@@ -1880,7 +2080,6 @@
 <ol>
 <li><a href="#descripción-general">Descripción General</a></li>
 <li><a href="#configuración-config">Configuración (<code>CONFIG</code>)</a></li>
-<li><a href="#estado-del-juego-gamestate">Estado del Juego (<code>GameState</code>)</a></li>
 <li><a href="#variables-globales-del-juego">Variables Globales del Juego</a></li>
 <li><a href="#tema-visual">Tema Visual</a></li>
 <li><a href="#funciones-de-inicialización">Funciones de Inicialización</a></li>
@@ -1894,27 +2093,20 @@
 </ol>
 <hr />
 <h2 id="descripcion-general">Descripción General</h2>
-<p><code>MainGame.py</code> es el <strong>punto de entrada y bucle principal</strong> del juego. Orquesta todos los demás módulos (Loader, setup, EquipmentSystem, ItemManager, ShopManager, ModLoader, GatheringMasterySystem) para presentar al jugador un RPG completo por consola con menús, combate, inventario y tiendas.</p>
-<p>Al ejecutar <code>python MainGame.py</code> (o <code>python -m Modules.MainGame</code>), se inicia el juego.</p>
+<p><code>MainGame.py</code> es el <strong>punto de entrada y bucle principal</strong> del juego. Orquesta todos los demás módulos para presentar al jugador un RPG completo por consola con menús, combate, inventario, tiendas, compañeros, crafteo, encantamientos y base.</p>
+<p>Al ejecutar <code>python MainGame.py</code>, se inicia el juego.</p>
+<p><strong>Módulos importados principales:</strong></p>
+<ul>
+<li><code>InventoryMenu</code>, <code>ShopManager</code>, <code>ItemManager</code>, <code>ModLoader</code></li>
+<li><code>GatheringMasterySystem</code>, <code>EnchantmentSystem</code>, <code>MasterySystem</code></li>
+<li><code>SaveSystem</code>, <code>ZoneManager</code>, <code>BuffManager</code>, <code>CraftingSystem</code></li>
+<li><code>BaseSystem</code>, <code>CompanionSystem</code>, <code>SkillTreeSystem</code> (vía <code>player.Points()</code>)</li>
+<li><code>debug</code>, <code>input_utils</code>, <code>setup</code></li>
+</ul>
 <hr />
 <h2 id="configuracion-config">Configuración (<code>CONFIG</code>)</h2>
-<p>Diccionario global con todas las opciones configurables del juego:</p>
-<pre><code class="language-python">CONFIG = {
-    &quot;ASK_FOR_ADMIN&quot;: False if platform.platform == &quot;Windows&quot; else True,
-
-    &quot;COMBAT&quot;: {
-        &quot;DELAY_BETWEEN_ROUNDS&quot;: 3.5,   # Segundos entre rondas
-        &quot;CHANCE_TO_FLEE&quot;: 0.3,          # Probabilidad base de huir (30%)
-    },
-    &quot;DISPLAY&quot;: {
-        &quot;BAR_LENGTH&quot;: 25,               # Largo de las barras HP/MP
-        &quot;MENU_REFRESH_RATE&quot;: 0.5,       # Segundos de espera al refrescar menús
-        &quot;SHOW_FULL_STATS&quot;: True,        # Mostrar stats completos en pantalla
-    },
-    &quot;DEBUG&quot;: {
-        &quot;ENABLED&quot;: False,               # Modo debug (actualmente no hace nada)
-    }
-}
+<p>El archivo de configuración se carga dinámicamente desde <code>config.json</code>:</p>
+<pre><code class="language-python">CONFIG = Read(&quot;config.json&quot;, None)
 </code></pre>
 <table>
 <thead>
@@ -1953,22 +2145,13 @@
 <tr>
 <td><code>DEBUG.ENABLED</code></td>
 <td><code>bool</code></td>
-<td>Modo debug (reservado).</td>
+<td>Activa el modo debug y el logging detallado.</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="estado-del-juego-gamestate">Estado del Juego (<code>GameState</code>)</h2>
-<p>Enum que registra en qué pantalla se encuentra el juego actualmente:</p>
-<pre><code class="language-python">class GameState(Enum):
-    MAIN_MENU  = auto()
-    EXPLORING  = auto()
-    COMBAT     = auto()
-    SHOP       = auto()
-    INVENTORY  = auto()
-    STATS      = auto()
-    EQUIPMENT  = auto()
-</code></pre>
+<blockquote>
+<p><strong>Nota:</strong> <code>CONFIG</code> ya no es un diccionario hardcodeado en el código; se lee desde <code>config.json</code> en tiempo de ejecución. Si el archivo no existe, <code>Read</code> retornará un valor vacío y el juego fallará al acceder a las claves.</p>
+</blockquote>
 <hr />
 <h2 id="variables-globales-del-juego">Variables Globales del Juego</h2>
 <table>
@@ -1983,7 +2166,7 @@
 <tr>
 <td><code>player</code></td>
 <td><code>cPlayer</code></td>
-<td>Objeto del jugador. Se inicializa con <code>setup_player()</code>.</td>
+<td>Objeto del jugador. Se inicializa con <code>setup_player()</code> al importar el módulo.</td>
 </tr>
 <tr>
 <td><code>enemies</code></td>
@@ -2021,11 +2204,6 @@
 <td>Lista de personajes (reservado).</td>
 </tr>
 <tr>
-<td><code>current_state</code></td>
-<td><code>GameState</code></td>
-<td>Estado actual del juego.</td>
-</tr>
-<tr>
 <td><code>item_manager</code></td>
 <td><code>ItemManager</code></td>
 <td>Instancia del gestor de items.</td>
@@ -2034,6 +2212,11 @@
 <td><code>shop_manager</code></td>
 <td><code>ShopManager</code></td>
 <td>Instancia del gestor de tiendas.</td>
+</tr>
+<tr>
+<td><code>app_logger</code></td>
+<td><code>Logger</code></td>
+<td>Logger principal del juego configurado por <code>debug.py</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -2050,9 +2233,10 @@
 })
 console = Console(theme=custom_theme)
 </code></pre>
-<p>Uso en el código:</p>
-<pre><code class="language-python">console.print(&quot;[success]¡Éxito![/success]&quot;)
-console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
+<p>Inmediatamente después se conecta el sistema de logging:</p>
+<pre><code class="language-python">app_logger = setup_logging(CONFIG[&quot;DEBUG&quot;][&quot;ENABLED&quot;])
+attach_console_logging(console, app_logger)
+install_exception_hooks(app_logger)
 </code></pre>
 <hr />
 <h2 id="funciones-de-inicializacion">Funciones de Inicialización</h2>
@@ -2062,39 +2246,21 @@ console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
 <li>Carga el <code>ItemManager</code> con <code>get_item_manager()</code>.</li>
 <li>Carga el <code>ShopManager</code> con <code>get_shop_manager()</code>.</li>
 <li>Inicializa y carga todos los mods con <code>get_mod_loader().load_all_mods()</code>.</li>
-<li>Si existe <code>Data/SaveGame.json</code>, pregunta si cargar la partida guardada.</li>
+<li>Si existe <code>Data/SaveGame.json</code>, pregunta si cargar la partida guardada (legado, llama a <code>load_game()</code>).</li>
 </ol>
 <hr />
 <h3 id="load_test_items"><code>load_test_items()</code></h3>
-<p>Carga algunos items de prueba (IDs 3, 4, 40, 41, 52) y los añade al inventario. Útil durante desarrollo.</p>
+<p>Carga items de prueba (IDs 3, 4, 40, 41, 52) y los añade al inventario. Útil durante desarrollo. Acepta también <code>cTool</code> como parámetro al llamar a <code>load_item_by_id</code>.</p>
 <hr />
 <h3 id="zone_loaderplayer_zone-str-cenemy"><code>zone_loader(player_zone: str) -&gt; cEnemy</code></h3>
-<p>Carga los enemigos de la zona indicada desde <code>DataStats.json</code> y retorna uno aleatorio.</p>
-<table>
-<thead>
-<tr>
-<th>Parámetro</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>player_zone</code></td>
-<td><code>"Forest"</code> o <code>"Cave"</code></td>
-</tr>
-</tbody>
-</table>
-<p>Retorna una instancia de <code>cEnemy</code> o <code>None</code> si hay error.</p>
+<p>Carga los enemigos de la zona indicada desde <code>DataStats.json</code> o desde los datos de mods (<code>mod_api.stats_injections</code>). Retorna un enemigo aleatorio.</p>
+<p><strong>Prioridad de carga:</strong>
+1. Primero busca en <code>mod_api.stats_injections[player_zone]</code>.
+2. Si no encuentra, lee de <code>Data/DataStats.json</code>.</p>
+<p>Retorna <code>None</code> si hay error o no hay enemigos.</p>
 <hr />
-<h2 id="funciones-de-ui">Funciones de UI</h2>
-<h3 id="display_player_status"><code>display_player_status()</code></h3>
-<p>Muestra un panel con:
-- Nombre, nivel y zona actual del jugador.
-- Barra de HP con porcentaje.
-- Barra de Mana con porcentaje.</p>
-<hr />
-<h3 id="create_status_barcurrent-maximum-color-return_valuestrue"><code>create_status_bar(current, maximum, color, return_values=True)</code></h3>
-<p>Crea una barra de estado visual con caracteres <code>#</code> y <code>-</code>.</p>
+<h3 id="zone_loader_groupplayer_zone-str-max_enemies-int-5-listcenemy"><code>zone_loader_group(player_zone: str, max_enemies: int = 5) -&gt; List[cEnemy]</code></h3>
+<p><strong>Función nueva.</strong> Carga un grupo de entre 1 y <code>max_enemies</code> enemigos aleatorios de la zona indicada. Sigue la misma lógica de prioridad (mods primero, luego JSON base).</p>
 <p><strong>Parámetros:</strong></p>
 <table>
 <thead>
@@ -2106,56 +2272,141 @@ console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
 </thead>
 <tbody>
 <tr>
-<td><code>current</code></td>
-<td><code>float</code></td>
-<td>Valor actual.</td>
-</tr>
-<tr>
-<td><code>maximum</code></td>
-<td><code>float</code></td>
-<td>Valor máximo.</td>
-</tr>
-<tr>
-<td><code>color</code></td>
+<td><code>player_zone</code></td>
 <td><code>str</code></td>
-<td>Color para la parte llena (ej: <code>"red"</code>, <code>"blue"</code>, <code>"green"</code>).</td>
+<td>Clave de la zona.</td>
 </tr>
 <tr>
-<td><code>return_values</code></td>
-<td><code>bool</code></td>
-<td>Si <code>True</code>, retorna <code>(bar_str, percentage)</code>. Si <code>False</code>, imprime y retorna <code>None</code>.</td>
+<td><code>max_enemies</code></td>
+<td><code>int</code></td>
+<td>Máximo de enemigos en el grupo (default <code>5</code>).</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Ejemplo de salida:</strong></p>
-<pre><code>[#########################-] 96%
+<p><strong>Retorno:</strong> Lista de instancias <code>cEnemy</code>. Lista vacía si falla la carga.</p>
+<hr />
+<h3 id="run_zone_gatheringzone_key-str-bool"><code>run_zone_gathering(zone_key: str) -&gt; bool</code></h3>
+<p>Ejecuta el minijuego de recolección para la zona actual. Lee los IDs de materiales del JSON, selecciona uno aleatorio, instancia el material con <code>item_manager.create_item_object()</code> y llama a <code>Gathering_init.gather()</code>. Si tiene éxito, añade el material al inventario.</p>
+<p>Retorna <code>True</code> si se recolectó con éxito.</p>
+<hr />
+<h2 id="funciones-de-ui">Funciones de UI</h2>
+<h3 id="display_player_status-none"><code>display_player_status() -&gt; None</code></h3>
+<p>Muestra un panel con:
+- Nombre, nivel, zona actual y oro del jugador.
+- Barra de HP (con soporte de barrera <code>Barrier</code> en cian brillante si <code>player.Barrier &gt; 0</code>).
+- Barra de Maná.</p>
+<hr />
+<h3 id="create_status_barcurrent-maximum-color-return_valuestrue"><code>create_status_bar(current, maximum, color, return_values=True)</code></h3>
+<p>Crea una barra de estado visual con caracteres <code>#</code> y <code>-</code>. La longitud se toma de <code>CONFIG["DISPLAY"]["BAR_LENGTH"]</code>.</p>
+<p><strong>Retorno:</strong> Tupla <code>(bar_str, percentage)</code> si <code>return_values=True</code>. Si es <code>False</code>, imprime directamente.</p>
+<hr />
+<h3 id="create_hp_barrier_barhealth-health_max-barrier-_unusednone-tuplestr-int"><code>create_hp_barrier_bar(health, health_max, barrier, _unused=None) -&gt; Tuple[str, int]</code></h3>
+<p><strong>Función nueva.</strong> Crea una barra de HP con superposición visual de barrera (similar a los escudos de League of Legends).</p>
+<p><strong>Visual:</strong> <code>[CYAN_barrera | GREEN_hp | EMPTY]</code></p>
+<p>La barrera se muestra en cian brillante desde la izquierda, cubriendo las celdas de HP. La barrera es proporcional a <code>health_max</code>.</p>
+<p><strong>Retorno:</strong> Tupla <code>(bar_string, health_percentage)</code>.</p>
+<pre><code class="language-python">bar, pct = create_hp_barrier_bar(75, 100, 30)
+# Barrera de 30 se renderiza sobre los primeros ~7 caracteres en cian
 </code></pre>
 <hr />
-<h3 id="display_main_menu"><code>display_main_menu()</code></h3>
-<p>Ahora el menú principal es <strong>interactivo</strong>:</p>
-<ul>
-<li>Navegación con <code>↑/↓</code> y selección con <code>Enter</code>.</li>
-<li>Opción alternativa: escribir el número y presionar <code>Enter</code>.</li>
-<li>La opción seleccionada se muestra con <strong>colores invertidos</strong> (estilo “menú”).</li>
-</ul>
-<p><strong>Nota técnica:</strong> el menú interactivo usa un <code>Theme</code> compartido para resolver estilos como <code>menu_title</code>. Además, el listener de teclado se limpia siempre al salir del menú (para evitar el error de sshkeyboard “Only one listener allowed at a time”).</p>
+<h3 id="display_main_menu-int"><code>display_main_menu() -&gt; int</code></h3>
+<p>Menú principal interactivo que usa <code>interactive_menu_select</code>. Retorna el número de opción elegida.</p>
+<p><strong>Opciones actuales:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Valor</th>
+<th>Etiqueta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td>Inspeccionar las zonas</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Ir a una zona</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>Tienda</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>Inventario Universal</td>
+</tr>
+<tr>
+<td><code>7</code></td>
+<td>Acciones de Zona</td>
+</tr>
+<tr>
+<td><code>8</code></td>
+<td>Mirar Stats</td>
+</tr>
+<tr>
+<td><code>9</code></td>
+<td>Gestión de Mods</td>
+</tr>
+<tr>
+<td><code>10</code></td>
+<td>Ver Items Disponibles</td>
+</tr>
+<tr>
+<td><code>11</code></td>
+<td>Guardar</td>
+</tr>
+<tr>
+<td><code>12</code></td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td><code>13</code></td>
+<td>Compañeros</td>
+</tr>
+<tr>
+<td><code>14</code></td>
+<td>Árbol de Habilidades</td>
+</tr>
+<tr>
+<td><code>15</code></td>
+<td>Mesa de Encantamientos</td>
+</tr>
+<tr>
+<td><code>16</code></td>
+<td>Yunque de Crafteo</td>
+</tr>
+<tr>
+<td><code>17</code></td>
+<td>Base</td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>Salir del juego</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Nota:</strong> Las opciones <code>5</code> y <code>6</code> del menú anterior (Usar objetos y Equipamiento) han sido eliminadas. El inventario unificado (opción <code>4</code>) las reemplaza.</p>
+</blockquote>
 <hr />
 <h3 id="render_combat_menuplayer-enemy-combat_round"><code>render_combat_menu(player, enemy, combat_round)</code></h3>
-<p>Muestra la UI de combate con:
-- Número de ronda.
-- Paneles de HP/MP del jugador y enemigo.
-- Tabla de acciones disponibles (Atacar, Usar objeto, Huir).</p>
+<p>Muestra la UI de combate. Ahora incluye soporte para <strong>compañeros</strong>:</p>
+<ul>
+<li>Muestra hasta 4 paneles de compañeros activos a la izquierda del jugador.</li>
+<li>Compañeros caídos muestran <code>💀 KO</code> con indicación de costo de resurrección.</li>
+<li>El panel del jugador incluye barra de barrera si <code>player.Barrier &gt; 0</code>.</li>
+<li>Las acciones disponibles son: <code>[1] Atacar</code>, <code>[2] Inventario</code>, <code>[3] Huir</code>.</li>
+</ul>
 <hr />
 <h3 id="display_zone_enemieszone_name-enemies_data-strings_data"><code>display_zone_enemies(zone_name, enemies_data, strings_data)</code></h3>
-<p>Muestra una tabla con los enemigos de una zona, incluyendo HP, daño físico, daño mágico y defensa.</p>
+<p>Muestra una tabla con los enemigos de una zona, incluyendo HP, daño físico, daño mágico total y defensa física.</p>
 <hr />
 <h3 id="get_validated_inputprompt-valid_options-int"><code>get_validated_input(prompt, valid_options) -&gt; int</code></h3>
-<p>Se mantiene como fallback para entradas puramente numéricas cuando no hay un menú Rich asociado.</p>
-<blockquote>
-<p>El flujo principal del juego usa menús interactivos con selección invertida.</p>
-</blockquote>
-<h3 id="keyboard_listener_scope-modulesinput_utilspy"><code>keyboard_listener_scope()</code> (<code>Modules/input_utils.py</code>)</h3>
-<p>Context manager que <strong>serializa</strong> todo uso de <code>sshkeyboard.listen_keyboard</code>: solo puede existir un listener a la vez. Antes y después de cada sesión se llama a <code>stop_listening()</code> y se espera un instante; en menús con hilo de teclado se hace <code>join()</code> del hilo antes de abrir el siguiente menú. Así se evita <code>AssertionError: Only one listener allowed at a time</code> al encadenar menús (por ejemplo menú principal → selección de zona).</p>
+<p>Fallback numérico simple para entradas sin menú Rich. Ignora entradas vacías (Enter residual). Atrapa <code>KeyboardInterrupt</code> y <code>EOFError</code> terminando el juego con <code>sys.exit(0)</code>.</p>
+<hr />
+<h3 id="get_zone_shop_namezone_key-str-str"><code>get_zone_shop_name(zone_key: str) -&gt; str</code></h3>
+<p>Retorna el nombre de la tienda de una zona: <code>f"{zone_key}Shop"</code>.</p>
 <hr />
 <h2 id="funciones-de-combate">Funciones de Combate</h2>
 <h3 id="apply_debuffsplayer-dict"><code>apply_debuffs(player) -&gt; Dict</code></h3>
@@ -2163,23 +2414,20 @@ console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
 <hr />
 <h2 id="funciones-de-guardadocarga">Funciones de Guardado/Carga</h2>
 <h3 id="save_game-bool"><code>save_game() -&gt; bool</code></h3>
-<p>Guarda el estado del juego en <code>Data/SaveGame.json</code>.</p>
+<p>Guarda el estado básico del juego en <code>Data/SaveGame.json</code> (función legado, preservada para compatibilidad).</p>
 <p><strong>Datos guardados:</strong></p>
 <pre><code class="language-json">{
-    &quot;player&quot;: {
-        &quot;name&quot;: &quot;...&quot;, &quot;level&quot;: 1, &quot;health&quot;: 100, &quot;health_max&quot;: 100,
-        &quot;mana&quot;: 100, &quot;mana_max&quot;: 100, &quot;exp&quot;: 15, &quot;exp_max&quot;: 100, &quot;gold&quot;: 50
-    },
+    &quot;player&quot;: { &quot;name&quot;: &quot;...&quot;, &quot;level&quot;: 1, &quot;health&quot;: 100, ... },
     &quot;game_state&quot;: { &quot;area&quot;: &quot;Forest&quot;, &quot;tick&quot;: 0 },
     &quot;timestamp&quot;: &quot;...&quot;
 }
 </code></pre>
 <blockquote>
-<p><strong>Nota:</strong> El inventario y el equipamiento <strong>no se guardan</strong> en la implementación actual.</p>
+<p><strong>Nota:</strong> El guardado completo (inventario, equipamiento, compañeros, masteries, base) lo gestiona <code>SaveSystem.py</code> a través de la opción <code>11</code> del menú.</p>
 </blockquote>
 <hr />
 <h3 id="load_game-bool"><code>load_game() -&gt; bool</code></h3>
-<p>Carga el archivo <code>Data/SaveGame.json</code> y restaura los atributos básicos del jugador y el estado del juego. Retorna <code>False</code> si el archivo no existe o está corrupto.</p>
+<p>Carga el archivo <code>Data/SaveGame.json</code> (legado) y restaura los atributos básicos del jugador. Retorna <code>False</code> si el archivo no existe o está corrupto.</p>
 <hr />
 <h2 id="bucle-principal-main">Bucle Principal (<code>main</code>)</h2>
 <p>La función <code>main()</code> se llama en un loop infinito desde el bloque <code>if __name__ == "__main__"</code>. En cada iteración:</p>
@@ -2187,9 +2435,9 @@ console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
 <li>Llama a <code>player.Check(vInventory)</code> y regenera el maná.</li>
 <li>Limpia la pantalla.</li>
 <li>Muestra el estado del jugador y el menú principal.</li>
-<li>Solicita y valida el input del usuario.</li>
 <li>Ejecuta la acción correspondiente.</li>
 </ol>
+<p>El loop externo captura excepciones y las muestra en consola sin terminar el juego.</p>
 <hr />
 <h2 id="opciones-del-menu-principal">Opciones del Menú Principal</h2>
 <table>
@@ -2202,39 +2450,31 @@ console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
 <tbody>
 <tr>
 <td><code>0</code></td>
-<td>Salir del juego (con confirmación).</td>
+<td>Salir del juego (con confirmación <code>s/n</code>).</td>
 </tr>
 <tr>
 <td><code>1</code></td>
-<td>Ver información de zonas (enemigos de Bosque y Cueva en tablas).</td>
+<td>Ver información de todas las zonas dinámicamente (usa <code>get_all_zones()</code>). Muestra fuente si es de un mod.</td>
 </tr>
 <tr>
 <td><code>2</code></td>
-<td>Ir a una zona (Bosque, Cueva o salir de la zona actual). Opcionalmente visitar la tienda de zona.</td>
+<td>Ir a una zona (selector dinámico con <code>get_zones_for_selector()</code>). Dispara evento <code>zone_entered</code> para mods.</td>
 </tr>
 <tr>
 <td><code>3</code></td>
-<td>Tienda general con selección entre GeneralStore, WeaponShop, ArmorShop, MagicShop.</td>
+<td>Tienda general con submenú: GeneralStore, WeaponShop, ArmorShop, MagicShop.</td>
 </tr>
 <tr>
 <td><code>4</code></td>
-<td>Ver inventario (<code>vInventory.PrintObjects()</code>).</td>
-</tr>
-<tr>
-<td><code>5</code></td>
-<td>Usar objetos consumibles del inventario.</td>
-</tr>
-<tr>
-<td><code>6</code></td>
-<td>Menú de equipamiento (<code>equip_menu(player, vInventory)</code>).</td>
+<td>Inventario universal (<code>open_inventory_menu</code>).</td>
 </tr>
 <tr>
 <td><code>7</code></td>
-<td>Acciones de zona: luchar, tienda de zona, recolectar o volver al menú principal.</td>
+<td>Acciones de zona: Luchar, Tienda de zona, Recolectar, Volver.</td>
 </tr>
 <tr>
 <td><code>8</code></td>
-<td>Ver estadísticas completas del jugador con barras de HP/MP/EXP y equipamiento actual.</td>
+<td>Ver estadísticas completas del jugador con barras, defensas multi-tipo, compañeros, buffs activos y equipamiento.</td>
 </tr>
 <tr>
 <td><code>9</code></td>
@@ -2242,15 +2482,35 @@ console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
 </tr>
 <tr>
 <td><code>10</code></td>
-<td>Ver todos los items disponibles en el juego (<code>item_manager.list_all_items(detailed=True)</code>).</td>
+<td>Ver todos los items disponibles en el juego.</td>
 </tr>
 <tr>
 <td><code>11</code></td>
-<td>Guardar la partida.</td>
+<td>Guardar/Cargar partida mediante <code>save_load_menu</code> de <code>SaveSystem.py</code> (3 slots).</td>
 </tr>
 <tr>
 <td><code>12</code></td>
-<td>Menú DEBUG (añadir armas, oro/EXP, ver variables).</td>
+<td>Menú DEBUG (añadir armas, oro/EXP, mastery, variables, compañero de prueba).</td>
+</tr>
+<tr>
+<td><code>13</code></td>
+<td>Gestión de compañeros (<code>companion_management_menu</code>).</td>
+</tr>
+<tr>
+<td><code>14</code></td>
+<td>Árbol de Habilidades (<code>player.Points()</code>).</td>
+</tr>
+<tr>
+<td><code>15</code></td>
+<td>Mesa de Encantamientos (<code>open_enchantment_menu</code>).</td>
+</tr>
+<tr>
+<td><code>16</code></td>
+<td>Yunque de Crafteo (<code>open_crafting_menu</code>).</td>
+</tr>
+<tr>
+<td><code>17</code></td>
+<td>Base del jugador (<code>open_base_menu</code>), con inyección de edificios de mods.</td>
 </tr>
 </tbody>
 </table>
@@ -2260,39 +2520,100 @@ console.print(&quot;[danger]¡Error crítico![/danger]&quot;)
     NO → Mensaje de error
     SÍ → Submenú:
         [1] Luchar
-            - Ejecuta el flujo de combate existente
-            - Si no hay enemigo cargado, intenta cargar uno con zone_loader()
-        [2] Tienda actual
-            - Busca tienda por nombre: {ZoneKey}Shop
-            - Si existe inventario, abre display_shop()
+            - Carga enemigo si no hay uno con zone_loader()
+            - Bucle de combate por rondas:
+                · Turno del jugador: Atacar / Inventario / Huir
+                · Turno de compañeros (con acciones según clase)
+                · Turno del enemigo (ataca a objetivo aleatorio: jugador o compañero)
+            - Al vencer: EXP, oro, loot aleatorio, posible level-up
+        [2] Tienda actual de la zona
+            - Busca tienda &quot;{ZoneKey}Shop&quot;
+            - Si existe, abre display_shop()
         [3] Recolectar
-            - Lee &quot;Gathering.Materials&quot; de DataStats.json (ej: &quot;1_G&quot;)
-            - Resuelve IDs de materiales y ejecuta GatheringMasterySystem
-        [4] Volver
-            - Regresa al menú principal sin acciones adicionales
+            - Llama a run_zone_gathering(chosen_area)
+        [4] Devolverse al menú principal
 </code></pre>
+<h3 id="flujo-de-combate-con-companeros-detalle">Flujo de combate con compañeros (detalle)</h3>
+<p>Durante el turno de cada compañero vivo, el jugador elige su acción según la clase del compañero:</p>
+<table>
+<thead>
+<tr>
+<th>Clase</th>
+<th>Acciones disponibles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cualquiera</td>
+<td><code>[1] Atacar</code></td>
+</tr>
+<tr>
+<td><code>Curandero</code></td>
+<td><code>[2] Curar al jugador (+20% HP máx)</code>, <code>[3] Curar al equipo (+15% HP máx)</code></td>
+</tr>
+<tr>
+<td><code>Soporte</code></td>
+<td><code>[2] Debilitar al enemigo (debuff vía BuffManager o reducción DEF -10%)</code></td>
+</tr>
+</tbody>
+</table>
+<p>El enemigo elige un objetivo aleatorio entre el jugador y los compañeros vivos.</p>
+<hr />
+<h3 id="menu-debug-opcion-12">Menú DEBUG (opción 12)</h3>
+<table>
+<thead>
+<tr>
+<th>Sub-opción</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td>Añadir arma de prueba (IDs 3 y 100) al inventario.</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Añadir 9.999.999 de oro y EXP.</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>Subir 10 niveles a todas las skills de Gathering y Armas.</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>Mostrar <code>dump_debug_snapshot</code> en pantalla y loggear.</td>
+</tr>
+<tr>
+<td><code>5</code></td>
+<td>Añadir compañero de prueba <code>Lyra</code> con arma equipada si hay una en el inventario.</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
 <h3 id="ejecutar-el-juego">Ejecutar el juego</h3>
 <pre><code class="language-bash">python MainGame.py
 </code></pre>
-<h3 id="modificar-el-delay-de-combate">Modificar el delay de combate</h3>
-<pre><code class="language-python"># En MainGame.py, antes de iniciar:
-CONFIG[&quot;COMBAT&quot;][&quot;DELAY_BETWEEN_ROUNDS&quot;] = 1.0  # Más rápido
+<h3 id="cargar-un-grupo-de-enemigos-para-un-encuentro">Cargar un grupo de enemigos para un encuentro</h3>
+<pre><code class="language-python">group = zone_loader_group(&quot;Forest&quot;, max_enemies=3)
+# Retorna lista de 1 a 3 instancias de cEnemy del Bosque
 </code></pre>
-<h3 id="acceder-al-item_manager-desde-el-juego">Acceder al item_manager desde el juego</h3>
-<pre><code class="language-python"># Ya inicializado en init_game()
-item_manager.list_all_items(detailed=True)
+<h3 id="crear-barra-con-barrera">Crear barra con barrera</h3>
+<pre><code class="language-python">bar, pct = create_hp_barrier_bar(60, 100, 25)
+# Bar: [CYAN×6 | GREEN×9 | EMPTY×10]
+# pct: 60
 </code></pre>
 <hr />
 <h2 id="notas-y-referencias">Notas y Referencias</h2>
 <ul>
 <li><strong><code>rich</code> library:</strong> Usada extensivamente para UI. <a href="https://rich.readthedocs.io/">https://rich.readthedocs.io/</a></li>
-<li><strong><code>keyboard</code> library:</strong> Para capturar Enter en confirmaciones. <a href="https://github.com/boppreh/keyboard">https://github.com/boppreh/keyboard</a></li>
 <li><strong><code>Enum</code> en Python:</strong> Para estados del juego. <a href="https://docs.python.org/3/library/enum.html">https://docs.python.org/3/library/enum.html</a></li>
-<li>El sistema de loot usa una tabla hardcodeada por niveles (1-3). Una mejora futura podría cargar la tabla desde el JSON.</li>
-<li>El <strong>guardado no persiste inventario ni equipamiento</strong>. Es una funcionalidad pendiente de implementar.</li>
+<li>El <code>CONFIG</code> ahora se lee desde <code>config.json</code> en lugar de estar hardcodeado. Si el archivo no existe el juego no arrancará correctamente.</li>
+<li>El <strong>guardado completo</strong> (con inventario, masteries, compañeros y base) está en <code>SaveSystem.py</code>. La función <code>save_game()</code> en este archivo es un guardado básico de legado.</li>
 <li>La probabilidad de huir está limitada entre 5% y 95%: <code>flee_chance = max(0.05, min(0.95, flee_chance))</code>.</li>
+<li>El evento <code>zone_entered</code> se dispara automáticamente al seleccionar una zona, permitiendo a los mods reaccionar a la entrada.</li>
+<li>La opción <code>14</code> del menú llama a <code>player.Points()</code>, que abre el árbol de habilidades definido en <code>SkillTreeSystem.py</code>.</li>
 </ul>
 
 

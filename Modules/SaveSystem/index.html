@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../ItemManager/">
+        <link rel="prev" href="../MasterySystem/">
       
       
-        <link rel="next" href="../CraftingSystem/">
+        <link rel="next" href="../SkillTreeSystem/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Zone Manager - TPPRPG Docs</title>
+        <title>Save System - TPPRPG Docs</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#zonemanagerpy" class="md-skip">
+        <a href="#savesystempy" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Zone Manager
+              Save System
             
           </span>
         </div>
@@ -504,37 +504,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Zone Manager
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../ZoneManager/" class="md-nav__link">
         
   
   
@@ -550,331 +523,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#indice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Índice
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#descripcion-general" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Descripción General
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#clase-zonemanager" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Clase ZoneManager
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Clase ZoneManager">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constructor
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#atributos-de-instancia" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Atributos de instancia
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#metodos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Métodos
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Métodos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_all_zones-dictstr-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_all_zones() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zone_by_keyzone_key-str-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zone_by_key(zone_key: str) -&gt; Dict
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zone_enemieszone_key-str-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zone_enemies(zone_key: str) -&gt; List
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zones_list-listtuplestr-str-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zones_list() -&gt; List[Tuple[str, str, str]]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_load_zones_from_json-dictstr-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _load_zones_from_json() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_load_zones_from_mods-dictstr-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _load_zones_from_mods() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_extract_zone_infozone_key-zone_data-source-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _extract_zone_info(zone_key, zone_data, source) -&gt; Dict
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#variables-globales-y-funciones-de-acceso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Variables Globales y Funciones de Acceso
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Variables Globales y Funciones de Acceso">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_zone_managerdatastats_path-zonemanager" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zone_manager(datastats_path) -&gt; ZoneManager
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#funciones-helper" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Funciones Helper
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Funciones Helper">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_all_zones-dictstr-dict_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_all_zones() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zones_for_selector-listtuplestr-str-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zones_for_selector() -&gt; List[Tuple[str, str, str]]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zone_infozone_key-str-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zone_info(zone_key: str) -&gt; Dict
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#estructura-de-una-zona" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Estructura de una Zona
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ejemplos-de-uso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ejemplos de Uso
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Ejemplos de Uso">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#obtener-enemigos-de-una-zona-para-el-combate" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Obtener enemigos de una zona para el combate
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#construir-el-selector-de-zona-dinamicamente" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Construir el selector de zona dinámicamente
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#verificar-si-una-zona-tiene-material-de-recoleccion" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Verificar si una zona tiene material de recolección
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notas-y-referencias" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Notas y Referencias
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -940,10 +588,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../SaveSystem/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Save System
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -959,6 +634,369 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constantes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-serializacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Serialización
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Serialización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_itemitem-optionaldict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_item(item) -&gt; Optional[dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_companioncomp-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_companion(comp) -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_inventoryinventory-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_inventory(inventory) -&gt; list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_masteryplayer-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_mastery(player) -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_baseplayer-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_base(player) -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-build_save_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función build_save_data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-guardado-y-carga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Guardado y Carga
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Guardado y Carga">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save_to_slotslot-int-player-inventory-chosen_area-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        save_to_slot(slot: int, player, inventory, chosen_area) -&gt; bool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_from_slotslot-int-player-inventory-item_manager-optionaldict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        load_from_slot(slot: int, player, inventory, item_manager) -&gt; Optional[dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-restauracion-internas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Restauración Internas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Restauración Internas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_restore_playerplayer-pdata-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_player(player, pdata: dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_equipmentplayer-equip_data-dict-item_manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_equipment(player, equip_data: dict, item_manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_inventoryinventory-inv_data-list-item_manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_inventory(inventory, inv_data: list, item_manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_companionsplayer-companions_data-bank_data-item_manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_companions(player, companions_data, bank_data, item_manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_skillsplayer-skills_data-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_skills(player, skills_data: dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_masteryplayer-mastery_data-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_mastery(player, mastery_data: dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_baseplayer-base_data-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_base(player, base_data: dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-get_slot_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función get_slot_info
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-save_load_menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función save_load_menu
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guardar-en-slot-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guardar en slot 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cargar-desde-slot-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cargar desde slot 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mostrar-info-de-slots-sin-cargar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mostrar info de slots sin cargar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-el-menu-completo-desde-maingame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar el menú completo (desde MainGame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-y-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas y Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1544,155 +1582,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#clase-zonemanager" class="md-nav__link">
+  <a href="#constantes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase ZoneManager
+        Constantes
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Clase ZoneManager">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#constructor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Constructor
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#atributos-de-instancia" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Atributos de instancia
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#metodos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Métodos
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Métodos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_all_zones-dictstr-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_all_zones() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zone_by_keyzone_key-str-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zone_by_key(zone_key: str) -&gt; Dict
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zone_enemieszone_key-str-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zone_enemies(zone_key: str) -&gt; List
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zones_list-listtuplestr-str-str" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zones_list() -&gt; List[Tuple[str, str, str]]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_load_zones_from_json-dictstr-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _load_zones_from_json() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_load_zones_from_mods-dictstr-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _load_zones_from_mods() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_extract_zone_infozone_key-zone_data-source-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _extract_zone_info(zone_key, zone_data, source) -&gt; Dict
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#variables-globales-y-funciones-de-acceso" class="md-nav__link">
+  <a href="#funciones-de-serializacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Variables Globales y Funciones de Acceso
+        Funciones de Serialización
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Variables Globales y Funciones de Acceso">
+    <nav class="md-nav" aria-label="Funciones de Serialización">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_zone_managerdatastats_path-zonemanager" class="md-nav__link">
+  <a href="#_serialize_itemitem-optionaldict" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_manager(datastats_path) -&gt; ZoneManager
+        _serialize_item(item) -&gt; Optional[dict]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_companioncomp-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_companion(comp) -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_inventoryinventory-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_inventory(inventory) -&gt; list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_masteryplayer-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_mastery(player) -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_serialize_baseplayer-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _serialize_base(player) -&gt; dict
       
     </span>
   </a>
@@ -1705,22 +1665,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#funciones-helper" class="md-nav__link">
+  <a href="#funcion-build_save_data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Funciones Helper
+        Función build_save_data
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Funciones Helper">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funciones-de-guardado-y-carga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funciones de Guardado y Carga
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Guardado y Carga">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_all_zones-dictstr-dict_1" class="md-nav__link">
+  <a href="#save_to_slotslot-int-player-inventory-chosen_area-bool" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_all_zones() -&gt; Dict[str, Dict]
+        save_to_slot(slot: int, player, inventory, chosen_area) -&gt; bool
       
     </span>
   </a>
@@ -1728,21 +1699,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zones_for_selector-listtuplestr-str-str" class="md-nav__link">
+  <a href="#load_from_slotslot-int-player-inventory-item_manager-optionaldict" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zones_for_selector() -&gt; List[Tuple[str, str, str]]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get_zone_infozone_key-str-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        get_zone_info(zone_key: str) -&gt; Dict
+        load_from_slot(slot: int, player, inventory, item_manager) -&gt; Optional[dict]
       
     </span>
   </a>
@@ -1755,10 +1715,115 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#estructura-de-una-zona" class="md-nav__link">
+  <a href="#funciones-de-restauracion-internas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Estructura de una Zona
+        Funciones de Restauración Internas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funciones de Restauración Internas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_restore_playerplayer-pdata-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_player(player, pdata: dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_equipmentplayer-equip_data-dict-item_manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_equipment(player, equip_data: dict, item_manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_inventoryinventory-inv_data-list-item_manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_inventory(inventory, inv_data: list, item_manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_companionsplayer-companions_data-bank_data-item_manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_companions(player, companions_data, bank_data, item_manager)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_skillsplayer-skills_data-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_skills(player, skills_data: dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_masteryplayer-mastery_data-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_mastery(player, mastery_data: dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_restore_baseplayer-base_data-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        _restore_base(player, base_data: dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-get_slot_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función get_slot_info
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcion-save_load_menu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función save_load_menu
       
     </span>
   </a>
@@ -1778,10 +1843,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#obtener-enemigos-de-una-zona-para-el-combate" class="md-nav__link">
+  <a href="#guardar-en-slot-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Obtener enemigos de una zona para el combate
+        Guardar en slot 1
       
     </span>
   </a>
@@ -1789,10 +1854,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#construir-el-selector-de-zona-dinamicamente" class="md-nav__link">
+  <a href="#cargar-desde-slot-2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Construir el selector de zona dinámicamente
+        Cargar desde slot 2
       
     </span>
   </a>
@@ -1800,10 +1865,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#verificar-si-una-zona-tiene-material-de-recoleccion" class="md-nav__link">
+  <a href="#mostrar-info-de-slots-sin-cargar" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificar si una zona tiene material de recolección
+        Mostrar info de slots sin cargar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-el-menu-completo-desde-maingame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar el menú completo (desde MainGame)
       
     </span>
   </a>
@@ -1843,102 +1919,152 @@
 
 
 
-<h1 id="zonemanagerpy"><code>ZoneManager.py</code></h1>
+<h1 id="savesystempy"><code>SaveSystem.py</code></h1>
 <h2 id="indice">Índice</h2>
 <ol>
 <li><a href="#descripción-general">Descripción General</a></li>
-<li><a href="#clase-zonemanager">Clase <code>ZoneManager</code></a></li>
-<li><a href="#variables-globales-y-funciones-de-acceso">Variables Globales y Funciones de Acceso</a></li>
-<li><a href="#funciones-helper">Funciones Helper</a></li>
-<li><a href="#estructura-de-una-zona">Estructura de una Zona</a></li>
+<li><a href="#constantes">Constantes</a></li>
+<li><a href="#funciones-de-serialización">Funciones de Serialización</a></li>
+<li><a href="#función-build_save_data">Función <code>build_save_data</code></a></li>
+<li><a href="#funciones-de-guardado-y-carga">Funciones de Guardado y Carga</a></li>
+<li><a href="#funciones-de-restauración-internas">Funciones de Restauración Internas</a></li>
+<li><a href="#función-get_slot_info">Función <code>get_slot_info</code></a></li>
+<li><a href="#función-save_load_menu">Función <code>save_load_menu</code></a></li>
 <li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
 <li><a href="#notas-y-referencias">Notas y Referencias</a></li>
 </ol>
 <hr />
 <h2 id="descripcion-general">Descripción General</h2>
-<p><code>ZoneManager.py</code> gestiona de forma dinámica todas las <strong>zonas del mundo del juego</strong>. Carga las zonas base desde <code>DataStats.json</code> y las combina con zonas añadidas por mods (a través del <code>ModAPI</code>), ofreciendo una API unificada para acceder a enemigos, recolectables y metadatos de cada zona.</p>
-<p>El sistema sigue el patrón <strong>Singleton</strong> para mantener una única instancia durante toda la partida.</p>
+<p><code>SaveSystem.py</code> implementa el sistema completo de <strong>guardado y carga de partidas</strong> con soporte para <strong>3 slots</strong> independientes. Persiste el estado completo del juego: estadísticas del jugador, equipamiento, inventario, compañeros, árbol de habilidades, masteries y estado de la base.</p>
+<p>Los archivos de guardado se almacenan en <code>Data/Saves/Slot1.json</code>, <code>Slot2.json</code> y <code>Slot3.json</code>.</p>
 <hr />
-<h2 id="clase-zonemanager">Clase <code>ZoneManager</code></h2>
-<h3 id="constructor">Constructor</h3>
-<pre><code class="language-python">ZoneManager(datastats_path=&quot;./Data/DataStats.json&quot;)
-</code></pre>
-<h3 id="atributos-de-instancia">Atributos de instancia</h3>
-<table>
-<thead>
-<tr>
-<th>Atributo</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>datastats_path</code></td>
-<td><code>str</code></td>
-<td>Ruta al archivo JSON base de zonas y estadísticas.</td>
-</tr>
-<tr>
-<td><code>zones_cache</code></td>
-<td><code>dict</code></td>
-<td>Caché de zonas (reservado para futuras optimizaciones; actualmente no se usa).</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3 id="metodos">Métodos</h3>
-<h4 id="get_all_zones-dictstr-dict"><code>get_all_zones() -&gt; Dict[str, Dict]</code></h4>
-<p>Punto de entrada principal. Combina zonas base y zonas de mods en un único diccionario.</p>
-<p><strong>Flujo interno:</strong>
-1. Llama a <code>_load_zones_from_json()</code> para obtener zonas del JSON base.
-2. Llama a <code>_load_zones_from_mods()</code> para obtener zonas añadidas por mods.
-3. Las zonas de mods sobreescriben las base si tienen el mismo <code>zone_key</code>.</p>
-<p><strong>Retorno:</strong> Diccionario con formato:</p>
-<pre><code class="language-python">{
-    &quot;ZoneKey&quot;: {
-        &quot;name&quot;:      &quot;Nombre mostrado&quot;,
-        &quot;desc&quot;:      &quot;Descripción de la zona&quot;,
-        &quot;exit&quot;:      &quot;Texto al salir de la zona&quot;,
-        &quot;color&quot;:     &quot;green&quot;,
-        &quot;enemies&quot;:   [...],       # Lista de dicts de enemigos
-        &quot;gathering&quot;: {...},       # Datos de recolección
-        &quot;source&quot;:    &quot;base&quot;       # &quot;base&quot; o &quot;mod&quot;
-    }
+<h2 id="constantes">Constantes</h2>
+<pre><code class="language-python">_SAVE_DIR = os.path.join(&quot;Data&quot;, &quot;Saves&quot;)
+
+_SLOT_PATHS = {
+    1: os.path.join(_SAVE_DIR, &quot;Slot1.json&quot;),
+    2: os.path.join(_SAVE_DIR, &quot;Slot2.json&quot;),
+    3: os.path.join(_SAVE_DIR, &quot;Slot3.json&quot;),
 }
 </code></pre>
 <hr />
-<h4 id="get_zone_by_keyzone_key-str-dict"><code>get_zone_by_key(zone_key: str) -&gt; Dict</code></h4>
-<p>Retorna la información completa de una zona específica. Retorna <code>None</code> si la zona no existe.</p>
-<pre><code class="language-python">zona = manager.get_zone_by_key(&quot;Forest&quot;)
+<h2 id="funciones-de-serializacion">Funciones de Serialización</h2>
+<h3 id="_serialize_itemitem-optionaldict"><code>_serialize_item(item) -&gt; Optional[dict]</code></h3>
+<p>Convierte un objeto de item a un diccionario serializable. Extrae <code>ID</code>/<code>STATIC_ID</code>, nombre, categoría (<code>item_category</code> o <code>objectcheck</code>) y la lista de encantamientos aplicados.</p>
+<p>Retorna <code>None</code> si el item es <code>None</code>.</p>
+<p><strong>Formato de salida:</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 3,
+  &quot;name&quot;: &quot;Espada Grande&quot;,
+  &quot;category&quot;: &quot;Weapon&quot;,
+  &quot;enchantments&quot;: [
+    { &quot;id&quot;: 1, &quot;level&quot;: 2 }
+  ]
+}
 </code></pre>
 <hr />
-<h4 id="get_zone_enemieszone_key-str-list"><code>get_zone_enemies(zone_key: str) -&gt; List</code></h4>
-<p>Retorna la lista de dicts de enemigos de una zona. Retorna lista vacía si la zona no existe.</p>
-<pre><code class="language-python">enemigos = manager.get_zone_enemies(&quot;Cave&quot;)
+<h3 id="_serialize_companioncomp-dict"><code>_serialize_companion(comp) -&gt; dict</code></h3>
+<p>Serializa un compañero: <code>companion_id</code>, nombre, HP/MP actuales y máximos, si está vivo, nivel, arma y armadura equipadas.</p>
+<hr />
+<h3 id="_serialize_inventoryinventory-list"><code>_serialize_inventory(inventory) -&gt; list</code></h3>
+<p>Serializa todos los slots del inventario como lista de <code>{"item": {...}, "quantity": N}</code>.</p>
+<hr />
+<h3 id="_serialize_masteryplayer-dict"><code>_serialize_mastery(player) -&gt; dict</code></h3>
+<p>Serializa <code>player.mastery_manager</code> usando <code>MasteryManager.to_dict()</code>. Retorna <code>{}</code> si no existe el manager.</p>
+<hr />
+<h3 id="_serialize_baseplayer-dict"><code>_serialize_base(player) -&gt; dict</code></h3>
+<p>Serializa <code>player.base_manager</code> usando <code>BaseManager.to_dict()</code>. Retorna <code>{}</code> si no existe.</p>
+<hr />
+<h2 id="funcion-build_save_data">Función <code>build_save_data</code></h2>
+<pre><code class="language-python">build_save_data(player, inventory, chosen_area, active_enemies_ids=None) -&gt; dict
+</code></pre>
+<p>Construye el diccionario completo de guardado.</p>
+<p><strong>Estructura del save:</strong></p>
+<pre><code class="language-json">{
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;timestamp&quot;: &quot;2025-01-15 20:30:00&quot;,
+  &quot;player&quot;: {
+    &quot;name&quot;: &quot;...&quot;, &quot;Level&quot;: 5, &quot;lvlPoints&quot;: 2,
+    &quot;Health&quot;: 95, &quot;Health_max&quot;: 140,
+    &quot;Mana&quot;: 80, &quot;Mana_max&quot;: 110,
+    &quot;EXP&quot;: 350, &quot;EXP_M&quot;: 500, &quot;Gold&quot;: 1200,
+    &quot;DEF&quot;: [5, 0, 2, 0, 0],
+    &quot;AGI&quot;: 10, &quot;DefensePercentage&quot;: [0, 0, 0, 0, 0],
+    &quot;CounterAttack&quot;: 5, &quot;Evasion&quot;: 8,
+    &quot;ManaRegen&quot;: 2.5, &quot;RAC&quot;: 0, &quot;Control&quot;: 0, &quot;Barrier&quot;: 0
+  },
+  &quot;equipment&quot;: {
+    &quot;weapon&quot;: {&quot;id&quot;: 3, &quot;name&quot;: &quot;Espada Grande&quot;, ...},
+    &quot;helmet&quot;: null, &quot;armor&quot;: {...}, &quot;boots&quot;: null,
+    &quot;ring&quot;: null, &quot;ring2&quot;: null, &quot;ring3&quot;: null,
+    &quot;tool&quot;: null, &quot;SecHand&quot;: null
+  },
+  &quot;inventory&quot;: [...],
+  &quot;companions&quot;: [...],
+  &quot;companion_bank&quot;: [...],
+  &quot;skills_purchased&quot;: {&quot;skill_node_1&quot;: 1, &quot;skill_node_2&quot;: 2},
+  &quot;mastery&quot;: {...},
+  &quot;base&quot;: {...},
+  &quot;game_state&quot;: { &quot;chosen_area&quot;: &quot;Forest&quot; }
+}
+</code></pre>
+<p><strong>Slots de equipamiento serializados:</strong> <code>weapon</code>, <code>helmet</code>, <code>armor</code>, <code>boots</code>, <code>ring</code>, <code>ring2</code>, <code>ring3</code>, <code>tool</code>, <code>SecHand</code>.</p>
+<hr />
+<h2 id="funciones-de-guardado-y-carga">Funciones de Guardado y Carga</h2>
+<h3 id="save_to_slotslot-int-player-inventory-chosen_area-bool"><code>save_to_slot(slot: int, player, inventory, chosen_area) -&gt; bool</code></h3>
+<p>Guarda la partida en el slot indicado (1, 2 o 3). Crea el directorio <code>Data/Saves/</code> si no existe. Retorna <code>True</code> si tuvo éxito.</p>
+<pre><code class="language-python">exito = save_to_slot(1, player, vInventory, chosen_area)
 </code></pre>
 <hr />
-<h4 id="get_zones_list-listtuplestr-str-str"><code>get_zones_list() -&gt; List[Tuple[str, str, str]]</code></h4>
-<p>Retorna una lista de tuplas con la información mínima de cada zona, útil para construir el selector de zonas en la UI.</p>
-<p><strong>Retorno:</strong> Lista de tuplas <code>(zone_key, zone_name, zone_color)</code>.</p>
-<pre><code class="language-python">zonas = manager.get_zones_list()
-# [(&quot;Forest&quot;, &quot;Bosque&quot;, &quot;green&quot;), (&quot;Cave&quot;, &quot;Cueva&quot;, &quot;grey&quot;), ...]
+<h3 id="load_from_slotslot-int-player-inventory-item_manager-optionaldict"><code>load_from_slot(slot: int, player, inventory, item_manager) -&gt; Optional[dict]</code></h3>
+<p>Carga la partida del slot indicado. Restaura el estado completo del jugador. Retorna el dict de <code>game_state</code> (con <code>chosen_area</code>, etc.) o <code>None</code> si falla.</p>
+<pre><code class="language-python">game_state = load_from_slot(2, player, vInventory, item_manager)
+if game_state:
+    chosen_area = game_state.get(&quot;chosen_area&quot;)
 </code></pre>
 <hr />
-<h4 id="_load_zones_from_json-dictstr-dict"><code>_load_zones_from_json() -&gt; Dict[str, Dict]</code></h4>
-<p><em>(Método interno)</em> Lee el archivo <code>DataStats.json</code> completo usando <code>Read()</code> del módulo <code>Loader</code>. Itera sobre todas las claves del JSON y, para cada entrada que sea un array válido, extrae la información de zona con <code>_extract_zone_info()</code>.</p>
+<h2 id="funciones-de-restauracion-internas">Funciones de Restauración Internas</h2>
+<h3 id="_restore_playerplayer-pdata-dict"><code>_restore_player(player, pdata: dict)</code></h3>
+<p>Restaura los stats básicos del jugador: nombre, nivel, puntos, HP, MP, EXP, oro, AGI, CounterAttack, Evasion, ManaRegen, RAC, Control, Barrier, DEF y DefensePercentage.</p>
 <hr />
-<h4 id="_load_zones_from_mods-dictstr-dict"><code>_load_zones_from_mods() -&gt; Dict[str, Dict]</code></h4>
-<p><em>(Método interno)</em> Obtiene zonas registradas por mods desde <code>ModAPI.get_all_zones()</code>. Si el <code>ModLoader</code> no está disponible, retorna silenciosamente un dict vacío (sin lanzar error).</p>
+<h3 id="_restore_equipmentplayer-equip_data-dict-item_manager"><code>_restore_equipment(player, equip_data: dict, item_manager)</code></h3>
+<p>Restaura el equipamiento por slot. Para cada slot, obtiene el <code>id</code> del item serializado y llama a <code>item_manager.create_item_object()</code> para reconstruir el objeto. Si el slot estaba vacío, asigna <code>None</code>.</p>
 <hr />
-<h4 id="_extract_zone_infozone_key-zone_data-source-dict"><code>_extract_zone_info(zone_key, zone_data, source) -&gt; Dict</code></h4>
-<p><em>(Método interno)</em> Extrae y estructura la información de una zona desde los datos raw del JSON.</p>
-<p><strong>Lógica de extracción:</strong></p>
-<ul>
-<li>Busca el objeto <code>"Strings"</code> para obtener <code>name</code>, <code>desc</code>, <code>exit</code> y <code>color</code>.</li>
-<li>Considera enemigos a todas las claves que no sean <code>"Strings"</code> ni <code>"Gathering"</code> y que sean un <code>dict</code> con la clave <code>"NAME"</code>.</li>
-<li>Extrae <code>"Gathering"</code> directamente si existe.</li>
-<li>Retorna <code>None</code> si no hay objeto <code>"Strings"</code> (la entrada no es una zona válida).</li>
-</ul>
+<h3 id="_restore_inventoryinventory-inv_data-list-item_manager"><code>_restore_inventory(inventory, inv_data: list, item_manager)</code></h3>
+<p>Limpia el inventario actual y lo reconstruye desde los datos serializados. Cada entry llama a <code>item_manager.create_item_object()</code> y añade el item con la cantidad guardada.</p>
+<hr />
+<h3 id="_restore_companionsplayer-companions_data-bank_data-item_manager"><code>_restore_companions(player, companions_data, bank_data, item_manager)</code></h3>
+<p>Restaura los compañeros activos y el banco de compañeros. Usa <code>load_companion_by_id()</code> de <code>CompanionSystem</code> para reconstruir cada compañero por su <code>companion_id</code> y luego restaura su estado (HP, MP, nivel, etc.).</p>
+<hr />
+<h3 id="_restore_skillsplayer-skills_data-dict"><code>_restore_skills(player, skills_data: dict)</code></h3>
+<p>Restaura el árbol de habilidades como diccionario <code>{node_id: level}</code>.</p>
+<hr />
+<h3 id="_restore_masteryplayer-mastery_data-dict"><code>_restore_mastery(player, mastery_data: dict)</code></h3>
+<p>Restaura el <code>MasteryManager</code> desde el diccionario usando <code>MasteryManager.from_dict()</code>.</p>
+<hr />
+<h3 id="_restore_baseplayer-base_data-dict"><code>_restore_base(player, base_data: dict)</code></h3>
+<p>Restaura el <code>BaseManager</code> desde el diccionario usando <code>BaseManager.load_from_dict()</code>. Si hay error, lo imprime sin lanzar excepción.</p>
+<hr />
+<h2 id="funcion-get_slot_info">Función <code>get_slot_info</code></h2>
+<pre><code class="language-python">get_slot_info(slot: int) -&gt; dict
+</code></pre>
+<p>Retorna metadatos de un slot de guardado sin cargar el estado completo. Útil para mostrar información en el menú de carga.</p>
+<p><strong>Retorno:</strong></p>
+<pre><code class="language-python">{
+    &quot;exists&quot;: True,
+    &quot;player_name&quot;: &quot;Héroe&quot;,
+    &quot;level&quot;: 5,
+    &quot;timestamp&quot;: &quot;2025-01-15 20:30:00&quot;,
+    &quot;area&quot;: &quot;Forest&quot;
+}
+# O si no existe:
+{&quot;exists&quot;: False}
+</code></pre>
+<hr />
+<h2 id="funcion-save_load_menu">Función <code>save_load_menu</code></h2>
+<pre><code class="language-python">save_load_menu(player, inventory, chosen_area, item_manager, console, menu_fn, pause_fn) -&gt; Optional[dict]
+</code></pre>
+<p>Menú completo de guardar/cargar con selección de los 3 slots.</p>
 <p><strong>Parámetros:</strong></p>
 <table>
 <thead>
@@ -1950,179 +2076,96 @@
 </thead>
 <tbody>
 <tr>
-<td><code>zone_key</code></td>
-<td><code>str</code></td>
-<td>Clave de la zona en el JSON (ej: <code>"Forest"</code>, <code>"Cave"</code>).</td>
+<td><code>player</code></td>
+<td><code>cPlayer</code></td>
+<td>Objeto del jugador.</td>
 </tr>
 <tr>
-<td><code>zone_data</code></td>
-<td><code>dict</code></td>
-<td>Datos de la zona (primer elemento del array en el JSON).</td>
+<td><code>inventory</code></td>
+<td><code>cInventory</code></td>
+<td>Inventario del jugador.</td>
 </tr>
 <tr>
-<td><code>source</code></td>
-<td><code>str</code></td>
-<td>Origen: <code>"base"</code> para JSON base, <code>"mod"</code> para mods.</td>
+<td><code>chosen_area</code></td>
+<td><code>str \| None</code></td>
+<td>Zona actual.</td>
+</tr>
+<tr>
+<td><code>item_manager</code></td>
+<td><code>ItemManager</code></td>
+<td>Gestor de items para reconstruir objetos al cargar.</td>
+</tr>
+<tr>
+<td><code>console</code></td>
+<td><code>Console</code></td>
+<td>Instancia de rich Console para mostrar mensajes.</td>
+</tr>
+<tr>
+<td><code>menu_fn</code></td>
+<td><code>Callable</code></td>
+<td>Función de menú interactivo (normalmente <code>interactive_menu_select</code>).</td>
+</tr>
+<tr>
+<td><code>pause_fn</code></td>
+<td><code>Callable</code></td>
+<td>Función de espera (normalmente <code>wait_for_enter</code>).</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="variables-globales-y-funciones-de-acceso">Variables Globales y Funciones de Acceso</h2>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>_zone_manager_instance</code></td>
-<td><code>ZoneManager \| None</code></td>
-<td>Instancia global Singleton del <code>ZoneManager</code>.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="get_zone_managerdatastats_path-zonemanager"><code>get_zone_manager(datastats_path) -&gt; ZoneManager</code></h3>
-<p>Patrón <strong>Singleton</strong>. Crea la instancia la primera vez y la retorna en llamadas sucesivas.</p>
-<pre><code class="language-python">from Modules.ZoneManager import get_zone_manager
-manager = get_zone_manager()
-</code></pre>
-<hr />
-<h2 id="funciones-helper">Funciones Helper</h2>
-<h3 id="get_all_zones-dictstr-dict_1"><code>get_all_zones() -&gt; Dict[str, Dict]</code></h3>
-<p>Atajo para obtener todas las zonas disponibles.</p>
-<pre><code class="language-python">from Modules.ZoneManager import get_all_zones
-zonas = get_all_zones()
-</code></pre>
-<hr />
-<h3 id="get_zones_for_selector-listtuplestr-str-str"><code>get_zones_for_selector() -&gt; List[Tuple[str, str, str]]</code></h3>
-<p>Atajo para obtener la lista de zonas en formato <code>(key, name, color)</code> para el selector de UI.</p>
-<pre><code class="language-python">from Modules.ZoneManager import get_zones_for_selector
-lista = get_zones_for_selector()
-</code></pre>
-<hr />
-<h3 id="get_zone_infozone_key-str-dict"><code>get_zone_info(zone_key: str) -&gt; Dict</code></h3>
-<p>Atajo para obtener los datos completos de una zona específica.</p>
-<pre><code class="language-python">from Modules.ZoneManager import get_zone_info
-info = get_zone_info(&quot;Forest&quot;)
-print(info[&quot;name&quot;])    # &quot;Bosque&quot;
-print(info[&quot;color&quot;])   # &quot;green&quot;
-print(info[&quot;enemies&quot;]) # [{&quot;NAME&quot;: &quot;Goblin&quot;, ...}, ...]
-</code></pre>
-<hr />
-<h2 id="estructura-de-una-zona">Estructura de una Zona</h2>
-<p>La estructura esperada en <code>DataStats.json</code> para una zona es:</p>
-<pre><code class="language-json">{
-    &quot;Forest&quot;: [
-        {
-            &quot;Strings&quot;: {
-                &quot;name&quot;:  &quot;Bosque&quot;,
-                &quot;desc&quot;:  &quot;Un denso bosque lleno de criaturas.&quot;,
-                &quot;exit&quot;:  &quot;Saliendo del Bosque...&quot;,
-                &quot;color&quot;: &quot;green&quot;
-            },
-            &quot;Goblin&quot;: {
-                &quot;NAME&quot;:    &quot;Goblin&quot;,
-                &quot;HP_M&quot;:    40,
-                &quot;DMG&quot;:     [8, 0, 0, 0, 0],
-                &quot;DMG_min&quot;: [4, 0, 0, 0],
-                &quot;DEF&quot;:     [2, 0, 0, 0, 0],
-                &quot;EXP&quot;:     15,
-                &quot;GOLD&quot;:    10
-            },
-            &quot;Wolf&quot;: {
-                &quot;NAME&quot;:    &quot;Lobo&quot;,
-                &quot;HP_M&quot;:    55,
-                &quot;DMG&quot;:     [12, 0, 0, 0, 0],
-                &quot;DMG_min&quot;: [7, 0, 0, 0],
-                &quot;DEF&quot;:     [1, 0, 0, 0, 0],
-                &quot;EXP&quot;:     20,
-                &quot;GOLD&quot;:    8
-            },
-            &quot;Gathering&quot;: {
-                &quot;Materials&quot;: [&quot;1_G&quot;, &quot;2_G&quot;]
-            }
-        }
-    ]
-}
-</code></pre>
-<p><strong>Campos del objeto <code>Strings</code>:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Campo</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td><code>str</code></td>
-<td>Nombre mostrado al jugador.</td>
-</tr>
-<tr>
-<td><code>desc</code></td>
-<td><code>str</code></td>
-<td>Descripción de la zona.</td>
-</tr>
-<tr>
-<td><code>exit</code></td>
-<td><code>str</code></td>
-<td>Mensaje mostrado al salir. Default: <code>"Saliendo de {zone_key}"</code>.</td>
-</tr>
-<tr>
-<td><code>color</code></td>
-<td><code>str</code></td>
-<td>Color Rich para el nombre de la zona en menús.</td>
-</tr>
-</tbody>
-</table>
+<p><strong>Flujo:</strong></p>
+<ol>
+<li>Muestra menú de acción: <code>Guardar</code>, <code>Cargar</code> o <code>Cancelar</code>.</li>
+<li>Muestra los 3 slots con información (nombre, nivel, zona, timestamp) o <code>Vacío</code>.</li>
+<li>Al guardar: llama a <code>save_to_slot()</code>.</li>
+<li>Al cargar: confirma con submenú Sí/No, luego llama a <code>load_from_slot()</code>.</li>
+</ol>
+<p><strong>Retorno:</strong> Dict de <code>game_state</code> si se cargó exitosamente, <code>None</code> si se guardó o canceló.</p>
 <hr />
 <h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
-<h3 id="obtener-enemigos-de-una-zona-para-el-combate">Obtener enemigos de una zona para el combate</h3>
-<pre><code class="language-python">from Modules.ZoneManager import get_zone_manager
-import random
+<h3 id="guardar-en-slot-1">Guardar en slot 1</h3>
+<pre><code class="language-python">from Modules.SaveSystem import save_to_slot
 
-manager  = get_zone_manager()
-enemigos = manager.get_zone_enemies(&quot;Forest&quot;)
-
-if enemigos:
-    enemigo_data = random.choice(enemigos)
-    print(f&quot;Enemigo encontrado: {enemigo_data['NAME']}&quot;)
+if save_to_slot(1, player, vInventory, chosen_area):
+    print(&quot;Guardado con éxito&quot;)
 </code></pre>
-<h3 id="construir-el-selector-de-zona-dinamicamente">Construir el selector de zona dinámicamente</h3>
-<pre><code class="language-python">from Modules.ZoneManager import get_zones_for_selector
-from Modules.input_utils import interactive_menu_select
+<h3 id="cargar-desde-slot-2">Cargar desde slot 2</h3>
+<pre><code class="language-python">from Modules.SaveSystem import load_from_slot
 
-zonas = get_zones_for_selector()
+game_state = load_from_slot(2, player, vInventory, item_manager)
+if game_state:
+    chosen_area = game_state.get(&quot;chosen_area&quot;)
+    enemy = None  # Resetear enemigo
+</code></pre>
+<h3 id="mostrar-info-de-slots-sin-cargar">Mostrar info de slots sin cargar</h3>
+<pre><code class="language-python">from Modules.SaveSystem import get_slot_info
 
-opciones = [(i + 1, f&quot;[{info[2]}]{info[1]}[/{info[2]}]&quot;) for i, info in enumerate(zonas)]
-opciones.append((0, &quot;Volver&quot;))
+for slot_num in [1, 2, 3]:
+    info = get_slot_info(slot_num)
+    if info[&quot;exists&quot;]:
+        print(f&quot;Slot {slot_num}: {info['player_name']} Nv.{info['level']} - {info['area']}&quot;)
+    else:
+        print(f&quot;Slot {slot_num}: Vacío&quot;)
+</code></pre>
+<h3 id="usar-el-menu-completo-desde-maingame">Usar el menú completo (desde MainGame)</h3>
+<pre><code class="language-python">from Modules.SaveSystem import save_load_menu
 
-eleccion = interactive_menu_select(
-    title=&quot;Seleccionar Zona&quot;,
-    options=opciones,
-    border_style=&quot;green&quot;,
+game_state = save_load_menu(
+    player, vInventory, chosen_area, item_manager,
+    console, interactive_menu_select, wait_for_enter
 )
-</code></pre>
-<h3 id="verificar-si-una-zona-tiene-material-de-recoleccion">Verificar si una zona tiene material de recolección</h3>
-<pre><code class="language-python">from Modules.ZoneManager import get_zone_info
-
-info = get_zone_info(&quot;Forest&quot;)
-if info and info.get(&quot;gathering&quot;):
-    materiales = info[&quot;gathering&quot;].get(&quot;Materials&quot;, [])
-    print(f&quot;Materiales disponibles: {materiales}&quot;)
+if game_state is not None:
+    chosen_area = game_state.get(&quot;chosen_area&quot;, chosen_area)
+    enemy = None
 </code></pre>
 <hr />
 <h2 id="notas-y-referencias">Notas y Referencias</h2>
 <ul>
-<li>El método <code>_load_zones_from_mods()</code> captura silenciosamente cualquier excepción si el <code>ModLoader</code> no está inicializado, lo que hace que el <code>ZoneManager</code> funcione aunque no haya mods cargados.</li>
-<li>Las zonas de mods <strong>sobreescriben</strong> las del JSON base si usan la misma <code>zone_key</code>. Esto permite a los mods modificar zonas existentes.</li>
-<li><strong><code>Loader.Read</code>:</strong> Se usa para leer el JSON completo pasando <code>None</code> como segundo argumento. Ver <code>Loader.md</code> para más detalles.</li>
-<li><strong><code>ModAPI.get_all_zones()</code>:</strong> Método que retorna el diccionario <code>stats_injections</code> de la <code>ModAPI</code>, donde los mods registran sus zonas. Ver <code>ModLoader.md</code>.</li>
+<li>Los slots de guardado son independientes entre sí: guardar en el slot 2 no afecta al 1 ni al 3.</li>
+<li>El campo <code>version</code> es <code>"1.0"</code>. Versiones futuras del juego pueden usar este campo para migrar saves antiguos.</li>
+<li>Si un item del inventario no puede reconstruirse por ID (ej: fue eliminado del JSON base), se omite silenciosamente durante la carga.</li>
+<li>Los compañeros se reconstruyen por <code>companion_id</code> desde <code>DataCompanions.json</code>. Si el ID no existe, el compañero se omite.</li>
+<li><strong><code>json.dump</code> con <code>ensure_ascii=False</code>:</strong> Permite guardar texto en español sin escapar caracteres. <a href="https://docs.python.org/3/library/json.html">https://docs.python.org/3/library/json.html</a></li>
+<li><strong><code>os.makedirs(exist_ok=True)</code>:</strong> Crea el directorio <code>Data/Saves/</code> de forma segura. <a href="https://docs.python.org/3/library/os.html#os.makedirs">https://docs.python.org/3/library/os.html#os.makedirs</a></li>
 </ul>
 
 

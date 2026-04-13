@@ -1,6 +1,3 @@
-/* =============================================
-   FONDO GLOBAL
-   ============================================= */
 :root {
     --md-default-bg-color: #1e1e1e;
 }
@@ -9,7 +6,6 @@
     background-color: #121212;
 }
 
-/* FIX: El contenido interno también necesita fondo oscuro */
 .md-main__inner,
 .md-content,
 .md-content__inner {

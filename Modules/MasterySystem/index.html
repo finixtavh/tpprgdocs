@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../ItemManager/">
+        <link rel="prev" href="../CraftingSystem/">
       
       
-        <link rel="next" href="../CraftingSystem/">
+        <link rel="next" href="../SaveSystem/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Zone Manager - TPPRPG Docs</title>
+        <title>Mastery System - TPPRPG Docs</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#zonemanagerpy" class="md-skip">
+        <a href="#masterysystempy" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Zone Manager
+              Mastery System
             
           </span>
         </div>
@@ -504,6 +504,62 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../ZoneManager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zone Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CraftingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crafting System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -523,7 +579,7 @@
   <span class="md-ellipsis">
     
   
-    Zone Manager
+    Mastery System
   
 
     
@@ -541,7 +597,7 @@
   <span class="md-ellipsis">
     
   
-    Zone Manager
+    Mastery System
   
 
     
@@ -589,15 +645,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#clase-zonemanager" class="md-nav__link">
+  <a href="#constantes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase ZoneManager
+        Constantes
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Clase ZoneManager">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-masteryskill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase MasterySkill
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase MasterySkill">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -635,10 +702,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_all_zones-dictstr-dict" class="md-nav__link">
+  <a href="#add_expamount-float-int" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_all_zones() -&gt; Dict[str, Dict]
+        add_exp(amount: float) -&gt; int
       
     </span>
   </a>
@@ -646,10 +713,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zone_by_keyzone_key-str-dict" class="md-nav__link">
+  <a href="#bonus_percent-property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_by_key(zone_key: str) -&gt; Dict
+        bonus_percent (property)
       
     </span>
   </a>
@@ -657,10 +724,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zone_enemieszone_key-str-list" class="md-nav__link">
+  <a href="#bonus_multiplier-property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_enemies(zone_key: str) -&gt; List
+        bonus_multiplier (property)
       
     </span>
   </a>
@@ -668,10 +735,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zones_list-listtuplestr-str-str" class="md-nav__link">
+  <a href="#to_dict-dict" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zones_list() -&gt; List[Tuple[str, str, str]]
+        to_dict() -&gt; dict
       
     </span>
   </a>
@@ -679,32 +746,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_load_zones_from_json-dictstr-dict" class="md-nav__link">
+  <a href="#from_dictdata-dict-masteryskill-classmethod" class="md-nav__link">
     <span class="md-ellipsis">
       
-        _load_zones_from_json() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_load_zones_from_mods-dictstr-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _load_zones_from_mods() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_extract_zone_infozone_key-zone_data-source-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _extract_zone_info(zone_key, zone_data, source) -&gt; Dict
+        from_dict(data: dict) -&gt; MasterySkill (classmethod)
       
     </span>
   </a>
@@ -722,50 +767,56 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#variables-globales-y-funciones-de-acceso" class="md-nav__link">
+  <a href="#clase-masterymanager" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Variables Globales y Funciones de Acceso
+        Clase MasteryManager
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Variables Globales y Funciones de Acceso">
+    <nav class="md-nav" aria-label="Clase MasteryManager">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_zone_managerdatastats_path-zonemanager" class="md-nav__link">
+  <a href="#nombres-legibles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_manager(datastats_path) -&gt; ZoneManager
+        Nombres legibles
       
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#funciones-helper" class="md-nav__link">
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Funciones Helper
+        Atributos de instancia
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Funciones Helper">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_all_zones-dictstr-dict_1" class="md-nav__link">
+  <a href="#get_weapon_typeweapon-str-staticmethod" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_all_zones() -&gt; Dict[str, Dict]
+        get_weapon_type(weapon) -&gt; str (staticmethod)
       
     </span>
   </a>
@@ -773,10 +824,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zones_for_selector-listtuplestr-str-str" class="md-nav__link">
+  <a href="#register_damage_dealtplayer-damage_total-float-optionalstr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zones_for_selector() -&gt; List[Tuple[str, str, str]]
+        register_damage_dealt(player, damage_total: float) -&gt; Optional[str]
       
     </span>
   </a>
@@ -784,10 +835,76 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zone_infozone_key-str-dict" class="md-nav__link">
+  <a href="#register_damage_receivedplayer-damage_total-float-optionalstr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_info(zone_key: str) -&gt; Dict
+        register_damage_received(player, damage_total: float) -&gt; Optional[str]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_weapon_damage_multiplierplayer-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_weapon_damage_multiplier(player) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_armor_damage_reduction_bonusplayer-slot-str-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_armor_damage_reduction_bonus(player, slot: str) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_total_armor_reduction_bonusplayer-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_total_armor_reduction_bonus(player) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to_dict-dict_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        to_dict() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from_dictdata-dict-masterymanager-classmethod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        from_dict(data: dict) -&gt; MasteryManager (classmethod)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_masteriesconsole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_masteries(console)
       
     </span>
   </a>
@@ -798,12 +915,17 @@
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#estructura-de-una-zona" class="md-nav__link">
+  <a href="#funcion-helper-ensure_mastery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Estructura de una Zona
+        Función Helper ensure_mastery
       
     </span>
   </a>
@@ -823,10 +945,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#obtener-enemigos-de-una-zona-para-el-combate" class="md-nav__link">
+  <a href="#registrar-dano-en-combate-maingamepy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Obtener enemigos de una zona para el combate
+        Registrar daño en combate (MainGame.py)
       
     </span>
   </a>
@@ -834,10 +956,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#construir-el-selector-de-zona-dinamicamente" class="md-nav__link">
+  <a href="#consultar-bonus-de-arma-equipada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Construir el selector de zona dinámicamente
+        Consultar bonus de arma equipada
       
     </span>
   </a>
@@ -845,10 +967,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#verificar-si-una-zona-tiene-material-de-recoleccion" class="md-nav__link">
+  <a href="#mostrar-tabla-de-masteries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificar si una zona tiene material de recolección
+        Mostrar tabla de masteries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guardado-y-carga-integrado-con-savesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guardado y carga (integrado con SaveSystem)
       
     </span>
   </a>
@@ -875,62 +1008,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CraftingSystem/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Crafting System
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../MasterySystem/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Mastery System
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1544,15 +1621,26 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#clase-zonemanager" class="md-nav__link">
+  <a href="#constantes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Clase ZoneManager
+        Constantes
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Clase ZoneManager">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clase-masteryskill" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clase MasterySkill
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Clase MasterySkill">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1590,10 +1678,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_all_zones-dictstr-dict" class="md-nav__link">
+  <a href="#add_expamount-float-int" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_all_zones() -&gt; Dict[str, Dict]
+        add_exp(amount: float) -&gt; int
       
     </span>
   </a>
@@ -1601,10 +1689,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zone_by_keyzone_key-str-dict" class="md-nav__link">
+  <a href="#bonus_percent-property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_by_key(zone_key: str) -&gt; Dict
+        bonus_percent (property)
       
     </span>
   </a>
@@ -1612,10 +1700,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zone_enemieszone_key-str-list" class="md-nav__link">
+  <a href="#bonus_multiplier-property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_enemies(zone_key: str) -&gt; List
+        bonus_multiplier (property)
       
     </span>
   </a>
@@ -1623,10 +1711,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zones_list-listtuplestr-str-str" class="md-nav__link">
+  <a href="#to_dict-dict" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zones_list() -&gt; List[Tuple[str, str, str]]
+        to_dict() -&gt; dict
       
     </span>
   </a>
@@ -1634,32 +1722,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_load_zones_from_json-dictstr-dict" class="md-nav__link">
+  <a href="#from_dictdata-dict-masteryskill-classmethod" class="md-nav__link">
     <span class="md-ellipsis">
       
-        _load_zones_from_json() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_load_zones_from_mods-dictstr-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _load_zones_from_mods() -&gt; Dict[str, Dict]
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_extract_zone_infozone_key-zone_data-source-dict" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        _extract_zone_info(zone_key, zone_data, source) -&gt; Dict
+        from_dict(data: dict) -&gt; MasterySkill (classmethod)
       
     </span>
   </a>
@@ -1677,50 +1743,56 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#variables-globales-y-funciones-de-acceso" class="md-nav__link">
+  <a href="#clase-masterymanager" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Variables Globales y Funciones de Acceso
+        Clase MasteryManager
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Variables Globales y Funciones de Acceso">
+    <nav class="md-nav" aria-label="Clase MasteryManager">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_zone_managerdatastats_path-zonemanager" class="md-nav__link">
+  <a href="#nombres-legibles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_manager(datastats_path) -&gt; ZoneManager
+        Nombres legibles
       
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#funciones-helper" class="md-nav__link">
+          <li class="md-nav__item">
+  <a href="#atributos-de-instancia_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Funciones Helper
+        Atributos de instancia
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Funciones Helper">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_all_zones-dictstr-dict_1" class="md-nav__link">
+  <a href="#get_weapon_typeweapon-str-staticmethod" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_all_zones() -&gt; Dict[str, Dict]
+        get_weapon_type(weapon) -&gt; str (staticmethod)
       
     </span>
   </a>
@@ -1728,10 +1800,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zones_for_selector-listtuplestr-str-str" class="md-nav__link">
+  <a href="#register_damage_dealtplayer-damage_total-float-optionalstr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zones_for_selector() -&gt; List[Tuple[str, str, str]]
+        register_damage_dealt(player, damage_total: float) -&gt; Optional[str]
       
     </span>
   </a>
@@ -1739,10 +1811,76 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_zone_infozone_key-str-dict" class="md-nav__link">
+  <a href="#register_damage_receivedplayer-damage_total-float-optionalstr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        get_zone_info(zone_key: str) -&gt; Dict
+        register_damage_received(player, damage_total: float) -&gt; Optional[str]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_weapon_damage_multiplierplayer-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_weapon_damage_multiplier(player) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_armor_damage_reduction_bonusplayer-slot-str-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_armor_damage_reduction_bonus(player, slot: str) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_total_armor_reduction_bonusplayer-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_total_armor_reduction_bonus(player) -&gt; float
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to_dict-dict_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        to_dict() -&gt; dict
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from_dictdata-dict-masterymanager-classmethod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        from_dict(data: dict) -&gt; MasteryManager (classmethod)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display_masteriesconsole" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        display_masteries(console)
       
     </span>
   </a>
@@ -1753,12 +1891,17 @@
     </nav>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#estructura-de-una-zona" class="md-nav__link">
+  <a href="#funcion-helper-ensure_mastery" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Estructura de una Zona
+        Función Helper ensure_mastery
       
     </span>
   </a>
@@ -1778,10 +1921,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#obtener-enemigos-de-una-zona-para-el-combate" class="md-nav__link">
+  <a href="#registrar-dano-en-combate-maingamepy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Obtener enemigos de una zona para el combate
+        Registrar daño en combate (MainGame.py)
       
     </span>
   </a>
@@ -1789,10 +1932,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#construir-el-selector-de-zona-dinamicamente" class="md-nav__link">
+  <a href="#consultar-bonus-de-arma-equipada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Construir el selector de zona dinámicamente
+        Consultar bonus de arma equipada
       
     </span>
   </a>
@@ -1800,10 +1943,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#verificar-si-una-zona-tiene-material-de-recoleccion" class="md-nav__link">
+  <a href="#mostrar-tabla-de-masteries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificar si una zona tiene material de recolección
+        Mostrar tabla de masteries
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guardado-y-carga-integrado-con-savesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guardado y carga (integrado con SaveSystem)
       
     </span>
   </a>
@@ -1843,26 +1997,92 @@
 
 
 
-<h1 id="zonemanagerpy"><code>ZoneManager.py</code></h1>
+<h1 id="masterysystempy"><code>MasterySystem.py</code></h1>
 <h2 id="indice">Índice</h2>
 <ol>
 <li><a href="#descripción-general">Descripción General</a></li>
-<li><a href="#clase-zonemanager">Clase <code>ZoneManager</code></a></li>
-<li><a href="#variables-globales-y-funciones-de-acceso">Variables Globales y Funciones de Acceso</a></li>
-<li><a href="#funciones-helper">Funciones Helper</a></li>
-<li><a href="#estructura-de-una-zona">Estructura de una Zona</a></li>
+<li><a href="#constantes">Constantes</a></li>
+<li><a href="#clase-masteryskill">Clase <code>MasterySkill</code></a></li>
+<li><a href="#clase-masterymanager">Clase <code>MasteryManager</code></a></li>
+<li><a href="#función-helper-ensure_mastery">Función Helper <code>ensure_mastery</code></a></li>
 <li><a href="#ejemplos-de-uso">Ejemplos de Uso</a></li>
 <li><a href="#notas-y-referencias">Notas y Referencias</a></li>
 </ol>
 <hr />
 <h2 id="descripcion-general">Descripción General</h2>
-<p><code>ZoneManager.py</code> gestiona de forma dinámica todas las <strong>zonas del mundo del juego</strong>. Carga las zonas base desde <code>DataStats.json</code> y las combina con zonas añadidas por mods (a través del <code>ModAPI</code>), ofreciendo una API unificada para acceder a enemigos, recolectables y metadatos de cada zona.</p>
-<p>El sistema sigue el patrón <strong>Singleton</strong> para mantener una única instancia durante toda la partida.</p>
+<p><code>MasterySystem.py</code> implementa el sistema de <strong>Mastery para Armas y Armaduras</strong>. Cada tipo de arma y cada tipo de armadura tiene su propio nivel de maestría que sube conforme el jugador combate, otorgando bonificaciones permanentes de daño o reducción de daño.</p>
+<p><strong>Mecánica:</strong>
+- <strong>Mastery de Armas:</strong> sube cuando el jugador hace daño. <code>EXP = daño_hecho / 35</code>.
+- <strong>Mastery de Armaduras:</strong> sube cuando el jugador recibe daño. <code>EXP = daño_recibido / 35</code>.</p>
+<p>El <code>MasteryManager</code> se guarda en <code>player.mastery_manager</code> y se serializa/deserializa con el sistema de guardado (<code>SaveSystem.py</code>).</p>
 <hr />
-<h2 id="clase-zonemanager">Clase <code>ZoneManager</code></h2>
-<h3 id="constructor">Constructor</h3>
-<pre><code class="language-python">ZoneManager(datastats_path=&quot;./Data/DataStats.json&quot;)
+<h2 id="constantes">Constantes</h2>
+<table>
+<thead>
+<tr>
+<th>Constante</th>
+<th>Valor</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MASTERY_MAX_LEVEL</code></td>
+<td><code>20</code></td>
+<td>Nivel máximo de cualquier mastery.</td>
+</tr>
+<tr>
+<td><code>MASTERY_EXP_BASE</code></td>
+<td><code>100.0</code></td>
+<td>EXP base para el nivel 1 → 2.</td>
+</tr>
+<tr>
+<td><code>MASTERY_EXP_GROWTH</code></td>
+<td><code>1.5</code></td>
+<td>Multiplicador de EXP por nivel.</td>
+</tr>
+<tr>
+<td><code>WEAPON_BONUS_PER_LEVEL</code></td>
+<td><code>0.5</code></td>
+<td>% de daño extra por nivel de arma.</td>
+</tr>
+<tr>
+<td><code>ARMOR_BONUS_PER_LEVEL</code></td>
+<td><code>0.25</code></td>
+<td>% de reducción de daño por nivel de armadura.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tipos de arma reconocidos (<code>WEAPON_TYPES</code>):</strong></p>
+<pre><code class="language-python">[&quot;Swords&quot;, &quot;Staffs&quot;, &quot;Hammers&quot;, &quot;Spears&quot;, &quot;Daggers&quot;, &quot;Bows&quot;, &quot;Generic&quot;]
 </code></pre>
+<p><strong>Tipos de armadura reconocidos (<code>ARMOR_TYPES</code>):</strong></p>
+<pre><code class="language-python">[&quot;Helmet&quot;, &quot;Armor&quot;, &quot;Boots&quot;, &quot;Ring&quot;]
+</code></pre>
+<hr />
+<h2 id="clase-masteryskill">Clase <code>MasterySkill</code></h2>
+<p>Representa el nivel de mastery para un tipo de arma o armadura.</p>
+<h3 id="constructor">Constructor</h3>
+<pre><code class="language-python">MasterySkill(name: str, skill_type: str)
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Nombre legible (ej: <code>"Espadas"</code>, <code>"Armaduras"</code>).</td>
+</tr>
+<tr>
+<td><code>skill_type</code></td>
+<td><code>"weapon"</code> o <code>"armor"</code>.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="atributos-de-instancia">Atributos de instancia</h3>
 <table>
 <thead>
@@ -1874,255 +2094,199 @@
 </thead>
 <tbody>
 <tr>
-<td><code>datastats_path</code></td>
-<td><code>str</code></td>
-<td>Ruta al archivo JSON base de zonas y estadísticas.</td>
-</tr>
-<tr>
-<td><code>zones_cache</code></td>
-<td><code>dict</code></td>
-<td>Caché de zonas (reservado para futuras optimizaciones; actualmente no se usa).</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3 id="metodos">Métodos</h3>
-<h4 id="get_all_zones-dictstr-dict"><code>get_all_zones() -&gt; Dict[str, Dict]</code></h4>
-<p>Punto de entrada principal. Combina zonas base y zonas de mods en un único diccionario.</p>
-<p><strong>Flujo interno:</strong>
-1. Llama a <code>_load_zones_from_json()</code> para obtener zonas del JSON base.
-2. Llama a <code>_load_zones_from_mods()</code> para obtener zonas añadidas por mods.
-3. Las zonas de mods sobreescriben las base si tienen el mismo <code>zone_key</code>.</p>
-<p><strong>Retorno:</strong> Diccionario con formato:</p>
-<pre><code class="language-python">{
-    &quot;ZoneKey&quot;: {
-        &quot;name&quot;:      &quot;Nombre mostrado&quot;,
-        &quot;desc&quot;:      &quot;Descripción de la zona&quot;,
-        &quot;exit&quot;:      &quot;Texto al salir de la zona&quot;,
-        &quot;color&quot;:     &quot;green&quot;,
-        &quot;enemies&quot;:   [...],       # Lista de dicts de enemigos
-        &quot;gathering&quot;: {...},       # Datos de recolección
-        &quot;source&quot;:    &quot;base&quot;       # &quot;base&quot; o &quot;mod&quot;
-    }
-}
-</code></pre>
-<hr />
-<h4 id="get_zone_by_keyzone_key-str-dict"><code>get_zone_by_key(zone_key: str) -&gt; Dict</code></h4>
-<p>Retorna la información completa de una zona específica. Retorna <code>None</code> si la zona no existe.</p>
-<pre><code class="language-python">zona = manager.get_zone_by_key(&quot;Forest&quot;)
-</code></pre>
-<hr />
-<h4 id="get_zone_enemieszone_key-str-list"><code>get_zone_enemies(zone_key: str) -&gt; List</code></h4>
-<p>Retorna la lista de dicts de enemigos de una zona. Retorna lista vacía si la zona no existe.</p>
-<pre><code class="language-python">enemigos = manager.get_zone_enemies(&quot;Cave&quot;)
-</code></pre>
-<hr />
-<h4 id="get_zones_list-listtuplestr-str-str"><code>get_zones_list() -&gt; List[Tuple[str, str, str]]</code></h4>
-<p>Retorna una lista de tuplas con la información mínima de cada zona, útil para construir el selector de zonas en la UI.</p>
-<p><strong>Retorno:</strong> Lista de tuplas <code>(zone_key, zone_name, zone_color)</code>.</p>
-<pre><code class="language-python">zonas = manager.get_zones_list()
-# [(&quot;Forest&quot;, &quot;Bosque&quot;, &quot;green&quot;), (&quot;Cave&quot;, &quot;Cueva&quot;, &quot;grey&quot;), ...]
-</code></pre>
-<hr />
-<h4 id="_load_zones_from_json-dictstr-dict"><code>_load_zones_from_json() -&gt; Dict[str, Dict]</code></h4>
-<p><em>(Método interno)</em> Lee el archivo <code>DataStats.json</code> completo usando <code>Read()</code> del módulo <code>Loader</code>. Itera sobre todas las claves del JSON y, para cada entrada que sea un array válido, extrae la información de zona con <code>_extract_zone_info()</code>.</p>
-<hr />
-<h4 id="_load_zones_from_mods-dictstr-dict"><code>_load_zones_from_mods() -&gt; Dict[str, Dict]</code></h4>
-<p><em>(Método interno)</em> Obtiene zonas registradas por mods desde <code>ModAPI.get_all_zones()</code>. Si el <code>ModLoader</code> no está disponible, retorna silenciosamente un dict vacío (sin lanzar error).</p>
-<hr />
-<h4 id="_extract_zone_infozone_key-zone_data-source-dict"><code>_extract_zone_info(zone_key, zone_data, source) -&gt; Dict</code></h4>
-<p><em>(Método interno)</em> Extrae y estructura la información de una zona desde los datos raw del JSON.</p>
-<p><strong>Lógica de extracción:</strong></p>
-<ul>
-<li>Busca el objeto <code>"Strings"</code> para obtener <code>name</code>, <code>desc</code>, <code>exit</code> y <code>color</code>.</li>
-<li>Considera enemigos a todas las claves que no sean <code>"Strings"</code> ni <code>"Gathering"</code> y que sean un <code>dict</code> con la clave <code>"NAME"</code>.</li>
-<li>Extrae <code>"Gathering"</code> directamente si existe.</li>
-<li>Retorna <code>None</code> si no hay objeto <code>"Strings"</code> (la entrada no es una zona válida).</li>
-</ul>
-<p><strong>Parámetros:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Parámetro</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>zone_key</code></td>
-<td><code>str</code></td>
-<td>Clave de la zona en el JSON (ej: <code>"Forest"</code>, <code>"Cave"</code>).</td>
-</tr>
-<tr>
-<td><code>zone_data</code></td>
-<td><code>dict</code></td>
-<td>Datos de la zona (primer elemento del array en el JSON).</td>
-</tr>
-<tr>
-<td><code>source</code></td>
-<td><code>str</code></td>
-<td>Origen: <code>"base"</code> para JSON base, <code>"mod"</code> para mods.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="variables-globales-y-funciones-de-acceso">Variables Globales y Funciones de Acceso</h2>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>_zone_manager_instance</code></td>
-<td><code>ZoneManager \| None</code></td>
-<td>Instancia global Singleton del <code>ZoneManager</code>.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="get_zone_managerdatastats_path-zonemanager"><code>get_zone_manager(datastats_path) -&gt; ZoneManager</code></h3>
-<p>Patrón <strong>Singleton</strong>. Crea la instancia la primera vez y la retorna en llamadas sucesivas.</p>
-<pre><code class="language-python">from Modules.ZoneManager import get_zone_manager
-manager = get_zone_manager()
-</code></pre>
-<hr />
-<h2 id="funciones-helper">Funciones Helper</h2>
-<h3 id="get_all_zones-dictstr-dict_1"><code>get_all_zones() -&gt; Dict[str, Dict]</code></h3>
-<p>Atajo para obtener todas las zonas disponibles.</p>
-<pre><code class="language-python">from Modules.ZoneManager import get_all_zones
-zonas = get_all_zones()
-</code></pre>
-<hr />
-<h3 id="get_zones_for_selector-listtuplestr-str-str"><code>get_zones_for_selector() -&gt; List[Tuple[str, str, str]]</code></h3>
-<p>Atajo para obtener la lista de zonas en formato <code>(key, name, color)</code> para el selector de UI.</p>
-<pre><code class="language-python">from Modules.ZoneManager import get_zones_for_selector
-lista = get_zones_for_selector()
-</code></pre>
-<hr />
-<h3 id="get_zone_infozone_key-str-dict"><code>get_zone_info(zone_key: str) -&gt; Dict</code></h3>
-<p>Atajo para obtener los datos completos de una zona específica.</p>
-<pre><code class="language-python">from Modules.ZoneManager import get_zone_info
-info = get_zone_info(&quot;Forest&quot;)
-print(info[&quot;name&quot;])    # &quot;Bosque&quot;
-print(info[&quot;color&quot;])   # &quot;green&quot;
-print(info[&quot;enemies&quot;]) # [{&quot;NAME&quot;: &quot;Goblin&quot;, ...}, ...]
-</code></pre>
-<hr />
-<h2 id="estructura-de-una-zona">Estructura de una Zona</h2>
-<p>La estructura esperada en <code>DataStats.json</code> para una zona es:</p>
-<pre><code class="language-json">{
-    &quot;Forest&quot;: [
-        {
-            &quot;Strings&quot;: {
-                &quot;name&quot;:  &quot;Bosque&quot;,
-                &quot;desc&quot;:  &quot;Un denso bosque lleno de criaturas.&quot;,
-                &quot;exit&quot;:  &quot;Saliendo del Bosque...&quot;,
-                &quot;color&quot;: &quot;green&quot;
-            },
-            &quot;Goblin&quot;: {
-                &quot;NAME&quot;:    &quot;Goblin&quot;,
-                &quot;HP_M&quot;:    40,
-                &quot;DMG&quot;:     [8, 0, 0, 0, 0],
-                &quot;DMG_min&quot;: [4, 0, 0, 0],
-                &quot;DEF&quot;:     [2, 0, 0, 0, 0],
-                &quot;EXP&quot;:     15,
-                &quot;GOLD&quot;:    10
-            },
-            &quot;Wolf&quot;: {
-                &quot;NAME&quot;:    &quot;Lobo&quot;,
-                &quot;HP_M&quot;:    55,
-                &quot;DMG&quot;:     [12, 0, 0, 0, 0],
-                &quot;DMG_min&quot;: [7, 0, 0, 0],
-                &quot;DEF&quot;:     [1, 0, 0, 0, 0],
-                &quot;EXP&quot;:     20,
-                &quot;GOLD&quot;:    8
-            },
-            &quot;Gathering&quot;: {
-                &quot;Materials&quot;: [&quot;1_G&quot;, &quot;2_G&quot;]
-            }
-        }
-    ]
-}
-</code></pre>
-<p><strong>Campos del objeto <code>Strings</code>:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Campo</th>
-<th>Tipo</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
 <td><code>name</code></td>
 <td><code>str</code></td>
-<td>Nombre mostrado al jugador.</td>
+<td>Nombre legible del mastery.</td>
 </tr>
 <tr>
-<td><code>desc</code></td>
+<td><code>skill_type</code></td>
 <td><code>str</code></td>
-<td>Descripción de la zona.</td>
+<td>Tipo: <code>"weapon"</code> o <code>"armor"</code>.</td>
 </tr>
 <tr>
-<td><code>exit</code></td>
-<td><code>str</code></td>
-<td>Mensaje mostrado al salir. Default: <code>"Saliendo de {zone_key}"</code>.</td>
+<td><code>current_level</code></td>
+<td><code>int</code></td>
+<td>Nivel actual (1–20).</td>
 </tr>
 <tr>
-<td><code>color</code></td>
-<td><code>str</code></td>
-<td>Color Rich para el nombre de la zona en menús.</td>
+<td><code>exp_current</code></td>
+<td><code>float</code></td>
+<td>EXP acumulada en el nivel actual.</td>
+</tr>
+<tr>
+<td><code>exp_to_next</code></td>
+<td><code>float</code></td>
+<td>EXP necesaria para subir al siguiente nivel.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metodos">Métodos</h3>
+<h4 id="add_expamount-float-int"><code>add_exp(amount: float) -&gt; int</code></h4>
+<p>Agrega EXP al mastery. Maneja múltiples subidas de nivel en una sola llamada. Al llegar al nivel máximo, la EXP se congela en 0. Retorna el número de niveles subidos.</p>
+<p><strong>Fórmula de EXP requerida:</strong></p>
+<pre><code class="language-python">exp_to_next = MASTERY_EXP_BASE * (MASTERY_EXP_GROWTH ** (nivel_actual - 1))
+</code></pre>
+<h4 id="bonus_percent-property"><code>bonus_percent</code> <em>(property)</em></h4>
+<p>Retorna el bonus total en porcentaje según nivel:
+- Armas: <code>(nivel - 1) * 0.5%</code>
+- Armaduras: <code>(nivel - 1) * 0.25%</code></p>
+<h4 id="bonus_multiplier-property"><code>bonus_multiplier</code> <em>(property)</em></h4>
+<p>Retorna el multiplicador <code>1.0 + bonus_percent / 100</code>. Listo para multiplicar directamente contra el daño o la reducción.</p>
+<h4 id="to_dict-dict"><code>to_dict() -&gt; dict</code></h4>
+<p>Serializa el mastery a diccionario para guardado.</p>
+<h4 id="from_dictdata-dict-masteryskill-classmethod"><code>from_dict(data: dict) -&gt; MasterySkill</code> <em>(classmethod)</em></h4>
+<p>Reconstruye una instancia desde un diccionario guardado.</p>
+<hr />
+<h2 id="clase-masterymanager">Clase <code>MasteryManager</code></h2>
+<p>Gestiona todos los masteries de un jugador. Se instancia una vez y se guarda en <code>player.mastery_manager</code>.</p>
+<h3 id="nombres-legibles">Nombres legibles</h3>
+<pre><code class="language-python">WEAPON_NAMES = {
+    &quot;Swords&quot;: &quot;Espadas&quot;, &quot;Staffs&quot;: &quot;Bastones&quot;, &quot;Hammers&quot;: &quot;Martillos&quot;,
+    &quot;Spears&quot;: &quot;Lanzas&quot;,  &quot;Daggers&quot;: &quot;Dagas&quot;,   &quot;Bows&quot;: &quot;Arcos&quot;,
+    &quot;Generic&quot;: &quot;Armas Genéricas&quot;,
+}
+ARMOR_NAMES = {
+    &quot;Helmet&quot;: &quot;Cascos&quot;, &quot;Armor&quot;: &quot;Armaduras&quot;,
+    &quot;Boots&quot;: &quot;Botas&quot;,   &quot;Ring&quot;: &quot;Anillos&quot;,
+}
+</code></pre>
+<h3 id="atributos-de-instancia_1">Atributos de instancia</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Tipo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>weapon_masteries</code></td>
+<td><code>Dict[str, MasterySkill]</code></td>
+<td>Un <code>MasterySkill</code> por cada tipo de arma.</td>
+</tr>
+<tr>
+<td><code>armor_masteries</code></td>
+<td><code>Dict[str, MasterySkill]</code></td>
+<td>Un <code>MasterySkill</code> por cada tipo de armadura.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="metodos_1">Métodos</h3>
+<h4 id="get_weapon_typeweapon-str-staticmethod"><code>get_weapon_type(weapon) -&gt; str</code> <em>(staticmethod)</em></h4>
+<p>Determina el tipo de mastery de un arma. Busca en orden:</p>
+<ol>
+<li>Atributo <code>item_category</code> (ej: <code>"TYPE:Swords"</code>) → extrae el tipo quitando el prefijo.</li>
+<li>Atributo <code>category</code>.</li>
+<li>Infiere del nombre del arma (palabras clave en español e inglés).</li>
+<li>Retorna <code>"Generic"</code> si no puede determinar.</li>
+</ol>
+<hr />
+<h4 id="register_damage_dealtplayer-damage_total-float-optionalstr"><code>register_damage_dealt(player, damage_total: float) -&gt; Optional[str]</code></h4>
+<p>Llamar cuando el jugador hace daño. Agrega <code>damage_total / 35</code> EXP al mastery del arma equipada. Retorna un mensaje de level-up si subió de nivel, <code>None</code> si no.</p>
+<pre><code class="language-python">msg = mm.register_damage_dealt(player, 120.0)
+# → &quot;⚔️  Mastery de Espadas subió a Nv.3! (+1.0% daño)&quot;
+</code></pre>
+<hr />
+<h4 id="register_damage_receivedplayer-damage_total-float-optionalstr"><code>register_damage_received(player, damage_total: float) -&gt; Optional[str]</code></h4>
+<p>Llamar cuando el jugador recibe daño. Agrega EXP a <strong>todos</strong> los masteries de armadura de los slots equipados (sin repetir tipos). Retorna mensajes de level-up concatenados, o <code>None</code>.</p>
+<p>Los slots mapeados:</p>
+<table>
+<thead>
+<tr>
+<th>Slot del jugador</th>
+<th>Tipo de armadura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>helmet</code></td>
+<td><code>Helmet</code></td>
+</tr>
+<tr>
+<td><code>armor</code></td>
+<td><code>Armor</code></td>
+</tr>
+<tr>
+<td><code>boots</code></td>
+<td><code>Boots</code></td>
+</tr>
+<tr>
+<td><code>ring</code>, <code>ring2</code>, <code>ring3</code></td>
+<td><code>Ring</code> (cuenta una sola vez)</td>
 </tr>
 </tbody>
 </table>
 <hr />
+<h4 id="get_weapon_damage_multiplierplayer-float"><code>get_weapon_damage_multiplier(player) -&gt; float</code></h4>
+<p>Retorna el multiplicador de daño basado en el mastery del arma equipada. <code>1.0</code> = sin bonus.</p>
+<hr />
+<h4 id="get_armor_damage_reduction_bonusplayer-slot-str-float"><code>get_armor_damage_reduction_bonus(player, slot: str) -&gt; float</code></h4>
+<p>Retorna el % extra de reducción para un slot específico, en decimal (0.0–1.0).</p>
+<hr />
+<h4 id="get_total_armor_reduction_bonusplayer-float"><code>get_total_armor_reduction_bonus(player) -&gt; float</code></h4>
+<p>Retorna el promedio de bonus de todas las armaduras equipadas (0.0–1.0).</p>
+<hr />
+<h4 id="to_dict-dict_1"><code>to_dict() -&gt; dict</code></h4>
+<p>Serializa todos los masteries a diccionario.</p>
+<h4 id="from_dictdata-dict-masterymanager-classmethod"><code>from_dict(data: dict) -&gt; MasteryManager</code> <em>(classmethod)</em></h4>
+<p>Reconstruye el manager desde un diccionario guardado. Compatibilidad con saves anteriores: los tipos no encontrados se inicializan en nivel 1.</p>
+<hr />
+<h4 id="display_masteriesconsole"><code>display_masteries(console)</code></h4>
+<p>Muestra todos los masteries en una tabla Rich con barras de progreso, nivel, EXP y bonus.</p>
+<hr />
+<h2 id="funcion-helper-ensure_mastery">Función Helper <code>ensure_mastery</code></h2>
+<pre><code class="language-python">ensure_mastery(player) -&gt; MasteryManager
+</code></pre>
+<p>Garantiza que <code>player.mastery_manager</code> exista. Si no existe o es <code>None</code>, crea una nueva instancia de <code>MasteryManager</code>. Retorna el manager.</p>
+<p>Debe llamarse antes de usar el sistema de mastery para garantizar compatibilidad con saves antiguos.</p>
+<pre><code class="language-python">from Modules.MasterySystem import ensure_mastery
+
+mm = ensure_mastery(player)
+mm.register_damage_dealt(player, damage)
+</code></pre>
+<hr />
 <h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
-<h3 id="obtener-enemigos-de-una-zona-para-el-combate">Obtener enemigos de una zona para el combate</h3>
-<pre><code class="language-python">from Modules.ZoneManager import get_zone_manager
-import random
+<h3 id="registrar-dano-en-combate-maingamepy">Registrar daño en combate (MainGame.py)</h3>
+<pre><code class="language-python">from Modules.MasterySystem import ensure_mastery
 
-manager  = get_zone_manager()
-enemigos = manager.get_zone_enemies(&quot;Forest&quot;)
+# Al atacar
+damage_dealt = player.attack(enemy)
+mm = ensure_mastery(player)
+lvlup_msg = mm.register_damage_dealt(player, float(damage_dealt))
+if lvlup_msg:
+    console.print(f&quot;[bold green]{lvlup_msg}[/bold green]&quot;)
 
-if enemigos:
-    enemigo_data = random.choice(enemigos)
-    print(f&quot;Enemigo encontrado: {enemigo_data['NAME']}&quot;)
+# Al recibir daño
+damage_taken = enemy.attack(player)
+lvlup_msg = mm.register_damage_received(player, float(damage_taken))
+if lvlup_msg:
+    console.print(f&quot;[bold cyan]{lvlup_msg}[/bold cyan]&quot;)
 </code></pre>
-<h3 id="construir-el-selector-de-zona-dinamicamente">Construir el selector de zona dinámicamente</h3>
-<pre><code class="language-python">from Modules.ZoneManager import get_zones_for_selector
-from Modules.input_utils import interactive_menu_select
-
-zonas = get_zones_for_selector()
-
-opciones = [(i + 1, f&quot;[{info[2]}]{info[1]}[/{info[2]}]&quot;) for i, info in enumerate(zonas)]
-opciones.append((0, &quot;Volver&quot;))
-
-eleccion = interactive_menu_select(
-    title=&quot;Seleccionar Zona&quot;,
-    options=opciones,
-    border_style=&quot;green&quot;,
-)
+<h3 id="consultar-bonus-de-arma-equipada">Consultar bonus de arma equipada</h3>
+<pre><code class="language-python">mm = ensure_mastery(player)
+multiplier = mm.get_weapon_damage_multiplier(player)
+final_damage = base_damage * multiplier
 </code></pre>
-<h3 id="verificar-si-una-zona-tiene-material-de-recoleccion">Verificar si una zona tiene material de recolección</h3>
-<pre><code class="language-python">from Modules.ZoneManager import get_zone_info
+<h3 id="mostrar-tabla-de-masteries">Mostrar tabla de masteries</h3>
+<pre><code class="language-python">from rich.console import Console
+mm = ensure_mastery(player)
+mm.display_masteries(Console())
+</code></pre>
+<h3 id="guardado-y-carga-integrado-con-savesystem">Guardado y carga (integrado con SaveSystem)</h3>
+<pre><code class="language-python"># Serializar (en build_save_data)
+mastery_dict = player.mastery_manager.to_dict()
 
-info = get_zone_info(&quot;Forest&quot;)
-if info and info.get(&quot;gathering&quot;):
-    materiales = info[&quot;gathering&quot;].get(&quot;Materials&quot;, [])
-    print(f&quot;Materiales disponibles: {materiales}&quot;)
+# Deserializar (en _restore_mastery)
+player.mastery_manager = MasteryManager.from_dict(mastery_dict)
 </code></pre>
 <hr />
 <h2 id="notas-y-referencias">Notas y Referencias</h2>
 <ul>
-<li>El método <code>_load_zones_from_mods()</code> captura silenciosamente cualquier excepción si el <code>ModLoader</code> no está inicializado, lo que hace que el <code>ZoneManager</code> funcione aunque no haya mods cargados.</li>
-<li>Las zonas de mods <strong>sobreescriben</strong> las del JSON base si usan la misma <code>zone_key</code>. Esto permite a los mods modificar zonas existentes.</li>
-<li><strong><code>Loader.Read</code>:</strong> Se usa para leer el JSON completo pasando <code>None</code> como segundo argumento. Ver <code>Loader.md</code> para más detalles.</li>
-<li><strong><code>ModAPI.get_all_zones()</code>:</strong> Método que retorna el diccionario <code>stats_injections</code> de la <code>ModAPI</code>, donde los mods registran sus zonas. Ver <code>ModLoader.md</code>.</li>
+<li>El mastery se calcula sobre el <strong>daño total</strong> de un golpe, no por tipo de daño individual.</li>
+<li>Los tres slots de anillo (<code>ring</code>, <code>ring2</code>, <code>ring3</code>) contribuyen al mismo tipo <code>Ring</code>, pero la EXP solo se otorga una vez por combate para evitar triplicarla.</li>
+<li><strong><code>math</code>:</strong> Se importa pero no se usa actualmente en la versión actual (puede ser residuo de versiones anteriores).</li>
+<li>La integración con <code>SaveSystem.py</code> es completa: <code>to_dict</code>/<code>from_dict</code> permiten persistir el progreso entre sesiones.</li>
 </ul>
 
 

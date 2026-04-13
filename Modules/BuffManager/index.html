@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
     
     
       
@@ -704,6 +704,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#aplicar-debuff-de-companero-a-un-enemigo-desde-maingame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicar debuff de compañero a un enemigo (desde MainGame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#crear-y-usar-el-buffmanager-directamente" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -961,6 +972,118 @@
     
   
     Zone Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CraftingSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crafting System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MasterySystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mastery System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SaveSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Save System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SkillTreeSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Skill Tree System
   
 
     
@@ -1865,6 +1988,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#aplicar-debuff-de-companero-a-un-enemigo-desde-maingame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicar debuff de compañero a un enemigo (desde MainGame)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#crear-y-usar-el-buffmanager-directamente" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2008,7 +2142,7 @@
 <tr>
 <td><code>source</code></td>
 <td><code>str</code></td>
-<td>Origen del buff: <code>"skill"</code>, <code>"item"</code>, <code>"potion"</code>.</td>
+<td>Origen del buff: <code>"skill"</code>, <code>"item"</code>, <code>"potion"</code>, <code>"companion_skill"</code>.</td>
 </tr>
 <tr>
 <td><code>permanent</code></td>
@@ -2120,7 +2254,7 @@ buff = manager.create_buff(&quot;1_buff&quot;, source=&quot;skill&quot;)
 <pre><code class="language-python">manager = get_buff_manager()
 </code></pre>
 <h3 id="apply_buff_to_playerplayer-buff_id-source-permanent-buff_after_unequip"><code>apply_buff_to_player(player, buff_id, source, permanent, buff_after_unequip)</code></h3>
-<p>Función de conveniencia para aplicar un buff directamente a un jugador. Inicializa <code>player.active_buffs</code> si no existe.</p>
+<p>Función de conveniencia para aplicar un buff directamente a un jugador. Inicializa <code>player.active_buffs</code> si no existe. El parámetro <code>source</code> acepta el valor <code>"companion_skill"</code> además de los anteriores.</p>
 <h3 id="remove_buff_from_playerplayer-buff_id-bool"><code>remove_buff_from_player(player, buff_id) -&gt; bool</code></h3>
 <p>Busca y elimina el primer buff con el <code>buff_id</code> dado de la lista <code>player.active_buffs</code>.</p>
 <h3 id="process_turn_buffsplayer"><code>process_turn_buffs(player)</code></h3>
@@ -2141,6 +2275,14 @@ process_turn_buffs(player)
 
 # El buff dura mientras el item esté equipado
 apply_buff_to_player(player, &quot;2_buff&quot;, source=&quot;item&quot;, permanent=True)
+</code></pre>
+<h3 id="aplicar-debuff-de-companero-a-un-enemigo-desde-maingame">Aplicar debuff de compañero a un enemigo (desde MainGame)</h3>
+<pre><code class="language-python">bm = get_buff_manager()
+debuff = bm.create_buff(&quot;5_debuff&quot;, &quot;companion_skill&quot;)
+if debuff:
+    if not hasattr(enemy, 'active_buffs'):
+        enemy.active_buffs = []
+    enemy.active_buffs.append(debuff)
 </code></pre>
 <h3 id="crear-y-usar-el-buffmanager-directamente">Crear y usar el BuffManager directamente</h3>
 <pre><code class="language-python">from Modules.BuffManager import get_buff_manager
@@ -2182,6 +2324,7 @@ manager.list_all_buffs(detailed=True)
 <h2 id="notas-y-referencias">Notas y Referencias</h2>
 <ul>
 <li>El sistema de <em>diminishing returns</em> es un patrón común en RPGs para evitar que acumular muchos buffs del mismo tipo sea demasiado poderoso.</li>
+<li>Los buffs aplicados a enemigos (ej: debuffs de compañeros) siguen el mismo sistema; el objeto enemigo necesita un atributo <code>active_buffs</code> (lista) para recibirlos.</li>
 <li><strong>Patrón Singleton en Python:</strong> <a href="https://refactoring.guru/design-patterns/singleton/python/example">https://refactoring.guru/design-patterns/singleton/python/example</a></li>
 <li><strong><code>deepcopy</code> de la librería <code>copy</code>:</strong> Crea copias independientes de objetos complejos. <a href="https://docs.python.org/3/library/copy.html">https://docs.python.org/3/library/copy.html</a></li>
 <li><strong><code>typing</code> module:</strong> Tipos como <code>Optional</code>, <code>List</code>, <code>Dict</code> son de este módulo. <a href="https://docs.python.org/3/library/typing.html">https://docs.python.org/3/library/typing.html</a></li>
