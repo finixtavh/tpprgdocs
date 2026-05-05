@@ -5,6 +5,21 @@ site_author: FN
 theme:
   name: material
   language: es
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
   features:
     - navigation.sections
     - navigation.expand
@@ -15,39 +30,42 @@ theme:
 plugins:
   - search
 
-extra_css:
-  - css/style.css
-
 nav:
   - Inicio: index.md
+  - Core:
+      - Main Game: MainGame.md
+      - Setup & Base Stats: Modules/ModulesUtils/setup.md
 
-  - Módulos:
-      - Buff Manager: Modules/BuffManager.md
-      - Enchantment System: Modules/EnchantmentSystem.md
-      - Equipment System: Modules/EquipmentSystem.md
-      - Farming System: Modules/FarmingSystem.md
-      - Gathering Mastery: Modules/GatheringMasterySystem.md
-      - Inventory Menu: Modules/InventoryMenu.md
-      - Shop Manager: Modules/ShopManager.md
-      - Item Manager: Modules/ItemManager.md
-      - Zone Manager: Modules/ZoneManager.md
-      - Crafting System: Modules/CraftingSystem.md
-      - Mastery System: Modules/MasterySystem.md
-      - Save System: Modules/SaveSystem.md
-      - Skill Tree System: Modules/SkillTreeSystem.md
-  - Utils:
-      - Main Game: ModulesUtils/MainGame.md
-      - Loader: ModulesUtils/Loader.md
-      - Mod Loader: ModulesUtils/ModLoader.md
+  - Sistemas Funcionales:
+      - Base System: Modules/ModulesFunctions/BaseSystem.md
+      - Companion System: Modules/ModulesFunctions/CompanionSystem.md
+      - Crafting System: Modules/ModulesFunctions/CraftingSystem.md
+      - Enchantment System: Modules/ModulesFunctions/EnchantmentSystem.md
+      - Equipment System: Modules/ModulesFunctions/EquipmentSystem.md
+      - Gathering Mastery: Modules/ModulesFunctions/GatheringMasterySystem.md
+      - Guild System (Grand Strategy): Modules/ModulesFunctions/GuildSystem.md
+      - Guild Missions: Modules/ModulesFunctions/GuildMissions.md
+      - Guild Skill Tree: Modules/ModulesFunctions/GuildSkillTree.md
+      - Item Browser: Modules/ModulesFunctions/ItemBrowser.md
+      - Mastery System: Modules/ModulesFunctions/MasterySystem.md
+      - Quest System: Modules/ModulesFunctions/QuestSystem.md
+      - Save System: Modules/ModulesFunctions/SaveSystem.md
+      - Skill Tree System: Modules/ModulesFunctions/SkillTreeSystem.md
+      - Weather System: Modules/ModulesFunctions/WeatherSystem.md
 
-      - Debug: ModulesUtils/debug.md
-      - Input Utils: ModulesUtils/input_utils.md
-      - Modloader: ModulesUtils/ModLoader.md
+  - Gestores (Managers):
+      - Item Manager: Modules/ModulesManager/ItemManager.md
+      - Buff Manager: Modules/ModulesManager/BuffManager.md
+      - Shop Manager: Modules/ModulesManager/ShopManager.md
+      - Zone Manager: Modules/ModulesManager/ZoneManager.md
 
-  - Setup:
-      - Configuración: setup/setup.md
+  - Menús (UI):
+      - Debug Menu: Modules/ModulesMenu/DebugMenu.md
+      - Guild Menu: Modules/ModulesMenu/GuildMenu.md
+      - Inventory Menu: Modules/ModulesMenu/InventoryMenu.md
 
-  - Interno:
-      - Init: __init__.md
-  - Obsoleto:
-    - Check Admin: ModulesUtils/check_admin.md
+  - Utilidades:
+      - Loader (I/O): Modules/ModulesUtils/Loader.md
+      - Mod Loader: Modules/ModulesUtils/ModLoader.md
+      - Input Utils: Modules/ModulesUtils/input_utils.md
+      - Debug Utils: Modules/ModulesUtils/debug.md
