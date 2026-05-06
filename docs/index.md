@@ -62,4 +62,4 @@ graph TD
 
 ## Autor
 
-Desarrollado con ❤️ por **finixtavh (aka lole)**.
+Desarrollado por **finixtavh (aka lole)**.
