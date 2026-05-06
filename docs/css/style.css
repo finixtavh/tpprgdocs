@@ -2,6 +2,24 @@
     --md-default-bg-color: #1e1e1e;
 }
 
+@font-face {
+    font-family: 'JetBrainsMonoNerd';
+    src: url('../../Fonts/JetBrainsMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+body {
+    font-family: "JetBrainsMonoNerd", monospace;
+    font-weight: normal;
+    background: #13131e;
+    color: #cdd6f4;
+    margin: 0;
+    padding: 0;
+}
+
+
 .md-main {
     background-color: #121212;
 }

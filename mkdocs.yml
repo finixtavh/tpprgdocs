@@ -10,16 +10,6 @@ theme:
       scheme: slate
       primary: teal
       accent: cyan
-      toggle:
-        icon: material/brightness-4
-        name: Cambiar a modo claro
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: teal
-      accent: cyan
-      toggle:
-        icon: material/brightness-7
-        name: Cambiar a modo oscuro
   features:
     - navigation.sections
     - navigation.expand
