@@ -14,7 +14,7 @@ TPPRPG no es solo un juego, sino un ecosistema extensible que permite la creaci�
 
 El siguiente diagrama muestra cómo interactúan los diferentes módulos del motor:
 
-```mermaid
+``` mermaid
 graph TD
     Main[MainGame.py] --> Input[input_utils.py]
     Main --> Managers[Managers]
