@@ -30,6 +30,9 @@ theme:
 plugins:
   - search
 
+extra_css:
+  - css/style.css
+
 nav:
   - Inicio: index.md
   - Core:
