@@ -1,55 +1,88 @@
 # `BuffManager.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Clase `Buff`](#clase-buff)
-3. [Gestor: `BuffManager`](#gestor-buffmanager)
-4. [Mecánica de Stacking (Diminishing Returns)](#mecánica-de-stacking-diminishing-returns)
-5. [Ciclo de Vida de los Efectos](#ciclo-de-vida-de-los-efectos)
-6. [Integración con el Jugador](#integración-con-el-jugador)
-7. [Ejemplos de Uso](#ejemplos-de-uso)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
 
 ---
 
-## Descripción General
-
-`BuffManager.py` gestiona los estados alterados (buffs y debuffs) aplicados tanto al jugador como a los enemigos. Permite definir efectos temporales o permanentes que alteran estadísticas como daño, defensa, regeneración de salud, entre otros.
-
----
-
-## Clase `Buff`
-
-Representa una instancia individual de un efecto de estado.
-- `buff_id`: Identificador único (terminado en `_buff` o `_debuff`).
-- `duration_current`: Turnos restantes antes de que el efecto desaparezca.
-- `permanent`: Indica si el efecto no tiene límite de tiempo (ej. bonus de equipo).
-- `effects`: Diccionario de modificadores aplicados.
+## 1. Descripción General
+El `BuffManager.py` gestiona el estado temporal (buffs y debuffs) de las entidades del juego. Es responsable de aplicar bonificaciones o penalizaciones a las estadísticas, calcular su tiempo de expiración por cada "tick" (turno) y aplicar mecánicas avanzadas como los *Diminishing Returns* (Rendimientos Decrecientes) cuando múltiples efectos intentan modificar la misma estadística simultáneamente.
 
 ---
 
-## Gestor: `BuffManager`
-
-Carga las definiciones desde `DataBuffs.json` y maneja la lógica de aplicación masiva.
-
-### Funciones Principales
-- `create_buff()`: Instancia un efecto basado en su ID.
-- `apply_buffs_to_entity()`: Calcula los modificadores totales de una lista de buffs, aplicando penalizaciones si es necesario.
-- `tick_buffs()`: Reduce la duración de todos los efectos activos en 1 turno.
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Requiere el JSON `./Data/DataBuffs.json` para definir la librería de buffs/debuffs del juego.
+- **Bibliotecas Standard**: `json`, `os`, `copy.deepcopy` para clonar instancias base de buffs.
 
 ---
 
-## Mecánica de Stacking (Diminishing Returns)
+## 3. Constantes y Variables Globales
+- `_buff_manager_instance` (`BuffManager` | `None`): Singleton global.
 
-Para evitar que el jugador se vuelva invencible acumulando múltiples buffs del mismo tipo, el sistema implementa **rendimientos decrecientes**:
-- Si tienes 2 o más buffs que afectan al **mismo atributo** (ej. dos buffs de daño):
-    1. El buff más potente se aplica al **100%**.
-    2. El segundo se aplica al **75%**.
-    3. El tercero al **35%**.
-    4. El cuarto al **9%**.
-    5. El quinto en adelante al **3%**.
+---
 
-Esto obliga al jugador a buscar diversidad en sus buffs en lugar de acumular el mismo efecto repetidamente.
+## 4. Clases y Estructuras de Datos
+
+### `Buff`
+Representa una instancia activa de un buff o debuff aplicado a una entidad.
+
+#### Atributos de Instancia
+- `self.buff_id` (`str`): Identificador único (ej: `"1_buff"`, `"5_debuff"`).
+- `self.name` (`str`), `self.description` (`str`), `self.icon` (`str`): Metadatos visuales.
+- `self.duration_base` (`int`): Turnos que dura por defecto.
+- `self.duration_current` (`int`): Turnos restantes antes de expirar (9999 si es permanente).
+- `self.type` (`str`): Tipo de buff (ej. `"flat"`, `"percentage"`).
+- `self.effects` (`Dict[str, float]`): Diccionario con las estadísticas afectadas y sus valores (ej. `{"attack": 10.0}`).
+- `self.source` (`str`): Origen (`"skill"`, `"item"`, `"potion"`).
+- `self.permanent` (`bool`): Si es True, no decae con los turnos. Útil para equipo.
+- `self.buff_after_unequip` (`int`): Turnos que dura un buff de equipo *después* de desequiparlo.
+- `self.is_debuff` (`bool`): True si el ID contiene `"_debuff"`.
+- `self.applied` (`bool`): Bandera para saber si ya se sumaron sus estadísticas a la entidad.
+- `self.stack_penalty` (`float`): Multiplicador de penalización por acumular muchos buffs del mismo tipo (de 0.0 a 1.0).
+
+#### Métodos Principales
+- `tick(self) -> bool`
+  - **Propósito**: Resta 1 a `duration_current` si no es permanente. Devuelve `True` si sigue vivo o `False` si expiró.
+- `get_display_name(self) -> str`
+  - **Propósito**: Devuelve un string formateado para la UI: `[Icono] [Nombre] ([Turnos]T) [[Penalización]% si aplica]`.
+- `copy(self) -> Buff`
+  - **Propósito**: Utiliza `deepcopy` para clonar un buff (útil para aplicarlo a un jugador sin modificar la base de datos central).
+
+### `BuffManager`
+Motor central de estados.
+
+#### Constantes de Clase
+- `STACK_PENALTIES` (`Dict[int, float]`): Define los rendimientos decrecientes. El 1er buff aplica al 100%, el 2do al 75%, el 3ro al 35%, el 4to al 9% y a partir del 5to solo el 3%.
+
+#### Atributos de Instancia
+- `self.buffs_json_path` (`str`): Ruta del archivo (`"./Data/DataBuffs.json"`).
+- `self.buffs_data` (`Dict`): Base de datos en memoria de los Buffs.
+- `self.debuffs_data` (`Dict`): Base de datos en memoria de los Debuffs.
+
+#### Métodos Principales
+- `load_buffs(self) -> bool`
+  - **Propósito**: Lee el JSON y separa los datos en `self.buffs_data` y `self.debuffs_data`.
+- `create_buff(self, buff_id: str, source: str = "skill", permanent: bool = False, buff_after_unequip: int = 0) -> Optional[Buff]`
+  - **Propósito**: Instancia un objeto `Buff` buscando su data por ID.
+- `apply_buffs_to_entity(self, entity, active_buffs: List[Buff]) -> Dict[str, float]`
+  - **Propósito**: Calcula las matemáticas detrás de todos los buffs en `active_buffs`. Aplica las penalizaciones de *Stacking* de ser necesario y devuelve el valor total consolidado de modificaciones a aplicar a la entidad.
+  - **Retornos**: Un diccionario con la suma neta de los efectos por cada stat.
+- `_group_buffs_by_stat(self, buffs: List[Buff]) -> Dict[str, List[Buff]]`
+  - **Propósito**: Organiza los buffs activos según qué estadística modifican para preparar el terreno para las penalizaciones.
+- `_apply_stacking_penalties(self, effects_by_stat: Dict[str, List[Buff]], all_buffs: List[Buff])`
+  - **Propósito**: Ordena los buffs que afectan un mismo stat de mayor impacto a menor impacto, aplicando el multiplicador dictado por `STACK_PENALTIES` según su posición en la lista.
+- `remove_buffs_from_entity(self, entity, buffs_to_remove: List[Buff]) -> Dict[str, float]`
+  - **Propósito**: Calcula cuánto valor (con penalización aplicada) debe removerse cuando expira un buff para que los stats vuelvan a la normalidad sin arrastrar errores de coma flotante.
+
+---
+
+## 5. Funciones del Módulo (API)
+- `get_buff_manager(buffs_path: str = "./Data/DataBuffs.json") -> BuffManager`
+  - **Propósito**: Devuelve la instancia Singleton del Manager, inicializándolo si es la primera llamada.
 
 ---
 

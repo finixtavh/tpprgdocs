@@ -1,109 +1,82 @@
 # `MasterySystem.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Clase `MasterySkill`](#clase-masteryskill)
-3. [Gestor: `MasteryManager`](#gestor-masterymanager)
-4. [Mecánica de Progresión](#mecánica-de-progresión)
-5. [Bonus por Nivel](#bonus-por-nivel)
-6. [Interfaz de Usuario](#interfaz-de-usuario)
-7. [Ejemplos de Uso](#ejemplos-de-uso)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Flujo de Ganancia de Experiencia](#flujo-de-ganancia)
 
 ---
 
-## Descripción General
-
-`MasterySystem.py` implementa el sistema de "Maestrías" de combate. A diferencia de los niveles de personaje, las maestrías suben de forma orgánica al usar equipos específicos. Cuanto más use el jugador una categoría de arma o armadura, más eficiente se volverá con ella.
-
----
-
-## Clase `MasterySkill`
-
-Representa el nivel de maestría en una categoría específica (ej. "Espadas").
-- `current_level`: Nivel actual (1-20).
-- `exp_current`: Progreso hacia el siguiente nivel.
-- `bonus_multiplier`: Calcula el modificador de daño o defensa basado en el nivel.
+## 1. Descripción General
+`MasterySystem.py` maneja la progresión pasiva ("Mastery" o Maestría) de los jugadores con los distintos tipos de armas y armaduras. Mientras el jugador inflige daño o recibe daño en combate, este sistema recompensa la constancia aumentando niveles específicos por categoría de equipo (Ej: Espadas, Arcos, Cascos). A mayor nivel, el jugador recibe multiplicadores pasivos permanentes de daño o resistencia.
 
 ---
 
-## Gestor: `MasteryManager`
-
-Coordina todas las maestrías del jugador.
-
-### Categorías de Armas
-- Swords (Espadas)
-- Staffs (Bastones)
-- Hammers (Martillos)
-- Spears (Lanzas)
-- Daggers (Dagas)
-- Bows (Arcos)
-- Generic (Armas no categorizadas)
-
-### Categorías de Armaduras
-- Helmet (Cascos)
-- Armor (Pechos/Armaduras)
-- Boots (Botas)
-- Ring (Anillos)
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Requiere lectura en tiempo de ejecución de `config.json` para obtener los modificadores globales de ganancia de EXP (`GLOBAL_WEAPON_MASTERY_MODIFIER` y `GLOBAL_ARMOR_MASTERY_MODIFIER`).
+- **Inyecciones**: `math`, `typing`. Actúa de forma aislada sin dependencias circulares complejas, recibiendo las instancias de `player` únicamente cuando procesa daño.
 
 ---
 
-## Mecánica de Progresión
-
-La experiencia se gana automáticamente durante el combate:
-- **Maestría de Armas**: Gana EXP al **infligir daño**.
-    - `EXP = Daño_Realizado / 35`.
-- **Maestría de Armaduras**: Gana EXP al **recibir daño**.
-    - `EXP = Daño_Recibido / 35`.
-
----
-
-## Bonus por Nivel
-
-Cada nivel de maestría (del 2 al 20) otorga beneficios acumulativos:
-
-| Tipo | Bonus por Nivel | Total al Nv. 20 |
-|---|---|---|
-| **Armas** | +0.5% Daño | +9.5% Daño |
-| **Armaduras** | +0.25% Reducción | +4.75% Reducción |
+## 3. Constantes y Variables Globales
+- `MASTERY_MAX_LEVEL` (`int`): Nivel tope de maestría (20).
+- `MASTERY_EXP_BASE` (`float`): Experiencia requerida para pasar de Nivel 1 a 2 (100.0).
+- `MASTERY_EXP_GROWTH` (`float`): Curva exponencial de requerimiento de experiencia (1.5).
+- `WEAPON_BONUS_PER_LEVEL` (`float`): +0.5% de Daño por cada nivel.
+- `ARMOR_BONUS_PER_LEVEL` (`float`): +0.25% de Reducción de Daño por cada nivel.
+- `WEAPON_TYPES` (`list`): `["Swords", "Staffs", "Hammers", "Spears", "Daggers", "Bows", "Generic"]`.
+- `ARMOR_TYPES` (`list`): `["Helmet", "Armor", "Boots", "Ring"]`.
 
 ---
 
-## Interfaz de Usuario
+## 4. Clases y Estructuras de Datos
 
-### `display_masteries(console)`
-Genera una tabla detallada con `Rich` que muestra:
-- El tipo de maestría.
-- El nivel actual y la barra de progreso visual `██░░`.
-- El bonus exacto de atributo que se está aplicando actualmente.
+### `MasterySkill`
+Clase contenedora de la progresión para una rama específica (ej: Solo Espadas).
+
+#### Atributos de Instancia
+- `self.name` (`str`): Nombre de UI (ej: "Espadas").
+- `self.skill_type` (`str`): Categoria general (`"weapon"` o `"armor"`).
+- `self.current_level` (`int`): Nivel actual.
+- `self.exp_current` (`float`): Experiencia acumulada.
+- `self.exp_to_next` (`float`): Experiencia necesaria para el siguiente nivel.
+
+#### Métodos Principales
+- `add_exp(self, amount: float) -> int`: Suma experiencia y aplica la matemática de Subida de Nivel. Devuelve un entero indicando si subió 1 o más niveles de golpe.
+- **Propiedades Computadas**: `bonus_percent`, `bonus_multiplier`, `bonus_description` calculan matemáticamente cuánto afecta este nivel en combate real.
+
+### `MasteryManager`
+Clase factoría e indexadora atada al `player.mastery_manager`.
+
+#### Atributos de Instancia
+- `self.weapon_masteries` (`Dict[str, MasterySkill]`): Diccionario de habilidades ofensivas.
+- `self.armor_masteries` (`Dict[str, MasterySkill]`): Diccionario de habilidades defensivas.
+
+#### Métodos Principales
+- `get_weapon_type(weapon) -> str` *(estático)*: Analiza el objeto del arma y determina a qué categoría de las 7 posibles pertenece (leyendo `item_category` o infiriendo por nombre).
+- `register_damage_dealt(self, player, damage_total: float) -> Optional[str]`: Extrae el tipo del arma actual del jugador, calcula la EXP correspondiente (`daño / 35 * modificador global`) y llama a `add_exp`. Retorna texto para UI en caso de *Level Up*.
+- `register_damage_received(self, player, damage_total: float) -> Optional[str]`: Itera a través del Casco, Armadura, Botas y Anillos equipados. Calcula la EXP (`daño / 35 * modificador global`) y aplica progreso a todas las partes a la vez.
+- `get_weapon_bonus_multiplier(self, weapon) -> float`: Método rápido para que el sistema de Combate Principal aplique el daño extra de la maestría.
 
 ---
 
-## Ejemplos de Uso
+## 5. Funciones del Módulo (API)
 
-### Registrar daño en el bucle de combate
+- `ensure_mastery(player) -> MasteryManager`
+  - **Propósito**: Función Singleton por jugador. Revisa si el jugador ya tiene inicializado `mastery_manager`. De no ser así, lo instancia y se lo asigna.
+- `open_mastery_menu(player, console, pause_fn)`
+  - **Propósito**: Abre una interfaz `rich.Panel` listando los niveles actuales de maestrías, ordenados por porcentaje de progreso y filtrando ramas no utilizadas.
 
-```python
-from Modules.ModulesFunctions.MasterySystem import ensure_mastery
-
-mgr = ensure_mastery(player)
-
-# Al final del turno del jugador
-msg = mgr.register_damage_dealt(player, daño_final)
-if msg:
-    print(msg) # "¡Mastery de Espadas subió a Nv.5!"
-```
-
-### Aplicar bonus en el cálculo de daño
-
-```python
-mult = mgr.get_weapon_damage_multiplier(player)
-daño_total = daño_base * mult
-```
 ---
 
-## Notas Técnicas
-
-- El sistema utiliza un Singleton por jugador almacenado en `player.mastery_manager`.
-- El crecimiento de EXP es exponencial: `100 * (1.5 ^ (nv-1))`.
-- Las maestrías se guardan y cargan automáticamente a través del `SaveSystem`.
+## 6. Flujo de Ganancia de Experiencia
+1. En **MainGame.py**, durante el ciclo de combate.
+2. Si el jugador hace **150 de daño** con una Espada.
+3. El sistema de combate llama a `register_damage_dealt`.
+4. El sistema reconoce "Swords".
+5. Extrae $150 / 35 = 4.28$ puntos de EXP.
+6. Si hay modificador global de `config.json` de $2.0x$, la EXP final es $8.56$.
+7. Si este aumento provoca subir a nivel 2, la función retorna un `string` avisando del Level Up que el motor de combate imprimirá en pantalla automáticamente.

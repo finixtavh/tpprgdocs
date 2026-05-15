@@ -1,90 +1,97 @@
 # `setup.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Clase `cPlayer`](#clase-cplayer)
-3. [Clase `cEnemy`](#clase-cenemy)
-4. [Sistemas de Objetos](#sistemas-de-objetos)
-    - [`cWeapon`](#cweapon)
-    - [`cEquippableItems`](#cequippableitems)
-    - [`cObject`](#cobject)
-5. [Sistema de Inventario (`cInventory`)](#sistema-de-inventario-cinventory)
-6. [Funciones de Normalización](#funciones-de-normalización)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clase `cPlayer`](#clase-cplayer)
+5. [Clase `cEnemy`](#clase-cenemy)
+6. [Sistemas de Objetos (`cWeapon`, `cEquippableItems`, `cObject`)](#sistemas-objetos)
+7. [Sistema de Inventario (`cInventory`)](#sistema-inventario)
+8. [Funciones de Normalización](#funciones-normalizacion)
 
 ---
 
-## Descripción General
-
-`setup.py` es el núcleo de datos del juego. Define las clases fundamentales para el jugador, los enemigos y los objetos, así como la lógica base de combate (ataque y recepción de daño) y el sistema de inventario con stacking.
+## 1. Descripción General
+`setup.py` es el archivo fundacional o *Engine Core Data Structure* de TPPRPG. Define de manera orientada a objetos todas las entidades con estado del juego: el personaje del jugador, los enemigos, los objetos (equipables o consumibles) y el inventario. Expone la API de bajo nivel para las matemáticas de combate y mitigación de daño, además de proporcionar los normalizadores estructurales.
 
 ---
 
-## Clase `cPlayer`
+## 2. Dependencias e Inyecciones
+- **`Modules.ModulesUtils.Loader`**: Utilizado indirectamente, aunque su uso nativo ha sido refactorizado.
+- **Inyecciones Condicionales (Lazy/Try-Except)**: Depende dinámicamente de `WeatherSystem` y `GuildSystem` (para procesar multiplicadores globales de combate y `Tax Debuffs`), así como de `EnchantmentSystem` (para interceptar daños en tiempo de cálculo sin generar referencias circulares).
 
-Representa al personaje del jugador. Gestiona estadísticas, equipamiento y progresión.
+---
+
+## 3. Constantes y Variables Globales
+- `player = None`: Singleton temporal del jugador activo durante el Runtime.
+- `vInventory = cInventory()`: Instancia estática del inventario del jugador.
+
+---
+
+## 4. Clase `cPlayer`
+
+Clase maestra que gestiona el estado y la progresión del avatar del usuario.
 
 ### Estadísticas Principales
-- **Health / Health_max**: Puntos de vida.
-- **Mana / Mana_max**: Puntos de energía para habilidades.
-- **EXP / EXP_M**: Experiencia actual y requerida para el siguiente nivel.
-- **DEF**: Array de 5 valores de defensa plana.
-- **DefensePercentage**: Array de 5 valores de reducción porcentual.
-- **Barrier**: Escudo temporal que absorbe daño antes que la salud.
+- **Health / Health_max**: Vida. Regenera de a poco usando `Check()`.
+- **Mana / Mana_max / ManaRegen**: Puntos de habilidad y su velocidad de regeneración por turno.
+- **EXP / EXP_M / Level**: Curva de progresión del personaje. Sube estadísticas al invocar `level_up()`.
+- **DEF / DefensePercentage**: Arrays de 5 dimensiones `[Physical, Thermal, Earth, Electric, Deep]`.
+- **Barrier**: Escudo temporal y ablativo.
 
-### Métodos Clave
-- `attack(enemy)`: Calcula el daño saliente aplicando clima y encantamientos.
-- `TakeDamage(damage, attacker)`: Procesa el daño entrante siguiendo el orden: Barrera → Encantamientos → Defensa Plana → Defensa Porcentual.
-- `level_up()`: Incrementa estadísticas y otorga puntos de habilidad al alcanzar `EXP_M`.
-- `Check(inventory)`: Actualiza estados, regenera mana y sincroniza el equipamiento.
+### Funciones de Ciclo de Vida
+- `Check(inventory)`: La función latido ("Heartbeat"). Restaura Mana, controla el contador de buffs temporales o venenos (`applieddebuffs`), reescala las estadísticas del jugador según su equipamiento y ejecuta la lógica perezosa de los anillos inyectados en la base de datos de Modifiers.
+- `level_up()`: Función de subida de nivel. Restablece el HP y aumenta las barreras.
 
----
-
-## Clase `cEnemy`
-
-Define el comportamiento y estadísticas de los monstruos.
-- **DMG / DMG_min**: Arrays de daño para los 5 tipos elementales.
-- **DEF**: Array de defensa elemental.
-- **EXP_TO_PLAYER / GOLD**: Recompensas otorgadas al morir.
-- **IS_BOSS**: Flag para enemigos especiales con mecánicas únicas.
+### Lógica de Combate
+- `attack(enemy) -> dict`: Inicia el flujo de daño. Genera los daños aleatorios en el arma y aplica modificadores de clima (`WeatherSystem`) e impuestos (`GuildSystem`). Mide probabilidad de "Contraataque" del rival y devuelve un mega-diccionario "Details".
+- `TakeDamage(damage_array, attacker=None) -> dict`: El escudo receptor. Escala el ataque recibido y deduce Vida considerando el siguiente orden matemático de prioridad:
+  1. Multiplicadores Ambientales de Clima.
+  2. Absorción de la `Barrier` activa.
+  3. Descuentos porcentuales (`DefensePercentage`).
+  4. Descuentos planos (`DEF`).
 
 ---
 
-## Sistemas de Objetos
+## 5. Clase `cEnemy`
+
+Define el comportamiento y estadísticas de la Inteligencia Artificial de las criaturas. Comparte el molde matemático con el `cPlayer` (tiene `TakeDamage` y `attack`) pero es agnóstico del equipamiento y usa valores codificados en JSON (`DataStats.json`).
+- Admite flags como `IS_BOSS` o `SPAWN_CHANCE`.
+- Implementa una función de Loot Table que es evaluada en el propio archivo.
+
+---
+
+## 6. Sistemas de Objetos
+
+El motor diferencia rígidamente 3 tipos de interacciones base, y todos se inicializan con la función `create_item_object` del `ItemManager`.
 
 ### `cWeapon`
-Armas que definen el daño del jugador.
-- `use_weapon(player)`: Genera un diccionario de daño aleatorio entre `DMG_min` y `DMG` para cada tipo elemental.
+- Contiene los arrays `DMG_min` y `DMG`.
+- Su método `use_weapon(player)` arroja N dados de 5 caras virtuales, suma bufos de equipo e inyecta la reducción matemática.
 
 ### `cEquippableItems`
-Armaduras, cascos, botas y anillos.
-- **Slots**: Casco (Helmet), Armadura (Armor), Botas (Boots), Anillos (Ring 1, 2, 3).
-- **AppliedStats**: Asegura que las estadísticas se sumen al jugador solo una vez al equipar.
+- Entidades que aportan bufos pasivos (`HealthBoost`, `Defense`, `DmgBoost`).
+- El método `equip(player)` los vincula al Singleton `player`, y delega a `player.Check()` la hidratación de estado global.
 
 ### `cObject`
-Objetos consumibles (pociones, pergaminos).
-- **HealthRestore / ManaRestore**: Valores de recuperación inmediata.
+- Objetos consumibles como pociones o materiales puros que no se equipan.
+- Atributos como `HealthRestore` y `ManaRestore`.
 
 ---
 
-## Sistema de Inventario (`cInventory`)
+## 7. Sistema de Inventario (`cInventory`)
 
-Implementa un sistema de slots con **stacking** (apilamiento).
-- **InventorySlot**: Contenedor para un tipo de ítem y su cantidad.
-- **addObject(item, quantity)**: Busca slots existentes del mismo ítem para apilar o crea nuevos si no hay espacio.
-- **remove_item(item, quantity)**: Reduce la cantidad de los slots y los elimina si llegan a cero.
-
----
-
-## Funciones de Normalización
-
-Para garantizar la compatibilidad con el sistema de 5 tipos de daño/defensa:
-- `_normalize_5_values()`: Convierte entradas simples o listas cortas en un array de longitud 5.
-- `_normalize_4_values()`: Similar, pero para daños mínimos (el daño "Profundo" no tiene valor mínimo aleatorio, es siempre máximo).
+Sistema de Slots apilables en memoria.
+- **`InventorySlot`**: Estructura de datos interna de tupla `(item, quantity)`.
+- `addObject(item, quantity)`: Compara el objeto usando `type(item).__name__` y su identificador estático único (`STATIC_ID`). Si hay coincidencia perfecta, incrementa el entero del stack. Si no, añade un nuevo Slot.
+- `remove_item(item, quantity)`: Modifica cantidades, previene números negativos y destruye el Slot de la memoria si llega a cero.
 
 ---
 
-## Notas Técnicas
+## 8. Funciones de Normalización
 
-- El sistema de daño utiliza `float` para cálculos precisos de buffs/clima antes de aplicar el daño final a los enteros de salud.
-- Las dependencias de `WeatherSystem` y `EnchantmentSystem` se cargan de forma diferida (lazy import) para evitar ciclos de importación.
+El motor v0.9 usa un vector de 5 elementos para representar el daño/defensa: `[Físico, Térmico, Tierra, Eléctrico, Profundo]`.
+Los métodos ocultos de hidratación son:
+- `_normalize_5_values(values)`: Inyecta ceros de relleno (`Padding`) a cualquier lista incompleta (ej: `[10] -> [10, 0, 0, 0, 0]`).
+- `_normalize_4_values(values)`: Lo mismo pero para daños mínimos, debido a que el atributo número 5 ("Profundo") ignora el RNG y siempre hace daño máximo, descartando el slot mínimo.

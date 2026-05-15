@@ -1,90 +1,74 @@
 # `SkillTreeSystem.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Clase `SkillTreeNode`](#clase-skilltreenode)
-3. [Clase `SkillTreeManager`](#clase-skilltreemanager)
-4. [Lógica de Costes y Niveles](#lógica-de-costes-y-niveles)
-5. [Aplicación de Efectos](#aplicación-de-efectos)
-6. [Interfaz Visual](#interfaz-visual)
-7. [Ejemplos de Uso](#ejemplos-de-uso)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Flujo de Desbloqueo y Construcción Visual](#flujo-de-desbloqueo)
 
 ---
 
-## Descripción General
-
-`SkillTreeSystem.py` gestiona la progresión de habilidades y estadísticas permanentes del **jugador**. Utiliza un sistema de nodos ramificados cargados desde `DataSkillTree.json`. Los puntos de habilidad (`lvlPoints`) se obtienen al subir de nivel en el juego principal.
-
----
-
-## Clase `SkillTreeNode`
-
-Representa un nodo (o "talento") individual en el árbol.
-
-- `node_id`: ID técnico del nodo.
-- `requires`: Lista de IDs de nodos previos necesarios para desbloquear este.
-- `max_level`: Número máximo de veces que se puede mejorar este nodo.
-- `effects`: Diccionario de cambios permanentes en los atributos del jugador (ej. `{"Health_max": 20}`).
+## 1. Descripción General
+El `SkillTreeSystem.py` gestiona el árbol de habilidades (o talentos) del jugador. Permite gastar los `lvlPoints` (ganados al subir de nivel) en nodos que otorgan bonificaciones permanentes (salud, maná, atributos, etc.). Soporta ramificaciones, donde algunos nodos están bloqueados hasta que se completen los nodos previos ("raíces"). Presenta un menú interactivo en consola construido de forma visualmente jerárquica utilizando `rich.tree`.
 
 ---
 
-## Clase `SkillTreeManager`
-
-Coordina la carga, visualización y compra de habilidades.
-
-### Métodos Principales
-- `load_tree()`: Carga la estructura completa desde el JSON.
-- `build_rich_tree(player)`: Genera un objeto `Tree` de la librería `Rich` para mostrar visualmente las ramificaciones, estados (bloqueado/desbloqueado) y costes.
-- `apply_node_effects(player, node)`: Modifica directamente el objeto `player` aplicando los bonus del nodo.
-- `open_menu(player)`: Menú interactivo de selección y compra.
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Requiere `./Data/DataSkillTree.json` que define el grafo de habilidades, los costos y los requerimientos de ramificación.
+- **Librerías TUI**: `rich.tree` para el renderizado jerárquico, `rich.panel` y `rich.console`.
+- **Inyecciones Condicionales**: `ModulesUtils.input_utils` (para el menú interactivo seguro `interactive_menu_select`).
 
 ---
 
-## Lógica de Costes y Niveles
-
-El coste de una habilidad no es necesariamente estático. Se calcula mediante la fórmula:
-`Costo Actual = base_cost + (current_level * cost_increment)`
-
-Esto permite que habilidades de múltiples niveles (como "Vitalidad") se vuelvan más caras con cada mejora.
+## 3. Constantes y Variables Globales
+- `skill_tree_manager` (`SkillTreeManager`): Instancia global pre-cargada. Expone el gestor como un Singleton de facto importable por cualquier otro script sin necesidad de volver a leer el archivo JSON desde cero.
 
 ---
 
-## Aplicación de Efectos
+## 4. Clases y Estructuras de Datos
 
-Cuando se compra una habilidad, el `SkillTreeManager` aplica los cambios al objeto `player`. Soporta:
-- **Salud y Maná**: Aumenta el máximo y cura la misma cantidad actual.
-- **Defensas**: Incrementa los valores fijos del array `DEF`.
-- **Porcentajes**: Incrementa los valores del array `DefensePercentage`.
-- **Atributos Dinámicos**: Cualquier otro atributo presente en la clase `cPlayer`.
+### `SkillTreeNode`
+Representa un talento individual (un punto del grafo).
+
+#### Atributos de Instancia
+- `self.node_id` (`str`): ID interno.
+- `self.name` (`str`), `self.desc` (`str`): UI legible.
+- `self.base_cost` (`int`): Costo en `lvlPoints` del primer nivel.
+- `self.cost_increment` (`int`): Cuánto encarece la habilidad por cada nivel extra comprado.
+- `self.max_level` (`int`): Límite de veces que se puede comprar.
+- `self.requires` (`List[str]`): IDs de nodos "padre" que deben poseerse para poder desbloquear este.
+- `self.effects` (`Dict`): Diccionario de bonificaciones, ej: `{"Health_max": 50, "AGI": 2}`.
+
+#### Métodos Principales
+- `get_current_cost(self, current_level: int) -> int`: Retorna la matemática `base_cost + (current_level * cost_increment)`.
+
+### `SkillTreeManager`
+El motor que maneja el árbol global.
+
+#### Atributos de Instancia
+- `self.nodes` (`Dict[str, SkillTreeNode]`): Caché de todos los nodos parseados de JSON.
+
+#### Métodos Principales
+- `load_tree(self)`: Parsea el JSON y llena el diccionario de `nodes`.
+- `build_rich_tree(self, player) -> Tree`: Recrea visualmente el árbol. Identifica los nodos que no tienen `requires` (Raíces). Luego itera recursivamente descubriendo a los "Hijos" que requieran al padre, decorándolos con colores semánticos (Verde si lo tienes, Amarillo si lo maxeaste, Rojo si no tienes puntos, Gris si está bloqueado).
+- `apply_node_effects(self, player, node: SkillTreeNode)`: Intérprete de mutación. Lee el diccionario de `effects` y los suma directamente a las estadísticas base del objeto `player`.
+- `open_menu(self, player)`: Bucle asíncrono. Muestra el árbol renderizado, filtra solo las opciones viables y delega la compra descontando los `lvlPoints`.
 
 ---
 
-## Interfaz Visual
+## 5. Funciones del Módulo (API)
 
-El sistema utiliza `rich.tree` para renderizar un diagrama jerárquico en la consola:
-- 🌟 **Origen**: Nodo raíz inicial.
-- 🟢 **Desbloqueable**: Nodo con requisitos cumplidos y puntos suficientes.
-- 🔒 **Bloqueado**: Nodo sin los requisitos previos.
-- ❇️ **Máximo**: Nodo que ya alcanzó su `max_level`.
+El módulo exporta directamente su clase de forma global, por lo que las funciones a llamar siempre son:
+- `skill_tree_manager.open_menu(player)`
 
 ---
 
-## Ejemplos de Uso
+## 6. Flujo de Desbloqueo y Construcción Visual
 
-### Abrir el menú desde el bucle principal
-
-```python
-from Modules.ModulesFunctions.SkillTreeSystem import skill_tree_manager
-
-if key == "k":
-    skill_tree_manager.open_menu(player)
-```
-
-### Consultar si una habilidad fue comprada
-
-```python
-# Útil para diálogos o eventos especiales
-if "double_jump" in player.skills_purchased:
-    print("¡Puedes saltar dos veces!")
-```
+El sistema fue rediseñado de listas a diccionarios en los guardados (`skills_purchased`).
+1. Al abrir el menú, si el jugador viene de una partida muy antigua donde `skills_purchased` era una lista, hace una migración automática (`retrocompatibilidad a dict`).
+2. Se renderiza un árbol usando la librería `rich`. El árbol detecta dinámicamente las relaciones Padre-Hijo gracias a la propiedad `requires`.
+3. El árbol comprueba silenciosamente y forza el desbloqueo a nivel 1 de los nodos raíz (para prevenir que los jugadores nuevos se bloqueen fuera del árbol).
+4. El jugador selecciona un nodo de la lista, el sistema cobra los Puntos de Nivel y aplica los modificadores matemáticos (como "Salud +50") **directamente y sin intermediarios** al objeto `Player`, mutando sus variables pasivamente.

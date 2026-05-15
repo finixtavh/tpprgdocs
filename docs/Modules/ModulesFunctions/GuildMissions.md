@@ -1,97 +1,74 @@
 # `GuildMissions.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Tipos de Misiones](#tipos-de-misiones)
-3. [Clase `GuildMission`](#clase-guildmission)
-4. [Lógica de Resolución Autónoma](#lógica-de-resolución-autónoma)
-5. [Bonus de Clase de Compañeros](#bonus-de-clase-de-compañeros)
-6. [Interfaz de Usuario](#interfaz-de-usuario)
-7. [Ejemplos de Uso](#ejemplos-de-uso)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Flujo de Resolución Autónoma](#flujo-de-resolución)
 
 ---
 
-## Descripción General
-
-`GuildMissions.py` implementa el sistema de misiones externas donde el jugador puede enviar a sus **compañeros** (Companions) a realizar tareas para el gremio de forma autónoma. Mientras están en una misión, los compañeros no están disponibles para el grupo del jugador y su éxito depende de sus estadísticas y clase.
-
-Las misiones avanzan a medida que el jugador realiza combates por su cuenta.
+## 1. Descripción General
+`GuildMissions.py` introduce una mecánica "Idle" / "Dispatch" dentro del juego. Permite a los líderes de un clan (Guild) enviar a los Compañeros (`cCompanion`) contratados a realizar misiones asíncronas en el trasfondo. Estas misiones toman un número específico de *combates del jugador* para completarse, y si los compañeros tienen las estadísticas suficientes para sobrevivir, regresan con recursos o conquistan territorios sin necesidad de que el jugador pelee manualmente.
 
 ---
 
-## Tipos de Misiones
-
-| Tipo | Icono | Descripción | Efecto del Éxito |
-|---|---|---|---|
-| **Asalto** | ⚔ | Ataque a posición enemiga. | Conquista de territorio. |
-| **Defensa** | 🛡 | Proteger territorio propio. | Evita pérdida de control. |
-| **Sabotaje**| 🗡 | Infiltración en rivales. | Reduce poder militar enemigo. |
-| **Recolección**| 📦 | Búsqueda de recursos. | Añade materiales a la Guild. |
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Ninguno directo. Recibe definiciones geográficas importando indirectamente `GuildManager`.
+- **Librerías TUI**: Uso extensivo de `rich.console`, `rich.table`, `rich.live` para mostrar la pantalla de selección de misiones, y `sshkeyboard` para la navegación con flechas en la UI.
+- **Inyecciones Condicionales**: Importa `get_effective_mission_slots` desde `GuildSkillTree.py` para calcular dinámicamente si el clan tiene capacidad para lanzar otra misión paralela.
 
 ---
 
-## Clase `GuildMission`
-
-Gestiona los datos y el estado de una misión en curso.
-
-- `duration_combats`: Número de combates que debe realizar el jugador para que la misión termine.
-- `assigned_companions`: Lista de IDs de compañeros enviados.
-- `result`: Almacena si la misión fue un éxito o un fracaso tras completarse.
-
----
-
-## Lógica de Resolución Autónoma
-
-El éxito se calcula comparando el **Poder del Squad** contra el **Umbral de Dificultad**:
-
-1. **Poder del Squad**: `suma de (HP_máx * 0.5 * (1 + bonus_clase))`.
-2. **Dificultad**: `misión.difficulty * 12 + factor_aleatorio`.
-3. **Resultado**: Si `squad_power >= dificultad`, la misión es un éxito.
+## 3. Constantes y Variables Globales
+- `MISSION_TYPES` (`Dict`): Catálogo estático con 4 misiones posibles.
+  - **Asalto**: Combate contra un territorio enemigo para conquistarlo. (Dificultad Base: 50).
+  - **Defensa**: Frenar ataque enemigo a un territorio propio. (Base: 35).
+  - **Sabotaje**: Atacar las reservas militares de otra guild. (Base: 45).
+  - **Recolección**: Buscar materias primas. (Base: 20).
+- `CLASS_MISSION_BONUS` (`Dict`): Matriz de afinidad. Define que enviar a un compañero clase "Tanque" a una Defensa le da `+40%` de fuerza, pero en Sabotaje le da `0%`.
 
 ---
 
-## Bonus de Clase de Compañeros
+## 4. Clases y Estructuras de Datos
 
-Ciertas clases de compañeros son más efectivas en tipos específicos de misiones:
+### `GuildMission`
+Estructura de datos que encapsula el contrato de una misión.
 
-- **Tanque**: +40% en misiones de **Defensa**.
-- **Explorador**: +40% en **Recolección**, +30% en **Sabotaje**.
-- **Daño**: +30% en **Asalto**.
-- **Mago**: Bonus equilibrado en Asalto (+20%) y Sabotaje (+20%).
+#### Atributos de Instancia (Relevantes)
+- `self.mission_id` / `self.mission_type`: Identificadores lógicos.
+- `self.difficulty` (`int`): Multiplicador matemático requerido para pasar el check (de 1 a 10).
+- `self.duration_combats` (`int`): Condición de victoria. Cuántos monstruos debe matar el Jugador (en su juego normal) antes de que el servidor considere que la misión expiró.
+- `self.reward_resources` / `self.reward_skill_pts`: Qué gana el clan si hay éxito.
+- `self.assigned_companions` (`List[str]`): Lista con los IDs de los NPC mandados al trabajo.
+- `self.started_at_combat` (`int`): Fotografía del contador de combates del jugador (`player.combat_counter`) en el instante en que se presiona Enter.
 
----
-
-## Interfaz de Usuario
-
-### `open_guild_missions_menu(guild, player, guild_manager)`
-Una interfaz interactiva que permite:
-- Ver misiones disponibles generadas aleatoriamente.
-- Consultar recompensas (Materiales, Puntos de Skill).
-- Seleccionar y enviar compañeros.
-- Muestra el estado de los slots de misión (ampliables mediante el árbol de habilidades).
+#### Métodos Principales
+- `to_dict(self)` / `from_dict(cls, data)`: Serialización plana.
 
 ---
 
-## Ejemplos de Uso
+## 5. Funciones del Módulo (API)
 
-### Consultar finalización de misiones
-El motor principal del juego llama a esta función tras cada combate:
+- `generate_missions_for_guild(guild, guild_manager) -> List[GuildMission]`
+  - **Propósito**: Observa el estado actual del mundo (Ej: si la guild tiene territorios enemigos cerca, o si hay neutrales) y crea proceduralmente 4 misiones para ofrecerlas en el tablón.
+- `open_guild_missions_menu(guild, player, guild_manager, console)`
+  - **Propósito**: Panel interactivo. Lista las 4 misiones creadas. Permite seleccionar una y despachar automáticamente a un compañero de la reserva marcando su `mission_status = "on_mission"`.
+- `check_mission_completion(mission, current_combat, companions, guild, guild_manager)`
+  - **Propósito**: Hook de chequeo pasivo que debe inyectarse en el ciclo principal del juego. Revisa si el jugador ya peleó lo suficiente (`current_combat >= started_at_combat + duration_combats`). Si es verdadero, detona el RNG matemático de la resolución.
 
-```python
-from Modules.ModulesFunctions.GuildMissions import check_mission_completion
-
-# Recorrer misiones activas de la guild del jugador
-for m_data in player_guild.active_missions:
-    m = GuildMission.from_dict(m_data)
-    res = check_mission_completion(m, player.combat_counter, player.companion, player_guild, gm)
-    if res:
-        # Procesar fin de misión...
-```
 ---
 
-## Notas y Referencias
+## 6. Flujo de Resolución Autónoma
 
-- Los compañeros en misión pasan al estado `on_mission`.
-- Al regresar, pasan al estado `inactive`, lo que significa que el jugador debe volver a añadirlos manualmente a su grupo principal si desea viajar con ellos.
-- Las misiones de **Asalto** fallidas pueden provocar la pérdida de soldados de la población de la Guild.
+La lógica principal se encuentra en `resolve_autonomous_mission`:
+
+1. El sistema recupera el escuadrón enviado (1 o más NPCs).
+2. Calcula su poder base ($HP_{max} * 0.5$).
+3. Aplica los bonos multiplicadores cruzando la matriz `CLASS_MISSION_BONUS` usando la clase del NPC contra el tipo de misión.
+4. Si la Guild tiene bonificaciones pasivas desbloqueadas (Ej: `mil_assault` en el Árbol de Habilidades del Clan), el poder se infla un $25\%$.
+5. Calcula el `difficulty_threshold`: $(dificultad \times 12) \pm Random(-10, +20)$.
+6. Compara: Si $Poder > Umbral$, el jugador gana y recibe el Botín + Moral.
+7. Si pierde, recibe daño al clan, baja moral, e incluso suscribe una penalización adicional si era Asalto o Sabotaje, donde la Guild sufre bajas definitivas poblacionales/militares. Los aliados regresan con estatus `"inactive"`.

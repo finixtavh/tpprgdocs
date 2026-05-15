@@ -1,120 +1,78 @@
 # `GuildSystem.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Estructuras de Datos](#estructuras-de-datos)
-    - [GuildResource](#guildresource)
-    - [Territory](#territory)
-3. [Clase Principal: `Guild`](#clase-principal-guild)
-4. [Gestor: `GuildManager`](#gestor-guildmanager)
-5. [Sistema de Economía y Producción](#sistema-de-economía-y-producción)
-6. [Sistema Militar y Combate](#sistema-militar-y-combate)
-7. [IA de Gremios (NPC)](#ia-de-gremios-npc)
-8. [Eventos y Desastres](#eventos-y-desastres)
-9. [Ciclo de Juego (Diagrama)](#ciclo-de-juego-diagrama)
-10. [Notas y Referencias](#notas-y-referencias)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Mecánicas Geopolíticas (Guerras y Eventos)](#mecanicas)
 
 ---
 
-## Descripción General
-
-`GuildSystem.py` es el motor central que gestiona la geopolítica, economía y simulación de los gremios (Guilds) en TPPRPG. Permite la existencia de múltiples facciones con intereses propios, territorios que producen recursos y ejércitos que pueden conquistar nuevas tierras.
-
-**Características principales:**
-- **IA Estratégica**: Los gremios NPC operan bajo 4 estados: *Survival, Expansion, Economic y Balanced*.
-- **Sistema de Impuestos (V4)**: El jugador puede ajustar la tasa impositiva (1-50%) cada 5 peleas.
-- **Tensión Mundial**: Un indicador global que aumenta con las declaraciones de guerra.
-- **Espionaje y Sabotaje**: Permite ver stats de enemigos y realizar ataques encubiertos.
+## 1. Descripción General
+`GuildSystem.py` es el motor masivo de Geopolítica de TPPRPG. Simula un mundo vivo donde docenas de facciones (Guilds) compiten por el control de territorios en un mapa 2D, gestionan recursos (`GuildResources`), reclutan ejércitos (`soldiers`, `archers`, `cavalry`) y se declaran la guerra mutuamente usando inteligencia artificial simplificada. El jugador puede crear su propia Guild o unirse a una existente, participando activamente en la diplomacia y gestión (Moral, Relaciones y Comida) mediante decisiones en eventos procedimentales.
 
 ---
 
-## Estructuras de Datos
+## 2. Dependencias e Inyecciones
+- **Archivos Base**:
+  - `./Data/GuildResources.json`: Fórmulas y rarezas de ítems de clan (Madera, Hierro, Xar).
+  - `./Data/Guilds.json`: Nombres base y arquetipos de clanes NPC.
+  - `./Data/ZoneGuilds.json`: Topología del mapa, coordenadas `[X,Y]` y multiplicadores de defensa/población de cada zona.
+  - `config.json` (`GUILDS_PARAMS`): Define la agresión de IA, penalties por guerra sorpresa y bonos base.
+- **Inyecciones**: `WeatherSystem` (`apply_weather_combat_mods`) inyectado como bloqueador para penalizar matemáticamente las ofensivas masivas en territorios con climas adversos (Tormentas, Niebla).
+
+---
+
+## 3. Constantes y Variables Globales
+- `SIMULATION_INTERVAL` (`int`): Segundos en tiempo real entre cada "Tick" económico mundial (por defecto 5s).
+- `RARITY_BASE_CAPS` (`Dict`): Capacidad límite de almacenamiento base según rareza.
+- `GUILD_BUILDINGS` (`Dict`): Diccionario anidado de los 11 edificios construibles en el clan (Cuartel, Granero, Mercado...) con costos en recursos.
+- `GUILD_EVENTS_POOL` (`List[Dict]`): Plantillas de eventos procedimentales (Plagas, Espías, Peticiones de ayuda).
+
+---
+
+## 4. Clases y Estructuras de Datos
 
 ### `GuildResource`
-Representa un tipo de recurso (Madera, Piedra, Oro, etc.) dentro del inventario de un gremio.
-- Atributos: `resource_id`, `name`, `icon`, `rarity`, `amount`.
+Clase contenedora (`resource_id`, `amount`). Facilita la serialización JSON.
 
 ### `Territory`
-Representa una zona en el mapa mundial.
-- Atributos: `owner`, `resource_output`, `defense_value`, `loyalty`, `garrison`.
-- Los territorios pueden rebelarse si la lealtad (`loyalty`) cae a 0 debido a falta de guarnición.
+Representa un nodo geográfico en disputa.
+- **Atributos Clave**: `resource_output` (qué produce), `owner` (dueño actual), `garrison` (tropas estáticas apostadas), `loyalty` (si baja a 0 puede rebelarse), `position` (tupla X,Y).
+
+### `Guild`
+Entidad principal (Facciones NPC o del Jugador).
+- **Atributos Económicos**: `resources`, `population`, `population_capacity`, `moral`.
+- **Atributos Militares**: `soldiers`, `military_power`, `buildings` (Lista de IDs).
+- **Atributos Diplomáticos**: `relations` (Dict mapeando ID Facción -> Relación -100 a +100), `at_war_with` (List de IDs), `event_queue` (Lista de eventos esperando decisión del jugador).
+- **Métodos**: `add_resource`, `consume_resources`, `recruit_soldiers`, `calculate_military_power`.
+
+### `GuildManager`
+Singleton que simula el mundo.
+- **Atributos**: `guilds` (Diccionario gigante), `territories`, `player_guild_id`, `last_simulation_tick`.
+- **Métodos Internos Principales**:
+  - `simulate_world()`: Bucle principal atado al tiempo. Ejecuta el consumo de comida general, producción, y da paso a la Inteligencia Artificial.
+  - `_simulate_npc_decisions(guild)`: Motor IA. Analiza las relaciones de los NPC. Si odian a un vecino (`rel < -30`), y tienen 20% más fuerza militar, les declaran la guerra. Construyen edificios si sobra comida/piedra.
+  - `_simulate_wars()`: Calcula el desgaste de guerra. Los clanes en guerra activa pierden tropas, población y recursos en cada tick hasta que la fuerza de un bando cae críticamente y se pide tregua.
+  - `push_event_to_player()`: Lanza un evento extraído de `GUILD_EVENTS_POOL` a la cola del jugador para que lo responda en el menú M.
 
 ---
 
-## Clase Principal: `Guild`
+## 5. Funciones del Módulo (API)
 
-Define el estado y comportamiento de un gremio.
-
-### Atributos Clave
-- **Estadísticas**: `military_power`, `population`, `moral`, `aggressiveness`.
-- **Economía**: `tax_rate`, `tax_gold_pool`, `resources` (Dict de `GuildResource`).
-- **Militar**: `soldiers` (Infantry, Archers, Cavalry, Siege), `attack_rating`, `defense_rating`.
-- **Infraestructura**: `buildings`, `unlocked_skills`.
-- **Global**: `at_war_with`, `relations`.
-
-### Métodos Destacados
-- `recruit_soldiers(type, count)`: Convierte recursos y población en tropas.
-- `apply_taxes()`: Recauda oro basado en la población y la tasa de impuestos. Afecta negativamente a la moral si los impuestos son altos (>10%).
-- `grow_population()`: Calcula el crecimiento poblacional basado en el suministro de comida.
-- `clamp_resources()`: Limita los recursos según la capacidad de los almacenes del gremio.
+- `get_guild_manager() -> GuildManager`: Singleton Global.
+- `reset_guild_manager() -> GuildManager`: Borra la instancia de memoria y reinicia. Útil al cambiar de Partida guardada.
+- `initialize_world_state()`: Función de Generación. Parsea los JSON, coloca a los NPC aleatoriamente en el mapa y precalcula los balances iníciales.
+- `generate_initial_player_events(guild_id)`: Empuja los primeros 3 eventos predefinidos (Discurso, Bienvenida, Finanzas) a la cola del jugador recién ungido como Líder.
 
 ---
 
-## Gestor: `GuildManager`
+## 6. Mecánicas Geopolíticas (Guerras y Eventos)
 
-El Singleton `get_guild_manager()` coordina la simulación global.
+### Ciclo Económico
+Cada `SIMULATION_INTERVAL` (Tick), todos los clanes ganan recursos basados en los `Territory` que poseen y su nivel de `population`. Seguidamente, pagan "Mantenimiento" en Comida. Si la comida llega a 0, la `moral` entra en picada. Si la moral baja a críticos, empiezan las revueltas poblacionales y pérdida militar.
 
-- `generate_random_guilds()`: Crea la población inicial de gremios NPC.
-- `initialize_world_state()`: Configura dinámicamente la situación geopolítica al iniciar una nueva partida leyendo el `config.json`, determinando la cantidad de conflictos iniciales (`AMOUNT_OF_STARTING_WARS`) y ajustes diplomáticos (`AMOUNT_OF_STARTING_EVENTS`).
-- `generate_initial_player_events()`: Al fundar o unirse a un gremio, pre-genera de manera procedural una serie de eventos interactivos iniciales (Bienvenida, Mercader, Diplomacia), eliminando la dependencia de un paso de tiempo global en las etapas iniciales de la simulación.
-- `tick()`: El corazón de la simulación. Se ejecuta periódicamente para procesar producción, IA, eventos y desastres.
-- `_process_disasters()`: Aplica efectos climáticos destructivos (ej. terremotos) a los gremios, con probabilidad reducida si poseen un "Puesto de Mantenimiento".
-
----
-
-## Sistema Militar y Combate
-
-El combate entre gremios (`_attack_territory`) es una resolución matemática que considera:
-1. **Poder Base**: El `military_power` del gremio.
-2. **Composición de Tropas**: Cada tipo de tropa tiene un valor y hay un sistema de "counters" (ej. Caballería vence Arqueros).
-3. **Bonificaciones**: Árbol de habilidades, edificios (Murallas, Cuartel) y moral.
-4. **Debuffs de Impuestos**: Si la tasa es >10%, se aplican penalizaciones severas al Daño y la Defensa del jugador.
-5. **Clima**: Los modificadores del `WeatherSystem` afectan el resultado final.
-
----
-
-## IA de Gremios (NPC)
-
-La IA toma decisiones en cada `tick`:
-1. **Sobrevivir**: Si falta comida, ataca territorios con producción agrícola.
-2. **Expandir**: Si tiene moral y poder alto, intenta conquistar territorios neutrales o enemigos.
-3. **Diplomacia**: Forma coaliciones contra gremios dominantes o declara guerras si la relación es baja.
-4. **Construir**: Gasta excedentes de recursos en edificios estratégicos.
-
----
-
-## Ciclo de Juego (Diagrama)
-
-```mermaid
-graph TD
-    A[Inicio del Tick] --> B[Producción de Recursos]
-    B --> C[Crecimiento de Población]
-    C --> D[Recaudación de Impuestos (Cada 5 Peleas)]
-    D --> E[Decisión de la IA (Estratégica)]
-    E --> F{¿Atacar o Sabotear?}
-    F -- Sí --> G[Resolución de Combate / Sabotaje]
-    F -- No --> H[Construcción/Reclutamiento/Trade]
-    G --> I[Aumento de Tensión Mundial]
-    H --> I
-    I --> J[Eventos y Desastres]
-    J --> K[Fin del Tick]
-```
-
----
-
-## Notas y Referencias
-
-- **Gobernadores**: Asignar un compañero como gobernador a un territorio aumenta su producción en un +20%.
-- **Mantenimiento**: El edificio `mantenimiento` reduce en un 75% la probabilidad de perder edificios por desastres.
-- **Relaciones**: La reputación del jugador con cada gremio afecta los precios de comercio y la probabilidad de ser atacado.
+### Sistema de Eventos
+Las notificaciones procedimentales se acumulan en `player_guild.event_queue`. Al abrir el menú, el jugador debe decidir entre 2 o 3 opciones. Las respuestas ejecutan modificadores estáticos de la plantilla (ej. `{"comida": -30, "rel_src": +15}`). Los "Targets" dinámicos (quién es el aliado que pide ayuda) se escogen aleatoriamente entre las facciones vecinas o aliadas, por lo que el texto es adaptado (`"Tus guardias capturaron a un espía de Gremio del Fuego"`).

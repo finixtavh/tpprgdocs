@@ -1,96 +1,90 @@
 # `GuildMenu.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Estructura de la Interfaz](#estructura-de-la-interfaz)
-3. [Módulos del Menú](#módulos-del-menú)
-    - [Resumen de Guild](#resumen-de-guild)
-    - [Gestión de Territorios](#gestión-de-territorios)
-    - [Diplomacia y Guerra](#diplomacia-y-guerra)
-    - [Economía y Recursos](#economía-y-recursos)
-    - [Construcciones](#construcciones)
-4. [Navegación y Controles](#navegación-y-controles)
-5. [Sistema de Renderizado (Rich + Live)](#sistema-de-renderizado-rich--live)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Estructura de la Interfaz (Sub-Menús)](#sub-menus)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Manejo de Renderizado y Teclado](#renderizado)
 
 ---
 
-## Descripción General
-
-`GuildMenu.py` es la interfaz maestra para el sistema de simulación de gremios. Proporciona al jugador una visión estratégica del mundo, permitiéndole gestionar su propia guild, interactuar diplomáticamente con otras facciones, expandir su territorio y desarrollar infraestructuras.
-
----
-
-## Estructura de la Interfaz
-
-La interfaz utiliza un sistema de pestañas virtuales y pantallas dedicadas:
-1. **Pestaña Principal**: Resumen de poder, moral y población.
-2. **Mapa de Territorios**: Visualización ASCII del control territorial del mundo.
-3. **Panel Diplomático**: Relaciones, alianzas, estados de guerra y **Sabotaje**.
-4. **Mercado y Trueques**: Gestión de propuestas comerciales de otras guilds.
-5. **Almacén de Recursos**: Stock de materiales y comercio de excedentes.
-6. **Menú de Construcción**: Desarrollo de edificios que otorgan bonus pasivos.
-7. **Configuración de Taxes**: Slider para ajustar el % de impuestos (1-50%).
+## 1. Descripción General
+`GuildMenu.py` contiene la interfaz visual del sistema Geopolítico (`GuildSystem.py`). Implementa una suite de navegación basada en Live/Panels mediante la librería `rich`. A través de sub-menús interactivos, el jugador administra los territorios conquistados, sus finanzas y recursos, interactúa diplomáticamente declarando la guerra/paz, realiza sabotajes asíncronos y dirige proyectos de construcción.
 
 ---
 
-## Módulos del Menú
-
-### Resumen de Guild
-Muestra las estadísticas vitales:
-- **Poder Militar**: Fuerza de ataque y defensa en conquistas.
-- **Moral**: Afecta la eficiencia y puede provocar deserciones si es baja.
-- **Influencia**: Puntos para acciones diplomáticas y políticas.
-- **Reputación del Jugador**: Cómo ve la guild al jugador específicamente.
-
-### Gestión de Territorios
-Permite visualizar el mapa del mundo:
-- **★**: Territorio propio.
-- **🔸**: Territorio de otra guild.
-- **·**: Territorio neutral.
-- **Acción**: El jugador puede declarar la guerra o atacar territorios neutrales consumiendo recursos (Lingotes de Xar, Madera).
-
-### Diplomacia y Guerra
-Permite interacciones complejas con otras facciones:
-- **Alianzas**: Cooperación militar y comercial.
-- **Guerra Formal**: Conflicto declarado que aumenta la **Tensión Mundial** y permite la conquista.
-- **Sabotaje**: Requiere la habilidad *Espionaje*. Permite robar oro o dañar la moral enemiga.
-
-### Economía y Recursos
-Visualiza el flujo de materiales:
-- **Consumo de Comida**: Calculado por tick según la población.
-- **Generación de Recursos**: Proveniente de los territorios controlados.
-- **Capacidad**: Limitada por el tipo de guild y edificios construidos.
-
-### Construcciones
-Lista de edificios disponibles (Muro, Cuartel, Almacén, etc.) con sus costes en materiales de guild y efectos inmediatos sobre las estadísticas del gremio.
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Requiere el `GuildManager` Singleton, lee la lista constante de edificios `GUILD_BUILDINGS` y se inyecta indirectamente con `config.json` para extraer las métricas punitivas por acciones bélicas (`FORMAL_WAR_PENALTY`, `SURPRISE_WAR_PENALTY`).
+- **Librerías TUI**:
+  - `rich.console`, `rich.panel`, `rich.table`, `rich.live`.
+  - `sshkeyboard` inyectado dentro del decorador/context manager `keyboard_listener_scope`.
+- **Módulos Conectados**: Lanza a su vez sub-menús como `open_guild_skill_tree` y `open_guild_missions_menu`.
 
 ---
 
-## Navegación y Controles
-
-| Tecla | Acción |
-|---|---|
-| **↑ / ↓** | Navegar entre opciones de menú o listas de territorios. |
-| **← / →** | Cambiar entre pestañas principales o páginas de listas. |
-| **Enter** | Confirmar acción (Construir, Atacar, Aliar). |
-| **F** | Formar Alianza (en el menú de Diplomacia). |
-| **W** | Declarar Guerra (en el menú de Diplomacia). |
-| **S** | Sabotear (requiere Espionaje). |
-| **T** | Comercio Personalizado con NPC. |
-| **O** | Abrir Configuración de Taxes. |
-| **Esc** | Volver o cerrar el menú. |
+## 3. Constantes y Variables Globales
+- `RARITY_COLORS` (`Dict`): Un mapeo simple que asigna colores HEX o string de la TUI según la calidad del material de guild (`Common` a `Legendary`).
 
 ---
 
-## Sistema de Renderizado (Rich + Live)
+## 4. Estructura de la Interfaz (Sub-Menús)
 
-El menú utiliza `rich.live` para actualizaciones en tiempo real (20-60 FPS), permitiendo que los eventos del mundo (notificaciones de otras guilds, cambios de clima) se reflejen instantáneamente sin parpadeos de pantalla. Cada submenú se encapsula en un `console.screen()` para garantizar una limpieza total de la terminal al salir.
+El menú principal delega la pantalla a 6 paneles distintos (Pestañas):
+1. **Resumen**: Estadísticas maestras (Moral, Poder Militar, Reputación del Jugador, y Cola de Últimos Eventos).
+2. **Territorios**: Mapa ASCII y listado de todas las zonas que tiene el jugador (`get_territory_map_rows()`).
+3. **Mundo**: Muestra a la competencia. Lista todos los clanes ordenador por Poder Militar (`get_sorted_guilds_by_power()`).
+4. **Diplomacia**: Permite Aliarse (`[F]`), Declarar Guerra (`[W]`), Sabotear (`[S]`) u Ofrecer Tratos Comerciales (`[T]`).
+5. **Recursos**: Estado de stock, capacidad máxima y consumo/ticks restantes de alimento.
+6. **Edificios**: Cola de construcción de la base.
 
 ---
 
-## Notas Técnicas
+## 5. Funciones del Módulo (API)
 
-- La configuración de costes y penalizaciones se lee dinámicamente de `config.json`.
-- El sistema de mapa ASCII se genera proceduralmente a través del `GuildManager`.
-- La diplomacia incluye un sistema de "Reputación Global" que afecta cómo te ven todas las guilds si realizas acciones deshonestas (como guerras sorpresa).
+### Renderizadores "Stateless"
+Solo devuelven strings o paneles. No bloquean.
+- `_render_summary(guild, player, gm)`
+- `_render_territories(guild, gm, page)`
+- `_render_resources(guild, gm)`
+- `_render_world(gm, player, page)`
+- `_render_diplomacy(guild, gm, player, page)`
+
+### Hooks de Controladores de Sub-Menús
+Bloqueantes (Bucle Atrapado). Toman el control de la terminal para realizar acciones de gestión que cambian los números del juego.
+- `_diplomacy_action_menu(player_guild, player, gm, con)`
+- `_territories_action_menu(player_guild, player, gm, con)`
+- `_buildings_menu(player_guild, gm, con)`
+- `_events_menu(player_guild, player, gm, con)`: Ejecuta las colas de decisión y lee los inputs procedimentales de las misiones que saltan cada N minutos.
+- `_custom_trade_menu(player_guild, target_guild, player, gm, con)`: Sistema de trueque con la IA.
+
+### Punto de Entrada
+- `open_guild_menu(player, console=None)`
+  - Encierra al usuario en una brújula principal con las flechas Izquierda/Derecha rotando entre las pantallas. Si se apreta `ENTER`, invoca a la función controladora de la Pestaña actual y el sub-menú toma temporalmente el Thread de teclado.
+
+---
+
+## 6. Manejo de Renderizado y Teclado
+
+### La Regla de Oro del Renderizado en `GuildMenu.py`:
+A diferencia de otros submenús simples, el `GuildMenu` nunca anida un `Live` dentro de otro `Live`.
+Cada controlador (`_buildings_menu`, `_diplomacy_action_menu`, etc.) sigue este patrón estructurado:
+```python
+with con.screen():
+    with keyboard_listener_scope():
+        kb_thread = threading.Thread(target=listen_keyboard, kwargs={...}, daemon=True)
+        kb_thread.start()
+        with Live(console=con, screen=True, auto_refresh=False) as live:
+            try:
+                while not state["exit"]:
+                    if state["dirty"]:
+                        live.update(_render(), refresh=True)
+                        state["dirty"] = False
+                    time.sleep(0.01)
+            finally:
+                stop_listening()
+                kb_thread.join(timeout=0.2)
+        con.clear()
+```
+Esto asegura que la terminal devuelva el foco limpiamente y no arroje *fantasmas* (líneas basura en la consola) ni bugs de teclas atascadas (debido a colisiones de threads de `sshkeyboard`) al regresar a la vista anterior.

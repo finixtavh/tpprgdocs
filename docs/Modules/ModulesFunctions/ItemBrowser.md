@@ -1,67 +1,72 @@
 # `ItemBrowser.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Clase `ItemBrowser`](#clase-itembrowser)
-3. [Mecánica de Descubrimiento](#mecánica-de-descubrimiento)
-4. [Interfaz de Usuario](#interfaz-de-usuario)
-5. [Controles](#controles)
-6. [Notas Técnicas](#notas-técnicas)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Flujo Visual e Interacción](#interacción)
 
 ---
 
-## Descripción General
-
-`ItemBrowser.py` implementa la **Enciclopedia de Ítems** (o Bestiario/Catálogo) del juego. Es una herramienta de consulta que permite al jugador ver todos los objetos existentes en la base de datos del juego, filtrarlos y marcar favoritos.
-
----
-
-## Clase `ItemBrowser`
-
-Se encarga de indexar todos los ítems disponibles en el `ItemManager`.
-
-- `_load_all_items()`: Escanea todas las categorías de ítems (Armas, Armaduras, Materiales, etc.) y crea instancias temporales para mostrar su información.
-- Los ítems se ordenan automáticamente por su ID numérico.
+## 1. Descripción General
+`ItemBrowser.py` provee la "Enciclopedia" o "Bestiario de Ítems" del juego. Es un menú visual interactivo que permite al jugador navegar a través del catálogo completo de objetos registrados en el `ItemManager` (`DataItems.json`, `DataWeapons.json`, etc.). Implementa mecánicas de descubrimiento: los objetos que el jugador nunca ha tenido se muestran bloqueados (censurados con bloques "█"), incentivando la exploración.
 
 ---
 
-## Mecánica de Descubrimiento
-
-El navegador respeta la progresión del jugador:
-- Si un ítem **ha sido descubierto** (está en `player.discovered_items`), se muestra su nombre, descripción y estadísticas completas.
-- Si el ítem **es desconocido**, su nombre y descripción aparecen censurados (bloques `█`) y sus estadísticas están ocultas.
-
----
-
-## Interfaz de Usuario
-
-### `open_item_browser(player, item_manager)`
-La interfaz utiliza un diseño de doble panel:
-1. **Panel Izquierdo (Lista)**: Muestra los ítems con iconos representativos de su tipo. Los favoritos aparecen con una estrella dorada `★` al inicio.
-2. **Panel Derecho (Detalle)**: Muestra la información técnica (Daño, Defensa, Valor en oro, Descripción narrativa).
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Ninguno directamente, le delega la carga total a la instancia de `ItemManager`.
+- **Librerías TUI**:
+  - `rich.console`, `rich.panel`, `rich.table`, `rich.live` para el renderizado asíncrono a 60fps de interfaz dividida.
+  - `sshkeyboard` para la escucha cruda de teclado.
+- **Inyecciones Condicionales**: `input_utils.keyboard_listener_scope` para el manejo seguro del foco de la terminal. Utiliza las clases `cWeapon`, `cEquippableItems`, `cObject`, `cTool`, y `cMaterial` para instanciar el catálogo.
 
 ---
 
-## Controles
-
-| Tecla | Acción |
-|---|---|
-| **Flechas ↑↓** | Navegar por la lista. |
-| **S** | Activar modo búsqueda (filtrar por nombre). |
-| **F** | Marcar/Desmarcar como favorito. |
-| **ESC** | Salir del navegador. |
-| **Backspace** | Borrar caracteres en el modo búsqueda. |
+## 3. Constantes y Variables Globales
+- `_TYPE_ICON` (`Dict`): Mapeo estético de íconos según la clase (Ej: `cWeapon` -> "⚔").
+- `_TYPE_LABEL` (`Dict`): Traducción de la clase para interfaz de usuario.
+- `_TYPE_COLOR` (`Dict`): Paleta de colores para cada familia de objetos (`bold red` para armas, `bold blue` para materiales).
 
 ---
 
-## Notas Técnicas
+## 4. Clases y Estructuras de Datos
 
-- **Filtros**: La búsqueda es insensible a mayúsculas/minúsculas.
-- **Favoritos**: Los ítems marcados como favoritos siempre aparecen al principio de la lista, independientemente de su ID.
-- **Iconografía**:
-    - ⚔ : Armas
-    - 🛡 : Equipamiento/Armaduras
-    - 🧪 : Objetos consumibles
-    - ⛏ : Herramientas
-    - 🪨 : Materiales
+### `ItemBrowser`
+Clase envoltorio para precargar y ordenar el catálogo masivo antes de abrir la UI.
+
+#### Atributos de Instancia
+- `self.item_manager`: Instancia inyectada por el invocador.
+- `self.all_items` (`List[object]`): Lista gigante donde se guardan las pre-instancias de TODOS los objetos del juego.
+
+#### Métodos Principales
+- `_load_all_items(self)`: Bucle anidado masivo que recorre `item_manager.items_data`. Intenta aislar las llaves (`STATIC_ID` o `MATERIAL_ID`) y manda a instanciar uno de cada objeto al vuelo usando la factoría. Luego los ordena por ID de menor a mayor.
+
+---
+
+## 5. Funciones del Módulo (API)
+
+- `open_item_browser(player, item_manager)`
+  - **Propósito**: Controlador principal que enciende la UI asíncrona.
+- `_is_discovered(item, player) -> bool`
+  - **Propósito**: Función auxiliar. Chequea si el ID estático del ítem pasado por parámetro se encuentra dentro del `Set` o `List` de `player.discovered_items`.
+- `_obscure(text: str) -> str`
+  - **Propósito**: Función auxiliar. Parsea una cadena de texto respetando los espacios pero sustituyendo todos los caracteres alfanuméricos por el bloque ANSI `█`. (Ej: "Espada Larga" $\rightarrow$ "██████ █████").
+
+---
+
+## 6. Flujo Visual e Interacción
+
+Al llamar a `open_item_browser`:
+1. El sistema carga una cuadrícula de dos columnas: **Lista (Izquierda)** y **Detalle (Derecha)**.
+2. El bucle infinito `live.update()` comienza a renderizar a alta velocidad.
+3. El teclado es atajado por `_on_press`.
+   - **Navegación (`UP/DOWN`)**: Mueve el cursor, y si supera el borde inferior de la pantalla, incrementa el valor de `scroll` para mover la cámara hacia abajo ocultando los de arriba.
+   - **Favoritos (`[F]`)**: Añade el objeto a `player.favorite_items`, lo que fuerza que el motor de renderizado lo dibuje arriba de todo en la lista junto con una estrella amarilla `★`.
+   - **Búsqueda (`[S]`)**: Cambia el modo a `input_mode = "search"`. Atrapa todas las teclas tecleadas y las concatena en un String. La función interna `_get_filtered_items` filtra la lista original en tiempo real para hacer una búsqueda incremental sin case-sensitive. Al pulsar `[ENTER]`, congela el término y devuelve el control de las flechas.
+4. Si un objeto se renderiza en **Detalle**, y no fue "Descubierto" (paso 2 de API), muestra únicamente:
+   ```text
+   [Icono] ██████ █████
+   [?] Descubre este ítem para ver sus estadísticas.
+   ```

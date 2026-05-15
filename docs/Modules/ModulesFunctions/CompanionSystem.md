@@ -1,86 +1,91 @@
 # `CompanionSystem.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Clase `cCompanion`](#clase-ccompanion)
-3. [Sistema de Reclutamiento](#sistema-de-reclutamiento)
-    - [Costos y Rarezas](#costos-y-rarezas)
-    - [Generación de Identidad](#generación-de-identidad)
-4. [Gestión de Salarios y Deuda](#gestión-de-salarios-y-deuda)
-5. [Combate y Equipamiento](#combate-y-equipamiento)
-6. [Resurrección](#resurrección)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Mecánicas de Economía y Pagos](#mecánicas-de-economía-y-pagos)
 
 ---
 
-## Descripción General
-
-`CompanionSystem.py` gestiona a los aliados que el jugador puede contratar para que le asistan en combate. Los compañeros tienen sus propias estadísticas, rarezas, clases y un sistema de mantenimiento económico basado en salarios temporales.
-
----
-
-## Clase `cCompanion`
-
-Es la clase base para todos los aliados. A diferencia del jugador, tienen un sistema de equipamiento simplificado (un arma y una armadura) y no tienen un árbol de habilidades propio, basando su poder en su nivel y equipo.
-
-### Atributos Clave
-- **companion_id**: ID único del catálogo.
-- **generated_name**: Nombre aleatorio único asignado al contratar.
-- **is_hired**: Indica si el compañero requiere pago de salario.
-- **DEF / DefensePercentage**: Arrays de defensa elemental (5 tipos).
-- **Barrier**: Escudo protector similar al del jugador.
+## 1. Descripción General
+El `CompanionSystem.py` maneja la instanciación, combate, equipamiento y economía de los "Compañeros" (NPCs aliados). Los compañeros pueden pelear junto al jugador, poseen sus propias estadísticas (HP, Mana, Defensas, etc.) y consumen oro periódicamente como salario si fueron "contratados". 
 
 ---
 
-## Sistema de Reclutamiento
-
-### Costos y Rarezas
-El costo de contratación y el salario dependen de la rareza del compañero:
-
-| Rareza | Costo Inicial | Salario (cada 3 días) |
-|---|---|---|
-| **Common** | 50g | 30g |
-| **Uncommon** | 120g | 70g |
-| **Rare** | 280g | 150g |
-| **Epic** | 600g | 320g |
-| **Legendary** | 1200g | 700g |
-
-### Generación de Identidad
-Al contratar un compañero, se le asigna un género y un nombre aleatorio (Nombre + Apellido) extraído de `Names.json`. Esto dota a cada aliado de una "identidad" única dentro del equipo del jugador.
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: 
+  - `./Data/DataCompanions.json`: Define las plantillas de NPCs (Rareza, Costos base, Armas por defecto).
+  - `./Data/Names.json`: Diccionarios de nombres aleatorios segmentados por género y apellidos.
+  - `./Data/Companions/Time.json`: Archivo persistente separado para llevar el control del último cobro de salarios.
+- **Inyecciones Condicionales**: 
+  - Funciones desde `Modules.ModulesUtils.setup` (ej: `apply_weather_combat_mods`) inyectadas en tiempo de ejecución para modificar el Daño/Evasión según el sistema de clima.
 
 ---
 
-## Gestión de Salarios y Deuda
-
-El sistema cobra automáticamente los salarios basándose en el tiempo real transcurrido (usando `datetime`).
-- **Intervalo**: 3 días reales.
-- **Límite de Deuda**: Si el oro del jugador es inferior a -100g tras cobrar los salarios, todos los compañeros contratados abandonarán el equipo inmediatamente.
-
----
-
-## Combate y Equipamiento
-
-### Combate
-Los compañeros atacan automáticamente en el turno del jugador.
-- Pueden evadir ataques enemigos.
-- Pueden realizar contraataques si su estadística `CounterAttack` lo permite.
-- Sus daños y defensas se ven afectados por el clima.
-
-### Equipamiento
-Se les puede equipar cualquier arma o armadura del inventario del jugador. Al hacerlo, se recalculan sus estadísticas de vida máxima, mana y defensas elementales de forma instantánea.
+## 3. Constantes y Variables Globales
+- `COMPANION_REVIVAL_GOLD_COST` (`int`): Oro necesario para resucitar a un aliado (100).
+- `COMPANION_PAY_INTERVAL_DAYS` (`int`): Ciclos de cobro (cada 3 días de tiempo real).
+- `COMPANION_DEBT_LIMIT` (`float`): Tope de deuda ($-100.0$). Si la deuda baja de este número, los compañeros desertan.
+- `RARITY_HIRE_COST` (`Dict[str, int]`): Oro para contratación inicial, clasificado por rareza (`Common` a `Legendary`).
+- `RARITY_PAY_COST` (`Dict[str, int]`): Oro del cobro recurrente cada 3 días, por rareza.
 
 ---
 
-## Resurrección
+## 4. Clases y Estructuras de Datos
 
-Si un compañero cae en combate (KO), puede ser revivido de dos formas:
-1. **Oro**: Pagando un costo fijo (por defecto 100g) en el menú de gestión.
-2. **Objetos**: Usando ítems consumibles marcados con `is_revival_item: true` (recuperan el 100% de HP).
+### `_DefaultWeapon` / `_DefaultArmor`
+Clases wrapper internas. Permiten que los NPCs cargados desde el JSON tengan un equipo "simulado" sin necesidad de instanciar objetos completos desde el `ItemManager`. Solo guardan daño/defensas brutas y bonificadores de estadísticas.
+
+### `cCompanion`
+Entidad principal del aliado. Actúa de forma análoga a la clase del Jugador en el ciclo de combate.
+
+#### Atributos de Instancia (Relevantes)
+- `self.companion_id` (`str`): ID de plantilla base.
+- `self.name` (`str`): Tipo de clase u oficio (Ej: "Arquero").
+- `self.generated_name` (`str`): Nombre procedimental (Ej: "Kael Stormcrest").
+- `self.is_hired` (`bool`): Bandera para indicar si cobra salario.
+- `self.Health` / `self.Health_max` / `self.Mana` / `self.Mana_max` (`float`): Estadísticas vitales.
+- `self.DEF` (`List[float]`): Array de 5 elementos para defensas Físico, Mágico, Elemental, Perforante, Divino.
+- `self.weapon` / `self.armor` (`Optional[object]`): Referencias al equipo real o simulado.
+
+#### Métodos de Equipamiento
+- `equip_weapon(self, weapon)` / `equip_armor(self, armor)`
+  - **Propósito**: Muta el inventario equipado. Quita los bonos pasivos del ítem anterior y aplica los del nuevo recalculando los máximos de HP/Mana.
+
+#### Métodos de Combate
+- `attack(self, enemy) -> dict`
+  - **Propósito**: Realiza la fase ofensiva. Calcula Evasión y Contraataque del enemigo (afectado por clima). Suma daños mínimos/máximos del arma o lanza el cálculo avanzado de la misma (`weapon.use_weapon()`).
+  - **Retornos**: Diccionario detallado con daño provocado, mitigación, absorción de barreras, etc.
+- `TakeDamage(self, damage, attacker=None)`
+  - **Propósito**: Fase defensiva. Absorbe daño mediante `self.Barrier`, aplica resistencias absolutas (`self.DEF/2`) y luego bloqueos por porcentaje (`DefensePercentage`).
+  - **Mutación**: Resta HP y cambia `self.is_alive` a `False` si llega a 0.
 
 ---
 
-## Notas Técnicas
+## 5. Funciones del Módulo (API)
 
-- Utiliza un sistema de caché para el catálogo de compañeros para evitar lecturas constantes de disco.
-- Los salarios se calculan de forma retroactiva (si el jugador no abre el juego en 9 días, se le cobrarán 3 ciclos de golpe).
-- La persistencia del tiempo se guarda en `Data/Companions/Time.json`.
+### Gestión y Carga
+- `get_companion_data() -> dict`: Parsea el `DataCompanions.json`.
+- `load_companion_by_id(companion_id: str) -> Optional[cCompanion]`: Constructor universal. Instancia la clase `cCompanion` utilizando las stats de la plantilla.
+- `assign_random_identity(companion)`: Extrae nombres de `Names.json` dependiendo de una tirada de género y se los asigna al NPC.
+
+### Economía
+- `process_companion_payments(player, console)`: Revisa el `Time.json`. Si pasaron ciclos vencidos de 3 días, descuenta oro al jugador por cada aliado contratado. Desertan si no puede pagar.
+- `hire_companion(companion, player, console) -> bool`: Ejecuta la transferencia de oro inicial de contratación. Devuelve booleano.
+
+### Menús Interactivos
+- `manage_companions_menu(player, inventory, console, main_menu_fn, pause_fn)`: Panel central que permite curar, resucitar, cambiar equipo o despedir a los compañeros activos.
+- `hire_companion_menu(...)`: Muestra las "Tabernas" categorizadas por rareza para que el jugador gaste su oro en nuevos NPC aleatorios de `DataCompanions.json`.
+
+---
+
+## 6. Mecánicas de Economía y Pagos
+
+El sistema económico está desacoplado del "tiempo ingame" y atado al **Tiempo Real** a través de `Time.json`.
+1. **Contratación**: El jugador paga un monto de enganche alto (`RARITY_HIRE_COST`).
+2. **Ciclo de Cobro (`calculate_payments_due`)**: Se calcula matemáticamente cuántos periodos de 3 días han pasado desde la última revisión (sin importar si el juego estuvo cerrado).
+3. **Cobro Múltiple**: Si el jugador dejó el juego cerrado 10 días, el sistema le cobrará *3 ciclos* completos de golpe.
+4. **Deserción**: Si al cobrar, el jugador baja de `-100 de Oro`, sus aliados contratados desaparecen del array `player.companion`.

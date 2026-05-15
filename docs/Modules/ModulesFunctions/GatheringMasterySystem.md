@@ -1,106 +1,87 @@
 # `GatheringMasterySystem.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Habilidades de Recolección (Skills)](#habilidades-de-recolección-skills)
-3. [Clases de Objetos](#clases-de-objetos)
-    - [`cMaterial`](#cmaterial)
-    - [`cTool`](#ctool)
-4. [El Minijuego de Recolección](#el-minijuego-de-recolección)
-5. [Cálculo de Recompensas](#cálculo-de-recompensas)
-6. [Integración con `cFarm`](#integración-con-cfarm)
-7. [Ejemplos de Uso](#ejemplos-de-uso)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Flujo del Minijuego de Recolección](#flujo-del-minijuego)
 
 ---
 
-## Descripción General
-
-`GatheringMasterySystem.py` gestiona todas las actividades de recolección de recursos en el mundo. Implementa un sistema de progresión de niveles para habilidades no combativas y un minijuego interactivo de timing que determina la velocidad y éxito de la recolección.
-
----
-
-## Habilidades de Recolección (Skills)
-
-El sistema soporta las siguientes disciplinas:
-- **Minería (Mining)**: Extracción de menas y piedras.
-- **Tala (Woodcutting)**: Obtención de diversos tipos de madera.
-- **Pesca (Fishing)**: Captura de peces en zonas acuáticas.
-- **Herboristería (Herbalism)**: Recolección de plantas y hongos.
-- **Peletería (Skinning)**: Obtención de cueros de animales.
-- **Astrología (Astrology)**: Recolección de materiales celestiales.
-
-### Bonus por Nivel
-Cada nivel ganado en una skill otorga:
-- **+5% Eficiencia**: Reduce el tiempo necesario para recolectar.
-- **+10% XP Factor**: Aumenta la experiencia ganada en esa skill.
+## 1. Descripción General
+`GatheringMasterySystem.py` define y gestiona el sistema interactivo de recolección de recursos (Minijuegos) y la progresión de las "Gathering Skills" (ej: Minería, Pesca, Tala). Cuando un jugador interactúa con un recurso en el mundo, este módulo orquesta un minijuego en tiempo real (barra de sincronización) donde el jugador puede obtener bonificaciones de progreso al presionar una tecla en el momento exacto. Paralelamente, otorga experiencia pasiva subiendo de nivel dichas profesiones.
 
 ---
 
-## Clases de Objetos
-
-### `cMaterial`
-Define los recursos naturales.
-- `Hardness`: Determina cuánto tiempo toma recolectarlo.
-- `Level_Req`: Nivel mínimo de skill necesario (basado en la rareza).
-- `SkillName`: La disciplina requerida para este material.
-
-### `cTool`
-Define las herramientas (picos, hachas, etc.).
-- `Efficiency`: Multiplicador que reduce el tiempo de recolección.
-- `ToolTypeStr`: Define qué materiales puede procesar (ej. "TYPE_M:wood").
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Requiere el `config.json` para definir parámetros de balance del minijuego (ej: anchura de la zona segura, velocidad del cursor, intervalos de tick).
+- **Inyecciones**:
+  - `ModulesUtils.Loader` (para carga de configs).
+  - Librerías TUI (`rich.live`, `rich.console`, `sshkeyboard`) para dibujar el minijuego de forma asíncrona.
+  - `Modules.ModulesUtils.input_utils` (para atrapar eventos de teclado de forma segura y sin interrupciones).
 
 ---
 
-## El Minijuego de Recolección
-
-Cuando el jugador interactúa con un recurso, se inicia un minijuego visual:
-1. **Barra de Progreso**: Muestra cuánto falta para terminar.
-2. **Zona de Acierto (Verde)**: Una zona que se mueve aleatoriamente.
-3. **Marcador (▼)**: Oscila de izquierda a derecha.
-
-**Mecánica**: Pulsar **Espacio** cuando el marcador esté en la zona verde reduce el tiempo restante en un **15% (acumulable)**.
+## 3. Constantes y Variables Globales
+- Instancia Global Automática: `Gathering_init` es una variable instanciada a nivel módulo que crea la clase `cFarm`. Funciona como el Singleton de facto.
 
 ---
 
-## Cálculo de Recompensas
+## 4. Clases y Estructuras de Datos
 
-Tras completar el tiempo de recolección:
-1. **Experiencia**: Se otorga EXP a la skill correspondiente basada en la `Hardness` del material.
-2. **Cantidad**: Se realiza un roll de probabilidad:
-    - **1x**: 80% base.
-    - **2x**: 15% base.
-    - **3x**: 5% base.
-    - El "Poder" (Herramienta + Skill) aumenta significativamente las probabilidades de obtener 2x y 3x.
+### `cSkill`
+Representa la progresión de una profesión específica.
+
+#### Constantes Base de Nivelación
+- `MAX_LEVEL` (`int`): Nivel máximo (50).
+- `EXP_BASE` (`float`): Experiencia inicial para nivel 2 (100.0).
+- `EXP_GROWTH` (`float`): Multiplicador de curva de experiencia (1.5).
+- `BONUS_EFFICIENCY` (`float`): +5% de poder base de recolección extra por cada nivel ganado.
+- `BONUS_XP_FACTOR` (`float`): +10% de ganancia de EXP multiplicativa por cada nivel.
+
+#### Atributos de Instancia
+- `self.exp_total` (`float`): Experiencia acumulada actual.
+- `self.exp_to_next_lvl` (`float`): Experiencia requerida calculada de la curva.
+- `self.current_level` (`int`): Nivel de profesión.
+
+#### Métodos Principales
+- `add_exp(self, amount: float) -> int`: Sube EXP y hace Level Up si supera el límite. Retorna la cantidad de niveles ganados de golpe (en caso de otorgar mucha EXP).
+- **Propiedades Computadas**: `efficiency_bonus`, `xp_bonus_factor` devuelven el multiplicador pasivo que se utilizará en las matemáticas del minijuego.
+
+### `cFarm`
+Motor central de habilidades, inicializado como `Gathering_init`.
+
+#### Constantes de Minijuego (Cargadas de `config.json`)
+- `ZONE_BONUS` (`float`): Multiplicador al presionar la tecla en la zona verde (ej: 0.2).
+- `TICK_INTERVAL` (`float`): Velocidad de renderizado del bucle Live.
+- `MARKER_SPEED` / `ZONE_WIDTH_MIN` / `ZONE_WIDTH_MAX`: Variables procedimentales para la dificultad del minijuego.
+
+#### Atributos de Instancia
+- `self.gathering` (`Dict[str, cSkill]`): Diccionario con las profesiones activas (`mining`, `woodcutting`, `fishing`, `herbalism`, `skinning`, `astrology`).
+
+#### Métodos Principales
+- `_build_display(...) -> Panel`: Renderizador interno de la UI del minijuego. Compone las barras ASCII y formatea la tabla central con *rich*.
+- `gather(self, material, tool, buffs) -> int`: Método maestro. Orquesta el multihilo, bloquea la entrada del jugador, evalúa las pulsaciones, restaura o destruye herramientas (basado en durabilidad), y calcula los yields. Retorna el número del botín final recolectado.
 
 ---
 
-## Integración con `cFarm`
+## 5. Funciones del Módulo (API)
 
-La clase `cFarm` actúa como el gestor global (`Gathering_init`).
-- Mantiene el estado de todos los niveles de skill del jugador.
-- Maneja la lógica de renderizado del minijuego usando `Rich.Live`.
+- El módulo opera principalmente instanciando `cMaterial` y `cTool` importados desde este archivo por conveniencia por otros scripts, y luego disparando `Gathering_init.gather()`. 
+- *(Nota: Las definiciones reales de `cMaterial` y `cTool` fueron trasladadas a `ItemManager` por arquitectura, pero este script contiene la lógica de consumo).*
 
 ---
 
-## Ejemplos de Uso
+## 6. Flujo del Minijuego de Recolección
 
-### Iniciar una recolección
-
-```python
-from Modules.ModulesFunctions.GatheringMasterySystem import Gathering_init
-
-try:
-    # material y tool son instancias de cMaterial y cTool
-    cantidad = Gathering_init.gather(material, tool)
-    inventory.addObject(material, cantidad)
-except PermissionError as e:
-    print(f"No puedes recolectar esto: {e}")
-```
-
-### Consultar nivel de una skill
-
-```python
-lvl = Gathering_init.gathering["mining"].current_level
-print(f"Tu nivel de minería es {lvl}")
-```
+1. **Iniciación**: El jugador interactúa con una fuente de recursos. El evento emite la función `gather` pasándole el material base y la herramienta equipada (ej: `Iron Pickaxe`).
+2. **Validación**: Comprueba si el jugador tiene el nivel mínimo de la profesión en `cSkill`.
+3. **Cálculo de Poder**: Multiplica la `Tool.Efficiency` $\times$ `Skill.EfficiencyBonus` $\times$ `Buffs Externos`. Esto define la cantidad total de Tiempo que el jugador tendrá que mantener la pantalla abierta.
+4. **Bucle Asíncrono (`rich.Live`)**: Se abre un `threading` con la función `listen_keyboard`.
+5. **Mecánica**: 
+   - El tiempo baja pasivamente.
+   - Un marcador `▼` se desliza sobre una barra.
+   - Si el jugador presiona `ESPACIO` en la zona `VERDE`, el sistema le otorga `ZONE_BONUS` de progreso extra y le resta tiempo faltante, acortando la recolección.
+6. **Finalización**: Se detiene el thread de teclado, se aplica daño a la durabilidad de la `cTool` (destruyéndola si llega a 0), y se suma el valor de botín multiplicando `Yield` de herramienta y posibles drops críticos. El material cae directo al inventario externo.

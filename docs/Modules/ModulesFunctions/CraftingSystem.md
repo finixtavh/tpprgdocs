@@ -1,103 +1,98 @@
 # `CraftingSystem.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Clase `CraftingSystem`](#clase-craftingsystem)
-3. [Lógica de Recetas](#lógica-de-recetas)
-4. [Interfaz: Mesa de Crafteo](#interfaz-mesa-de-crafteo)
-5. [Controles](#controles)
-6. [ModLoader e Inyecciones](#modloader-e-inyecciones)
-7. [Ejemplos de Uso](#ejemplos-de-uso)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Flujo de Crafteo y Reforjado](#flujo)
 
 ---
 
-## Descripción General
-
-`CraftingSystem.py` permite al jugador crear nuevos objetos combinando materiales de su inventario. El sistema es totalmente dinámico, cargando recetas desde `DataRecipes.json` y permitiendo a los mods inyectar sus propias fórmulas.
-
----
-
-## Clase `CraftingSystem`
-
-Coordina la carga de recetas y el acceso al inventario del jugador.
-
-- `_load_recipes()`: Lee las recetas base y consulta al `ModLoader` por recetas adicionales.
-- `recipes`: Almacena la lista de recetas normalizadas (ID, resultado, materiales, coste en oro).
+## 1. Descripción General
+`CraftingSystem.py` maneja la creación de objetos a partir de materias primas recolectadas por el jugador. Su principal función es exponer una interfaz de usuario pesada que dibuja un menú dinámico en consola (`rich`) donde el jugador puede ver recetas, materiales faltantes, buscar por nombre, y, como adición avanzada, alternar a un "Modo Reforjado" para gastar oro modificando proceduralmente la rareza de los ítems en su inventario.
 
 ---
 
-## Lógica de Recetas
-
-Cada receta define:
-- **Resultado**: ID del ítem generado y cantidad.
-- **Ingredientes**: Diccionario de `{item_id: cantidad_requerida}`.
-- **Coste de Oro**: (Opcional) Precio adicional por el trabajo de forja.
-
-Cuando el jugador craftea un objeto, el sistema:
-1. Verifica si posee todos los materiales (y oro).
-2. Los consume del inventario.
-3. Utiliza el `ItemManager` para crear el nuevo objeto.
-4. Llama a `roll_and_apply_modifier` (del `ItemModifierSystem`) para añadir modificadores procedurales basados en `GLOBAL_CRAFTING_QUALITY_MODIFIER` del `config.json`.
-5. Registra el objeto en `player.discovered_items`.
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Requiere el JSON `./Data/DataRecipes.json` donde se declaran las fórmulas base.
+- **Inyecciones Condicionales**: 
+  - `ModulesUtils.Loader` (lectura).
+  - `ModulesUtils.ModLoader` (las recetas pueden ser inyectadas externamente).
+  - `ItemManager` (inyección global para la instanciación factoría).
+  - `setup.py` (importación de clases hijas como `cWeapon` para inyectarlas a la factoría).
+  - `ItemModifierSystem` (inyectado *in-place* al finalizar el crafteo o durante un re-roll).
+- **Librerías TUI**: `rich` (Live, Table, Panel) y `sshkeyboard`.
 
 ---
 
-## Modo Reforjado (Reforge)
-
-Al presionar `[R]` dentro del menú, se cambia al **Modo Reforjado**. 
-En este modo, el jugador puede pagar una suma de Oro (por defecto 500) para **volver a calcular (reroll)** los modificadores de un ítem existente en su inventario.
-- Los ítems compatibles (Armas, Equipables y Herramientas) se muestran en la lista.
-- El objeto existente reemplazará su modificador actual por uno nuevo (que puede ser mejor, peor o ninguno).
+## 3. Constantes y Variables Globales
+- **No se exportan variables globales en este módulo.** El objeto principal `console = Console()` es del ámbito local de UI.
+- En la función principal, la constante `REFORGE_COST = 500` determina el costo de oro de la mecánica secundaria.
 
 ---
 
-## Interfaz: Mesa de Crafteo
+## 4. Clases y Estructuras de Datos
 
-### `open_crafting_menu(player, inventory)`
-Interfaz dividida en dos paneles:
-1. **Panel Izquierdo (Recetas)**: Muestra la lista de fórmulas conocidas. Indica visualmente si están "LISTO" (tienes materiales) o "FALTAN".
-2. **Panel Derecho (Detalle)**: Desglose exacto de materiales (ej. `Hierro: 5/10`).
+### `CraftingSystem`
+Motor transitorio de carga de recetas.
 
----
+#### Atributos de Instancia
+- `self.player`: Puntero al objeto del jugador actual.
+- `self.inventory`: Puntero al inventario del jugador.
+- `self.recipes` (`List[Dict]`): Lista normalizada de recetas. Cada receta tiene el formato:
+  ```json
+  {
+      "id": "espada_hierro",
+      "result_name": "Espada de Hierro",
+      "result_id": 5,
+      "result_qty": 1,
+      "materials": {"iron_ingot": 2, "wood": 1},
+      "gold_cost": 0
+  }
+  ```
 
-## Controles
-
-| Tecla | Acción |
-|---|---|
-| **Enter** | Craftear una unidad del ítem seleccionado (o aplicar Reforjado en Modo R). |
-| **Q** | Crafteo múltiple (abre un buffer para introducir cantidad numérica). |
-| **R** | Alternar entre **Modo Crafteo** y **Modo Reforjado**. |
-| **S** | Buscar recetas por nombre. |
-| **F** | Marcar receta como favorita (aparecen al inicio de la lista). |
-| **ESC** | Salir del menú. |
-
----
-
-## ModLoader e Inyecciones
-
-El sistema de crafteo es compatible con mods mediante `get_mod_api().recipe_injections`. Esto permite añadir nuevas recetas de armas o consumibles sin modificar los archivos base del juego.
+#### Métodos Principales
+- `__init__(self, player, inventory)`: Guarda referencias y llama a `_load_recipes()`.
+- `_load_recipes(self)`: Parsea `DataRecipes.json`. Normaliza los nombres de los atributos. Adicionalmente, verifica `mod_api.recipe_injections` por si algún mod añadió nuevas recetas.
 
 ---
 
-## Ejemplos de Uso
+## 5. Funciones del Módulo (API)
 
-### Abrir la mesa de crafteo desde la ciudad
+- `open_crafting_menu(player, inventory)`
+  - **Propósito**: Bucle principal asíncrono y síncrono mixto del menú de creación. Utiliza `rich.live` para actualizar la pantalla a 15fps.
+  - **Parámetros**: `player` (clase jugador), `inventory` (gestor de inventario).
+  - **Estructura Interna**: 
+    Contiene subclausuras (`closures`) fuertemente acopladas al estado local (`state = {"idx": 0, "input_mode": "normal", ...}`).
+    - `_get_actual_item_id(mat_id_or_name)` y `_get_actual_item_name()`: Resuelven identificadores mágicos utilizando el Singleton del `ItemManager`.
+    - `_has_materials(recipe, multiplier=1)`: Check de viabilidad de recursos en tiempo real.
+    - `_craft(recipe, qty=1)`: Elimina el costo del inventario y el oro, manda a instanciar el ítem resultante, invoca al `ItemModifierSystem` pasándole los multiplicadores de calidad `GLOBAL_CRAFTING_QUALITY_MODIFIER`, y lo añade al inventario. Además añade el ID a la lista de `discovered_items` del jugador.
+    - `_get_forgeable_slots()`: Filtra el inventario a solo Armas, Equipables y Herramientas (útil para el menú secundario de Reforja).
+    - `_do_reforge()`: Función secundaria que descuenta 500 de Oro, llama a `remove_current_modifier()` para limpiar el ítem, y aplica uno nuevo a través de `roll_and_apply_modifier`.
+  - **Controles (Listeners)**:
+    - Modo Normal: Flechas para navegar la lista.
+    - `[S]`: Cambia el modo para escribir strings de búsqueda.
+    - `[F]`: Alterna favoritos (sube la receta al principio de la lista de dibujado).
+    - `[R]`: Cambia totalmente la pantalla de `Crafting` a `Reforge`.
+    - `[Enter]`: Envía un comando de crafteo o de reforjado según la pestaña activa.
 
-```python
-from Modules.ModulesFunctions.CraftingSystem import open_crafting_menu
+---
 
-# Llamado al interactuar con un yunque o mesa de trabajo
-open_crafting_menu(player, inventory)
-```
+## 6. Flujo de Crafteo y Reforjado
 
-### Consultar materiales disponibles para una receta
+### Ciclo Normal
+1. Jugador entra a Crafteo.
+2. Interfaz llama `_has_materials()`, si es positivo habilita color Verde.
+3. Jugador pulsa `Enter`.
+4. El Inventario pierde los recursos, la Factoría genera el Ítem en memoria.
+5. `ItemModifierSystem.py` tira un "Roll" de suerte sobre el objeto.
+6. El objeto resultante es un `Ítem [Modificado]` y aterriza en el inventario final.
 
-```python
-# Lógica interna usada por el menú
-def _has_materials(recipe, multiplier=1):
-    for mat_id, req_qty in recipe["materials"].items():
-        if inventory.get_item_quantity(mat_id) < (req_qty * multiplier):
-            return False
-    return True
-```
+### Ciclo de Reforja
+1. Jugador presiona `R` en Crafteo.
+2. Interfaz lista solo su armadura/armas actuales.
+3. Jugador selecciona objeto y paga oro.
+4. El sistema limpia sus stats pasadas, restaura la vida/daño original, y ejecuta un "Roll" nuevo de `ItemModifierSystem.py`.
+5. Si falla el roll sale malo, si lo gana sale excelente. El ítem se actualiza en tiempo real en la mochila.

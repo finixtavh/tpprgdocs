@@ -1,101 +1,90 @@
 # `SaveSystem.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [Estructura de Archivos](#estructura-de-archivos)
-3. [Proceso de Serialización](#proceso-de-serialización)
-4. [Gestión de Slots (1, 2 y 3)](#gestión-de-slots-1-2-y-3)
-5. [Restauración de Estado](#restauración-de-estado)
-6. [Integración con Módulos](#integración-con-módulos)
-7. [Interfaz de Usuario](#interfaz-de-usuario)
-8. [Ejemplos de Uso](#ejemplos-de-uso)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [Constantes y Variables Globales](#constantes)
+4. [Clases y Estructuras de Datos](#clases)
+5. [Funciones del Módulo (API)](#funciones)
+6. [Flujo de Serialización y Deserialización](#flujo)
 
 ---
 
-## Descripción General
-
-`SaveSystem.py` es el componente encargado de la persistencia de datos. Permite guardar y cargar el estado completo del juego en archivos JSON. El sistema es robusto y cubre no solo las estadísticas del jugador, sino también inventarios, encantamientos, progreso de la base, misiones, reputaciones y el estado global de la simulación de gremios.
-
----
-
-## Estructura de Archivos
-
-Las partidas se almacenan en `Data/Saves/` bajo los nombres:
-- `Slot1.json`
-- `Slot2.json`
-- `Slot3.json`
-
-Cada archivo contiene un objeto JSON con metadatos de versión y timestamp, seguido de secciones para cada sistema del juego.
+## 1. Descripción General
+`SaveSystem.py` es el motor central de persistencia del estado de TPPRPG. Recoge el estado en memoria de prácticamente todos los administradores (Jugador, Inventario, Gremios, QuestSystem, Gathering, Base) y los convierte a formato JSON plano para su guardado en múltiples slots (ranuras). De manera recíproca, al cargar una partida, inyecta las variables en los módulos correspondientes asegurando que los objetos persistidos se reinstancien correctamente.
 
 ---
 
-## Proceso de Serialización
-
-El sistema descompone los objetos complejos de Python en diccionarios serializables:
-- **Items**: Se guardan por su ID, categoría y lista de encantamientos (ID y nivel).
-- **Jugador**: Se guardan todos los atributos numéricos, sets de ítems descubiertos y listas de favoritos.
-- **Compañeros**: Incluye identidad (nombre generado, género), estado vital y equipo actual.
-- **Inventario**: Lista de slots con ID de ítem y cantidad.
-
----
-
-## Gestión de Slots (1, 2 y 3)
-
-### `get_slot_info(slot) -> dict`
-Permite obtener una vista previa de la partida sin cargarla completamente. Retorna:
-- Nombre del personaje.
-- Nivel.
-- Zona actual.
-- Fecha y hora del guardado.
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Guarda y lee desde `./Data/Saves/Slot[X].json`.
+- **Inyecciones Centrales**: Este archivo es el punto de embudo de casi todo el ecosistema. Importa a:
+  - `Modules.ModulesFunctions.GatheringMasterySystem`
+  - `Modules.ModulesUtils.setup` (`cObject`, `cWeapon`, `cEquippableItems`)
+  - `Modules.ModulesFunctions.CompanionSystem`
+  - `Modules.ModulesFunctions.MasterySystem`
+  - `Modules.ModulesFunctions.BaseSystem`
+  - `Modules.ModulesFunctions.QuestSystem`
+  - `Modules.ModulesFunctions.GuildSystem`
 
 ---
 
-## Restauración de Estado
-
-Al cargar una partida, el sistema sigue un orden jerárquico para reconstruir los objetos:
-1. Reconstruye el objeto `player` y sus stats.
-2. Utiliza el `ItemManager` para recrear las instancias de ítems en el inventario y equipo.
-3. Re-instancia a los compañeros y les asigna su equipo guardado.
-4. Restaura los Singleton de los gestores (`MasteryManager`, `BaseManager`, `QuestManager`, `GuildManager`).
+## 3. Constantes y Variables Globales
+- `_SAVE_DIR` (`str`): Directorio base (`"Data/Saves"`).
+- `_SLOT_PATHS` (`Dict[int, str]`): Diccionario estático que mapea IDs numéricos de Slot a su ruta real (ej: `1 -> "Data/Saves/Slot1.json"`).
 
 ---
 
-## Integración con Módulos
+## 4. Clases y Estructuras de Datos
 
-El `SaveSystem` actúa como un punto de unión para todos los sistemas funcionales:
-- **GuildSystem**: Guarda el mapa de territorios y relaciones geopolíticas.
-- **QuestSystem**: Guarda misiones activas y el historial de completadas.
-- **GatheringMasterySystem**: Guarda los niveles de habilidades de recolección (Minería, Botánica, etc.).
+*(Nota: Este módulo se basa casi enteramente en funciones puras y delegación de estado, no define clases persistentes nuevas).*
 
 ---
 
-## Interfaz de Usuario
+## 5. Funciones del Módulo (API)
 
-### `save_load_menu(...)`
-Muestra un menú interactivo que permite elegir entre Guardar o Cargar.
-- En el modo **Guardar**, muestra qué slots están ocupados para prevenir sobrescrituras accidentales.
-- En el modo **Cargar**, muestra la información detallada de cada slot (Nombre, Nv, Zona).
+### Funciones de Guardado (API Pública)
+- `save_to_slot(slot: int, player, inventory, chosen_area) -> bool`
+  - **Propósito**: Ejecuta toda la tubería de guardado y vuelca el resultado final en el archivo correspondiente.
+  - **Retornos**: `True` si el guardado JSON tuvo éxito.
+
+### Funciones de Carga (API Pública)
+- `load_from_slot(slot: int, player, inventory, item_manager) -> Optional[dict]`
+  - **Propósito**: Lee el JSON de disco. Luego, llama a todas las sub-funciones de reconstrucción (`_restore_*`) pasándole los fragmentos de diccionario relevantes.
+  - **Retornos**: Retorna el bloque `game_state` si fue exitoso (que incluye variables volátiles como `chosen_area`). Retorna `None` si el slot no existe o está corrupto.
+- `get_slot_info(slot: int) -> Optional[dict]`
+  - **Propósito**: Lee rápidamente los metadatos superficiales del slot (Nivel del jugador, Tiempo de guardado, Oro) sin cargar ni instanciar nada. Útil para el Menú Principal.
+- `delete_slot(slot: int) -> bool`
+  - **Propósito**: Elimina el archivo `Slot[X].json`.
+
+### Helpers de Serialización (`dict -> json`)
+Estas funciones transforman los objetos complejos en diccionarios anidados:
+- `_serialize_item(item) -> Optional[dict]`: Conserva `ID` estático y, muy importante, la lista de `enchantments` y su nivel.
+- `_serialize_companion(comp) -> dict`: Guarda HP, MP, status de vida e inventario equipado de los aliados.
+- `_serialize_inventory(inventory) -> list`: Itera sobre los `slots` del objeto Inventario.
+- `_serialize_mastery(player) -> dict` / `_serialize_base(player) -> dict`: Llaman al método `.to_dict()` de los gestores respectivos.
+- `_serialize_gathering() -> dict`: Serializa exp y niveles directamente desde la instancia global `Gathering_init`.
+- `_serialize_guild_system() -> dict`: Vuelca el estado geopolítico masivo desde `GuildManager`.
+- `build_save_data(player, inventory, chosen_area, active_enemies_ids) -> dict`: Función principal que consolida todos los pedazos anteriores en un mega-diccionario maestro.
+
+### Helpers de Deserialización (`json -> RAM`)
+Estas funciones instancian y llenan las clases de Python a partir de la metadata:
+- `_restore_player(player, data: dict)`: Parcha el objeto `player` base sobrescribiendo atributos directos (`HP`, `Gold`, `Guild Reputations`, etc).
+- `_restore_item(item_data, item_manager) -> Any`: Factoría puente. Utiliza el `item_manager` para crear el objeto base desde cero mediante su ID, y luego le reimplementa los encantos o modificadores guardados.
+- `_restore_equipment(...)` / `_restore_inventory(...)`
+- `_restore_companions(...)`: Llama a `load_companion_by_id` para rehidratar a los aliados.
+- `_restore_mastery(...)` / `_restore_base(...)`
+- `_restore_gathering(...)` / `_restore_guild_system(...)`: Rellena los Singletons con los diccionarios guardados en el archivo.
 
 ---
 
-## Ejemplos de Uso
+## 6. Flujo de Serialización y Deserialización
 
-### Guardar partida automáticamente (Autosave)
+### Al Guardar (`save_to_slot`):
+1. **Recolección**: `build_save_data` compila un diccionario con versión y timestamp.
+2. **Serialización Módulos**: Llama al método `_serialize_[Modulo]` para cada subsistema.
+3. **Persistencia**: Abre el archivo de manera síncrona y vuelca el diccionario estructurado.
 
-```python
-from Modules.ModulesFunctions.SaveSystem import save_to_slot
-
-# Guardar en el Slot 1 (típicamente usado para autosave)
-save_to_slot(1, player, inventory, "Ciudad Principal")
-```
-
-### Cargar al iniciar el juego
-
-```python
-from Modules.ModulesFunctions.SaveSystem import load_from_slot
-
-game_state = load_from_slot(1, player, inventory, item_manager)
-if game_state:
-    print(f"Bienvenido de nuevo, {player.name}. Estás en {game_state['chosen_area']}")
-```
+### Al Cargar (`load_from_slot`):
+1. **Lectura Base**: Carga el JSON completo.
+2. **Hidratación**: Ejecuta las cadenas de `_restore_[Modulo]`. 
+3. **Re-Factoría Crítica (`_restore_item`)**: Los ítems en el inventario/equipo **NO** guardan todas sus estadísticas (daño, descripciones) en el guardado. Guardan solo su `ID` y Encantamientos/Modificadores. Al cargar, el `ItemManager` vuelve a instanciar el ítem desde la base de datos `DataItems.json`, y sobre él se aplican las variaciones de la partida. Esto evita que el archivo de guardado pese megabytes y asegura compatibilidad si el desarrollador balancea el juego en parches futuros.

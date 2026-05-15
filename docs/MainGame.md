@@ -1,88 +1,65 @@
 # `MainGame.py`
 
 ## Índice
-
 1. [Descripción General](#descripción-general)
-2. [El Bucle Principal (Main Loop)](#el-bucle-principal-main-loop)
-3. [Sistema de Combate Detallado](#sistema-de-combate-detallado)
-    - [Ataques y Contraataques](#ataques-y-contraataques)
-    - [Visualización de Resultados](#visualización-de-resultados)
-4. [Gestión de Zonas y Enemigos](#gestión-de-zonas-y-enemigos)
-5. [Dashboard del Jugador](#dashboard-del-jugador)
-6. [Opciones del Menú Principal](#opciones-del-menú-principal)
-7. [Configuración y Debug](#configuración-y-debug)
+2. [Dependencias e Inyecciones](#dependencias)
+3. [El Bucle Principal (Main Loop)](#bucle-principal)
+4. [Menú Principal e Interacción](#menu-principal)
+5. [Sistema de Combate Detallado](#sistema-combate)
+6. [Carga Procedural y Zonas](#carga-zonas)
 
 ---
 
-## Descripción General
-
-`MainGame.py` es el punto de entrada y el orquestador central de TPPRPG. Importa todos los gestores y sistemas funcionales para unificar la experiencia de juego, manejando la transición entre la exploración, el combate, el comercio y la gestión de gremios.
-
----
-
-## El Bucle Principal (Main Loop)
-
-El juego opera bajo un bucle `while True` que presenta al jugador el **Menú Principal**. Cada acción seleccionada dispara una función específica que puede abrir otros submenús interactivos o iniciar una secuencia de combate. 
-
-**Mecánicas de Ciclo:**
-- **player.Check()**: Se llama tras cada acción para actualizar estados y buffs.
-- **fight_count**: Se incrementa tras cada combate finalizado. Al llegar a **5**, se activa automáticamente la recaudación de impuestos de la Guild del jugador (ver `GuildSystem.py`).
-- **Global Tick**: El sistema de gremios y clima avanza sus estados internos tras acciones de exploración.
+## 1. Descripción General
+`MainGame.py` es el orquestador principal del motor TPPRPG. Contiene el bucle de juego interactivo (`main()`), donde el jugador invierte la mayor parte de su tiempo navegando opciones, visualizando su `Dashboard` de estado (HP/MP/Stats) e interactuando con otros módulos a través del enrutador del menú principal. También actúa como el gestor gráfico del sistema de combate, renderizando los intercambios de daño entre entidades.
 
 ---
 
-## Sistema de Combate Detallado
-
-### Ataques y Contraataques
-El combate es por turnos pero incluye mecánicas de reacción:
-- **Evasión**: El defensor tiene una probabilidad de evitar todo el daño.
-- **Contraataque**: El defensor puede responder con un ataque inmediato sin consumir su turno si sobrevive al golpe.
-- **Cadena**: Los ataques pueden involucrar a compañeros, creando combates de grupo.
-
-### Visualización de Resultados
-La función `_display_combat_details` utiliza `Rich` para renderizar un desglose matemático de cada golpe:
-- **Daño por Tipo**: Barras de colores para Físico, Térmico, Tierra, Eléctrico y Profundo.
-- **Descuentos**: Muestra cuánto daño fue absorbido por la Defensa Plana, la Defensa Porcentual, los Encantamientos y la Barrera.
-- **Modificadores Ambientales**: Indica cómo el clima actual afectó la potencia del ataque.
+## 2. Dependencias e Inyecciones
+- **Archivos Base**: Su núcleo depende de prácticamente toda la base de código (`Modules.ModulesManager`, `Modules.ModulesFunctions`, `Modules.ModulesMenu`, y `Modules.ModulesUtils`).
+- **Librerías TUI**:
+  - `rich.console`, `rich.panel`, `rich.table`, `rich.text`, `rich.live`, `rich.align`.
+  - Escucha de eventos de teclado asíncronos mediante `sshkeyboard`.
+- **Inyección de Dependencias (DI)**: Inicializa e inyecta Singleton Managers (`ItemManager`, `ShopManager`, `BuffManager`, etc.) a los diferentes sub-menús cuando el jugador los selecciona.
 
 ---
 
-## Gestión de Zonas y Enemigos
-
-### `zone_loader()`
-Carga dinámicamente el contenido de un área:
-1. Consulta si los **Mods** han inyectado datos para esa zona.
-2. Si no, carga desde el `DataStats.json` base.
-3. Filtra jefes finales (Bosses) basándose en su `SPAWN_CHANCE`.
-4. Devuelve un enemigo o grupo de enemigos para iniciar el encuentro.
-
----
-
-## Dashboard del Jugador
-
-Muestra la información vital en la parte superior de la terminal:
-- **Barras de Estado**: HP (con overlay de Barrera cian) y MP.
-- **Info de Mundo**: Zona actual, Clima activo y Oro acumulado.
-- **Nivel**: Nivel actual del jugador y progreso de experiencia.
+## 3. El Bucle Principal (Main Loop)
+El juego no se apaga a menos que el jugador seleccione "0" en el menú principal. Su estructura funciona así:
+1. Limpia la pantalla `os.system('cls'/'clear')`.
+2. Llama a `player.Check(vInventory)` pasivamente para actualizar buffs temporales y estado de salud.
+3. Imprime el Dashboard en vivo invocando a `display_player_status()`.
+4. Rinde el control al menú interactivo llamando a `display_main_menu()`.
+5. Procesa el `main_input` devuelto en un árbol masivo de `if / elif`, ejecutando los flujos correspondientes.
 
 ---
 
-## Opciones del Menú Principal
+## 4. Menú Principal e Interacción
 
-| ID | Opción | Descripción |
-|---|---|---|
-| 1 | Inspeccionar zonas | Ver enemigos y recursos de cualquier área. |
-| 2 | Ir a una zona | Viajar e iniciar un encuentro de combate. |
-| 3 | Tienda | Comprar equipamiento y consumibles. |
-| 4 | Inventario | Gestionar ítems y equipar objetos. |
-| 11 | Habilidades | Abrir el árbol de talentos del jugador. |
-| 14 | Base | Gestionar edificios y minijuegos de la base. |
-| 16 | Guilds | Acceder a la simulación geopolítica de gremios. |
+El menú interactivo provee un router hacia 16 subsistemas y 1 menú extra oculto:
+- `[1-2]` **Zonas**: Iniciar exploración o combate con el gestor de zonas.
+- `[3]` **Tiendas**: Inicializa `ShopManager`.
+- `[4]` **Inventario**: Delega a `InventoryMenu.py`.
+- `[5]` **Estadísticas**: Un renderizado nativo multi-pestaña usando flechas que expone stats puras de combate, maestría e información de aliados activos.
+- `[6]` **Gathering**: Dispara un minijuego de farmeo usando `GatheringMasterySystem.py`.
+- `[7-9]` **Mods, Items y Guardado**: Interfaces utilitarias y de inyección JSON externa.
+- `[10-16]` **Progresión de Jugador y Geopolítica**: Árboles de habilidades, mesa de encantamientos, `BaseSystem` de jugador individual y `GuildMenu` geopolítico.
+- `[17] DEBUG**: (Solo si `CONFIG["DEBUG"]["ENABLED"] == True`) Abre consola técnica.
 
 ---
 
-## Configuración y Debug
+## 5. Sistema de Combate Detallado
 
-- **config.json**: El juego lee parámetros como la duración de las barras, el multiplicador de dificultad y el estado del modo Debug.
-- **Modo Debug**: Si está activado en la configuración, aparece una opción adicional (17) que da acceso al `DebugMenu.py`.
-- **Logging**: Captura errores inesperados y los guarda en `tpprpg.log` junto con un snapshot del estado de las variables.
+Cuando un jugador inicia una pelea, el flujo cae en `combat_loop()` (o lógicas similares inyectadas):
+1. **Dibuja el estado (Render de Pantalla)**: Llama a `render_combat_menu()`. Enumera los componentes `HP/MP/Barrera` del jugador, de sus compañeros y del enemigo. Renderiza un bloque de penalizaciones/bonos climáticos globales.
+2. **Ciclo de Reacciones**: `_perform_attack(attacker, defender)` ejecuta daños y lee si hubo "Evasión".
+3. **Engine de Cálculos Visual**: Llama a `_display_combat_details()`. Desglosa el ataque real (que es un diccionario complejo devuelto por `Entity.attack()`) en barras y paneles coloreados desglosando Físico/Magia e imprimiendo los descuentos de Defensa Plana, Encantamientos y Barreras que mitigaron el golpe.
+4. **Contraataque Asíncrono**: Si el diccionario retornado tiene la flag `is_counter = True`, el sistema detiene temporalmente la ejecución para dibujar un ataque relámpago de respuesta fuera de turno antes de seguir.
+
+---
+
+## 6. Carga Procedural y Zonas
+La función `zone_loader(player_zone)` encapsula la lógica para instanciar a los monstruos con los que el jugador va a pelear:
+- Busca si algún mod cargó en memoria los datos para esa zona (`mod_api.stats_injections`). Si no, recurre a `Data/DataStats.json`.
+- Filtra del Array base de criaturas al jefe final (`IS_BOSS`) usando `SPAWN_CHANCE`. Si se superó el RNG, reemplaza el pool y fuerza un combate crítico; de lo contrario, elige aleatoriamente un esbirro estándar del JSON.
+- Una variante (`zone_loader_group`) permite generar arenas de combate con N cantidad de oponentes simultáneos, útil para misiones asíncronas de base o incursiones (Raids).
