@@ -38,7 +38,17 @@ Cuando el jugador craftea un objeto, el sistema:
 1. Verifica si posee todos los materiales (y oro).
 2. Los consume del inventario.
 3. Utiliza el `ItemManager` para crear el nuevo objeto.
-4. Registra el objeto en `player.discovered_items`.
+4. Llama a `roll_and_apply_modifier` (del `ItemModifierSystem`) para añadir modificadores procedurales basados en `GLOBAL_CRAFTING_QUALITY_MODIFIER` del `config.json`.
+5. Registra el objeto en `player.discovered_items`.
+
+---
+
+## Modo Reforjado (Reforge)
+
+Al presionar `[R]` dentro del menú, se cambia al **Modo Reforjado**. 
+En este modo, el jugador puede pagar una suma de Oro (por defecto 500) para **volver a calcular (reroll)** los modificadores de un ítem existente en su inventario.
+- Los ítems compatibles (Armas, Equipables y Herramientas) se muestran en la lista.
+- El objeto existente reemplazará su modificador actual por uno nuevo (que puede ser mejor, peor o ninguno).
 
 ---
 
@@ -55,8 +65,9 @@ Interfaz dividida en dos paneles:
 
 | Tecla | Acción |
 |---|---|
-| **Enter** | Craftear una unidad del ítem seleccionado. |
+| **Enter** | Craftear una unidad del ítem seleccionado (o aplicar Reforjado en Modo R). |
 | **Q** | Crafteo múltiple (abre un buffer para introducir cantidad numérica). |
+| **R** | Alternar entre **Modo Crafteo** y **Modo Reforjado**. |
 | **S** | Buscar recetas por nombre. |
 | **F** | Marcar receta como favorita (aparecen al inicio de la lista). |
 | **ESC** | Salir del menú. |

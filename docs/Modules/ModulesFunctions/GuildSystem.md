@@ -66,6 +66,8 @@ Define el estado y comportamiento de un gremio.
 El Singleton `get_guild_manager()` coordina la simulación global.
 
 - `generate_random_guilds()`: Crea la población inicial de gremios NPC.
+- `initialize_world_state()`: Configura dinámicamente la situación geopolítica al iniciar una nueva partida leyendo el `config.json`, determinando la cantidad de conflictos iniciales (`AMOUNT_OF_STARTING_WARS`) y ajustes diplomáticos (`AMOUNT_OF_STARTING_EVENTS`).
+- `generate_initial_player_events()`: Al fundar o unirse a un gremio, pre-genera de manera procedural una serie de eventos interactivos iniciales (Bienvenida, Mercader, Diplomacia), eliminando la dependencia de un paso de tiempo global en las etapas iniciales de la simulación.
 - `tick()`: El corazón de la simulación. Se ejecuta periódicamente para procesar producción, IA, eventos y desastres.
 - `_process_disasters()`: Aplica efectos climáticos destructivos (ej. terremotos) a los gremios, con probabilidad reducida si poseen un "Puesto de Mantenimiento".
 
